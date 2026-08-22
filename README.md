@@ -19,7 +19,9 @@ Neither half is novel alone. The join is the product.
 
 Design phase. No implementation yet.
 
+- **Concept demo:** [docs/index.html](docs/index.html) — designed pages only, sample data, no working software behind them.
 - **Design spec:** [docs/superpowers/specs/2026-08-22-golf-coaching-platform-design.md](docs/superpowers/specs/2026-08-22-golf-coaching-platform-design.md)
+- **Plans:** [foundation and extraction kit](docs/superpowers/plans/2026-08-22-foundation-and-extraction-kit.md) · [Video Combine capture](docs/superpowers/plans/2026-08-22-video-combine-capture.md) · [course directory and rounds](docs/superpowers/plans/2026-08-22-course-directory-and-rounds.md)
 
 ## Shape
 
