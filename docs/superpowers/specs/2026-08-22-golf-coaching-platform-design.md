@@ -383,6 +383,17 @@ code path that stores an image without provenance.
 Users enter their own rounds hole by hole at specific courses: strokes, putts, fairway,
 green in regulation, penalties. Two things follow.
 
+**Entry is by photograph, not by typing.** Eighteen holes times five fields is ninety data
+points, requested after four hours of walking. That is where round logging dies in every
+product that has tried it. The realistic input is a photo of the scorecard; typing is the
+fallback for people who want it.
+
+Because handwritten scorecards are genuinely hard to read, **OCR proposes and the golfer
+confirms.** Nothing is written to a round from a photo alone, and cells the reader was
+unsure about are flagged for correction rather than silently accepted. Every score records
+its provenance — typed, read-and-confirmed, or imported from a shot tracker — because the
+evidence layer in this section is only as trustworthy as it knows its inputs to be.
+
 **For the golfer:** a real record of how they play each course, and — accumulated — the
 dispersion model that makes computed strategy personal.
 

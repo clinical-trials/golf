@@ -1435,9 +1435,334 @@ git commit -m "feat: pre-round preparation brief for the pro"
 
 ---
 
+### Task 7: Scorecard photo instead of typing
+
+Nobody wants to enter ninety numbers after four hours of walking. A photo of the card is
+the realistic input; typing is the fallback. OCR **proposes**, the golfer **confirms**.
+
+**Files:**
+- Modify: `prisma/schema.prisma`
+- Create: `src/domain/round/ocr-port.ts`
+- Create: `src/domain/round/scorecard.ts`
+- Test: `tests/domain/round/scorecard.test.ts`
+
+**Interfaces:**
+- Consumes: `prisma`, `StoragePort` from `@/domain/storage/port`, `recordHoleScore` from `./record`.
+- Produces:
+  - `OcrPort` — `{ readScorecard(storageKey: string): Promise<OcrCell[]> }`
+  - `OcrCell` — `{ holeNumber: number; field: 'strokes' | 'putts'; value: number; confidence: number }`
+  - `StubOcr` — test double implementing `OcrPort`, constructed with `new StubOcr(cells)`
+  - `proposeRoundFromPhoto(input: { roundId: string; storageKey: string; ocr: OcrPort }): Promise<ScorecardProposal>`
+  - `ScorecardProposal` — `{ uploadId: string; holes: ProposedHole[]; needsReview: number[] }`
+  - `ProposedHole` — `{ holeNumber: number; strokes: number | null; putts: number | null; lowConfidence: boolean }`
+  - `confirmProposal(input: { uploadId: string; holes: ConfirmedHole[] }): Promise<number>` — returns holes written
+  - `ConfirmedHole` — `{ holeNumber: number; strokes: number; putts: number; fairwayHit: boolean | null; greenInRegulation: boolean; penalties: number }`
+  - `LOW_CONFIDENCE_THRESHOLD` — `0.85`
+
+- [ ] **Step 1: Write the failing test**
+
+`tests/domain/round/scorecard.test.ts`:
+
+```ts
+import { describe, it, expect, beforeEach } from 'vitest'
+import { prisma } from '@/lib/db'
+import { StubOcr } from '@/domain/round/ocr-port'
+import { proposeRoundFromPhoto, confirmProposal } from '@/domain/round/scorecard'
+import { createRound } from '@/domain/round/record'
+
+async function fixtures() {
+  const user = await prisma.user.create({
+    data: { email: `s${Date.now()}${Math.round(performance.now())}@example.com` },
+  })
+  const course = await prisma.course.create({
+    data: {
+      osmId: `way/${Date.now()}`,
+      slug: `us-nm/s${Date.now()}`,
+      name: 'Test',
+      countryCode: 'US',
+      regionCode: 'US-NM',
+      regionName: 'New Mexico',
+      latitude: 35,
+      longitude: -106,
+      holes: { create: [{ number: 1, par: 4, path: [] }, { number: 2, par: 3, path: [] }] },
+    },
+  })
+  const round = await createRound({ userId: user.id, courseId: course.id, playedOn: new Date('2026-08-01') })
+  return { user, course, round }
+}
+
+beforeEach(async () => {
+  await prisma.holeScore.deleteMany()
+  await prisma.scorecardUpload.deleteMany()
+  await prisma.round.deleteMany()
+  await prisma.hole.deleteMany()
+  await prisma.course.deleteMany()
+  await prisma.user.deleteMany()
+})
+
+describe('scorecard photo', () => {
+  it('proposes holes read from the photo', async () => {
+    const { round } = await fixtures()
+    const ocr = new StubOcr([
+      { holeNumber: 1, field: 'strokes', value: 5, confidence: 0.97 },
+      { holeNumber: 1, field: 'putts', value: 2, confidence: 0.94 },
+    ])
+
+    const proposal = await proposeRoundFromPhoto({ roundId: round.id, storageKey: 'cards/a.jpg', ocr })
+    expect(proposal.holes).toEqual([{ holeNumber: 1, strokes: 5, putts: 2, lowConfidence: false }])
+    expect(proposal.needsReview).toEqual([])
+  })
+
+  it('flags a hole the OCR was unsure about', async () => {
+    const { round } = await fixtures()
+    const ocr = new StubOcr([
+      { holeNumber: 1, field: 'strokes', value: 5, confidence: 0.42 },
+      { holeNumber: 1, field: 'putts', value: 2, confidence: 0.99 },
+    ])
+
+    const proposal = await proposeRoundFromPhoto({ roundId: round.id, storageKey: 'cards/b.jpg', ocr })
+    expect(proposal.holes[0]?.lowConfidence).toBe(true)
+    expect(proposal.needsReview).toEqual([1])
+  })
+
+  it('writes nothing to the round until the golfer confirms', async () => {
+    const { round } = await fixtures()
+    const ocr = new StubOcr([{ holeNumber: 1, field: 'strokes', value: 5, confidence: 0.99 }])
+
+    await proposeRoundFromPhoto({ roundId: round.id, storageKey: 'cards/c.jpg', ocr })
+    expect(await prisma.holeScore.count({ where: { roundId: round.id } })).toBe(0)
+  })
+
+  it('writes the corrected values on confirmation, not the OCR values', async () => {
+    const { round } = await fixtures()
+    const ocr = new StubOcr([
+      { holeNumber: 1, field: 'strokes', value: 8, confidence: 0.31 },
+      { holeNumber: 1, field: 'putts', value: 2, confidence: 0.98 },
+    ])
+
+    const proposal = await proposeRoundFromPhoto({ roundId: round.id, storageKey: 'cards/d.jpg', ocr })
+    const written = await confirmProposal({
+      uploadId: proposal.uploadId,
+      holes: [
+        { holeNumber: 1, strokes: 6, putts: 2, fairwayHit: false, greenInRegulation: false, penalties: 0 },
+      ],
+    })
+
+    expect(written).toBe(1)
+    const score = await prisma.holeScore.findFirst({ where: { roundId: round.id, holeNumber: 1 } })
+    expect(score?.strokes).toBe(6)
+    expect(score?.provenance).toBe('OCR_CONFIRMED')
+  })
+
+  it('marks typed entry as manual provenance', async () => {
+    const { round } = await fixtures()
+    const { recordHoleScore } = await import('@/domain/round/record')
+    await recordHoleScore({
+      roundId: round.id,
+      holeNumber: 1,
+      strokes: 4,
+      putts: 2,
+      fairwayHit: true,
+      greenInRegulation: true,
+      penalties: 0,
+    })
+    const score = await prisma.holeScore.findFirst({ where: { roundId: round.id } })
+    expect(score?.provenance).toBe('MANUAL')
+  })
+
+  it('rejects confirmation of an unknown upload', async () => {
+    await expect(confirmProposal({ uploadId: 'nope', holes: [] })).rejects.toThrow(/upload/i)
+  })
+})
+```
+
+- [ ] **Step 2: Run it and watch it fail**
+
+Run: `pnpm test tests/domain/round/scorecard.test.ts`
+Expected: FAIL — cannot resolve `@/domain/round/ocr-port`.
+
+- [ ] **Step 3: Extend the schema**
+
+Provenance matters downstream: the evidence layer in the spec must know whether a number was
+typed, read from a photo and confirmed, or imported from a shot-tracking device.
+
+```prisma
+enum ScoreProvenance { MANUAL OCR_CONFIRMED IMPORTED }
+
+model ScorecardUpload {
+  id         String   @id @default(cuid())
+  roundId    String
+  round      Round    @relation(fields: [roundId], references: [id], onDelete: Cascade)
+  storageKey String
+  rawCells   Json
+  confirmed  Boolean  @default(false)
+  createdAt  DateTime @default(now())
+}
+```
+
+Add to `HoleScore`:
+
+```prisma
+  provenance ScoreProvenance @default(MANUAL)
+```
+
+Add to `Round`:
+
+```prisma
+  uploads ScorecardUpload[]
+```
+
+- [ ] **Step 4: Write the OCR port and its stub**
+
+`src/domain/round/ocr-port.ts`:
+
+```ts
+export interface OcrCell {
+  holeNumber: number
+  field: 'strokes' | 'putts'
+  value: number
+  confidence: number
+}
+
+export interface OcrPort {
+  readScorecard(storageKey: string): Promise<OcrCell[]>
+}
+
+export class StubOcr implements OcrPort {
+  constructor(private readonly cells: OcrCell[]) {}
+
+  async readScorecard(_storageKey: string): Promise<OcrCell[]> {
+    return this.cells
+  }
+}
+```
+
+- [ ] **Step 5: Write the scorecard module**
+
+`src/domain/round/scorecard.ts`:
+
+```ts
+import { prisma } from '@/lib/db'
+import type { OcrCell, OcrPort } from './ocr-port'
+
+export const LOW_CONFIDENCE_THRESHOLD = 0.85
+
+export interface ProposedHole {
+  holeNumber: number
+  strokes: number | null
+  putts: number | null
+  lowConfidence: boolean
+}
+
+export interface ScorecardProposal {
+  uploadId: string
+  holes: ProposedHole[]
+  needsReview: number[]
+}
+
+export interface ConfirmedHole {
+  holeNumber: number
+  strokes: number
+  putts: number
+  fairwayHit: boolean | null
+  greenInRegulation: boolean
+  penalties: number
+}
+
+export async function proposeRoundFromPhoto(input: {
+  roundId: string
+  storageKey: string
+  ocr: OcrPort
+}): Promise<ScorecardProposal> {
+  const cells = await input.ocr.readScorecard(input.storageKey)
+
+  const upload = await prisma.scorecardUpload.create({
+    data: { roundId: input.roundId, storageKey: input.storageKey, rawCells: cells as unknown as object },
+  })
+
+  const byHole = new Map<number, OcrCell[]>()
+  for (const cell of cells) {
+    if (!byHole.has(cell.holeNumber)) byHole.set(cell.holeNumber, [])
+    byHole.get(cell.holeNumber)!.push(cell)
+  }
+
+  const holes: ProposedHole[] = [...byHole.entries()]
+    .sort(([a], [b]) => a - b)
+    .map(([holeNumber, holeCells]) => ({
+      holeNumber,
+      strokes: holeCells.find((c) => c.field === 'strokes')?.value ?? null,
+      putts: holeCells.find((c) => c.field === 'putts')?.value ?? null,
+      lowConfidence: holeCells.some((c) => c.confidence < LOW_CONFIDENCE_THRESHOLD),
+    }))
+
+  return {
+    uploadId: upload.id,
+    holes,
+    needsReview: holes.filter((h) => h.lowConfidence).map((h) => h.holeNumber),
+  }
+}
+
+export async function confirmProposal(input: {
+  uploadId: string
+  holes: ConfirmedHole[]
+}): Promise<number> {
+  const upload = await prisma.scorecardUpload.findUnique({ where: { id: input.uploadId } })
+  if (!upload) throw new Error(`No scorecard upload with id ${input.uploadId}`)
+
+  const round = await prisma.round.findUniqueOrThrow({ where: { id: upload.roundId } })
+
+  for (const entry of input.holes) {
+    const hole = await prisma.hole.findUnique({
+      where: { courseId_number: { courseId: round.courseId, number: entry.holeNumber } },
+    })
+    if (!hole) throw new Error(`This course has no hole ${entry.holeNumber}`)
+
+    const data = {
+      holeId: hole.id,
+      holeNumber: entry.holeNumber,
+      strokes: entry.strokes,
+      putts: entry.putts,
+      fairwayHit: entry.fairwayHit,
+      greenInRegulation: entry.greenInRegulation,
+      penalties: entry.penalties,
+      provenance: 'OCR_CONFIRMED' as const,
+    }
+
+    await prisma.holeScore.upsert({
+      where: { roundId_holeNumber: { roundId: upload.roundId, holeNumber: entry.holeNumber } },
+      update: data,
+      create: { roundId: upload.roundId, ...data },
+    })
+  }
+
+  await prisma.scorecardUpload.update({ where: { id: upload.id }, data: { confirmed: true } })
+  return input.holes.length
+}
+```
+
+- [ ] **Step 6: Run it and watch it pass**
+
+```bash
+pnpm db:push && pnpm test tests/domain/round/scorecard.test.ts
+```
+
+Expected: PASS, 6 tests.
+
+- [ ] **Step 7: Commit**
+
+```bash
+git add prisma/schema.prisma src/domain/round/ocr-port.ts src/domain/round/scorecard.ts tests/domain/round/scorecard.test.ts
+git commit -m "feat: scorecard photo entry with confirm-before-write"
+```
+
+---
+
 ## Done when
 
 - `pnpm test` passes.
+- A round can be logged from a photo of the card without typing any hole numbers, and no
+  score is written until the golfer confirms it.
+- Every `HoleScore` records whether it was typed, read from a photo and confirmed, or imported.
 - `listRegions('US')` returns all fifty states with live course counts once ingest has run.
 - Every course page can state its coverage grade in plain words.
 - No media row exists without a licence, a source URL, and an attribution, and no media can originate from a commercial golf directory.
