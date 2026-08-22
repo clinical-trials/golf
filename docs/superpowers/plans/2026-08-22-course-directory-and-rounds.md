@@ -1235,7 +1235,7 @@ What the pro opens when a student says "I'm playing there Saturday."
 - Test: `tests/domain/round/prep.test.ts`
 
 **Interfaces:**
-- Consumes: `prisma`, `getCourseBySlug` from `@/domain/course/directory`, `COVERAGE_LABELS` from `@/domain/course/coverage`.
+- Consumes: `prisma` from `@/lib/db`, `COVERAGE_LABELS` from `@/domain/course/coverage`. (Does not use `getCourseBySlug` — the brief needs `features` included, which that function does not return.)
 - Produces:
   - `buildPrepBrief(input: { userId: string; courseSlug: string }): Promise<PrepBrief>`
   - `PrepBrief` — `{ courseName: string; coverage: CoverageGrade; coverageLabel: string; holes: PrepHole[]; playerHistory: { roundsAtCourse: number; averageStrokes: number | null } }`
