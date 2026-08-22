@@ -307,10 +307,18 @@ because incumbents ignore them:
 
 ## 8. Global course charting
 
-There are **38,081 golf courses across 206 countries**, roughly 576,500 holes. The United
-States holds 16,156 of them (42.4%), and ten countries account for about 80% of the total.
+Sources disagree on the global count. The R&A's *Golf Around the World* survey reports
+**38,081 courses across 206 countries** (roughly 576,500 holes), of which the United States
+holds 16,156. Commercial directories such as AllSquare catalogue closer to **33,000**. The
+difference is a counting question — facilities versus courses, and what each source has
+actually catalogued. **Treat the figure as 33,000–38,000 and never assert a precise
+number** in code or copy.
 
-Charting all of them is achievable because **strategy is computed, not authored.**
+Charting them is achievable because **strategy is computed, not authored.**
+
+Course coverage is a **bonus that makes the product feel limitless, not the product
+itself.** The coaching relationship is what people pay for. Global coverage is what makes a
+second pro want to rent the platform rather than build their own.
 
 ### Tier 1 — Geometry (automatable, global)
 
@@ -347,10 +355,51 @@ accumulates from played rounds. It is the last ten percent and is not needed at 
   imagery, unverified* versus *player-verified*. Presenting a poorly-sourced hole as
   authoritative is fabricating a yardage book, and someone hits it into water on our advice.
 
+### The directory is the navigation spine
+
+Country → state → course → hole, every level clickable. The United States alone gives fifty
+state pages with live course counts — New Mexico around 81, Ohio around 795, Texas around
+855 by AllSquare's count. Each course gets a page with its holes, its imagery, and its
+coverage grade.
+
+Each course carries a photograph. **Not scraped from commercial directories** — their
+listings and photography are copyrighted, and attribution does not cure infringement. The
+legitimate sources, in order of preference:
+
+- **NAIP** (USDA National Agriculture Imagery Program) — 1-metre aerial imagery, public
+  domain, covering all fifty states. Every American course gets a clean aerial image at no
+  cost and no licensing risk.
+- **Sentinel-2 / Copernicus** — free, global, 10 metres. Coarse but usable as a locator
+  outside the US.
+- **Wikimedia Commons** where a course happens to be photographed.
+- **User-submitted**, with an explicit rights grant in the terms.
+- **Course-provided**, by arrangement.
+
+Every stored image carries a non-nullable licence, source URL, and attribution. There is no
+code path that stores an image without provenance.
+
+### Round records and pre-round preparation
+
+Users enter their own rounds hole by hole at specific courses: strokes, putts, fairway,
+green in regulation, penalties. Two things follow.
+
+**For the golfer:** a real record of how they play each course, and — accumulated — the
+dispersion model that makes computed strategy personal.
+
+**For the pro:** a **pre-round preparation brief.** A student says "I'm playing Paa-Ko
+Ridge on Saturday," and he opens the course, sees the holes and hazards alongside that
+student's own history there, and preps a plan in advance. No product does this, it is
+concrete enough to sell, and it turns the course directory from a lookup table into
+coaching.
+
 ### Sequencing
 
-Do not pre-chart 38,000 courses. Pre-chart the courses users are likely to play, auto-chart
+Do not pre-chart every course. Pre-chart the courses users are likely to play, auto-chart
 any course on first request, and let the long tail fill itself.
+
+The strategy engine depends on a dispersion model, which depends on accumulated round data.
+So the order is: directory and round records first, computed strategy second. That is a
+dependency, not a deferral.
 
 ---
 
@@ -571,3 +620,9 @@ These are unresolved and must not be treated as decided:
   page and general category knowledge, not primary research. They should be validated in
   conversation with practicing teaching professionals before they drive strategy.
 - **Pricing model** — not yet designed.
+- **Exact global course count** — 33,000 (AllSquare) versus 38,081 (R&A). Unresolved, and
+  deliberately left as a range.
+- **NAIP retrieval pipeline** — confirmed public domain, but the bulk-access mechanism and
+  storage cost for ~16,000 US course images is unscoped.
+- **Non-US course imagery** — Sentinel-2 at 10 metres is a weak hero image. No decision yet
+  on whether that is acceptable or whether commercial licensing is warranted outside the US.
