@@ -8,7 +8,7 @@
  * Usage: node scripts/fetch-courses.mjs
  */
 
-import { writeFileSync, mkdirSync } from 'node:fs'
+import { writeFileSync, mkdirSync, readFileSync, existsSync } from 'node:fs'
 
 const OVERPASS = 'https://overpass-api.de/api/interpreter'
 
@@ -23,6 +23,15 @@ const COURSES = [
   { id: 'royal-melbourne', name: 'Royal Melbourne Golf Club', place: 'Victoria, Australia', country: 'AU', bbox: '-38.025,144.995,-37.960,145.070' },
   { id: 'fancourt', name: 'Fancourt', place: 'Western Cape, South Africa', country: 'ZA', bbox: '-33.990,22.360,-33.930,22.450' },
   { id: 'kasumigaseki', name: 'Kasumigaseki Country Club', place: 'Saitama, Japan', country: 'JP', bbox: '35.895,139.375,35.965,139.485' },
+
+  // Weighted toward the United States, because USGS aerial imagery is public
+  // domain there and no free equivalent exists elsewhere at that resolution.
+  { id: 'torrey-pines', name: 'Torrey Pines Golf Course', place: 'California, USA', country: 'US', bbox: '32.882,-117.264,32.914,-117.234' },
+  { id: 'tpc-sawgrass', name: 'TPC Sawgrass', place: 'Florida, USA', country: 'US', bbox: '30.186,-81.408,30.212,-81.376' },
+  { id: 'pinehurst-no2', name: 'Pinehurst Resort', place: 'North Carolina, USA', country: 'US', bbox: '35.178,-79.482,35.212,-79.448' },
+  { id: 'chambers-bay', name: 'Chambers Bay', place: 'Washington, USA', country: 'US', bbox: '47.190,-122.592,47.220,-122.552' },
+  { id: 'erin-hills', name: 'Erin Hills', place: 'Wisconsin, USA', country: 'US', bbox: '43.228,-88.372,43.266,-88.328' },
+  { id: 'unm-championship', name: 'UNM Championship Course', place: 'New Mexico, USA', country: 'US', bbox: '35.048,-106.622,35.076,-106.588' },
 ]
 
 const FEATURE_TAGS = {
@@ -114,9 +123,22 @@ function coverage(course) {
   return greens && hazards ? 'DETAILED' : 'ROUTED'
 }
 
+// Reuse anything already fetched successfully so re-runs only hit Overpass for
+// courses that are missing or came back empty. It is a free, shared service.
+const existing = existsSync('docs/courses.json')
+  ? JSON.parse(readFileSync('docs/courses.json', 'utf8')).courses ?? []
+  : []
+
 const results = []
 
 for (const course of COURSES) {
+  const cached = existing.find((c) => c.id === course.id)
+  if (cached && cached.holes.length >= 9) {
+    results.push(cached)
+    console.log(`${course.name} … cached (${cached.holes.length} holes)`)
+    continue
+  }
+
   process.stdout.write(`${course.name} … `)
   try {
     const elements = await overpass(course.bbox)

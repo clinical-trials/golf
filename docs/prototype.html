@@ -294,11 +294,12 @@
       <svg id="hole" viewBox="0 0 800 520" role="img" aria-labelledby="hole-desc"></svg>
       <desc id="hole-desc">Plan view of the selected hole with fairway, green, bunkers and water, and the simulated landing pattern for the recommended club.</desc>
       <div class="legend">
-        <span><i style="background:var(--turf-dim)"></i>Fairway</span>
         <span><i style="background:var(--turf)"></i>Green</span>
         <span><i style="background:var(--sand)"></i>Bunker</span>
         <span><i style="background:var(--water)"></i>Water</span>
         <span><i style="background:var(--flag)"></i>Your pattern</span>
+        <span><i style="background:var(--penalty)"></i>In trouble</span>
+        <span id="imagery-note"></span>
       </div>
       <div class="holes" id="holes" role="group" aria-label="Hole"></div>
     </section>
@@ -386,22 +387,24 @@
 
     <div class="split">
       <div>
-        <h3>Genuinely real</h3>
+        <h3>Real and sourced</h3>
         <ul>
-          <li>Every course, hole, par, stroke index and hazard on this page is real OpenStreetMap data, fetched by <code>scripts/fetch-courses.mjs</code> in this repository.</li>
-          <li>Eight courses across four continents, 144 holes, all graded <em>detailed</em>.</li>
-          <li>The recommendation is computed, not written: 600 Monte Carlo shots per club against the actual hole polygons, scored on expected strokes.</li>
-          <li>Change the golfer and the answer changes, because the dispersion changes.</li>
+          <li><strong>The courses.</strong> Twelve courses across five continents, 216 holes. Every hole, par, stroke index, green, bunker and water hazard is OpenStreetMap data fetched by <code>scripts/fetch-courses.mjs</code> in this repository.</li>
+          <li><strong>The photographs.</strong> Real aerial imagery from the USGS National Map — a United States government work, public domain — requested live for the exact bounding box on screen. Six US courses have it.</li>
+          <li><strong>The driver distances.</strong> Shot Scope's published averages by handicap: 285 yards scratch, 259 at ten, 236 at fifteen. These are performance averages with outliers removed.</li>
+          <li><strong>The expected-strokes curve</strong> is fitted to two published strokes-gained anchors — 2.81 strokes from 150 yards in the fairway, 1.83 from fifteen feet on the green.</li>
+          <li><strong>The recommendation is computed, not written.</strong> 600 Monte Carlo shots per club against the actual hole polygons, each classified by ray-casting into the real hazard shapes.</li>
         </ul>
       </div>
       <div>
-        <h3>Not real</h3>
+        <h3>Still modelled</h3>
         <ul>
-          <li>The three golfers. Their dispersions are invented to demonstrate the engine.</li>
-          <li>The expected-strokes model is a rough approximation, not a calibrated baseline. Real figures come from accumulated rounds.</li>
-          <li>No swing has been assessed. The range half is described, not built.</li>
-          <li>Kasumigaseki Country Club is missing because Overpass rate-limited the ninth request. It was left out rather than faked.</li>
-          <li>Some courses have no fairway polygons in OpenStreetMap, so every shot there reads as rough and the fairway percentage collapses to near zero. Royal County Down is the clearest case. That is a data gap, not a golfing verdict, and it is exactly what the coverage grades in the spec exist to make visible.</li>
+          <li><strong>Dispersion.</strong> Published data gives distance by handicap, not spread or directional bias. Those are assumptions, and they are the single biggest thing a beta with real golfers would replace with measurement.</li>
+          <li><strong>Club gapping</strong> below the driver is scaled off the driver distance rather than sourced.</li>
+          <li><strong>Lie penalties</strong> for rough, sand and water are modelled; only the two anchor points are published values.</li>
+          <li><strong>No swing has been assessed.</strong> The range half is described here, not built.</li>
+          <li><strong>Imagery outside the United States.</strong> The free global alternative is Sentinel-2 at ten metres, which is too coarse to read a bunker, so those courses stay as vector plans rather than being dressed up with something that only looks like a photograph.</li>
+          <li><strong>Gaps are left visible.</strong> Some courses have no fairway polygons in OpenStreetMap, so shots there read as rough and the fairway percentage collapses — Royal County Down most obviously. TPC Sawgrass and Erin Hills are absent entirely. Those are data gaps, not golfing verdicts, and they are exactly what the coverage grades exist to expose.</li>
         </ul>
       </div>
     </div>
@@ -418,42 +421,55 @@
 const SVG_NS = 'http://www.w3.org/2000/svg'
 const W = 800, H = 520, PAD = 26
 
+/**
+ * Driver distances are Shot Scope's published averages by handicap, converted
+ * from yards to metres. Scratch 285 yd, 10 handicap 259 yd, 15 handicap 236 yd.
+ * These are Shot Scope "performance averages" — outliers removed — so they
+ * describe a well-struck drive rather than every drive.
+ *
+ * The rest is modelled, not sourced: club gapping is scaled off the driver, and
+ * the dispersion figures (spread and directional bias) are assumptions. Real
+ * dispersion has to be measured per golfer, which is what the beta is for.
+ */
+const GAPPING = [
+  { club: 'Driver', ratio: 1.0 },
+  { club: '3 wood', ratio: 0.9 },
+  { club: 'Hybrid', ratio: 0.82 },
+  { club: '5 iron', ratio: 0.73 },
+  { club: '7 iron', ratio: 0.64 },
+]
+
+const YARD = 0.9144
+
+function buildBag(driverYards, spread, bias) {
+  const driver = driverYards * YARD
+  return GAPPING.map(({ club, ratio }) => ({
+    club,
+    carry: Math.round(driver * ratio),
+    carrySd: Math.round(driver * ratio * 0.07),
+    offlineSd: Number((spread * (0.6 + 0.4 * ratio)).toFixed(2)),
+    bias: Number((bias * ratio).toFixed(2)),
+  }))
+}
+
 const PLAYERS = [
   {
-    id: 'slicer',
-    name: '15 handicap, misses right',
-    note: 'Driver leaks right under pressure',
-    clubs: [
-      { club: 'Driver',  carry: 210, carrySd: 18, offlineSd: 7.0, bias: 4.5 },
-      { club: '3 wood',  carry: 190, carrySd: 15, offlineSd: 5.4, bias: 3.0 },
-      { club: 'Hybrid',  carry: 170, carrySd: 13, offlineSd: 4.4, bias: 2.2 },
-      { club: '5 iron',  carry: 150, carrySd: 12, offlineSd: 3.9, bias: 1.6 },
-      { club: '7 iron',  carry: 130, carrySd: 10, offlineSd: 3.4, bias: 1.2 },
-    ],
+    id: 'hcp15',
+    name: '15 handicap',
+    note: '236 yd driver · Shot Scope average · modelled miss to the right',
+    clubs: buildBag(236, 6.4, 4.2),
   },
   {
-    id: 'straight',
-    name: '8 handicap, straight',
-    note: 'Tight pattern, plenty of length',
-    clubs: [
-      { club: 'Driver',  carry: 245, carrySd: 14, offlineSd: 4.4, bias: 0.4 },
-      { club: '3 wood',  carry: 220, carrySd: 12, offlineSd: 3.6, bias: 0.3 },
-      { club: 'Hybrid',  carry: 200, carrySd: 11, offlineSd: 3.1, bias: 0.2 },
-      { club: '5 iron',  carry: 178, carrySd: 10, offlineSd: 2.8, bias: 0.2 },
-      { club: '7 iron',  carry: 155, carrySd: 9,  offlineSd: 2.5, bias: 0.1 },
-    ],
+    id: 'hcp10',
+    name: '10 handicap',
+    note: '259 yd driver · Shot Scope average · modelled mild miss right',
+    clubs: buildBag(259, 4.9, 1.6),
   },
   {
-    id: 'senior',
-    name: '20 handicap, 68, limited turn',
-    note: 'Short and straight, no recovery length',
-    clubs: [
-      { club: 'Driver',  carry: 168, carrySd: 15, offlineSd: 5.6, bias: -1.5 },
-      { club: '3 wood',  carry: 155, carrySd: 13, offlineSd: 4.8, bias: -1.2 },
-      { club: 'Hybrid',  carry: 142, carrySd: 11, offlineSd: 4.0, bias: -0.9 },
-      { club: '5 iron',  carry: 126, carrySd: 10, offlineSd: 3.6, bias: -0.7 },
-      { club: '7 iron',  carry: 110, carrySd: 9,  offlineSd: 3.2, bias: -0.5 },
-    ],
+    id: 'scratch',
+    name: 'Scratch',
+    note: '285 yd driver · Shot Scope average · modelled tight pattern',
+    clubs: buildBag(285, 3.6, 0.3),
   },
 ]
 
@@ -461,13 +477,18 @@ const PLAYERS = [
  * Expected strokes to hole out, by lie and remaining metres.
  * A rough approximation only — real baselines come from accumulated rounds.
  */
+/**
+ * Expected strokes to hole out, fitted to two published strokes-gained anchors:
+ *   150 yards (137 m) from the fairway = 2.81 strokes
+ *   15 feet (4.6 m) on the green       = 1.83 strokes
+ * Both are the widely cited values from Mark Broadie's ShotLink-derived
+ * baselines. The curve between and beyond them is interpolation, and the
+ * lie penalties are modelled rather than sourced.
+ */
 function expectedStrokes(lie, metres) {
   const d = Math.max(metres, 2)
-  // Calibrated so a clean lie is about 2.9 strokes from 150 m, 2.6 from 50 m,
-  // and 2.0 on the green — roughly what published strokes-gained baselines show.
-  // Approximate and meant to be replaced by figures fitted to real rounds.
-  const base = 1.55 + 0.62 * Math.log10(d)
-  const penalty = { FAIRWAY: 0, GREEN: -0.15, ROUGH: 0.22, BUNKER: 0.45, WATER: 1.5, OB: 1.9 }[lie] ?? 0.22
+  const base = 1.485 + 0.62 * Math.log10(d)
+  const penalty = { FAIRWAY: 0, GREEN: -0.06, ROUGH: 0.22, BUNKER: 0.45, WATER: 1.5, OB: 1.9 }[lie] ?? 0.22
   return base + penalty
 }
 
@@ -537,7 +558,7 @@ function buildHole() {
     }
   }
 
-  return { hole, path, tee, target, length, pathLength, features }
+  return { hole, origin, path, tee, target, length, pathLength, features }
 }
 
 function classify(x, y, features) {
@@ -601,7 +622,33 @@ function fitTransform(geo, shots) {
   const offX = PAD + ((W - PAD * 2) - (maxX - minX) * scale) / 2
   const offY = PAD + ((H - PAD * 2) - (maxY - minY) * scale) / 2
 
-  return ([x, y]) => [(x - minX) * scale + offX, (y - minY) * scale + offY]
+  const to = ([x, y]) => [(x - minX) * scale + offX, (y - minY) * scale + offY]
+  return { to, scale, bounds: { minX, maxX, minY, maxY }, offX, offY }
+}
+
+/**
+ * USGS National Map imagery — a United States government work, public domain.
+ * Requested live for the exact bounding box on screen, so no imagery is stored
+ * in this repository and the photo always matches the geometry drawn over it.
+ * United States coverage only; there is no free equivalent at this resolution
+ * elsewhere, so courses outside the US render as vector plans.
+ */
+function aerialUrl(origin, bounds, pxWide, pxHigh) {
+  const metresPerDegLatLocal = metresPerDegLat
+  const west = origin.lon + bounds.minX / metresPerDegLon(origin.lat)
+  const east = origin.lon + bounds.maxX / metresPerDegLon(origin.lat)
+  const north = origin.lat - bounds.minY / metresPerDegLatLocal
+  const south = origin.lat - bounds.maxY / metresPerDegLatLocal
+
+  const params = new URLSearchParams({
+    bbox: `${west},${south},${east},${north}`,
+    bboxSR: '4326',
+    imageSR: '4326',
+    size: `${Math.round(pxWide)},${Math.round(pxHigh)}`,
+    format: 'jpg',
+    f: 'image',
+  })
+  return `https://basemap.nationalmap.gov/arcgis/rest/services/USGSImageryOnly/MapServer/export?${params}`
 }
 
 const FILLS = { FAIRWAY: 'var(--turf-dim)', GREEN: 'var(--turf)', BUNKER: 'var(--sand)', WATER: 'var(--water)' }
@@ -609,7 +656,8 @@ const FILLS = { FAIRWAY: 'var(--turf-dim)', GREEN: 'var(--turf)', BUNKER: 'var(-
 function draw(geo, best) {
   const svg = document.getElementById('hole')
   svg.textContent = ''
-  const to = fitTransform(geo, best.shots.map((s) => [s[0], s[1]]))
+  const fit = fitTransform(geo, best.shots.map((s) => [s[0], s[1]]))
+  const to = fit.to
 
   const add = (tag, attrs) => {
     const node = document.createElementNS(SVG_NS, tag)
@@ -618,13 +666,34 @@ function draw(geo, best) {
     return node
   }
 
+  const photo = course.country === 'US'
+  const { bounds } = fit
+  const boxW = (bounds.maxX - bounds.minX) * fit.scale
+  const boxH = (bounds.maxY - bounds.minY) * fit.scale
+
+  if (photo) {
+    add('image', {
+      href: aerialUrl(geo.origin, bounds, Math.min(boxW * 3, 2048), Math.min(boxH * 3, 1536)),
+      x: fit.offX,
+      y: fit.offY,
+      width: boxW,
+      height: boxH,
+      preserveAspectRatio: 'none',
+    })
+  }
+
+  // Over a photograph the hazards are already visible, so they become outlines
+  // rather than fills. Without one they carry the whole picture.
   for (const kind of ['FAIRWAY', 'WATER', 'BUNKER', 'GREEN']) {
     for (const feature of geo.features) {
       if (feature.kind !== kind) continue
       add('polygon', {
         points: feature.ring.map(to).map((p) => p.join(',')).join(' '),
         fill: FILLS[kind],
-        'fill-opacity': kind === 'FAIRWAY' ? 0.85 : 0.95,
+        'fill-opacity': photo ? (kind === 'FAIRWAY' ? 0 : 0.28) : kind === 'FAIRWAY' ? 0.85 : 0.95,
+        stroke: photo ? FILLS[kind] : 'none',
+        'stroke-width': photo ? 1.4 : 0,
+        'stroke-opacity': photo ? 0.9 : 0,
       })
     }
   }
@@ -691,6 +760,11 @@ function render() {
   document.getElementById('options').innerHTML = results
     .map((r) => `<tr class="${r === best ? 'best' : ''}"><td>${r.club}</td><td>${r.expected.toFixed(2)}</td><td>${r.fairwayPct}%</td><td class="${r.troublePct >= 15 ? 'risk' : ''}">${r.troublePct}%</td></tr>`)
     .join('')
+
+  document.getElementById('imagery-note').textContent =
+    course.country === 'US'
+      ? 'Aerial photo: USGS National Map, public domain'
+      : 'Vector plan — no free 1 m imagery outside the US'
 
   document.querySelectorAll('.hole-pip').forEach((pip, i) =>
     pip.setAttribute('aria-pressed', String(i === holeIndex)),
