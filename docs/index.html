@@ -3,8 +3,8 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Pocket Pro</title>
-<meta name="description" content="One PGA Master Professional's method, in your pocket — on the range and on every course.">
+<title>Pocket Pro — Tom Harris, PGA</title>
+<meta name="description" content="Tom Harris, PGA — player development in your pocket, on the range and on every course.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600&family=Archivo+Black&family=Archivo+Narrow:wght@400;600;700&display=swap" rel="stylesheet">
@@ -19,96 +19,112 @@
   body{margin:0;background:var(--ink);color:var(--card);font-family:'Archivo',system-ui,sans-serif;line-height:1.5;-webkit-font-smoothing:antialiased;}
   h1,h2,h3{font-family:'Archivo Black',sans-serif;font-weight:400;line-height:0.96;letter-spacing:-0.02em;margin:0;}
   a{color:var(--flag);}
-  .wrap{width:min(100% - 2rem,78rem);margin-inline:auto;}
+  .wrap{width:min(100% - 2rem,80rem);margin-inline:auto;}
   .label{font-family:'Archivo Narrow',sans-serif;font-weight:700;text-transform:uppercase;letter-spacing:0.15em;font-size:0.74rem;color:var(--dim);}
   .notice{background:var(--flag);color:#231A06;font-family:'Archivo Narrow',sans-serif;font-weight:700;text-transform:uppercase;letter-spacing:0.09em;font-size:0.76rem;text-align:center;padding:0.55rem 1rem;}
 
+  /* photo with graceful fallback until the file is added */
+  .ph{position:relative;background:linear-gradient(150deg,#20302A,#0D1512);overflow:hidden;}
+  .ph img{display:block;width:100%;height:100%;object-fit:cover;}
+  .ph.empty::after{content:'Photo → docs/'attr(data-need);position:absolute;inset:0;display:flex;align-items:center;justify-content:center;text-align:center;padding:1rem;font-family:'Archivo Narrow',sans-serif;font-weight:700;text-transform:uppercase;letter-spacing:0.1em;font-size:0.72rem;color:var(--turf);}
+
   /* hero: the pro is the hero */
-  .hero{display:grid;grid-template-columns:1fr;gap:0;border-bottom:1px solid var(--rule);}
-  @media(min-width:56rem){.hero{grid-template-columns:1.05fr 1fr;}}
-  .portrait{position:relative;background:linear-gradient(160deg,#18211C,#0D1512);min-height:38vh;max-height:46vh;display:flex;align-items:flex-end;overflow:hidden;border-bottom:1px solid var(--rule);}
-  @media(min-width:56rem){.portrait{min-height:60vh;max-height:none;border-bottom:0;border-right:1px solid var(--rule);}}
-  .portrait svg{position:absolute;inset:0;width:100%;height:100%;}
-  .portrait__tag{position:relative;margin:1.25rem;padding:0.55rem 0.8rem;background:rgba(11,15,19,0.72);backdrop-filter:blur(3px);font-family:'Archivo Narrow',sans-serif;font-weight:700;text-transform:uppercase;letter-spacing:0.1em;font-size:0.72rem;color:var(--flag);border:1px solid rgba(233,185,73,0.4);}
-  .hero__body{padding:clamp(2rem,5vw,3.5rem);display:flex;flex-direction:column;justify-content:center;}
-  .hero__name{font-size:clamp(2.6rem,1.6rem + 4vw,4.6rem);}
-  .hero__cred{color:var(--flag);margin-top:0.6rem;font-family:'Archivo Narrow',sans-serif;font-weight:700;text-transform:uppercase;letter-spacing:0.12em;font-size:0.9rem;}
-  .hero__line{font-size:clamp(1.15rem,1rem + 0.8vw,1.5rem);margin-top:1.5rem;max-width:24ch;}
-  .hero__cta{display:flex;flex-wrap:wrap;gap:0.75rem;margin-top:2rem;}
+  .hero{display:grid;grid-template-columns:1fr;border-bottom:1px solid var(--rule);}
+  @media(min-width:56rem){.hero{grid-template-columns:1.1fr 1fr;}}
+  .hero__photo{min-height:44vh;max-height:52vh;border-bottom:1px solid var(--rule);}
+  @media(min-width:56rem){.hero__photo{min-height:78vh;max-height:none;border-bottom:0;border-right:1px solid var(--rule);}}
+  .hero__body{padding:clamp(1.75rem,4vw,3.25rem);display:flex;flex-direction:column;justify-content:center;}
+  .hero__name{font-size:clamp(2.6rem,1.6rem + 4vw,4.8rem);}
+  .hero__cred{color:var(--flag);margin-top:0.6rem;font-family:'Archivo Narrow',sans-serif;font-weight:700;text-transform:uppercase;letter-spacing:0.1em;font-size:0.92rem;line-height:1.4;}
+  .hero__line{font-size:clamp(1.15rem,1rem + 0.8vw,1.5rem);margin-top:1.4rem;max-width:24ch;}
+  .chips{display:flex;flex-wrap:wrap;gap:0.4rem;margin-top:1.4rem;}
+  .chip{font-family:'Archivo Narrow',sans-serif;font-weight:700;font-size:0.72rem;text-transform:uppercase;letter-spacing:0.06em;padding:0.32rem 0.6rem;border:1px solid var(--rule);color:var(--dim);}
+  .hero__cta{display:flex;flex-wrap:wrap;gap:0.75rem;margin-top:1.9rem;}
   .btn{display:inline-flex;align-items:center;min-height:46px;padding:0.7rem 1.15rem;font-family:'Archivo Narrow',sans-serif;font-weight:700;text-transform:uppercase;letter-spacing:0.08em;font-size:0.85rem;text-decoration:none;}
   .btn--y{background:var(--flag);color:#231A06;}
   .btn--o{border:1px solid var(--rule);color:var(--card);}
   .btn:focus-visible{outline:2px solid var(--flag);outline-offset:2px;}
 
-  /* method: few words, big type */
-  .method{padding:clamp(2.5rem,6vw,4rem) 0;border-bottom:1px solid var(--rule);}
-  .method__grid{display:grid;gap:1px;background:var(--rule);border:1px solid var(--rule);margin-top:1.5rem;grid-template-columns:1fr;}
-  @media(min-width:44rem){.method__grid{grid-template-columns:repeat(3,1fr);}}
-  .m{background:var(--ink-2);padding:1.5rem;}
-  .m b{font-family:'Archivo Black',sans-serif;font-size:1.15rem;display:block;}
-  .m p{margin:0.5rem 0 0;color:var(--dim);font-size:0.92rem;}
+  /* player development — image band */
+  .dev{border-bottom:1px solid var(--rule);}
+  .dev__hd{padding:clamp(2rem,5vw,3.5rem) 0 0;}
+  .gallery{display:grid;grid-template-columns:1fr;gap:0;margin-top:1.5rem;}
+  @media(min-width:48rem){.gallery{grid-template-columns:2fr 1fr;grid-template-rows:1fr 1fr;gap:0;}}
+  .gcell{position:relative;min-height:16rem;border-top:1px solid var(--rule);border-right:0;}
+  @media(min-width:48rem){
+    .gcell{border-right:1px solid var(--rule);}
+    .gcell--big{grid-row:1 / span 2;min-height:32rem;}
+  }
+  .gcell figcaption{position:absolute;left:0;right:0;bottom:0;padding:1.5rem 1.15rem 1rem;background:linear-gradient(transparent,rgba(11,15,19,0.92));font-family:'Archivo Narrow',sans-serif;font-weight:700;font-size:0.95rem;}
+  .gcell figcaption small{display:block;color:var(--flag);font-size:0.72rem;letter-spacing:0.1em;text-transform:uppercase;margin-bottom:0.2rem;}
 
-  /* two surfaces */
+  /* two surfaces, compact */
   .surfaces{padding:clamp(2.5rem,6vw,4rem) 0;border-bottom:1px solid var(--rule);}
   .two{display:grid;gap:1rem;margin-top:1.5rem;grid-template-columns:1fr;}
   @media(min-width:52rem){.two{grid-template-columns:1fr 1fr;}}
-  .surf{border:1px solid var(--rule);background:var(--ink-2);padding:1.75rem;}
+  .surf{border:1px solid var(--rule);background:var(--ink-2);padding:1.6rem;}
   .surf .where{font-family:'Archivo Narrow',sans-serif;font-weight:700;text-transform:uppercase;letter-spacing:0.13em;font-size:0.72rem;color:var(--turf);}
-  .surf h3{font-size:1.4rem;margin:0.7rem 0 0.6rem;}
+  .surf h3{font-size:1.35rem;margin:0.6rem 0 0.5rem;}
   .surf p{margin:0;color:var(--dim);}
 
-  /* course strip -> prototype */
+  /* course strip */
   .courses{padding:clamp(2.5rem,6vw,4rem) 0;border-bottom:1px solid var(--rule);}
   .courses__hd{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:end;gap:1rem;}
   .thumbs{display:grid;grid-template-columns:repeat(2,1fr);gap:0.6rem;margin-top:1.5rem;}
-  @media(min-width:44rem){.thumbs{grid-template-columns:repeat(4,1fr);}}
-  .thumb{position:relative;aspect-ratio:4/3;background:#0D1512;overflow:hidden;border:1px solid var(--rule);}
+  @media(min-width:56rem){.thumbs{grid-template-columns:repeat(4,1fr);}}
+  .thumb{position:relative;aspect-ratio:4/3;overflow:hidden;border:1px solid var(--rule);background:#0D1512;}
   .thumb img{width:100%;height:100%;object-fit:cover;display:block;}
   .thumb figcaption{position:absolute;left:0;right:0;bottom:0;padding:0.5rem 0.6rem;background:linear-gradient(transparent,rgba(11,15,19,0.9));font-family:'Archivo Narrow',sans-serif;font-weight:700;font-size:0.78rem;}
 
   footer{padding:2.5rem 0 3.5rem;color:var(--dim);font-size:0.85rem;}
-  footer p{max-width:70ch;}
-  @media(prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important;}}
+  footer p{max-width:74ch;}
+  @media(prefers-reduced-motion:reduce){*{transition:none!important;}}
 </style>
 </head>
 <body>
 
-<p class="notice">Concept demo — the pro's name, photo and method are placeholders until captured. Nothing here is fabricated.</p>
+<p class="notice">Concept demo — Tom Harris is a real PGA professional consulting on this project. Method and product still in build.</p>
 
 <header class="hero">
-  <div class="portrait">
-    <svg viewBox="0 0 400 480" preserveAspectRatio="xMidYMax meet" aria-label="Placeholder for the pro's portrait">
-      <defs><radialGradient id="g" cx="50%" cy="38%" r="65%"><stop offset="0%" stop-color="#26332A"/><stop offset="100%" stop-color="#0D1512"/></radialGradient></defs>
-      <rect width="400" height="480" fill="url(#g)"/>
-      <g fill="none" stroke="#2E3D33" stroke-width="1">
-        <circle cx="200" cy="182" r="78"/>
-        <path d="M70 480 C70 360 130 300 200 300 C270 300 330 360 330 480"/>
-      </g>
-      <g fill="#3A4B3E"><circle cx="200" cy="180" r="66"/><path d="M96 480 C96 372 142 320 200 320 C258 320 304 372 304 480 Z"/></g>
-      <text x="200" y="188" text-anchor="middle" font-family="Archivo Black,sans-serif" font-size="15" fill="#6E7F70" letter-spacing="1">YOUR PRO</text>
-    </svg>
-    <span class="portrait__tag">Real photo goes here</span>
-  </div>
+  <figure class="ph hero__photo" data-need="img/tom-harris-lesson.jpg" style="margin:0">
+    <img src="img/tom-harris-lesson.jpg" alt="Tom Harris coaching a putting stroke on the practice green" onerror="this.parentElement.classList.add('empty');this.remove()">
+  </figure>
   <div class="hero__body">
     <span class="label">In your pocket</span>
-    <h1 class="hero__name">Coach<br>Pocket&nbsp;Pro</h1>
-    <div class="hero__cred">PGA Master Professional · his name here</div>
+    <h1 class="hero__name">Tom Harris</h1>
+    <div class="hero__cred">Class A PGA Professional · Player Development</div>
     <p class="hero__line">One coach. One method. On the range and on every course you play.</p>
+    <div class="chips">
+      <span class="chip">TPI Certified · Golf L3</span>
+      <span class="chip">Operation 36 Master Coach</span>
+      <span class="chip">2023 S. Ohio Player Development Award</span>
+    </div>
     <div class="hero__cta">
       <a class="btn btn--y" href="prototype.html">See it on real courses →</a>
-      <a class="btn btn--o" href="#method">His method</a>
+      <a class="btn btn--o" href="#dev">His teaching</a>
     </div>
   </div>
 </header>
 
-<section class="method" id="method">
+<section class="dev" id="dev">
+  <div class="wrap dev__hd">
+    <span class="label">Player development</span>
+    <h2 style="font-size:clamp(1.7rem,1.2rem + 2vw,2.8rem);max-width:20ch;margin-top:0.7rem">He builds golfers, from the first putt up.</h2>
+  </div>
   <div class="wrap">
-    <span class="label">Why one coach beats a hundred tips</span>
-    <h2 style="font-size:clamp(1.7rem,1.2rem + 2vw,2.8rem);max-width:18ch;margin-top:0.8rem">Stop collecting swing tips. Follow one professional.</h2>
-    <div class="method__grid">
-      <div class="m"><b>One method</b><p>Not four contradictory theories from the internet. His system, said his way, every time.</p></div>
-      <div class="m"><b>Trained on him</b><p>The advice is his — drawn from his method and his corrections, in his voice. Never generic golf slop.</p></div>
-      <div class="m"><b>He stays in the loop</b><p>Nothing goes out under his name he hasn't approved. His credential is the whole point.</p></div>
+    <div class="gallery">
+      <figure class="ph gcell gcell--big" data-need="img/tom-harris-clinic.jpg" style="margin:0">
+        <img src="img/tom-harris-clinic.jpg" alt="Tom Harris running a putting clinic with a grid drill on the practice green" onerror="this.parentElement.classList.add('empty');this.remove()">
+        <figcaption><small>On the green</small>Drills that make practice count — not just hitting balls.</figcaption>
+      </figure>
+      <figure class="ph gcell" data-need="img/tom-harris-group.jpg" style="margin:0">
+        <img src="img/tom-harris-group.jpg" alt="Tom Harris demonstrating a putting stroke to a group of students" onerror="this.parentElement.classList.add('empty');this.remove()">
+        <figcaption><small>Groups &amp; juniors</small>Youth to senior, one method for every level.</figcaption>
+      </figure>
+      <figure class="ph gcell" data-need="img/tom-harris-lesson.jpg" style="margin:0">
+        <img src="img/tom-harris-lesson.jpg" alt="Tom Harris giving a one-to-one putting lesson" onerror="this.parentElement.classList.add('empty');this.remove()">
+        <figcaption><small>One to one</small>Read the fault, fix it, retest. Then it&rsquo;s in your pocket.</figcaption>
+      </figure>
     </div>
   </div>
 </section>
@@ -120,7 +136,7 @@
       <article class="surf">
         <span class="where">On the range</span>
         <h3>He reads your swing</h3>
-        <p>Film eight shots. He names the fault in his words and prescribes the fix for someone built like you — then retests to see whether it moved.</p>
+        <p>Film your shots. He names the fault in his words and prescribes the fix for someone built like you — then retests to see whether it moved.</p>
       </article>
       <article class="surf">
         <span class="where">On the course</span>
@@ -141,24 +157,25 @@
       <a class="btn btn--y" href="prototype.html">Open the course tool →</a>
     </div>
     <div class="thumbs" id="thumbs"></div>
-    <p style="color:var(--dim);font-size:0.85rem;margin-top:1.25rem;max-width:62ch">Real USGS aerial photography, real hole geometry from OpenStreetMap. Same pipeline runs on any of the world's ~30,000–38,000 courses.</p>
+    <p style="color:var(--dim);font-size:0.85rem;margin-top:1.25rem;max-width:62ch">Real USGS aerial photography, real hole geometry from OpenStreetMap — including Austin&rsquo;s public courses. The same pipeline runs on any of the world&rsquo;s ~30,000–38,000 courses.</p>
   </div>
 </section>
 
 <footer>
   <div class="wrap">
-    <span class="label">What's real</span>
-    <p style="margin-top:0.8rem">The courses, aerials and strategy engine are real data. The pro's identity is a placeholder — drop in his photo, name and method and it becomes his. Imagery: USGS National Map, public domain. Geometry: © OpenStreetMap, ODbL. <a href="prototype.html">See the working course tool →</a></p>
+    <span class="label">What&rsquo;s real</span>
+    <p style="margin-top:0.8rem">Tom Harris is a real Class A PGA professional (credentials per pga.com and mytpi.com). Courses, aerials and the strategy engine are real data — imagery from the USGS National Map (public domain), geometry © OpenStreetMap (ODbL). His method and the product are still in build; nothing here is fabricated. <a href="prototype.html">See the working course tool →</a></p>
   </div>
 </footer>
 
 <script>
-// Real course thumbnails from the same data the prototype uses.
 const usgs=(b,w,h)=>`https://basemap.nationalmap.gov/arcgis/rest/services/USGSImageryOnly/MapServer/export?bbox=${b.minLo},${b.minLa},${b.maxLo},${b.maxLa}&bboxSR=4326&imageSR=4326&size=${w},${h}&format=jpg&f=image`
 fetch('courses.json').then(r=>r.json()).then(d=>{
-  const us=d.courses.filter(c=>c.country==='US'&&c.holes.length).slice(0,4)
+  const pref=['pebble-beach','lions-municipal','roy-kizer','bethpage-black']
+  const us=d.courses.filter(c=>c.country==='US'&&c.holes.length)
+  const pick=[...pref.map(id=>us.find(c=>c.id===id)).filter(Boolean),...us].filter((c,i,a)=>a.indexOf(c)===i).slice(0,4)
   const bounds=c=>{let a=90,b=-90,x=180,y=-180;for(const h of c.holes)for(const[la,lo]of h.path){if(la<a)a=la;if(la>b)b=la;if(lo<x)x=lo;if(lo>y)y=lo}const pa=(b-a)*0.06+6e-4,px=(y-x)*0.06+6e-4;return{minLa:a-pa,maxLa:b+pa,minLo:x-px,maxLo:y+px}}
-  document.getElementById('thumbs').innerHTML=us.map(c=>`<figure class="thumb"><img loading="lazy" decoding="async" alt="Aerial of ${c.name}" src="${usgs(bounds(c),520,390)}"><figcaption>${c.name}</figcaption></figure>`).join('')
+  document.getElementById('thumbs').innerHTML=pick.map(c=>`<figure class="thumb"><img loading="lazy" decoding="async" alt="Aerial of ${c.name}" src="${usgs(bounds(c),520,390)}"><figcaption>${c.name}</figcaption></figure>`).join('')
 }).catch(()=>{})
 </script>
 </body>
