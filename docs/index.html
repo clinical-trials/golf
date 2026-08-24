@@ -26,7 +26,8 @@
   /* hero: the pro is the hero */
   .hero{display:grid;grid-template-columns:1fr;gap:0;border-bottom:1px solid var(--rule);}
   @media(min-width:56rem){.hero{grid-template-columns:1.05fr 1fr;}}
-  .portrait{position:relative;background:linear-gradient(160deg,#18211C,#0D1512);min-height:60vh;display:flex;align-items:flex-end;overflow:hidden;border-right:1px solid var(--rule);}
+  .portrait{position:relative;background:linear-gradient(160deg,#18211C,#0D1512);min-height:38vh;max-height:46vh;display:flex;align-items:flex-end;overflow:hidden;border-bottom:1px solid var(--rule);}
+  @media(min-width:56rem){.portrait{min-height:60vh;max-height:none;border-bottom:0;border-right:1px solid var(--rule);}}
   .portrait svg{position:absolute;inset:0;width:100%;height:100%;}
   .portrait__tag{position:relative;margin:1.25rem;padding:0.55rem 0.8rem;background:rgba(11,15,19,0.72);backdrop-filter:blur(3px);font-family:'Archivo Narrow',sans-serif;font-weight:700;text-transform:uppercase;letter-spacing:0.1em;font-size:0.72rem;color:var(--flag);border:1px solid rgba(233,185,73,0.4);}
   .hero__body{padding:clamp(2rem,5vw,3.5rem);display:flex;flex-direction:column;justify-content:center;}
@@ -34,7 +35,7 @@
   .hero__cred{color:var(--flag);margin-top:0.6rem;font-family:'Archivo Narrow',sans-serif;font-weight:700;text-transform:uppercase;letter-spacing:0.12em;font-size:0.9rem;}
   .hero__line{font-size:clamp(1.15rem,1rem + 0.8vw,1.5rem);margin-top:1.5rem;max-width:24ch;}
   .hero__cta{display:flex;flex-wrap:wrap;gap:0.75rem;margin-top:2rem;}
-  .btn{display:inline-block;padding:0.7rem 1.15rem;font-family:'Archivo Narrow',sans-serif;font-weight:700;text-transform:uppercase;letter-spacing:0.08em;font-size:0.85rem;text-decoration:none;}
+  .btn{display:inline-flex;align-items:center;min-height:46px;padding:0.7rem 1.15rem;font-family:'Archivo Narrow',sans-serif;font-weight:700;text-transform:uppercase;letter-spacing:0.08em;font-size:0.85rem;text-decoration:none;}
   .btn--y{background:var(--flag);color:#231A06;}
   .btn--o{border:1px solid var(--rule);color:var(--card);}
   .btn:focus-visible{outline:2px solid var(--flag);outline-offset:2px;}
