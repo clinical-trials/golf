@@ -51,6 +51,11 @@
 
   /* filmstrip */
   .strip-wrap{padding:2rem 0 0;}
+  .strip-hd{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:0.75rem;}
+  .toggle{display:inline-flex;border:1px solid var(--rule);}
+  .tg{appearance:none;background:transparent;color:var(--card-dim);font-family:'Archivo Narrow',sans-serif;font-weight:700;text-transform:uppercase;letter-spacing:0.08em;font-size:0.76rem;padding:0.5rem 0.9rem;min-height:40px;cursor:pointer;border:0;}
+  .tg[aria-pressed="true"]{background:var(--flag);color:#231A06;}
+  .tg:focus-visible{outline:2px solid var(--flag);outline-offset:2px;}
   .strip{display:flex;gap:0.75rem;overflow-x:auto;padding:1rem 0 0.75rem;scrollbar-width:thin;}
   .tile{flex:0 0 auto;width:14rem;background:var(--ink-2);border:1px solid var(--rule);cursor:pointer;padding:0;text-align:left;overflow:hidden;color:var(--card);}
   .tile img,.tile svg{display:block;width:100%;height:8rem;object-fit:cover;background:#0A0E11;}
@@ -74,6 +79,10 @@
   svg.map{display:block;width:100%;height:auto;background:#0A0E11;}
   .coverage{display:inline-flex;align-items:center;gap:0.4rem;font-family:'Archivo Narrow',sans-serif;font-weight:700;font-size:0.72rem;text-transform:uppercase;letter-spacing:0.08em;color:var(--flag);}
   .coverage i{width:0.55rem;height:0.55rem;background:var(--flag);border-radius:50%;}
+  .zoomctl{position:absolute;right:1.1rem;top:3.4rem;display:flex;flex-direction:column;gap:3px;z-index:2;}
+  .zbtn{appearance:none;width:42px;height:42px;border:1px solid var(--rule);background:rgba(11,15,19,0.85);color:var(--card);font-family:'Archivo Narrow',sans-serif;font-weight:700;font-size:1.05rem;cursor:pointer;}
+  .zbtn:hover{border-color:var(--flag);color:var(--flag);}
+  .zbtn:focus-visible{outline:2px solid var(--flag);outline-offset:2px;}
 
   .panel{display:grid;gap:1.15rem;}
   .box{background:var(--ink-2);border:1px solid var(--rule);padding:1.15rem;}
@@ -145,7 +154,13 @@
 
 <section class="strip-wrap">
   <div class="wrap">
-    <span class="label">Choose a course</span>
+    <div class="strip-hd">
+      <span class="label">Choose a course</span>
+      <div class="toggle" role="group" aria-label="Course region">
+        <button class="tg" id="tg-us" aria-pressed="true">United States</button>
+        <button class="tg" id="tg-all" aria-pressed="false">Global</button>
+      </div>
+    </div>
     <div class="strip" id="strip" role="group" aria-label="Course"></div>
   </div>
 </section>
@@ -158,6 +173,11 @@
           <div class="canvas__head">
             <span class="canvas__name" id="course-name">—</span>
             <span class="coverage" id="course-cov"><i></i><span></span></span>
+          </div>
+          <div class="zoomctl">
+            <button class="zbtn" id="z-in" aria-label="Zoom in">+</button>
+            <button class="zbtn" id="z-out" aria-label="Zoom out">−</button>
+            <button class="zbtn" id="z-reset" aria-label="Reset zoom">⌂</button>
           </div>
           <svg class="map" id="course-map" viewBox="0 0 1000 700" role="img" aria-label="Full course aerial with the hole routing drawn over it"></svg>
           <div class="legend">
@@ -285,11 +305,35 @@ function el(tag,attrs){const n=document.createElementNS(SVG,tag);for(const k in 
 
 let COURSES=[], course=null, holeIndex=0, player=PLAYERS[0]
 
+/* ---------- zoom on the course flyover ---------- */
+let zoomK=1, zoomCx=0.5, zoomCy=0.5, baseVW=1000, baseVH=700
+function applyZoom(){
+  const svg=document.getElementById('course-map')
+  const w=baseVW/zoomK, h=baseVH/zoomK
+  const x=(baseVW-w)*zoomCx, y=(baseVH-h)*zoomCy
+  svg.setAttribute('viewBox',`${x} ${y} ${w} ${h}`)
+}
+function setZoom(k,fx=0.5,fy=0.5){
+  const k0=zoomK
+  const k1=Math.min(8,Math.max(1,k))
+  if(k1===k0)return
+  // keep the point under (fx,fy) fixed while scaling
+  const x0=(baseVW-baseVW/k0)*zoomCx, y0=(baseVH-baseVH/k0)*zoomCy
+  const px=x0+fx*(baseVW/k0), py=y0+fy*(baseVH/k0)
+  const x1=px-fx*(baseVW/k1), y1=py-fy*(baseVH/k1)
+  zoomK=k1
+  zoomCx=k1===1?0.5:Math.min(1,Math.max(0,x1/(baseVW-baseVW/k1)))
+  zoomCy=k1===1?0.5:Math.min(1,Math.max(0,y1/(baseVH-baseVH/k1)))
+  applyZoom()
+}
+
 /* ---------- full-course flyover ---------- */
 function renderCourse(){
   const b=courseBounds(course), a=aspect(b)
   const VW=1000, VH=Math.round(VW/Math.max(a.ratio,0.55))
-  const svg=document.getElementById('course-map'); svg.setAttribute('viewBox',`0 0 ${VW} ${VH}`); svg.textContent=''
+  baseVW=VW; baseVH=VH
+  const svg=document.getElementById('course-map'); svg.textContent=''
+  applyZoom()
   const to=projector(b,VW,VH)
   const isUS=course.country==='US'
 
@@ -429,9 +473,20 @@ function say(h,best,res){
 /* ---------- boot ---------- */
 function selectCourse(c){
   course=c; holeIndex=0
+  zoomK=1; zoomCx=0.5; zoomCy=0.5
   document.querySelectorAll('.tile').forEach(t=>t.setAttribute('aria-pressed',String(t.dataset.id===c.id)))
   renderCourse(); renderHole()
 }
+
+// zoom controls: buttons + wheel-at-cursor
+document.getElementById('z-in').addEventListener('click',()=>setZoom(zoomK*1.5))
+document.getElementById('z-out').addEventListener('click',()=>setZoom(zoomK/1.5))
+document.getElementById('z-reset').addEventListener('click',()=>setZoom(1))
+document.getElementById('course-map').addEventListener('wheel',e=>{
+  e.preventDefault()
+  const r=e.currentTarget.getBoundingClientRect()
+  setZoom(zoomK*(e.deltaY<0?1.25:0.8),(e.clientX-r.left)/r.width,(e.clientY-r.top)/r.height)
+},{passive:false})
 fetch('courses.json').then(r=>r.json()).then(data=>{
   COURSES=data.courses.filter(c=>c.holes.length>0)
   const us=COURSES.filter(c=>c.country==='US')
@@ -446,13 +501,29 @@ fetch('courses.json').then(r=>r.json()).then(data=>{
     [COURSES.length,'courses charted'],[totalHoles,'holes'],[us.length,'with real aerial photos'],[new Set(COURSES.map(c=>c.country)).size,'countries']
   ].map(([n,l])=>`<div><b>${n}</b><span>${l}</span></div>`).join('')
 
-  // filmstrip
-  document.getElementById('strip').innerHTML=COURSES.map(c=>{
-    const b=courseBounds(c),a=aspect(c===marquee?hb:b)
-    const thumb=c.country==='US'?`<img loading="lazy" decoding="async" alt="" src="${usgsUrl(b,420,Math.round(420/Math.max(a.ratio,1)))}">`:`<svg viewBox="0 0 100 60" aria-hidden="true"><rect width="100" height="60" fill="#0D1512"/><text x="50" y="33" text-anchor="middle" font-family="Archivo Narrow,sans-serif" font-size="8" fill="#7B9153">vector</text></svg>`
-    return `<button class="tile" data-id="${c.id}" aria-pressed="false"><div class="tile__wrap">${c.country==='US'?'<span class="tile__badge">Photo</span>':''}${thumb}</div><div class="tile__cap"><div class="tile__name">${c.name}</div><div class="tile__place">${c.place}</div></div></button>`
-  }).join('')
-  document.querySelectorAll('.tile').forEach(t=>t.addEventListener('click',()=>selectCourse(COURSES.find(c=>c.id===t.dataset.id))))
+  // filmstrip with US / Global toggle (defaults to US)
+  let region='US'
+  const inRegion=c=>region==='US'?c.country==='US':true
+  function renderStrip(){
+    const list=COURSES.filter(inRegion)
+    document.getElementById('strip').innerHTML=list.map(c=>{
+      const b=courseBounds(c),a=aspect(b)
+      const thumb=c.country==='US'?`<img loading="lazy" decoding="async" alt="" src="${usgsUrl(b,420,Math.round(420/Math.max(a.ratio,1)))}">`:`<svg viewBox="0 0 100 60" aria-hidden="true"><rect width="100" height="60" fill="#0D1512"/><text x="50" y="33" text-anchor="middle" font-family="Archivo Narrow,sans-serif" font-size="8" fill="#7B9153">vector</text></svg>`
+      return `<button class="tile" data-id="${c.id}" aria-pressed="${course&&c.id===course.id}"><div class="tile__wrap">${c.country==='US'?'<span class="tile__badge">Photo</span>':''}${thumb}</div><div class="tile__cap"><div class="tile__name">${c.name}</div><div class="tile__place">${c.place}</div></div></button>`
+    }).join('')
+    document.querySelectorAll('.tile').forEach(t=>t.addEventListener('click',()=>selectCourse(COURSES.find(c=>c.id===t.dataset.id))))
+  }
+  function setRegion(r){
+    region=r
+    document.getElementById('tg-us').setAttribute('aria-pressed',String(r==='US'))
+    document.getElementById('tg-all').setAttribute('aria-pressed',String(r==='ALL'))
+    renderStrip()
+    const list=COURSES.filter(inRegion)
+    if(!list.some(c=>c.id===course.id))selectCourse(list[0])
+  }
+  renderStrip()
+  document.getElementById('tg-us').addEventListener('click',()=>setRegion('US'))
+  document.getElementById('tg-all').addEventListener('click',()=>setRegion('ALL'))
 
   // globe stats
   document.getElementById('globe').innerHTML=[
