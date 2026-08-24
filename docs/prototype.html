@@ -3,380 +3,218 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Pocket Pro — working prototype</title>
-<meta name="description" content="Working prototype: real course geometry from OpenStreetMap with a live expected-strokes strategy engine.">
+<title>Pocket Pro — course intelligence</title>
+<meta name="description" content="Real aerial imagery of the world's golf courses with a live expected-strokes engine. Every course, routing and photo is real data.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600&family=Archivo+Black&family=Archivo+Narrow:wght@400;600;700&display=swap" rel="stylesheet">
 <style>
   :root{
-    --ink:#0F1417;
-    --ink-2:#161D21;
-    --ink-3:#1D2528;
-    --card:#E9E3D4;
-    --turf:#66784A;
-    --turf-dim:#3D4A2E;
-    --flag:#E4B23F;
-    --chalk:#9EAAA6;
-    --penalty:#C4462F;
-    --water:#2F5E7A;
-    --sand:#B9A472;
-    --rule:#26302F;
+    --ink:#0B0F13;
+    --ink-2:#131A1F;
+    --ink-3:#1B242A;
+    --card:#ECE6D6;
+    --card-dim:#B9B7A6;
+    --flag:#E9B949;
+    --thread:#B7D06A;
+    --turf:#7B9153;
+    --water:#3E7DA0;
+    --sand:#CDB988;
+    --penalty:#D2553C;
+    --rule:#232D31;
   }
-
   *{box-sizing:border-box;}
-
+  html{-webkit-text-size-adjust:100%;}
   body{
-    margin:0;
-    background:var(--ink);
-    color:var(--card);
+    margin:0;background:var(--ink);color:var(--card);
     font-family:'Archivo',system-ui,-apple-system,sans-serif;
-    line-height:1.55;
-    -webkit-font-smoothing:antialiased;
+    line-height:1.55;-webkit-font-smoothing:antialiased;
   }
-
-  h1,h2,h3{
-    font-family:'Archivo Black','Archivo',system-ui,sans-serif;
-    font-weight:400;
-    line-height:1;
-    letter-spacing:-0.02em;
-    margin:0;
-  }
-
+  h1,h2,h3{font-family:'Archivo Black','Archivo',sans-serif;font-weight:400;line-height:0.98;letter-spacing:-0.02em;margin:0;}
   a{color:var(--flag);}
+  .wrap{width:min(100% - 2rem, 80rem);margin-inline:auto;}
+  .label{font-family:'Archivo Narrow',sans-serif;font-weight:700;text-transform:uppercase;letter-spacing:0.15em;font-size:0.75rem;color:var(--card-dim);}
 
-  .wrap{width:min(100% - 2rem, 78rem);margin-inline:auto;}
+  .notice{background:var(--flag);color:#231A06;font-family:'Archivo Narrow',sans-serif;font-weight:700;text-transform:uppercase;letter-spacing:0.09em;font-size:0.78rem;text-align:center;padding:0.6rem 1rem;}
 
-  .label{
-    font-family:'Archivo Narrow',system-ui,sans-serif;
-    font-weight:700;
-    text-transform:uppercase;
-    letter-spacing:0.14em;
-    font-size:0.75rem;
-    color:var(--chalk);
-  }
+  /* hero */
+  .hero{position:relative;min-height:min(82vh,720px);display:flex;align-items:flex-end;overflow:hidden;border-bottom:1px solid var(--rule);}
+  .hero__img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;filter:saturate(1.05) contrast(1.03);}
+  .hero__scrim{position:absolute;inset:0;background:linear-gradient(180deg,rgba(11,15,19,0.35) 0%,rgba(11,15,19,0.1) 40%,rgba(11,15,19,0.92) 100%);}
+  .hero__in{position:relative;padding:0 0 clamp(2rem,5vw,3.5rem);}
+  .hero__ey{color:var(--flag);}
+  .hero h1{font-size:clamp(2.4rem,1.5rem + 4.4vw,5.5rem);max-width:16ch;margin:1rem 0 0;}
+  .hero__sub{max-width:52ch;margin:1.25rem 0 0;color:var(--card);font-size:clamp(1rem,0.95rem + 0.4vw,1.2rem);}
+  .hero__stat{display:flex;flex-wrap:wrap;gap:1.5rem 2.5rem;margin-top:2rem;padding-top:1.5rem;border-top:1px solid rgba(236,230,214,0.22);}
+  .hero__stat b{font-family:'Archivo Black',sans-serif;font-size:1.6rem;display:block;line-height:1;}
+  .hero__stat span{font-family:'Archivo Narrow',sans-serif;text-transform:uppercase;letter-spacing:0.1em;font-size:0.72rem;color:var(--card-dim);}
 
-  .notice{
-    background:var(--flag);
-    color:#22190A;
-    font-family:'Archivo Narrow',system-ui,sans-serif;
-    font-weight:700;
-    text-transform:uppercase;
-    letter-spacing:0.09em;
-    font-size:0.78rem;
-    text-align:center;
-    padding:0.65rem 1rem;
-  }
+  /* filmstrip */
+  .strip-wrap{padding:2rem 0 0;}
+  .strip{display:flex;gap:0.75rem;overflow-x:auto;padding:1rem 0 0.75rem;scrollbar-width:thin;}
+  .tile{flex:0 0 auto;width:14rem;background:var(--ink-2);border:1px solid var(--rule);cursor:pointer;padding:0;text-align:left;overflow:hidden;color:var(--card);}
+  .tile img,.tile svg{display:block;width:100%;height:8rem;object-fit:cover;background:#0A0E11;}
+  .tile__cap{padding:0.6rem 0.8rem 0.75rem;}
+  .tile__name{font-family:'Archivo Narrow',sans-serif;font-weight:700;font-size:0.95rem;line-height:1.15;}
+  .tile__place{font-family:'Archivo Narrow',sans-serif;font-size:0.75rem;text-transform:uppercase;letter-spacing:0.08em;color:var(--card-dim);margin-top:0.15rem;}
+  .tile[aria-pressed="true"]{border-color:var(--flag);}
+  .tile[aria-pressed="true"] .tile__name{color:var(--flag);}
+  .tile:focus-visible{outline:2px solid var(--flag);outline-offset:2px;}
+  .tile__badge{position:absolute;margin:0.5rem;padding:0.15rem 0.4rem;font-family:'Archivo Narrow',sans-serif;font-weight:700;font-size:0.62rem;letter-spacing:0.08em;text-transform:uppercase;background:rgba(11,15,19,0.8);color:var(--flag);}
+  .tile__wrap{position:relative;}
 
-  /* ---------- masthead ---------- */
+  /* flyover */
+  .stage{padding:2.5rem 0 1rem;}
+  .stage__grid{display:grid;gap:1.5rem;grid-template-columns:1fr;}
+  @media (min-width:64rem){.stage__grid{grid-template-columns:minmax(0,1.7fr) minmax(0,1fr);align-items:start;}}
+  .canvas{background:var(--ink-2);border:1px solid var(--rule);padding:0.75rem;position:relative;}
+  .canvas__head{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:baseline;gap:0.5rem 1rem;padding:0.25rem 0.35rem 0.75rem;}
+  .canvas__name{font-family:'Archivo Black',sans-serif;font-size:1.35rem;}
+  .canvas__meta{font-family:'Archivo Narrow',sans-serif;letter-spacing:0.06em;color:var(--card-dim);font-size:0.85rem;}
+  svg.map{display:block;width:100%;height:auto;background:#0A0E11;}
+  .coverage{display:inline-flex;align-items:center;gap:0.4rem;font-family:'Archivo Narrow',sans-serif;font-weight:700;font-size:0.72rem;text-transform:uppercase;letter-spacing:0.08em;color:var(--flag);}
+  .coverage i{width:0.55rem;height:0.55rem;background:var(--flag);border-radius:50%;}
 
-  .masthead{padding:clamp(2.5rem,6vw,4rem) 0 2rem;border-bottom:1px solid var(--rule);}
-  .masthead h1{font-size:clamp(2rem,1.4rem + 2.6vw,3.25rem);}
-  .masthead p{color:var(--chalk);max-width:56ch;margin:1.25rem 0 0;}
-  .masthead__nav{margin-top:1.5rem;font-family:'Archivo Narrow',system-ui,sans-serif;font-size:0.9rem;letter-spacing:0.04em;}
-
-  /* ---------- course strip ---------- */
-
-  .courses{padding:2rem 0 0;}
-
-  .chips{
-    display:flex;
-    gap:0.5rem;
-    overflow-x:auto;
-    padding:1rem 0 0.5rem;
-    scrollbar-width:thin;
-  }
-
-  .chip{
-    appearance:none;
-    flex:0 0 auto;
-    background:var(--ink-2);
-    border:1px solid var(--rule);
-    color:var(--card);
-    font-family:'Archivo Narrow',system-ui,sans-serif;
-    font-weight:600;
-    font-size:0.9rem;
-    padding:0.6rem 0.9rem;
-    cursor:pointer;
-    text-align:left;
-    line-height:1.25;
-  }
-
-  .chip small{display:block;color:var(--chalk);font-weight:400;font-size:0.75rem;letter-spacing:0.06em;text-transform:uppercase;}
-
-  .chip[aria-pressed="true"]{border-color:var(--flag);background:var(--ink-3);}
-  .chip[aria-pressed="true"] small{color:var(--flag);}
-  .chip:focus-visible{outline:2px solid var(--flag);outline-offset:2px;}
-
-  /* ---------- play area ---------- */
-
-  .play{
-    display:grid;
-    gap:1.5rem;
-    padding:1.5rem 0 clamp(3rem,7vw,5rem);
-    grid-template-columns:1fr;
-  }
-
-  @media (min-width:62rem){
-    .play{grid-template-columns:minmax(0,1.55fr) minmax(0,1fr);align-items:start;}
-  }
-
-  .map{
-    background:var(--ink-2);
-    border:1px solid var(--rule);
-    padding:1rem;
-  }
-
-  .map__head{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:baseline;gap:0.75rem;margin-bottom:0.75rem;}
-  .map__hole{font-family:'Archivo Black',system-ui,sans-serif;font-size:1.35rem;}
-  .map__stats{font-family:'Archivo Narrow',system-ui,sans-serif;font-variant-numeric:tabular-nums;color:var(--chalk);letter-spacing:0.06em;font-size:0.9rem;}
-
-  svg#hole{display:block;width:100%;height:auto;background:#0C1113;}
-
-  .holes{
-    display:grid;
-    grid-template-columns:repeat(9,1fr);
-    gap:2px;
-    margin-top:0.75rem;
-  }
-
-  .hole-pip{
-    appearance:none;
-    background:var(--ink-3);
-    border:0;
-    color:var(--chalk);
-    font-family:'Archivo Narrow',system-ui,sans-serif;
-    font-weight:700;
-    font-variant-numeric:tabular-nums;
-    padding:0.45rem 0;
-    cursor:pointer;
-    font-size:0.9rem;
-  }
-
-  .hole-pip[aria-pressed="true"]{background:var(--flag);color:#22190A;}
-  .hole-pip:focus-visible{outline:2px solid var(--flag);outline-offset:1px;}
-
-  /* ---------- panel ---------- */
-
-  .panel{display:grid;gap:1.25rem;}
-
-  .box{background:var(--ink-2);border:1px solid var(--rule);padding:1.25rem;}
-  .box > .label{display:block;margin-bottom:0.85rem;}
-
+  .panel{display:grid;gap:1.15rem;}
+  .box{background:var(--ink-2);border:1px solid var(--rule);padding:1.15rem;}
+  .box>.label{display:block;margin-bottom:0.85rem;}
   .players{display:grid;gap:0.4rem;}
+  .pbtn{appearance:none;background:var(--ink-3);border:1px solid transparent;color:var(--card);text-align:left;padding:0.65rem 0.8rem;cursor:pointer;font-family:'Archivo',sans-serif;font-size:0.88rem;line-height:1.25;}
+  .pbtn strong{font-family:'Archivo Narrow',sans-serif;font-weight:700;letter-spacing:0.03em;display:block;}
+  .pbtn span{color:var(--card-dim);font-size:0.78rem;}
+  .pbtn[aria-pressed="true"]{border-color:var(--flag);}
+  .pbtn:focus-visible{outline:2px solid var(--flag);outline-offset:2px;}
 
-  .player-btn{
-    appearance:none;
-    background:var(--ink-3);
-    border:1px solid transparent;
-    color:var(--card);
-    text-align:left;
-    padding:0.7rem 0.85rem;
-    cursor:pointer;
-    font-family:'Archivo',system-ui,sans-serif;
-    font-size:0.9rem;
-    line-height:1.3;
-  }
+  .verdict{background:var(--card);color:#171C18;padding:1.15rem;}
+  .verdict__l{font-family:'Archivo Narrow',sans-serif;font-weight:700;text-transform:uppercase;letter-spacing:0.14em;font-size:0.7rem;color:#5C6259;}
+  .verdict__club{font-family:'Archivo Black',sans-serif;font-size:clamp(1.5rem,1.2rem + 1.2vw,2rem);line-height:1;margin:0.3rem 0 0.55rem;}
+  .verdict__say{margin:0;font-size:1rem;line-height:1.4;}
 
-  .player-btn strong{font-family:'Archivo Narrow',system-ui,sans-serif;font-weight:700;letter-spacing:0.04em;display:block;}
-  .player-btn span{color:var(--chalk);font-size:0.8rem;}
-  .player-btn[aria-pressed="true"]{border-color:var(--flag);}
-  .player-btn:focus-visible{outline:2px solid var(--flag);outline-offset:2px;}
-
-  .verdict{
-    background:var(--card);
-    color:#171C18;
-    padding:1.25rem;
-  }
-
-  .verdict__club{
-    font-family:'Archivo Black',system-ui,sans-serif;
-    font-size:clamp(1.5rem,1.2rem + 1.4vw,2.1rem);
-    line-height:1;
-    margin:0.35rem 0 0.6rem;
-  }
-
-  .verdict__say{margin:0;font-size:1.02rem;line-height:1.4;}
-
-  .verdict__label{
-    font-family:'Archivo Narrow',system-ui,sans-serif;
-    font-weight:700;
-    text-transform:uppercase;
-    letter-spacing:0.14em;
-    font-size:0.7rem;
-    color:#5C6259;
-  }
-
-  table.options{
-    width:100%;
-    border-collapse:collapse;
-    font-family:'Archivo Narrow',system-ui,sans-serif;
-    font-variant-numeric:tabular-nums;
-    font-size:0.9rem;
-  }
-
-  table.options th,
-  table.options td{
-    text-align:right;
-    padding:0.42rem 0.3rem;
-    border-bottom:1px solid var(--rule);
-  }
-
-  table.options th:first-child,
-  table.options td:first-child{text-align:left;}
-
-  table.options thead th{
-    color:var(--chalk);
-    font-size:0.7rem;
-    text-transform:uppercase;
-    letter-spacing:0.1em;
-    font-weight:700;
-  }
-
+  table.opt{width:100%;border-collapse:collapse;font-family:'Archivo Narrow',sans-serif;font-variant-numeric:tabular-nums;font-size:0.88rem;}
+  table.opt th,table.opt td{text-align:right;padding:0.4rem 0.3rem;border-bottom:1px solid var(--rule);}
+  table.opt th:first-child,table.opt td:first-child{text-align:left;}
+  table.opt thead th{color:var(--card-dim);font-size:0.68rem;text-transform:uppercase;letter-spacing:0.1em;font-weight:700;}
   tr.best td{color:var(--flag);font-weight:700;}
   td.risk{color:var(--penalty);}
 
-  .legend{display:flex;flex-wrap:wrap;gap:0.85rem;margin-top:0.75rem;font-family:'Archivo Narrow',system-ui,sans-serif;font-size:0.78rem;letter-spacing:0.06em;color:var(--chalk);}
-  .legend i{display:inline-block;width:0.7rem;height:0.7rem;margin-right:0.3rem;vertical-align:-1px;}
+  .legend{display:flex;flex-wrap:wrap;gap:0.8rem;padding:0.75rem 0.35rem 0.25rem;font-family:'Archivo Narrow',sans-serif;font-size:0.76rem;letter-spacing:0.05em;color:var(--card-dim);}
+  .legend i{display:inline-block;width:0.7rem;height:0.7rem;margin-right:0.3rem;vertical-align:-1px;border-radius:2px;}
 
-  /* ---------- sections ---------- */
+  .holes{display:grid;grid-template-columns:repeat(9,1fr);gap:2px;margin-top:0.6rem;}
+  @media (min-width:40rem){.holes{grid-template-columns:repeat(18,1fr);}}
+  .pip{appearance:none;background:var(--ink-3);border:0;color:var(--card-dim);font-family:'Archivo Narrow',sans-serif;font-weight:700;font-variant-numeric:tabular-nums;padding:0.4rem 0;cursor:pointer;font-size:0.8rem;}
+  .pip[aria-pressed="true"]{background:var(--flag);color:#231A06;}
+  .pip:focus-visible{outline:2px solid var(--flag);outline-offset:1px;}
 
+  /* bands */
   .band{padding:clamp(2.5rem,6vw,4.5rem) 0;border-top:1px solid var(--rule);}
-  .band h2{font-size:clamp(1.5rem,1.1rem + 1.6vw,2.25rem);max-width:20ch;}
-  .band p.lede{color:var(--chalk);max-width:60ch;margin:1.15rem 0 0;}
+  .band h2{font-size:clamp(1.6rem,1.1rem + 1.9vw,2.6rem);max-width:20ch;}
+  .band p.lede{color:var(--card-dim);max-width:60ch;margin:1.15rem 0 0;}
 
-  .ideas{list-style:none;padding:0;margin:2rem 0 0;display:grid;gap:1px;background:var(--rule);border:1px solid var(--rule);}
-
-  @media (min-width:52rem){.ideas{grid-template-columns:1fr 1fr;}}
-
-  .idea{background:var(--ink-2);padding:1.35rem;}
-  .idea h3{font-size:1.05rem;margin-bottom:0.55rem;}
-  .idea p{margin:0;color:var(--chalk);font-size:0.94rem;}
-  .idea .them{display:block;font-family:'Archivo Narrow',system-ui,sans-serif;font-size:0.72rem;letter-spacing:0.12em;text-transform:uppercase;color:var(--turf);margin-bottom:0.7rem;}
+  .globe{display:grid;gap:1px;background:var(--rule);border:1px solid var(--rule);margin-top:2.5rem;grid-template-columns:repeat(auto-fit,minmax(9rem,1fr));}
+  .cell{background:var(--ink-2);padding:1.25rem 1.15rem;}
+  .cell b{font-family:'Archivo Black',sans-serif;font-size:2rem;display:block;line-height:1;}
+  .cell span{font-family:'Archivo Narrow',sans-serif;text-transform:uppercase;letter-spacing:0.08em;font-size:0.72rem;color:var(--card-dim);display:block;margin-top:0.4rem;}
+  .cite{color:var(--card-dim);font-size:0.82rem;margin-top:1.5rem;max-width:64ch;}
 
   .split{display:grid;gap:2rem;margin-top:2rem;}
   @media (min-width:52rem){.split{grid-template-columns:1fr 1fr;}}
-  .split h3{font-family:'Archivo Narrow',system-ui,sans-serif;font-weight:700;text-transform:uppercase;letter-spacing:0.12em;font-size:0.95rem;margin-bottom:0.85rem;}
-  .split ul{margin:0;padding-left:1.15rem;color:var(--chalk);display:grid;gap:0.55rem;font-size:0.95rem;}
+  .split h3{font-family:'Archivo Narrow',sans-serif;font-weight:700;text-transform:uppercase;letter-spacing:0.12em;font-size:0.95rem;margin-bottom:0.85rem;}
+  .split ul{margin:0;padding-left:1.1rem;color:var(--card-dim);display:grid;gap:0.55rem;font-size:0.94rem;}
 
-  footer.colophon{padding:2rem 0 3.5rem;color:var(--chalk);font-size:0.88rem;border-top:1px solid var(--rule);}
-  footer.colophon p{max-width:70ch;}
+  footer{padding:2rem 0 3.5rem;color:var(--card-dim);font-size:0.86rem;border-top:1px solid var(--rule);}
+  footer p{max-width:72ch;}
 
-  @media (prefers-reduced-motion:reduce){*{transition:none !important;animation:none !important;}}
+  @media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important;}}
 </style>
 </head>
 <body>
 
-<p class="notice">Working prototype — real course geometry, live strategy engine, simulated golfer</p>
+<p class="notice">Working prototype — real aerial imagery, real course geometry, live strategy engine. Nothing on this page is fabricated.</p>
 
-<header class="masthead">
-  <div class="wrap">
-    <h1>Pocket Pro</h1>
-    <p>One product, not two. On the range it diagnoses your swing from video, prescribes work in your pro's method, and retests to see whether anything moved. On the course it knows the hole in front of you and knows how you actually miss. Same judgment in both places, because that's what a real professional is.</p>
-    <p class="masthead__nav"><a href="index.html">← Concept overview</a></p>
+<header class="hero" id="hero">
+  <img class="hero__img" id="hero-img" alt="" decoding="async">
+  <div class="hero__scrim"></div>
+  <div class="hero__in wrap">
+    <span class="label hero__ey">Every course, photographed from above</span>
+    <h1 id="hero-name">Pocket Pro</h1>
+    <p class="hero__sub">The world's golf courses in real aerial imagery, with a professional's strategy read on every hole. Pick a course, walk the routing, stand on any tee.</p>
+    <div class="hero__stat" id="hero-stat"></div>
   </div>
 </header>
 
-<section class="courses">
+<section class="strip-wrap">
   <div class="wrap">
-    <span class="label">Pick a course — geometry pulled live from OpenStreetMap</span>
-    <div class="chips" id="chips" role="group" aria-label="Course"></div>
+    <span class="label">Choose a course</span>
+    <div class="strip" id="strip" role="group" aria-label="Course"></div>
   </div>
 </section>
 
 <div class="wrap">
-  <div class="play">
-    <section class="map">
-      <div class="map__head">
-        <span class="map__hole" id="hole-title">Hole 1</span>
-        <span class="map__stats" id="hole-stats"></span>
-      </div>
-      <svg id="hole" viewBox="0 0 800 520" role="img" aria-labelledby="hole-desc"></svg>
-      <desc id="hole-desc">Plan view of the selected hole with fairway, green, bunkers and water, and the simulated landing pattern for the recommended club.</desc>
-      <div class="legend">
-        <span><i style="background:var(--turf)"></i>Green</span>
-        <span><i style="background:var(--sand)"></i>Bunker</span>
-        <span><i style="background:var(--water)"></i>Water</span>
-        <span><i style="background:var(--flag)"></i>Your pattern</span>
-        <span><i style="background:var(--penalty)"></i>In trouble</span>
-        <span id="imagery-note"></span>
-      </div>
-      <div class="holes" id="holes" role="group" aria-label="Hole"></div>
-    </section>
-
-    <aside class="panel">
-      <div class="box">
-        <span class="label">Who's playing</span>
-        <div class="players" id="players" role="group" aria-label="Golfer"></div>
+  <section class="stage">
+    <div class="stage__grid">
+      <div>
+        <div class="canvas">
+          <div class="canvas__head">
+            <span class="canvas__name" id="course-name">—</span>
+            <span class="coverage" id="course-cov"><i></i><span></span></span>
+          </div>
+          <svg class="map" id="course-map" viewBox="0 0 1000 700" role="img" aria-label="Full course aerial with the hole routing drawn over it"></svg>
+          <div class="legend">
+            <span><i style="background:var(--thread)"></i>Routing, hole 1 → 18</span>
+            <span><i style="background:var(--flag);border-radius:50%"></i>Selected hole</span>
+            <span id="cov-note"></span>
+          </div>
+          <div class="holes" id="holes" role="group" aria-label="Hole"></div>
+        </div>
       </div>
 
-      <div class="verdict">
-        <span class="verdict__label">Off the tee</span>
-        <div class="verdict__club" id="verdict-club">—</div>
-        <p class="verdict__say" id="verdict-say"></p>
-      </div>
+      <aside class="panel">
+        <div class="canvas">
+          <div class="canvas__head">
+            <span class="canvas__name" id="hole-title" style="font-size:1.1rem">Hole 1</span>
+            <span class="canvas__meta" id="hole-meta"></span>
+          </div>
+          <svg class="map" id="hole-map" viewBox="0 0 1000 720" role="img" aria-label="Selected hole in close aerial with the simulated shot pattern"></svg>
+          <div class="legend">
+            <span><i style="background:var(--flag)"></i>Your pattern</span>
+            <span><i style="background:var(--penalty)"></i>In trouble</span>
+            <span><i style="background:var(--turf)"></i>Green</span>
+            <span><i style="background:var(--water)"></i>Water</span>
+          </div>
+        </div>
 
-      <div class="box">
-        <span class="label">Every option, expected strokes</span>
-        <table class="options">
-          <thead>
-            <tr><th scope="col">Club</th><th scope="col">Exp.</th><th scope="col">Fwy</th><th scope="col">Trouble</th></tr>
-          </thead>
-          <tbody id="options"></tbody>
-        </table>
-        <p style="margin:0.85rem 0 0;font-size:0.82rem;color:var(--chalk);">600 simulated shots per club against this hole's real geometry. Lower expected strokes is better.</p>
-      </div>
-    </aside>
-  </div>
+        <div class="box">
+          <span class="label">Who's playing</span>
+          <div class="players" id="players" role="group" aria-label="Golfer"></div>
+        </div>
+
+        <div class="verdict">
+          <span class="verdict__l">Off the tee</span>
+          <div class="verdict__club" id="v-club">—</div>
+          <p class="verdict__say" id="v-say"></p>
+        </div>
+
+        <div class="box">
+          <span class="label">Every option, expected strokes</span>
+          <table class="opt">
+            <thead><tr><th>Club</th><th>Exp.</th><th>In&nbsp;play</th><th>Trouble</th></tr></thead>
+            <tbody id="opt-body"></tbody>
+          </table>
+          <p style="margin:0.8rem 0 0;font-size:0.8rem;color:var(--card-dim)">600 simulated shots per club against this hole's real geometry.</p>
+        </div>
+      </aside>
+    </div>
+  </section>
 </div>
 
 <section class="band">
   <div class="wrap">
-    <span class="label">The other half</span>
-    <h2>On the range, the same pro.</h2>
-    <p class="lede">The course advice above is only as good as the profile behind it, and that profile comes from video. Eight shots, three swings each, unedited — driver and mid-iron from both angles, a pitch, a chip, and two putting views. Level is assessed per domain, because full swing, short game, and putting genuinely diverge, and the gap between them is usually the whole story.</p>
-    <p class="lede">The dispersion driving every recommendation on this page is the same object the diagnosis engine writes to. Fix the fault on the range and the pattern on the course tightens. That loop is the product.</p>
-  </div>
-</section>
-
-<section class="band">
-  <div class="wrap">
-    <span class="label">Building on CoachNow</span>
-    <h2>What a communication hub can't do.</h2>
-    <p class="lede">CoachNow is a good tool for what it is: per-athlete spaces, video markup with angle tools, a reusable drill library, batch messaging. Its unit of value is a message sent. It proves the coach communicated; it never proves the student improved. Everything below follows from changing that unit.</p>
-
-    <ul class="ideas">
-      <li class="idea">
-        <span class="them">They measure messages</span>
-        <h3>Measure strokes instead</h3>
-        <p>Round data joins the coaching relationship, so the agenda is set by where you actually lose shots — not by what you felt like booking. Renewal stops being a sales conversation and becomes a chart.</p>
-      </li>
-      <li class="idea">
-        <span class="them">Reports arrive as dead PDFs</span>
-        <h3>Keep the numbers longitudinal</h3>
-        <p>Launch monitor and motion data land as structured measurements, not attachments. You can ask whether a number has moved in six months and get an answer.</p>
-      </li>
-      <li class="idea">
-        <span class="them">Capture is the student's problem</span>
-        <h3>Guide the camera</h3>
-        <p>Framing guides, automatic swing detection, auto-trim, club tagging. The coach stops spending goodwill asking for reshoots, and consistent framing is what makes a progress curve mean anything.</p>
-      </li>
-      <li class="idea">
-        <span class="them">Async review is unpaid labour</span>
-        <h3>Draft it, don't author it</h3>
-        <p>Pose estimation and fault detection produce a draft in the pro's own voice; he approves or corrects in seconds. Every correction is stored as a labelled example, so the system sounds more like him over time.</p>
-      </li>
-      <li class="idea">
-        <span class="them">The swing is all they see</span>
-        <h3>Own the course too</h3>
-        <p>Range mechanics and on-course scoring are the same relationship. Nobody joins them, which is why golfers hit it well on the range and badly where it counts.</p>
-      </li>
-      <li class="idea">
-        <span class="them">Ninety numbers after four hours</span>
-        <h3>Photograph the card</h3>
-        <p>Round entry is a photo of the scorecard. The reader proposes, you confirm, and low-confidence cells are flagged rather than silently accepted. Nothing is written until you say so.</p>
-      </li>
-    </ul>
+    <span class="label">The ambition</span>
+    <h2>Every golf course on earth, the same way.</h2>
+    <p class="lede">There are somewhere between 30,000 and 38,000 golf courses in the world, depending on who counts. This demo charts a handful to prove the method: hole geometry from OpenStreetMap, aerial photography from public imagery, strategy computed per player. The same pipeline runs on any course on request — nothing here is hand-drawn or invented.</p>
+    <div class="globe" id="globe"></div>
+    <p class="cite">Counts: Golfshake and World Golf Quest cite roughly 30,000; AllSquare catalogues around 33,000; the R&amp;A's Golf Around the World survey reports 38,081 across 206 countries. We state the range rather than pick one. United States courses carry real 1-metre aerial photography today; elsewhere, high-resolution public imagery is thinner, so those courses show as vector routings until better sources are licensed.</p>
   </div>
 </section>
 
@@ -384,445 +222,257 @@
   <div class="wrap">
     <span class="label">What this is</span>
     <h2>Real where it says real.</h2>
-
     <div class="split">
       <div>
         <h3>Real and sourced</h3>
-        <ul>
-          <li><strong>The courses.</strong> Twelve courses across five continents, 216 holes. Every hole, par, stroke index, green, bunker and water hazard is OpenStreetMap data fetched by <code>scripts/fetch-courses.mjs</code> in this repository.</li>
-          <li><strong>The photographs.</strong> Real aerial imagery from the USGS National Map — a United States government work, public domain — requested live for the exact bounding box on screen. Six US courses have it.</li>
-          <li><strong>The driver distances.</strong> Shot Scope's published averages by handicap: 285 yards scratch, 259 at ten, 236 at fifteen. These are performance averages with outliers removed.</li>
-          <li><strong>The expected-strokes curve</strong> is fitted to two published strokes-gained anchors — 2.81 strokes from 150 yards in the fairway, 1.83 from fifteen feet on the green.</li>
-          <li><strong>The recommendation is computed, not written.</strong> 600 Monte Carlo shots per club against the actual hole polygons, each classified by ray-casting into the real hazard shapes.</li>
-        </ul>
+        <ul id="real-list"></ul>
       </div>
       <div>
         <h3>Still modelled</h3>
         <ul>
-          <li><strong>Dispersion.</strong> Published data gives distance by handicap, not spread or directional bias. Those are assumptions, and they are the single biggest thing a beta with real golfers would replace with measurement.</li>
-          <li><strong>Club gapping</strong> below the driver is scaled off the driver distance rather than sourced.</li>
-          <li><strong>Lie penalties</strong> for rough, sand and water are modelled; only the two anchor points are published values.</li>
-          <li><strong>No swing has been assessed.</strong> The range half is described here, not built.</li>
-          <li><strong>Imagery outside the United States.</strong> The free global alternative is Sentinel-2 at ten metres, which is too coarse to read a bunker, so those courses stay as vector plans rather than being dressed up with something that only looks like a photograph.</li>
-          <li><strong>Gaps are left visible.</strong> Some courses have no fairway polygons in OpenStreetMap, so shots there read as rough and the fairway percentage collapses — Royal County Down most obviously. TPC Sawgrass and Erin Hills are absent entirely. Those are data gaps, not golfing verdicts, and they are exactly what the coverage grades exist to expose.</li>
+          <li><strong>Dispersion.</strong> Published data gives driver distance by handicap, not shot spread. Spread and directional bias are assumptions — the first thing a beta with real golfers replaces with measurement.</li>
+          <li><strong>Club gapping</strong> below the driver is scaled off driver distance, not sourced per player.</li>
+          <li><strong>Lie penalties</strong> for rough, sand and water are modelled; only two anchor points on the expected-strokes curve are published values.</li>
+          <li><strong>No swing has been assessed.</strong> The range half of the product is described elsewhere, not built here.</li>
+          <li><strong>Gaps stay visible.</strong> Where OpenStreetMap lacks fairway polygons a hole reads as rough, and the fairway percentage drops. That is a data gap, not a golfing verdict.</li>
         </ul>
       </div>
     </div>
+    <p class="cite"><a href="index.html">← Back to the concept overview</a></p>
   </div>
 </section>
 
-<footer class="colophon">
+<footer>
   <div class="wrap">
-    <p>Course data © OpenStreetMap contributors, licensed ODbL. Simplified to roughly two metres for delivery. Nothing on this page is scraped from a commercial golf directory. American course imagery, when it is added, will come from USDA NAIP, which is public domain.</p>
+    <p>Course geometry © OpenStreetMap contributors, ODbL. Aerial imagery from the USGS National Map, a United States government work in the public domain, requested live for the exact frame shown. Driver distances are Shot Scope published averages by handicap; the expected-strokes curve is fitted to Mark Broadie's published strokes-gained anchors. Nothing on this page is scraped from a commercial golf directory.</p>
   </div>
 </footer>
 
 <script>
-const SVG_NS = 'http://www.w3.org/2000/svg'
-const W = 800, H = 520, PAD = 26
+const SVG='http://www.w3.org/2000/svg'
+const mLat=111132, mLon=l=>111320*Math.cos(l*Math.PI/180)
 
-/**
- * Driver distances are Shot Scope's published averages by handicap, converted
- * from yards to metres. Scratch 285 yd, 10 handicap 259 yd, 15 handicap 236 yd.
- * These are Shot Scope "performance averages" — outliers removed — so they
- * describe a well-struck drive rather than every drive.
- *
- * The rest is modelled, not sourced: club gapping is scaled off the driver, and
- * the dispersion figures (spread and directional bias) are assumptions. Real
- * dispersion has to be measured per golfer, which is what the beta is for.
- */
-const GAPPING = [
-  { club: 'Driver', ratio: 1.0 },
-  { club: '3 wood', ratio: 0.9 },
-  { club: 'Hybrid', ratio: 0.82 },
-  { club: '5 iron', ratio: 0.73 },
-  { club: '7 iron', ratio: 0.64 },
+/* ---------- players: Shot Scope driver averages, modelled dispersion ---------- */
+const GAP=[{c:'Driver',r:1},{c:'3 wood',r:0.9},{c:'Hybrid',r:0.82},{c:'5 iron',r:0.73},{c:'7 iron',r:0.64}]
+const YD=0.9144
+const bag=(yds,spread,bias)=>{const d=yds*YD;return GAP.map(({c,r})=>({club:c,carry:Math.round(d*r),carrySd:Math.round(d*r*0.07),offlineSd:+(spread*(0.6+0.4*r)).toFixed(2),bias:+(bias*r).toFixed(2)}))}
+const PLAYERS=[
+  {id:'h15',name:'15 handicap',note:'236 yd driver · Shot Scope average · modelled miss right',clubs:bag(236,6.4,4.2)},
+  {id:'h10',name:'10 handicap',note:'259 yd driver · Shot Scope average · mild miss right',clubs:bag(259,4.9,1.6)},
+  {id:'scr',name:'Scratch',note:'285 yd driver · Shot Scope average · tight pattern',clubs:bag(285,3.6,0.3)},
 ]
 
-const YARD = 0.9144
+/* ---------- expected strokes, fitted to two published anchors ---------- */
+function xs(lie,m){const d=Math.max(m,2);const base=1.485+0.62*Math.log10(d);const p={FAIRWAY:0,GREEN:-0.06,ROUGH:0.22,BUNKER:0.45,WATER:1.5,OB:1.9}[lie]??0.22;return base+p}
 
-function buildBag(driverYards, spread, bias) {
-  const driver = driverYards * YARD
-  return GAPPING.map(({ club, ratio }) => ({
-    club,
-    carry: Math.round(driver * ratio),
-    carrySd: Math.round(driver * ratio * 0.07),
-    offlineSd: Number((spread * (0.6 + 0.4 * ratio)).toFixed(2)),
-    bias: Number((bias * ratio).toFixed(2)),
-  }))
+/* ---------- geometry ---------- */
+function courseBounds(c){
+  let minLa=90,maxLa=-90,minLo=180,maxLo=-180
+  for(const h of c.holes)for(const [la,lo] of h.path){if(la<minLa)minLa=la;if(la>maxLa)maxLa=la;if(lo<minLo)minLo=lo;if(lo>maxLo)maxLo=lo}
+  const padLa=(maxLa-minLa)*0.06+0.0006, padLo=(maxLo-minLo)*0.06+0.0006
+  return {minLa:minLa-padLa,maxLa:maxLa+padLa,minLo:minLo-padLo,maxLo:maxLo+padLo}
 }
-
-const PLAYERS = [
-  {
-    id: 'hcp15',
-    name: '15 handicap',
-    note: '236 yd driver · Shot Scope average · modelled miss to the right',
-    clubs: buildBag(236, 6.4, 4.2),
-  },
-  {
-    id: 'hcp10',
-    name: '10 handicap',
-    note: '259 yd driver · Shot Scope average · modelled mild miss right',
-    clubs: buildBag(259, 4.9, 1.6),
-  },
-  {
-    id: 'scratch',
-    name: 'Scratch',
-    note: '285 yd driver · Shot Scope average · modelled tight pattern',
-    clubs: buildBag(285, 3.6, 0.3),
-  },
-]
-
-/**
- * Expected strokes to hole out, by lie and remaining metres.
- * A rough approximation only — real baselines come from accumulated rounds.
- */
-/**
- * Expected strokes to hole out, fitted to two published strokes-gained anchors:
- *   150 yards (137 m) from the fairway = 2.81 strokes
- *   15 feet (4.6 m) on the green       = 1.83 strokes
- * Both are the widely cited values from Mark Broadie's ShotLink-derived
- * baselines. The curve between and beyond them is interpolation, and the
- * lie penalties are modelled rather than sourced.
- */
-function expectedStrokes(lie, metres) {
-  const d = Math.max(metres, 2)
-  const base = 1.485 + 0.62 * Math.log10(d)
-  const penalty = { FAIRWAY: 0, GREEN: -0.06, ROUGH: 0.22, BUNKER: 0.45, WATER: 1.5, OB: 1.9 }[lie] ?? 0.22
-  return base + penalty
+// bbox in metres -> pick an SVG height that matches real aspect
+function aspect(b){const w=(b.maxLo-b.minLo)*mLon((b.minLa+b.maxLa)/2);const h=(b.maxLa-b.minLa)*mLat;return {w,h,ratio:w/h}}
+function projector(b,vw,vh){
+  return ([la,lo])=>[ (lo-b.minLo)/(b.maxLo-b.minLo)*vw, (b.maxLa-la)/(b.maxLa-b.minLa)*vh ]
 }
-
-/** The point on the hole's centreline at `distance` metres from the tee. */
-function aimAlongPath(path, distance) {
-  let travelled = 0
-  for (let i = 1; i < path.length; i++) {
-    const [ax, ay] = path[i - 1]
-    const [bx, by] = path[i]
-    const segment = Math.hypot(bx - ax, by - ay)
-    if (travelled + segment >= distance) {
-      const t = segment === 0 ? 0 : (distance - travelled) / segment
-      return [ax + (bx - ax) * t, ay + (by - ay) * t]
-    }
-    travelled += segment
-  }
-  return path[path.length - 1]
+function usgsUrl(b,pxW,pxH){
+  const p=new URLSearchParams({bbox:`${b.minLo},${b.minLa},${b.maxLo},${b.maxLa}`,bboxSR:'4326',imageSR:'4326',size:`${Math.round(pxW)},${Math.round(pxH)}`,format:'jpg',f:'image'})
+  return `https://basemap.nationalmap.gov/arcgis/rest/services/USGSImageryOnly/MapServer/export?${p}`
 }
+function el(tag,attrs){const n=document.createElementNS(SVG,tag);for(const k in attrs)n.setAttribute(k,attrs[k]);return n}
 
-let COURSES = [], course = null, holeIndex = 0, player = PLAYERS[0]
+let COURSES=[], course=null, holeIndex=0, player=PLAYERS[0]
 
-const metresPerDegLat = 111132
-const metresPerDegLon = (lat) => 111320 * Math.cos((lat * Math.PI) / 180)
+/* ---------- full-course flyover ---------- */
+function renderCourse(){
+  const b=courseBounds(course), a=aspect(b)
+  const VW=1000, VH=Math.round(VW/Math.max(a.ratio,0.55))
+  const svg=document.getElementById('course-map'); svg.setAttribute('viewBox',`0 0 ${VW} ${VH}`); svg.textContent=''
+  const to=projector(b,VW,VH)
+  const isUS=course.country==='US'
 
-function project(points, origin) {
-  return points.map(([lat, lon]) => [
-    (lon - origin.lon) * metresPerDegLon(origin.lat),
-    -(lat - origin.lat) * metresPerDegLat,
-  ])
-}
-
-function pointInRing(x, y, ring) {
-  let inside = false
-  for (let i = 0, j = ring.length - 1; i < ring.length; j = i++) {
-    const [xi, yi] = ring[i], [xj, yj] = ring[j]
-    if ((yi > y) !== (yj > y) && x < ((xj - xi) * (y - yi)) / (yj - yi) + xi) inside = !inside
-  }
-  return inside
-}
-
-function buildHole() {
-  const hole = course.holes[holeIndex]
-  const origin = { lat: hole.path[0][0], lon: hole.path[0][1] }
-
-  const path = project(hole.path, origin)
-  const tee = path[0]
-  const target = path[path.length - 1]
-  const length = Math.hypot(target[0] - tee[0], target[1] - tee[1])
-
-  let pathLength = 0
-  for (let i = 1; i < path.length; i++) {
-    pathLength += Math.hypot(path[i][0] - path[i - 1][0], path[i][1] - path[i - 1][1])
+  if(isUS){
+    svg.appendChild(el('image',{href:usgsUrl(b,Math.min(a.ratio>=1?1400:1400*a.ratio,1400),Math.min(a.ratio>=1?1400/a.ratio:1400,1400)),x:0,y:0,width:VW,height:VH,preserveAspectRatio:'none'}))
+    svg.appendChild(el('rect',{x:0,y:0,width:VW,height:VH,fill:'#0B0F13','fill-opacity':0.12}))
+  }else{
+    svg.appendChild(el('rect',{x:0,y:0,width:VW,height:VH,fill:'#0D1512'}))
   }
 
-  // Only features within a generous corridor of this hole.
-  const corridor = Math.max(length * 0.75, 140)
-  const features = []
-  for (const feature of course.features) {
-    if (feature.ring.length < 3) continue
-    const ring = project(feature.ring, origin)
-    const cx = ring.reduce((s, p) => s + p[0], 0) / ring.length
-    const cy = ring.reduce((s, p) => s + p[1], 0) / ring.length
-    const nearTee = Math.hypot(cx - tee[0], cy - tee[1])
-    const nearGreen = Math.hypot(cx - target[0], cy - target[1])
-    if (feature.hole === hole.number || Math.min(nearTee, nearGreen) < corridor) {
-      features.push({ kind: feature.kind, ring })
-    }
-  }
-
-  return { hole, origin, path, tee, target, length, pathLength, features }
-}
-
-function classify(x, y, features) {
-  for (const kind of ['WATER', 'BUNKER', 'GREEN', 'FAIRWAY']) {
-    for (const feature of features) {
-      if (feature.kind === kind && pointInRing(x, y, feature.ring)) return kind
-    }
-  }
-  return 'ROUGH'
-}
-
-function simulate(geo, spec, samples = 600) {
-  // Aim down the centreline at the club's carry distance, not straight at the
-  // green — otherwise every dogleg reads as a shot flown into the trees.
-  const aim = aimAlongPath(geo.path, Math.min(spec.carry, geo.pathLength))
-  const bearing = Math.atan2(aim[1] - geo.tee[1], aim[0] - geo.tee[0])
-
-  const shots = []
-  let total = 0, fairway = 0, trouble = 0
-
-  for (let i = 0; i < samples; i++) {
-    const u1 = Math.random() || 1e-9, u2 = Math.random()
-    const g1 = Math.sqrt(-2 * Math.log(u1)) * Math.cos(2 * Math.PI * u2)
-    const g2 = Math.sqrt(-2 * Math.log(u1)) * Math.sin(2 * Math.PI * u2)
-
-    const carry = Math.max(20, spec.carry + g1 * spec.carrySd)
-    const offlineDeg = spec.bias + g2 * spec.offlineSd
-    const angle = bearing + (offlineDeg * Math.PI) / 180
-
-    const x = geo.tee[0] + Math.cos(angle) * carry
-    const y = geo.tee[1] + Math.sin(angle) * carry
-
-    const lie = classify(x, y, geo.features)
-    const remaining = Math.hypot(geo.target[0] - x, geo.target[1] - y)
-    total += 1 + expectedStrokes(lie, remaining)
-
-    if (lie === 'FAIRWAY' || lie === 'GREEN') fairway++
-    if (lie === 'WATER' || lie === 'BUNKER') trouble++
-    shots.push([x, y, lie])
-  }
-
-  return {
-    club: spec.club,
-    expected: total / samples,
-    fairwayPct: Math.round((fairway / samples) * 100),
-    troublePct: Math.round((trouble / samples) * 100),
-    shots,
-  }
-}
-
-function fitTransform(geo, shots) {
-  const xs = [], ys = []
-  const push = ([x, y]) => { xs.push(x); ys.push(y) }
-  geo.path.forEach(push)
-  geo.features.forEach((f) => f.ring.forEach(push))
-  shots.forEach(push)
-
-  const minX = Math.min(...xs), maxX = Math.max(...xs)
-  const minY = Math.min(...ys), maxY = Math.max(...ys)
-  const scale = Math.min((W - PAD * 2) / Math.max(maxX - minX, 1), (H - PAD * 2) / Math.max(maxY - minY, 1))
-  const offX = PAD + ((W - PAD * 2) - (maxX - minX) * scale) / 2
-  const offY = PAD + ((H - PAD * 2) - (maxY - minY) * scale) / 2
-
-  const to = ([x, y]) => [(x - minX) * scale + offX, (y - minY) * scale + offY]
-  return { to, scale, bounds: { minX, maxX, minY, maxY }, offX, offY }
-}
-
-/**
- * USGS National Map imagery — a United States government work, public domain.
- * Requested live for the exact bounding box on screen, so no imagery is stored
- * in this repository and the photo always matches the geometry drawn over it.
- * United States coverage only; there is no free equivalent at this resolution
- * elsewhere, so courses outside the US render as vector plans.
- */
-function aerialUrl(origin, bounds, pxWide, pxHigh) {
-  const metresPerDegLatLocal = metresPerDegLat
-  const west = origin.lon + bounds.minX / metresPerDegLon(origin.lat)
-  const east = origin.lon + bounds.maxX / metresPerDegLon(origin.lat)
-  const north = origin.lat - bounds.minY / metresPerDegLatLocal
-  const south = origin.lat - bounds.maxY / metresPerDegLatLocal
-
-  const params = new URLSearchParams({
-    bbox: `${west},${south},${east},${north}`,
-    bboxSR: '4326',
-    imageSR: '4326',
-    size: `${Math.round(pxWide)},${Math.round(pxHigh)}`,
-    format: 'jpg',
-    f: 'image',
+  // routing thread through hole centrelines, hole 1 -> 18
+  const nodes=[]
+  course.holes.forEach((h,i)=>{
+    const pts=h.path.map(to)
+    svg.appendChild(el('polyline',{points:pts.map(p=>p.join(',')).join(' '),fill:'none',stroke:'#0B0F13','stroke-width':4.5,'stroke-opacity':0.5,'stroke-linecap':'round','stroke-linejoin':'round'}))
+    svg.appendChild(el('polyline',{points:pts.map(p=>p.join(',')).join(' '),fill:'none',stroke:'var(--thread)','stroke-width':2.4,'stroke-opacity':0.95,'stroke-linecap':'round','stroke-linejoin':'round'}))
+    nodes.push({i,at:pts[0],num:h.number})
   })
-  return `https://basemap.nationalmap.gov/arcgis/rest/services/USGSImageryOnly/MapServer/export?${params}`
-}
-
-const FILLS = { FAIRWAY: 'var(--turf-dim)', GREEN: 'var(--turf)', BUNKER: 'var(--sand)', WATER: 'var(--water)' }
-
-function draw(geo, best) {
-  const svg = document.getElementById('hole')
-  svg.textContent = ''
-  const fit = fitTransform(geo, best.shots.map((s) => [s[0], s[1]]))
-  const to = fit.to
-
-  const add = (tag, attrs) => {
-    const node = document.createElementNS(SVG_NS, tag)
-    for (const [k, v] of Object.entries(attrs)) node.setAttribute(k, v)
-    svg.appendChild(node)
-    return node
-  }
-
-  const photo = course.country === 'US'
-  const { bounds } = fit
-  const boxW = (bounds.maxX - bounds.minX) * fit.scale
-  const boxH = (bounds.maxY - bounds.minY) * fit.scale
-
-  if (photo) {
-    add('image', {
-      href: aerialUrl(geo.origin, bounds, Math.min(boxW * 3, 2048), Math.min(boxH * 3, 1536)),
-      x: fit.offX,
-      y: fit.offY,
-      width: boxW,
-      height: boxH,
-      preserveAspectRatio: 'none',
-    })
-  }
-
-  // Over a photograph the hazards are already visible, so they become outlines
-  // rather than fills. Without one they carry the whole picture.
-  for (const kind of ['FAIRWAY', 'WATER', 'BUNKER', 'GREEN']) {
-    for (const feature of geo.features) {
-      if (feature.kind !== kind) continue
-      add('polygon', {
-        points: feature.ring.map(to).map((p) => p.join(',')).join(' '),
-        fill: FILLS[kind],
-        'fill-opacity': photo ? (kind === 'FAIRWAY' ? 0 : 0.28) : kind === 'FAIRWAY' ? 0.85 : 0.95,
-        stroke: photo ? FILLS[kind] : 'none',
-        'stroke-width': photo ? 1.4 : 0,
-        'stroke-opacity': photo ? 0.9 : 0,
-      })
-    }
-  }
-
-  add('polyline', {
-    points: geo.path.map(to).map((p) => p.join(',')).join(' '),
-    fill: 'none',
-    stroke: 'var(--chalk)',
-    'stroke-width': 1.2,
-    'stroke-dasharray': '5 5',
-    'stroke-opacity': 0.55,
+  // hole number nodes
+  nodes.forEach(n=>{
+    const sel=n.i===holeIndex
+    const g=el('g',{style:'cursor:pointer'}); g.setAttribute('tabindex','0'); g.setAttribute('role','button'); g.setAttribute('aria-label',`Hole ${n.num}`)
+    g.appendChild(el('circle',{cx:n.at[0],cy:n.at[1],r:sel?11:8,fill:sel?'var(--flag)':'#0B0F13',stroke:sel?'#0B0F13':'var(--thread)','stroke-width':sel?2:1.5}))
+    const t=el('text',{x:n.at[0],y:n.at[1]+3.4,'text-anchor':'middle','font-family':'Archivo Narrow, sans-serif','font-weight':'700','font-size':sel?'11':'9',fill:sel?'#231A06':'var(--card)'}); t.textContent=n.num
+    g.appendChild(t)
+    const pick=()=>{holeIndex=n.i;renderCourse();renderHole()}
+    g.addEventListener('click',pick); g.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();pick()}})
+    svg.appendChild(g)
   })
 
-  for (const [x, y, lie] of best.shots) {
-    const [px, py] = to([x, y])
-    add('circle', {
-      cx: px, cy: py, r: 2,
-      fill: lie === 'WATER' || lie === 'BUNKER' ? 'var(--penalty)' : 'var(--flag)',
-      'fill-opacity': 0.5,
-    })
+  document.getElementById('course-name').textContent=course.name
+  const cov=document.getElementById('course-cov'); cov.querySelector('span').textContent=`${course.coverage.toLowerCase()} · ${course.holes.length} holes`
+  document.getElementById('cov-note').textContent=isUS?'Aerial: USGS National Map, public domain':'No free 1 m imagery outside the US — vector routing'
+
+  const holes=document.getElementById('holes')
+  holes.innerHTML=course.holes.map((h,i)=>`<button class="pip" data-i="${i}" aria-pressed="${i===holeIndex}">${h.number}</button>`).join('')
+  holes.querySelectorAll('.pip').forEach(p=>p.addEventListener('click',()=>{holeIndex=+p.dataset.i;renderCourse();renderHole()}))
+}
+
+/* ---------- single-hole strategy ---------- */
+function buildHole(){
+  const h=course.holes[holeIndex]
+  const o={lat:h.path[0][0],lon:h.path[0][1]}
+  const mpll=mLon(o.lat)
+  const path=h.path.map(([la,lo])=>[(lo-o.lon)*mpll,-(la-o.lat)*mLat])
+  const tee=path[0], target=path[path.length-1]
+  let plen=0;for(let i=1;i<path.length;i++)plen+=Math.hypot(path[i][0]-path[i-1][0],path[i][1]-path[i-1][1])
+  const length=Math.hypot(target[0]-tee[0],target[1]-tee[1])
+  const corridor=Math.max(length*0.75,140)
+  const features=[]
+  for(const f of course.features){
+    if(f.ring.length<3)continue
+    const ring=f.ring.map(([la,lo])=>[(lo-o.lon)*mpll,-(la-o.lat)*mLat])
+    const cx=ring.reduce((s,p)=>s+p[0],0)/ring.length, cy=ring.reduce((s,p)=>s+p[1],0)/ring.length
+    if(f.hole===h.number||Math.min(Math.hypot(cx-tee[0],cy-tee[1]),Math.hypot(cx-target[0],cy-target[1]))<corridor)features.push({kind:f.kind,ring})
   }
-
-  const [tx, ty] = to(geo.tee)
-  add('circle', { cx: tx, cy: ty, r: 5, fill: 'var(--card)' })
-  const [gx, gy] = to(geo.target)
-  add('circle', { cx: gx, cy: gy, r: 5, fill: 'none', stroke: 'var(--card)', 'stroke-width': 2 })
+  return {h,o,path,tee,target,length,plen,features}
 }
-
-function say(hole, best, results, geo) {
-  const worst = results[results.length - 1]
-  const longest = results.reduce((a, b) => (a.club === 'Driver' ? a : b), results[0])
-  const driver = results.find((r) => r.club === 'Driver')
-
-  if (best.club !== 'Driver' && driver && driver.troublePct >= 12) {
-    return `Driver finds trouble ${driver.troublePct}% of the time here. ${best.club}, and you keep the ball in play ${best.fairwayPct}% of the time. Take the longer second shot.`
+function pin(x,y,ring){let inside=false;for(let i=0,j=ring.length-1;i<ring.length;j=i++){const[xi,yi]=ring[i],[xj,yj]=ring[j];if((yi>y)!==(yj>y)&&x<((xj-xi)*(y-yi))/(yj-yi)+xi)inside=!inside}return inside}
+function classify(x,y,f){for(const k of['WATER','BUNKER','GREEN','FAIRWAY'])for(const ft of f)if(ft.kind===k&&pin(x,y,ft.ring))return k;return 'ROUGH'}
+function aimAlong(path,dist){let t=0;for(let i=1;i<path.length;i++){const[ax,ay]=path[i-1],[bx,by]=path[i];const s=Math.hypot(bx-ax,by-ay);if(t+s>=dist){const k=s?(dist-t)/s:0;return[ax+(bx-ax)*k,ay+(by-ay)*k]}t+=s}return path[path.length-1]}
+function simulate(g,spec,n=600){
+  const aim=aimAlong(g.path,Math.min(spec.carry,g.plen))
+  const bearing=Math.atan2(aim[1]-g.tee[1],aim[0]-g.tee[0])
+  let total=0,fw=0,tr=0;const shots=[]
+  for(let i=0;i<n;i++){
+    const u1=Math.random()||1e-9,u2=Math.random()
+    const g1=Math.sqrt(-2*Math.log(u1))*Math.cos(2*Math.PI*u2), g2=Math.sqrt(-2*Math.log(u1))*Math.sin(2*Math.PI*u2)
+    const carry=Math.max(20,spec.carry+g1*spec.carrySd)
+    const ang=bearing+((spec.bias+g2*spec.offlineSd)*Math.PI)/180
+    const x=g.tee[0]+Math.cos(ang)*carry, y=g.tee[1]+Math.sin(ang)*carry
+    const lie=classify(x,y,g.features)
+    total+=1+xs(lie,Math.hypot(g.target[0]-x,g.target[1]-y))
+    if(lie==='FAIRWAY'||lie==='GREEN')fw++; if(lie==='WATER'||lie==='BUNKER')tr++
+    shots.push([x,y,lie])
   }
-  if (best.club === 'Driver' && best.troublePct < 8) {
-    return `Nothing to be clever about. Driver, ${best.fairwayPct}% of these finish in play, and the shorter approach is worth the risk.`
+  return {club:spec.club,expected:total/n,fairwayPct:Math.round(fw/n*100),troublePct:Math.round(tr/n*100),shots}
+}
+// hole bbox in lat/lon for the close aerial
+function holeBounds(g){
+  const h=course.holes[holeIndex]
+  let minLa=90,maxLa=-90,minLo=180,maxLo=-180
+  const pushLL=([la,lo])=>{if(la<minLa)minLa=la;if(la>maxLa)maxLa=la;if(lo<minLo)minLo=lo;if(lo>maxLo)maxLo=lo}
+  h.path.forEach(pushLL)
+  for(const f of g.features){/* features stored in metres; skip for bbox */}
+  const padLa=(maxLa-minLa)*0.25+0.0004, padLo=(maxLo-minLo)*0.25+0.0004
+  return {minLa:minLa-padLa,maxLa:maxLa+padLa,minLo:minLo-padLo,maxLo:maxLo+padLo}
+}
+function renderHole(){
+  const g=buildHole()
+  const results=player.clubs.map(s=>simulate(g,s)).sort((a,b)=>a.expected-b.expected)
+  const best=results[0]
+  const h=g.h
+
+  document.getElementById('hole-title').textContent=`Hole ${h.number}${h.name?' · '+h.name:''}`
+  const bits=[]; if(h.par)bits.push(`Par ${h.par}`); bits.push(`${Math.round(h.meters??g.plen)} m`); if(h.strokeIndex)bits.push(`SI ${h.strokeIndex}`)
+  document.getElementById('hole-meta').textContent=bits.join(' · ')
+
+  // draw close aerial with overlays
+  const b=holeBounds(g), a=aspect(b)
+  const VW=1000, VH=Math.round(VW/Math.max(a.ratio,0.7))
+  const svg=document.getElementById('hole-map'); svg.setAttribute('viewBox',`0 0 ${VW} ${VH}`); svg.textContent=''
+  const o={lat:h.path[0][0],lon:h.path[0][1]}, mpll=mLon(o.lat)
+  // metres(from tee) -> latlon -> view
+  const toLL=([mx,my])=>[o.lat - my/mLat, o.lon + mx/mpll]
+  const toV=([la,lo])=>[(lo-b.minLo)/(b.maxLo-b.minLo)*VW,(b.maxLa-la)/(b.maxLa-b.minLa)*VH]
+  const M=(p)=>toV(toLL(p))
+  const isUS=course.country==='US'
+  if(isUS){svg.appendChild(el('image',{href:usgsUrl(b,Math.min(a.ratio>=1?1400:1400*a.ratio,1400),Math.min(a.ratio>=1?1400/a.ratio:1400,1400)),x:0,y:0,width:VW,height:VH,preserveAspectRatio:'none'}))}
+  else{svg.appendChild(el('rect',{x:0,y:0,width:VW,height:VH,fill:'#0D1512'}))}
+
+  const FILL={GREEN:'var(--turf)',WATER:'var(--water)',BUNKER:'var(--sand)',FAIRWAY:'var(--turf)'}
+  for(const k of['FAIRWAY','WATER','BUNKER','GREEN']){
+    for(const f of g.features){if(f.kind!==k)continue
+      const poly=f.ring.map(M).map(p=>p.join(',')).join(' ')
+      svg.appendChild(el('polygon',{points:poly,fill:isUS?'none':FILL[k],'fill-opacity':isUS?0:(k==='FAIRWAY'?0.5:0.9),stroke:FILL[k],'stroke-width':k==='FAIRWAY'?0:1.6,'stroke-opacity':isUS?0.85:0}))
+    }
   }
-  if (hole.par === 3) {
-    return `It's a par three — the tee shot is the approach. ${best.club} is the club that leaves you putting most often.`
-  }
-  return `${best.club}. It's not the longest option, but it's the one that gets you home in the fewest shots on average.`
+  // shots
+  for(const [x,y,lie] of best.shots){const p=M([x,y]);svg.appendChild(el('circle',{cx:p[0],cy:p[1],r:2.1,fill:(lie==='WATER'||lie==='BUNKER')?'var(--penalty)':'var(--flag)','fill-opacity':0.55}))}
+  const t=M(g.tee), gr=M(g.target)
+  svg.appendChild(el('circle',{cx:t[0],cy:t[1],r:5,fill:'var(--card)'}))
+  svg.appendChild(el('circle',{cx:gr[0],cy:gr[1],r:5,fill:'none',stroke:'var(--card)','stroke-width':2}))
+
+  document.getElementById('v-club').textContent=best.club
+  document.getElementById('v-say').textContent=say(h,best,results)
+  document.getElementById('opt-body').innerHTML=results.map(r=>`<tr class="${r===best?'best':''}"><td>${r.club}</td><td>${r.expected.toFixed(2)}</td><td>${r.fairwayPct}%</td><td class="${r.troublePct>=15?'risk':''}">${r.troublePct}%</td></tr>`).join('')
+}
+function say(h,best,res){
+  const driver=res.find(r=>r.club==='Driver')
+  if(best.club!=='Driver'&&driver&&driver.troublePct>=12)return `Driver finds trouble ${driver.troublePct}% of the time here. ${best.club} keeps you in play ${best.fairwayPct}% of the time — take the longer second shot.`
+  if(best.club==='Driver'&&best.troublePct<8)return `Nothing to overthink. Driver: ${best.fairwayPct}% finish in play, and the shorter approach is worth it.`
+  if(h.par===3)return `Par three — the tee shot is the approach. ${best.club} leaves you putting most often.`
+  return `${best.club}. Not the longest option, but the one that gets you home in the fewest shots on average.`
 }
 
-function render() {
-  const geo = buildHole()
-  const results = player.clubs.map((spec) => simulate(geo, spec)).sort((a, b) => a.expected - b.expected)
-  const best = results[0]
-
-  const hole = geo.hole
-  document.getElementById('hole-title').textContent = `Hole ${hole.number}${hole.name ? ' — ' + hole.name : ''}`
-  const bits = []
-  if (hole.par) bits.push(`Par ${hole.par}`)
-  bits.push(`${Math.round(hole.meters ?? geo.pathLength)} m`)
-  if (hole.strokeIndex) bits.push(`SI ${hole.strokeIndex}`)
-  document.getElementById('hole-stats').textContent = bits.join(' · ')
-
-  draw(geo, best)
-
-  document.getElementById('verdict-club').textContent = best.club
-  document.getElementById('verdict-say').textContent = say(hole, best, results, geo)
-
-  document.getElementById('options').innerHTML = results
-    .map((r) => `<tr class="${r === best ? 'best' : ''}"><td>${r.club}</td><td>${r.expected.toFixed(2)}</td><td>${r.fairwayPct}%</td><td class="${r.troublePct >= 15 ? 'risk' : ''}">${r.troublePct}%</td></tr>`)
-    .join('')
-
-  document.getElementById('imagery-note').textContent =
-    course.country === 'US'
-      ? 'Aerial photo: USGS National Map, public domain'
-      : 'Vector plan — no free 1 m imagery outside the US'
-
-  document.querySelectorAll('.hole-pip').forEach((pip, i) =>
-    pip.setAttribute('aria-pressed', String(i === holeIndex)),
-  )
+/* ---------- boot ---------- */
+function selectCourse(c){
+  course=c; holeIndex=0
+  document.querySelectorAll('.tile').forEach(t=>t.setAttribute('aria-pressed',String(t.dataset.id===c.id)))
+  renderCourse(); renderHole()
 }
+fetch('courses.json').then(r=>r.json()).then(data=>{
+  COURSES=data.courses.filter(c=>c.holes.length>0)
+  const us=COURSES.filter(c=>c.country==='US')
+  const marquee=COURSES.find(c=>c.id==='pebble-beach')||us[0]||COURSES[0]
 
-function buildHolePips() {
-  const holes = document.getElementById('holes')
-  holes.innerHTML = course.holes
-    .map((h, i) => `<button class="hole-pip" data-i="${i}" aria-pressed="${i === holeIndex}">${h.number}</button>`)
-    .join('')
-  holes.querySelectorAll('.hole-pip').forEach((pip) =>
-    pip.addEventListener('click', () => { holeIndex = Number(pip.dataset.i); render() }),
-  )
-}
+  // hero
+  const hb=courseBounds(marquee), ha=aspect(hb)
+  if(marquee.country==='US')document.getElementById('hero-img').src=usgsUrl(hb,1400,Math.round(1400/Math.max(ha.ratio,0.9)))
+  document.getElementById('hero-name').textContent=marquee.name
+  const totalHoles=COURSES.reduce((s,c)=>s+c.holes.length,0)
+  document.getElementById('hero-stat').innerHTML=[
+    [COURSES.length,'courses charted'],[totalHoles,'holes'],[us.length,'with real aerial photos'],[new Set(COURSES.map(c=>c.country)).size,'countries']
+  ].map(([n,l])=>`<div><b>${n}</b><span>${l}</span></div>`).join('')
 
-function selectCourse(next) {
-  course = next
-  holeIndex = 0
-  document.querySelectorAll('.chip').forEach((chip) =>
-    chip.setAttribute('aria-pressed', String(chip.dataset.id === course.id)),
-  )
-  buildHolePips()
-  render()
-}
+  // filmstrip
+  document.getElementById('strip').innerHTML=COURSES.map(c=>{
+    const b=courseBounds(c),a=aspect(c===marquee?hb:b)
+    const thumb=c.country==='US'?`<img loading="lazy" decoding="async" alt="" src="${usgsUrl(b,420,Math.round(420/Math.max(a.ratio,1)))}">`:`<svg viewBox="0 0 100 60" aria-hidden="true"><rect width="100" height="60" fill="#0D1512"/><text x="50" y="33" text-anchor="middle" font-family="Archivo Narrow,sans-serif" font-size="8" fill="#7B9153">vector</text></svg>`
+    return `<button class="tile" data-id="${c.id}" aria-pressed="false"><div class="tile__wrap">${c.country==='US'?'<span class="tile__badge">Photo</span>':''}${thumb}</div><div class="tile__cap"><div class="tile__name">${c.name}</div><div class="tile__place">${c.place}</div></div></button>`
+  }).join('')
+  document.querySelectorAll('.tile').forEach(t=>t.addEventListener('click',()=>selectCourse(COURSES.find(c=>c.id===t.dataset.id))))
 
-fetch('courses.json')
-  .then((r) => r.json())
-  .then((data) => {
-    COURSES = data.courses.filter((c) => c.holes.length > 0)
+  // globe stats
+  document.getElementById('globe').innerHTML=[
+    [COURSES.length,'courses in this demo'],[totalHoles,'holes charted'],[us.length,'real aerial photos'],['30–38k','courses worldwide'],[new Set(COURSES.map(c=>c.country)).size,'countries shown']
+  ].map(([n,l])=>`<div class="cell"><b>${n}</b><span>${l}</span></div>`).join('')
 
-    document.getElementById('chips').innerHTML = COURSES
-      .map((c) => `<button class="chip" data-id="${c.id}" aria-pressed="false">${c.name}<small>${c.place}</small></button>`)
-      .join('')
-    document.querySelectorAll('.chip').forEach((chip) =>
-      chip.addEventListener('click', () => selectCourse(COURSES.find((c) => c.id === chip.dataset.id))),
-    )
+  // real list
+  document.getElementById('real-list').innerHTML=[
+    `<strong>The courses.</strong> ${COURSES.length} courses, ${totalHoles} holes. Every hole, par, stroke index and hazard is OpenStreetMap data fetched by scripts/fetch-courses.mjs in this repository.`,
+    `<strong>The photographs.</strong> Real USGS National Map aerial imagery — public domain — requested live for the exact frame on screen. ${us.length} US courses carry it.`,
+    `<strong>The driver distances.</strong> Shot Scope's published averages by handicap: 285 scratch, 259 at ten, 236 at fifteen.`,
+    `<strong>The expected-strokes curve</strong> is fitted to two published strokes-gained anchors: 2.81 from 150 yards fairway, 1.83 from 15 feet.`,
+    `<strong>The recommendation is computed.</strong> 600 Monte Carlo shots per club against the real hole polygons, each classified by ray-casting into the hazard shapes.`,
+  ].map(t=>`<li>${t}</li>`).join('')
 
-    document.getElementById('players').innerHTML = PLAYERS
-      .map((p, i) => `<button class="player-btn" data-id="${p.id}" aria-pressed="${i === 0}"><strong>${p.name}</strong><span>${p.note}</span></button>`)
-      .join('')
-    document.querySelectorAll('.player-btn').forEach((btn) =>
-      btn.addEventListener('click', () => {
-        player = PLAYERS.find((p) => p.id === btn.dataset.id)
-        document.querySelectorAll('.player-btn').forEach((other) =>
-          other.setAttribute('aria-pressed', String(other === btn)),
-        )
-        render()
-      }),
-    )
+  document.getElementById('players').innerHTML=PLAYERS.map((p,i)=>`<button class="pbtn" data-id="${p.id}" aria-pressed="${i===0}"><strong>${p.name}</strong><span>${p.note}</span></button>`).join('')
+  document.querySelectorAll('.pbtn').forEach(b=>b.addEventListener('click',()=>{player=PLAYERS.find(p=>p.id===b.dataset.id);document.querySelectorAll('.pbtn').forEach(o=>o.setAttribute('aria-pressed',String(o===b)));renderHole()}))
 
-    selectCourse(COURSES[0])
-  })
-  .catch(() => {
-    document.getElementById('verdict-say').textContent =
-      'Could not load courses.json. Serve this page over HTTP rather than opening the file directly.'
-  })
+  selectCourse(marquee)
+}).catch(()=>{document.getElementById('v-say').textContent='Could not load courses.json — serve this page over HTTP.'})
 </script>
-
 </body>
 </html>

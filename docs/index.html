@@ -3,792 +3,162 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Pocket Pro — concept demo</title>
-<meta name="description" content="Concept demo for a golf coaching platform built around one PGA Master Professional's method.">
+<title>Pocket Pro</title>
+<meta name="description" content="One PGA Master Professional's method, in your pocket — on the range and on every course.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600&family=Archivo+Black&family=Archivo+Narrow:wght@400;600;700&display=swap" rel="stylesheet">
 <style>
   :root{
-    --ink:#0F1417;
-    --ink-2:#161D21;
-    --card:#E9E3D4;
-    --card-rule:#C3BBA6;
-    --turf:#66784A;
-    --flag:#E4B23F;
-    --chalk:#9EAAA6;
-    --penalty:#C4462F;
-    --measure:74rem;
+    --ink:#0B0F13;--ink-2:#131A1F;--ink-3:#1B242A;
+    --card:#ECE6D6;--dim:#9EA9A2;
+    --flag:#E9B949;--turf:#7B9153;--penalty:#D2553C;--rule:#232D31;
   }
-
   *{box-sizing:border-box;}
-
   html{-webkit-text-size-adjust:100%;}
-
-  body{
-    margin:0;
-    background:var(--ink);
-    color:var(--card);
-    font-family:'Archivo',system-ui,-apple-system,sans-serif;
-    font-size:clamp(1rem,0.95rem + 0.2vw,1.125rem);
-    line-height:1.6;
-    -webkit-font-smoothing:antialiased;
-  }
-
-  h1,h2,h3{
-    font-family:'Archivo Black','Archivo',system-ui,sans-serif;
-    font-weight:400;
-    line-height:0.98;
-    letter-spacing:-0.02em;
-    margin:0;
-    text-wrap:balance;
-  }
-
+  body{margin:0;background:var(--ink);color:var(--card);font-family:'Archivo',system-ui,sans-serif;line-height:1.5;-webkit-font-smoothing:antialiased;}
+  h1,h2,h3{font-family:'Archivo Black',sans-serif;font-weight:400;line-height:0.96;letter-spacing:-0.02em;margin:0;}
   a{color:var(--flag);}
-
-  .wrap{
-    width:min(100% - 2.5rem, var(--measure));
-    margin-inline:auto;
-  }
-
-  .eyebrow{
-    font-family:'Archivo Narrow',system-ui,sans-serif;
-    font-weight:700;
-    text-transform:uppercase;
-    letter-spacing:0.16em;
-    font-size:0.8125rem;
-    color:var(--chalk);
-    margin:0 0 1.25rem;
-  }
-
-  /* ---------- notice ---------- */
-
-  .notice{
-    background:var(--flag);
-    color:#22190A;
-    font-family:'Archivo Narrow',system-ui,sans-serif;
-    font-weight:700;
-    text-transform:uppercase;
-    letter-spacing:0.1em;
-    font-size:0.8125rem;
-    text-align:center;
-    padding:0.7rem 1.25rem;
-  }
-
-  /* ---------- hero ---------- */
-
-  .hero{
-    padding:clamp(4rem,11vw,8.5rem) 0 clamp(3.5rem,8vw,6rem);
-    border-bottom:1px solid #26302F;
-  }
-
-  .hero__said{
-    font-family:'Archivo Narrow',system-ui,sans-serif;
-    text-transform:uppercase;
-    letter-spacing:0.16em;
-    font-size:0.8125rem;
-    font-weight:700;
-    color:var(--turf);
-    margin:0 0 2rem;
-  }
-
-  .hero__quote{
-    font-size:clamp(1.75rem,1.15rem + 2.6vw,3.25rem);
-    max-width:26ch;
-    line-height:1.04;
-  }
-
-  .hero__quote em{
-    font-style:normal;
-    color:var(--flag);
-  }
-
-  .hero__meta{
-    display:flex;
-    flex-wrap:wrap;
-    gap:1rem 3rem;
-    margin-top:clamp(2.5rem,6vw,4rem);
-    padding-top:1.75rem;
-    border-top:1px solid #26302F;
-  }
-
-  .hero__name{
-    font-family:'Archivo Black',system-ui,sans-serif;
-    font-size:1.5rem;
-    letter-spacing:-0.02em;
-  }
-
-  .hero__line{
-    color:var(--chalk);
-    max-width:44ch;
-    margin:0;
-  }
-
-  /* ---------- generic band ---------- */
-
-  .band{
-    padding:clamp(3.5rem,8vw,6.5rem) 0;
-    border-bottom:1px solid #26302F;
-  }
-
-  .band__title{
-    font-size:clamp(1.65rem,1.1rem + 2vw,2.75rem);
-    max-width:18ch;
-  }
-
-  .band__lede{
-    color:var(--chalk);
-    max-width:56ch;
-    margin:1.5rem 0 0;
-  }
-
-  /* ---------- two halves ---------- */
-
-  .halves{
-    display:grid;
-    gap:1.5rem;
-    grid-template-columns:1fr;
-    margin-top:3rem;
-  }
-
-  @media (min-width:56rem){
-    .halves{grid-template-columns:1fr 1fr;}
-  }
-
-  .half{
-    border:1px solid #2C3634;
-    padding:2rem;
-    background:var(--ink-2);
-  }
-
-  .half h3{
-    font-size:1.25rem;
-    margin-bottom:0.9rem;
-  }
-
-  .half p{
-    margin:0;
-    color:var(--chalk);
-  }
-
-  .half__where{
-    font-family:'Archivo Narrow',system-ui,sans-serif;
-    font-weight:700;
-    text-transform:uppercase;
-    letter-spacing:0.14em;
-    font-size:0.75rem;
-    color:var(--turf);
-    display:block;
-    margin-bottom:1.5rem;
-  }
-
-  .halves__note{
-    margin:2rem 0 0;
-    padding-left:1.25rem;
-    border-left:3px solid var(--flag);
-    max-width:58ch;
-  }
-
-  /* ---------- combine ---------- */
-
-  .shots{
-    list-style:none;
-    padding:0;
-    margin:3rem 0 0;
-    display:grid;
-    gap:1px;
-    background:#2C3634;
-    border:1px solid #2C3634;
-    grid-template-columns:repeat(2,1fr);
-  }
-
-  @media (min-width:44rem){
-    .shots{grid-template-columns:repeat(4,1fr);}
-  }
-
-  .shot{
-    background:var(--ink-2);
-    padding:1.25rem 1rem 1.1rem;
-  }
-
-  .shot__club{
-    font-family:'Archivo Narrow',system-ui,sans-serif;
-    font-weight:700;
-    font-size:1.0625rem;
-    text-transform:uppercase;
-    letter-spacing:0.04em;
-    display:block;
-  }
-
-  .shot__angle{
-    font-family:'Archivo Narrow',system-ui,sans-serif;
-    font-size:0.8125rem;
-    text-transform:uppercase;
-    letter-spacing:0.1em;
-    color:var(--chalk);
-    display:block;
-    margin-top:0.3rem;
-  }
-
-  .shot__swings{
-    font-family:'Archivo Narrow',system-ui,sans-serif;
-    font-weight:700;
-    font-size:0.75rem;
-    letter-spacing:0.1em;
-    color:var(--turf);
-    margin-top:0.75rem;
-    display:block;
-  }
-
-  /* ---------- levels ---------- */
-
-  .levels{
-    margin-top:3rem;
-    border:1px solid #2C3634;
-    background:var(--ink-2);
-    padding:clamp(1.5rem,4vw,2.5rem);
-  }
-
-  .level{
-    display:grid;
-    grid-template-columns:8.5rem 1fr auto;
-    align-items:center;
-    gap:1rem;
-    padding:0.9rem 0;
-    border-bottom:1px solid #262F2D;
-  }
-
-  .level:last-of-type{border-bottom:0;}
-
-  .level__name{
-    font-family:'Archivo Narrow',system-ui,sans-serif;
-    font-weight:700;
-    text-transform:uppercase;
-    letter-spacing:0.1em;
-    font-size:0.8125rem;
-  }
-
-  .level__track{
-    height:0.5rem;
-    background:#232C2A;
-    position:relative;
-  }
-
-  .level__fill{
-    position:absolute;
-    inset:0 auto 0 0;
-    background:var(--turf);
-  }
-
-  .level--worst .level__fill{background:var(--penalty);}
-
-  .level__value{
-    font-family:'Archivo Narrow',system-ui,sans-serif;
-    font-weight:700;
-    font-size:1.5rem;
-    font-variant-numeric:tabular-nums;
-    min-width:2.5ch;
-    text-align:right;
-  }
-
-  .level--worst .level__value{color:var(--penalty);}
-
-  .levels__verdict{
-    margin:1.75rem 0 0;
-    font-family:'Archivo Black',system-ui,sans-serif;
-    font-size:clamp(1.15rem,1rem + 0.8vw,1.6rem);
-    line-height:1.15;
-  }
-
-  /* ---------- scorecard signature ---------- */
-
-  .card{
-    margin-top:3rem;
-    background:var(--card);
-    color:#1A1F1B;
-    padding:clamp(1.25rem,3vw,2rem);
-  }
-
-  .card__head{
-    display:flex;
-    flex-wrap:wrap;
-    justify-content:space-between;
-    align-items:flex-end;
-    gap:1rem;
-    padding-bottom:1rem;
-    border-bottom:2px solid #1A1F1B;
-  }
-
-  .card__course{
-    font-family:'Archivo Black',system-ui,sans-serif;
-    font-size:1.375rem;
-    letter-spacing:-0.01em;
-  }
-
-  .card__coverage{
-    font-family:'Archivo Narrow',system-ui,sans-serif;
-    font-weight:700;
-    text-transform:uppercase;
-    letter-spacing:0.1em;
-    font-size:0.75rem;
-    color:#5C6259;
-    text-align:right;
-  }
-
-  .card__scroll{overflow-x:auto;}
-
-  .card table{
-    border-collapse:collapse;
-    width:100%;
-    min-width:38rem;
-    font-family:'Archivo Narrow',system-ui,sans-serif;
-    font-variant-numeric:tabular-nums;
-  }
-
-  .card th,
-  .card td{
-    border-right:1px solid var(--card-rule);
-    border-bottom:1px solid var(--card-rule);
-    padding:0.6rem 0.35rem;
-    text-align:center;
-    font-size:0.9375rem;
-  }
-
-  .card th:last-child,
-  .card td:last-child{border-right:0;}
-
-  .card thead th{
-    font-weight:700;
-    font-size:1.0625rem;
-    border-bottom:2px solid #1A1F1B;
-  }
-
-  .card tbody th{
-    text-align:left;
-    text-transform:uppercase;
-    letter-spacing:0.1em;
-    font-size:0.6875rem;
-    font-weight:700;
-    color:#5C6259;
-    white-space:nowrap;
-    padding-right:1rem;
-  }
-
-  .card .row-you td{font-weight:700;}
-
-  .card .over{color:var(--penalty);}
-
-  .hole-btn{
-    appearance:none;
-    background:transparent;
-    border:0;
-    font:inherit;
-    color:inherit;
-    cursor:pointer;
-    width:100%;
-    padding:0.15rem 0;
-    border-radius:2px;
-  }
-
-  .hole-btn[aria-pressed="true"]{
-    background:var(--flag);
-    box-shadow:0 0 0 3px var(--flag);
-  }
-
-  .hole-btn:focus-visible{
-    outline:2px solid #1A1F1B;
-    outline-offset:3px;
-  }
-
-  .card__note{
-    margin-top:1.5rem;
-    padding-top:1.25rem;
-    border-top:2px solid #1A1F1B;
-    display:grid;
-    gap:0.5rem;
-  }
-
-  .card__note-label{
-    font-family:'Archivo Narrow',system-ui,sans-serif;
-    font-weight:700;
-    text-transform:uppercase;
-    letter-spacing:0.14em;
-    font-size:0.6875rem;
-    color:#5C6259;
-  }
-
-  .card__note-text{
-    margin:0;
-    font-size:clamp(1.0625rem,1rem + 0.5vw,1.375rem);
-    line-height:1.35;
-    max-width:52ch;
-  }
-
-  .card__sample{
-    margin:1.25rem 0 0;
-    font-family:'Archivo Narrow',system-ui,sans-serif;
-    font-size:0.8125rem;
-    letter-spacing:0.06em;
-    text-transform:uppercase;
-    color:#5C6259;
-  }
-
-  /* ---------- directory ---------- */
-
-  .states{
-    list-style:none;
-    padding:0;
-    margin:3rem 0 0;
-    display:grid;
-    gap:1px;
-    background:#2C3634;
-    border:1px solid #2C3634;
-    grid-template-columns:repeat(auto-fill,minmax(11rem,1fr));
-  }
-
-  .state{
-    background:var(--ink-2);
-    padding:1rem 1.1rem;
-    display:flex;
-    justify-content:space-between;
-    align-items:baseline;
-    gap:0.75rem;
-  }
-
-  .state__name{
-    font-family:'Archivo Narrow',system-ui,sans-serif;
-    font-weight:600;
-    font-size:1rem;
-  }
-
-  .state__count{
-    font-family:'Archivo Narrow',system-ui,sans-serif;
-    font-weight:700;
-    font-variant-numeric:tabular-nums;
-    color:var(--flag);
-  }
-
-  .state--pending .state__count{
-    color:var(--chalk);
-    font-weight:400;
-  }
-
-  .grades{
-    list-style:none;
-    padding:0;
-    margin:2.5rem 0 0;
-    display:grid;
-    gap:0.75rem;
-  }
-
-  .grade{
-    display:grid;
-    grid-template-columns:7.5rem 1fr;
-    gap:1rem;
-    align-items:baseline;
-    padding-bottom:0.75rem;
-    border-bottom:1px solid #262F2D;
-  }
-
-  .grade__name{
-    font-family:'Archivo Narrow',system-ui,sans-serif;
-    font-weight:700;
-    text-transform:uppercase;
-    letter-spacing:0.1em;
-    font-size:0.8125rem;
-    color:var(--flag);
-  }
-
-  .grade__what{
-    color:var(--chalk);
-  }
-
-  /* ---------- honesty ---------- */
-
-  .honesty{
-    padding:clamp(3.5rem,8vw,6rem) 0 clamp(4rem,9vw,7rem);
-  }
-
-  .honesty__grid{
-    display:grid;
-    gap:2.5rem;
-    margin-top:2.5rem;
-  }
-
-  @media (min-width:52rem){
-    .honesty__grid{grid-template-columns:1fr 1fr;}
-  }
-
-  .honesty h3{
-    font-size:1.0625rem;
-    font-family:'Archivo Narrow',system-ui,sans-serif;
-    font-weight:700;
-    text-transform:uppercase;
-    letter-spacing:0.12em;
-    margin-bottom:1rem;
-  }
-
-  .honesty ul{
-    margin:0;
-    padding-left:1.15rem;
-    color:var(--chalk);
-    display:grid;
-    gap:0.6rem;
-  }
-
-  .colophon{
-    margin-top:3.5rem;
-    padding-top:1.5rem;
-    border-top:1px solid #26302F;
-    color:var(--chalk);
-    font-size:0.9375rem;
-    max-width:60ch;
-  }
-
-  /* ---------- motion ---------- */
-
-  .rise{
-    opacity:0;
-    transform:translateY(0.9rem);
-    animation:rise 0.7s cubic-bezier(0.2,0.7,0.3,1) forwards;
-  }
-
-  .rise:nth-child(2){animation-delay:0.1s;}
-  .rise:nth-child(3){animation-delay:0.2s;}
-  .rise:nth-child(4){animation-delay:0.3s;}
-
-  @keyframes rise{
-    to{opacity:1;transform:none;}
-  }
-
-  @media (prefers-reduced-motion:reduce){
-    .rise{animation:none;opacity:1;transform:none;}
-    *{transition:none !important;}
-  }
+  .wrap{width:min(100% - 2rem,78rem);margin-inline:auto;}
+  .label{font-family:'Archivo Narrow',sans-serif;font-weight:700;text-transform:uppercase;letter-spacing:0.15em;font-size:0.74rem;color:var(--dim);}
+  .notice{background:var(--flag);color:#231A06;font-family:'Archivo Narrow',sans-serif;font-weight:700;text-transform:uppercase;letter-spacing:0.09em;font-size:0.76rem;text-align:center;padding:0.55rem 1rem;}
+
+  /* hero: the pro is the hero */
+  .hero{display:grid;grid-template-columns:1fr;gap:0;border-bottom:1px solid var(--rule);}
+  @media(min-width:56rem){.hero{grid-template-columns:1.05fr 1fr;}}
+  .portrait{position:relative;background:linear-gradient(160deg,#18211C,#0D1512);min-height:60vh;display:flex;align-items:flex-end;overflow:hidden;border-right:1px solid var(--rule);}
+  .portrait svg{position:absolute;inset:0;width:100%;height:100%;}
+  .portrait__tag{position:relative;margin:1.25rem;padding:0.55rem 0.8rem;background:rgba(11,15,19,0.72);backdrop-filter:blur(3px);font-family:'Archivo Narrow',sans-serif;font-weight:700;text-transform:uppercase;letter-spacing:0.1em;font-size:0.72rem;color:var(--flag);border:1px solid rgba(233,185,73,0.4);}
+  .hero__body{padding:clamp(2rem,5vw,3.5rem);display:flex;flex-direction:column;justify-content:center;}
+  .hero__name{font-size:clamp(2.6rem,1.6rem + 4vw,4.6rem);}
+  .hero__cred{color:var(--flag);margin-top:0.6rem;font-family:'Archivo Narrow',sans-serif;font-weight:700;text-transform:uppercase;letter-spacing:0.12em;font-size:0.9rem;}
+  .hero__line{font-size:clamp(1.15rem,1rem + 0.8vw,1.5rem);margin-top:1.5rem;max-width:24ch;}
+  .hero__cta{display:flex;flex-wrap:wrap;gap:0.75rem;margin-top:2rem;}
+  .btn{display:inline-block;padding:0.7rem 1.15rem;font-family:'Archivo Narrow',sans-serif;font-weight:700;text-transform:uppercase;letter-spacing:0.08em;font-size:0.85rem;text-decoration:none;}
+  .btn--y{background:var(--flag);color:#231A06;}
+  .btn--o{border:1px solid var(--rule);color:var(--card);}
+  .btn:focus-visible{outline:2px solid var(--flag);outline-offset:2px;}
+
+  /* method: few words, big type */
+  .method{padding:clamp(2.5rem,6vw,4rem) 0;border-bottom:1px solid var(--rule);}
+  .method__grid{display:grid;gap:1px;background:var(--rule);border:1px solid var(--rule);margin-top:1.5rem;grid-template-columns:1fr;}
+  @media(min-width:44rem){.method__grid{grid-template-columns:repeat(3,1fr);}}
+  .m{background:var(--ink-2);padding:1.5rem;}
+  .m b{font-family:'Archivo Black',sans-serif;font-size:1.15rem;display:block;}
+  .m p{margin:0.5rem 0 0;color:var(--dim);font-size:0.92rem;}
+
+  /* two surfaces */
+  .surfaces{padding:clamp(2.5rem,6vw,4rem) 0;border-bottom:1px solid var(--rule);}
+  .two{display:grid;gap:1rem;margin-top:1.5rem;grid-template-columns:1fr;}
+  @media(min-width:52rem){.two{grid-template-columns:1fr 1fr;}}
+  .surf{border:1px solid var(--rule);background:var(--ink-2);padding:1.75rem;}
+  .surf .where{font-family:'Archivo Narrow',sans-serif;font-weight:700;text-transform:uppercase;letter-spacing:0.13em;font-size:0.72rem;color:var(--turf);}
+  .surf h3{font-size:1.4rem;margin:0.7rem 0 0.6rem;}
+  .surf p{margin:0;color:var(--dim);}
+
+  /* course strip -> prototype */
+  .courses{padding:clamp(2.5rem,6vw,4rem) 0;border-bottom:1px solid var(--rule);}
+  .courses__hd{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:end;gap:1rem;}
+  .thumbs{display:grid;grid-template-columns:repeat(2,1fr);gap:0.6rem;margin-top:1.5rem;}
+  @media(min-width:44rem){.thumbs{grid-template-columns:repeat(4,1fr);}}
+  .thumb{position:relative;aspect-ratio:4/3;background:#0D1512;overflow:hidden;border:1px solid var(--rule);}
+  .thumb img{width:100%;height:100%;object-fit:cover;display:block;}
+  .thumb figcaption{position:absolute;left:0;right:0;bottom:0;padding:0.5rem 0.6rem;background:linear-gradient(transparent,rgba(11,15,19,0.9));font-family:'Archivo Narrow',sans-serif;font-weight:700;font-size:0.78rem;}
+
+  footer{padding:2.5rem 0 3.5rem;color:var(--dim);font-size:0.85rem;}
+  footer p{max-width:70ch;}
+  @media(prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important;}}
 </style>
 </head>
 <body>
 
-<p class="notice">Concept demo — designed pages only, no working software behind them. Sample data throughout.</p>
+<p class="notice">Concept demo — the pro's name, photo and method are placeholders until captured. Nothing here is fabricated.</p>
 
 <header class="hero">
-  <div class="wrap">
-    <p class="hero__said rise">What your pro actually says</p>
-    <h1 class="hero__quote rise">You booked a driver lesson. Your rounds say the driver costs you a shot and a half. Three-putts cost you <em>four</em>. We're doing putting today.</h1>
-    <div class="hero__meta rise">
-      <span class="hero__name">Pocket&nbsp;Pro</span>
-      <p class="hero__line">One PGA Master Professional's method, on the range and on the course. It tells you what to work on, not what you came for.</p>
+  <div class="portrait">
+    <svg viewBox="0 0 400 480" preserveAspectRatio="xMidYMax meet" aria-label="Placeholder for the pro's portrait">
+      <defs><radialGradient id="g" cx="50%" cy="38%" r="65%"><stop offset="0%" stop-color="#26332A"/><stop offset="100%" stop-color="#0D1512"/></radialGradient></defs>
+      <rect width="400" height="480" fill="url(#g)"/>
+      <g fill="none" stroke="#2E3D33" stroke-width="1">
+        <circle cx="200" cy="182" r="78"/>
+        <path d="M70 480 C70 360 130 300 200 300 C270 300 330 360 330 480"/>
+      </g>
+      <g fill="#3A4B3E"><circle cx="200" cy="180" r="66"/><path d="M96 480 C96 372 142 320 200 320 C258 320 304 372 304 480 Z"/></g>
+      <text x="200" y="188" text-anchor="middle" font-family="Archivo Black,sans-serif" font-size="15" fill="#6E7F70" letter-spacing="1">YOUR PRO</text>
+    </svg>
+    <span class="portrait__tag">Real photo goes here</span>
+  </div>
+  <div class="hero__body">
+    <span class="label">In your pocket</span>
+    <h1 class="hero__name">Coach<br>Pocket&nbsp;Pro</h1>
+    <div class="hero__cred">PGA Master Professional · his name here</div>
+    <p class="hero__line">One coach. One method. On the range and on every course you play.</p>
+    <div class="hero__cta">
+      <a class="btn btn--y" href="prototype.html">See it on real courses →</a>
+      <a class="btn btn--o" href="#method">His method</a>
     </div>
   </div>
 </header>
 
-<section class="band">
+<section class="method" id="method">
   <div class="wrap">
-    <p class="eyebrow">The relationship</p>
-    <h2 class="band__title">A real pro isn't two products.</h2>
-    <p class="band__lede">He teaches you on the range and then tells you what to hit on the seventh tee. Same person, same judgment, same method. Software usually splits those into a coaching app and a caddie app. This doesn't.</p>
+    <span class="label">Why one coach beats a hundred tips</span>
+    <h2 style="font-size:clamp(1.7rem,1.2rem + 2vw,2.8rem);max-width:18ch;margin-top:0.8rem">Stop collecting swing tips. Follow one professional.</h2>
+    <div class="method__grid">
+      <div class="m"><b>One method</b><p>Not four contradictory theories from the internet. His system, said his way, every time.</p></div>
+      <div class="m"><b>Trained on him</b><p>The advice is his — drawn from his method and his corrections, in his voice. Never generic golf slop.</p></div>
+      <div class="m"><b>He stays in the loop</b><p>Nothing goes out under his name he hasn't approved. His credential is the whole point.</p></div>
+    </div>
+  </div>
+</section>
 
-    <div class="halves">
-      <article class="half">
-        <span class="half__where">On the range</span>
-        <h3>Diagnose and prescribe</h3>
-        <p>You film your swings. He names the fault in his own words and prescribes the fix he'd give someone built like you, with the practice time you actually have. Then he retests you to see whether it moved.</p>
+<section class="surfaces">
+  <div class="wrap">
+    <span class="label">One relationship, two places</span>
+    <div class="two">
+      <article class="surf">
+        <span class="where">On the range</span>
+        <h3>He reads your swing</h3>
+        <p>Film eight shots. He names the fault in his words and prescribes the fix for someone built like you — then retests to see whether it moved.</p>
       </article>
-      <article class="half">
-        <span class="half__where">On the course</span>
-        <h3>Know the hole and know you</h3>
-        <p>He knows the hole in front of you and he knows you miss right with a driver under pressure. So he tells you 3-wood, left half, take the bogey — the same thing he'd say standing next to you.</p>
+      <article class="surf">
+        <span class="where">On the course</span>
+        <h3>He calls your shot</h3>
+        <p>He knows the hole in front of you and knows how you actually miss. So he tells you the club, the line, and when to take the bogey.</p>
       </article>
     </div>
-
-    <p class="halves__note">The only reason this works is that both halves read from the same profile. Most golf apps know your swing or your scores. Neither knows both, and nobody has a professional's judgment sitting between them.</p>
   </div>
 </section>
 
-<section class="band">
+<section class="courses">
   <div class="wrap">
-    <p class="eyebrow">Assessment</p>
-    <h2 class="band__title">Eight shots. Three swings each. Unedited.</h2>
-    <p class="band__lede">Self-reported handicap is the weakest number in golf. So level comes from video instead — a fixed protocol, so that six months from now the progress you see is you improving rather than your camera moving. Three swings because everybody submits their one good one, and the spread across three says more than the best of them.</p>
-
-    <ul class="shots">
-      <li class="shot"><span class="shot__club">Driver</span><span class="shot__angle">Face on</span><span class="shot__swings">×3</span></li>
-      <li class="shot"><span class="shot__club">Driver</span><span class="shot__angle">Down the line</span><span class="shot__swings">×3</span></li>
-      <li class="shot"><span class="shot__club">7 iron</span><span class="shot__angle">Face on</span><span class="shot__swings">×3</span></li>
-      <li class="shot"><span class="shot__club">7 iron</span><span class="shot__angle">Down the line</span><span class="shot__swings">×3</span></li>
-      <li class="shot"><span class="shot__club">Pitch</span><span class="shot__angle">Face on</span><span class="shot__swings">×3</span></li>
-      <li class="shot"><span class="shot__club">Chip</span><span class="shot__angle">Face on</span><span class="shot__swings">×3</span></li>
-      <li class="shot"><span class="shot__club">Putt</span><span class="shot__angle">Face on</span><span class="shot__swings">×3</span></li>
-      <li class="shot"><span class="shot__club">Putt</span><span class="shot__angle">Down the line</span><span class="shot__swings">×3</span></li>
-    </ul>
-
-    <div class="levels">
-      <p class="eyebrow">Sample readout — one golfer, three separate levels</p>
-
-      <div class="level">
-        <span class="level__name">Full swing</span>
-        <span class="level__track"><span class="level__fill" style="width:24%"></span></span>
-        <span class="level__value">12</span>
-      </div>
-      <div class="level level--worst">
-        <span class="level__name">Short game</span>
-        <span class="level__track"><span class="level__fill" style="width:50%"></span></span>
-        <span class="level__value">25</span>
-      </div>
-      <div class="level">
-        <span class="level__name">Putting</span>
-        <span class="level__track"><span class="level__fill" style="width:38%"></span></span>
-        <span class="level__value">19</span>
-      </div>
-
-      <p class="levels__verdict">Your swing isn't the problem. You have a 12-handicap swing and a 25-handicap short game, and that gap is your whole scorecard.</p>
-    </div>
-  </div>
-</section>
-
-<section class="band">
-  <div class="wrap">
-    <p class="eyebrow">Before you play</p>
-    <h2 class="band__title">He preps the round before you tee off.</h2>
-    <p class="band__lede">You tell him where you're playing Saturday. He opens the card, sees every hole next to your own history on it, and writes the plan in advance. Pick a hole.</p>
-
-    <div class="card">
-      <div class="card__head">
-        <span class="card__course">Coyote Wash Golf Club — front nine</span>
-        <span class="card__coverage">Coverage: detailed<br>Charted from OpenStreetMap, not yet confirmed on the ground</span>
-      </div>
-
-      <div class="card__scroll">
-        <table>
-          <caption class="visually-hidden" style="position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);">Front nine with par, yardage, and this golfer's scoring average</caption>
-          <thead>
-            <tr>
-              <th scope="col">Hole</th>
-              <th scope="col"><button class="hole-btn" data-hole="1" aria-pressed="true">1</button></th>
-              <th scope="col"><button class="hole-btn" data-hole="2" aria-pressed="false">2</button></th>
-              <th scope="col"><button class="hole-btn" data-hole="3" aria-pressed="false">3</button></th>
-              <th scope="col"><button class="hole-btn" data-hole="4" aria-pressed="false">4</button></th>
-              <th scope="col"><button class="hole-btn" data-hole="5" aria-pressed="false">5</button></th>
-              <th scope="col"><button class="hole-btn" data-hole="6" aria-pressed="false">6</button></th>
-              <th scope="col"><button class="hole-btn" data-hole="7" aria-pressed="false">7</button></th>
-              <th scope="col"><button class="hole-btn" data-hole="8" aria-pressed="false">8</button></th>
-              <th scope="col"><button class="hole-btn" data-hole="9" aria-pressed="false">9</button></th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <th scope="row">Par</th>
-              <td>4</td><td>3</td><td>5</td><td>4</td><td>4</td><td>3</td><td>4</td><td>5</td><td>4</td>
-            </tr>
-            <tr>
-              <th scope="row">Yards</th>
-              <td>388</td><td>165</td><td>512</td><td>402</td><td>355</td><td>188</td><td>424</td><td>527</td><td>371</td>
-            </tr>
-            <tr class="row-you">
-              <th scope="row">Your average</th>
-              <td class="over">5.4</td><td>3.2</td><td class="over">6.7</td><td>4.6</td><td>4.1</td><td>3.4</td><td class="over">6.1</td><td>5.8</td><td>4.3</td>
-            </tr>
-            <tr>
-              <th scope="row">Penalty rate</th>
-              <td class="over">50%</td><td>0%</td><td class="over">33%</td><td>17%</td><td>0%</td><td>0%</td><td class="over">67%</td><td>17%</td><td>0%</td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-
-      <div class="card__note">
-        <span class="card__note-label">His prep note — hole <span id="note-hole">1</span></span>
-        <p class="card__note-text" id="note-text">Driver isn't required here and it's cost you a penalty in half your rounds. Four iron off the tee, left half of the fairway, wedge in. Bogey is fine. Doubles are what's killing you.</p>
-      </div>
-
-      <p class="card__sample">Sample data. Coyote Wash is a fictional course.</p>
-    </div>
-  </div>
-</section>
-
-<section class="band">
-  <div class="wrap">
-    <p class="eyebrow">The directory</p>
-    <h2 class="band__title">Every state. Then every course.</h2>
-    <p class="band__lede">Country to state to course to hole, all of it clickable. Somewhere between 33,000 and 38,000 courses exist worldwide depending on who's counting, and roughly 16,000 of them are in the United States. Course coverage isn't the product — the coaching is. It's what makes the product feel like it has no edges.</p>
-
-    <ul class="states">
-      <li class="state"><span class="state__name">Texas</span><span class="state__count">855</span></li>
-      <li class="state"><span class="state__name">Ohio</span><span class="state__count">795</span></li>
-      <li class="state"><span class="state__name">New Mexico</span><span class="state__count">81</span></li>
-      <li class="state state--pending"><span class="state__name">Florida</span><span class="state__count">not charted</span></li>
-      <li class="state state--pending"><span class="state__name">California</span><span class="state__count">not charted</span></li>
-      <li class="state state--pending"><span class="state__name">Michigan</span><span class="state__count">not charted</span></li>
-      <li class="state state--pending"><span class="state__name">New York</span><span class="state__count">not charted</span></li>
-      <li class="state state--pending"><span class="state__name">+ 43 more</span><span class="state__count">not charted</span></li>
-    </ul>
-
-    <ul class="grades">
-      <li class="grade"><span class="grade__name">Listed</span><span class="grade__what">We know the course exists. We haven't charted its holes.</span></li>
-      <li class="grade"><span class="grade__name">Routed</span><span class="grade__what">Hole routing charted. Hazards may be incomplete.</span></li>
-      <li class="grade"><span class="grade__name">Detailed</span><span class="grade__what">Holes and hazards charted. Not yet confirmed on the ground.</span></li>
-      <li class="grade"><span class="grade__name">Verified</span><span class="grade__what">Confirmed against play by a golfer or a professional.</span></li>
-    </ul>
-
-    <p class="halves__note">Every course states its grade in plain words. A yardage book that quietly guesses is worse than no yardage book, because someone hits it into the water on our advice.</p>
-  </div>
-</section>
-
-<section class="honesty">
-  <div class="wrap">
-    <p class="eyebrow">What this is</p>
-    <h2 class="band__title">A demo, and nothing more than that.</h2>
-
-    <div class="honesty__grid">
+    <div class="courses__hd">
       <div>
-        <h3>Real</h3>
-        <ul>
-          <li>The design spec and three implementation plans in this repository.</li>
-          <li>The assessment protocol, the coverage grades, and the consent model shown here.</li>
-          <li>State course counts, which come from AllSquare's public directory.</li>
-        </ul>
+        <span class="label">He knows every course</span>
+        <h2 style="font-size:clamp(1.6rem,1.2rem + 1.8vw,2.5rem);max-width:16ch;margin-top:0.7rem">Real aerials. Real strategy.</h2>
       </div>
-      <div>
-        <h3>Not real yet</h3>
-        <ul>
-          <li>Every number on the scorecard. Coyote Wash is invented.</li>
-          <li>The level readout. No golfer has been assessed.</li>
-          <li>The prep notes. Written to show the voice, not by the pro.</li>
-          <li>All of the software. None of it is built.</li>
-        </ul>
-      </div>
+      <a class="btn btn--y" href="prototype.html">Open the course tool →</a>
     </div>
-
-    <p class="colophon">Course geometry will come from OpenStreetMap under ODbL, and American course imagery from USDA NAIP, which is public domain. Nothing is scraped from commercial golf directories. Legal copy stays marked as draft until an attorney clears it.</p>
+    <div class="thumbs" id="thumbs"></div>
+    <p style="color:var(--dim);font-size:0.85rem;margin-top:1.25rem;max-width:62ch">Real USGS aerial photography, real hole geometry from OpenStreetMap. Same pipeline runs on any of the world's ~30,000–38,000 courses.</p>
   </div>
 </section>
+
+<footer>
+  <div class="wrap">
+    <span class="label">What's real</span>
+    <p style="margin-top:0.8rem">The courses, aerials and strategy engine are real data. The pro's identity is a placeholder — drop in his photo, name and method and it becomes his. Imagery: USGS National Map, public domain. Geometry: © OpenStreetMap, ODbL. <a href="prototype.html">See the working course tool →</a></p>
+  </div>
+</footer>
 
 <script>
-  const NOTES = {
-    1:"Driver isn't required here and it's cost you a penalty in half your rounds. Four iron off the tee, left half of the fairway, wedge in. Bogey is fine. Doubles are what's killing you.",
-    2:"You play this hole well. Nothing to fix. Middle of the green, two putts, walk to the third tee.",
-    3:"You can't reach this in two and you know it. Stop trying. Lay up to a full wedge and you make par here more often than you think.",
-    4:"Straightforward. Your average is fine. The only thing that hurts you is going at a back pin — take the middle.",
-    5:"Shortest hole on the front. Three wood is plenty and it takes the right side out of play entirely.",
-    6:"Long par three and you're a bogey away either side. Aim at the fat part, accept the two-putt, move on.",
-    7:"Two out of three rounds you take a penalty here. This one hole is costing you more than your driver does all day. We're going to plan it properly before Saturday.",
-    8:"Reachable, and you've earned the right to try. Miss long-left, never short-right.",
-    9:"Finishing hole and your average says you handle it. Same club off the tee as the fourth."
-  };
-
-  const noteText = document.getElementById('note-text');
-  const noteHole = document.getElementById('note-hole');
-  const buttons = document.querySelectorAll('.hole-btn');
-
-  buttons.forEach((button) => {
-    button.addEventListener('click', () => {
-      buttons.forEach((other) => other.setAttribute('aria-pressed', String(other === button)));
-      const hole = button.dataset.hole;
-      noteHole.textContent = hole;
-      noteText.textContent = NOTES[hole];
-    });
-  });
+// Real course thumbnails from the same data the prototype uses.
+const usgs=(b,w,h)=>`https://basemap.nationalmap.gov/arcgis/rest/services/USGSImageryOnly/MapServer/export?bbox=${b.minLo},${b.minLa},${b.maxLo},${b.maxLa}&bboxSR=4326&imageSR=4326&size=${w},${h}&format=jpg&f=image`
+fetch('courses.json').then(r=>r.json()).then(d=>{
+  const us=d.courses.filter(c=>c.country==='US'&&c.holes.length).slice(0,4)
+  const bounds=c=>{let a=90,b=-90,x=180,y=-180;for(const h of c.holes)for(const[la,lo]of h.path){if(la<a)a=la;if(la>b)b=la;if(lo<x)x=lo;if(lo>y)y=lo}const pa=(b-a)*0.06+6e-4,px=(y-x)*0.06+6e-4;return{minLa:a-pa,maxLa:b+pa,minLo:x-px,maxLo:y+px}}
+  document.getElementById('thumbs').innerHTML=us.map(c=>`<figure class="thumb"><img loading="lazy" decoding="async" alt="Aerial of ${c.name}" src="${usgs(bounds(c),520,390)}"><figcaption>${c.name}</figcaption></figure>`).join('')
+}).catch(()=>{})
 </script>
-
 </body>
 </html>
