@@ -32,6 +32,22 @@ const COURSES = [
   { id: 'chambers-bay', name: 'Chambers Bay', place: 'Washington, USA', country: 'US', bbox: '47.190,-122.592,47.220,-122.552' },
   { id: 'erin-hills', name: 'Erin Hills', place: 'Wisconsin, USA', country: 'US', bbox: '43.228,-88.372,43.266,-88.328' },
   { id: 'unm-championship', name: 'UNM Championship Course', place: 'New Mexico, USA', country: 'US', bbox: '35.048,-106.622,35.076,-106.588' },
+
+  // City of Austin municipal courses (golfATX). Boxes centred on the real OSM
+  // coordinates for each course; all US, so all carry USGS aerial imagery.
+  { id: 'lions-municipal', name: 'Lions Municipal Golf Course', place: 'Austin, Texas', country: 'US', bbox: '30.280,-97.788,30.297,-97.769' },
+  { id: 'morris-williams', name: 'Morris Williams Golf Course', place: 'Austin, Texas', country: 'US', bbox: '30.279,-97.699,30.297,-97.680' },
+  { id: 'hancock-atx', name: 'Hancock Golf Course', place: 'Austin, Texas', country: 'US', bbox: '30.293,-97.733,30.305,-97.718' },
+  { id: 'jimmy-clay', name: 'Jimmy Clay Golf Course', place: 'Austin, Texas', country: 'US', bbox: '30.179,-97.738,30.201,-97.716' },
+  { id: 'roy-kizer', name: 'Roy Kizer Golf Course', place: 'Austin, Texas', country: 'US', bbox: '30.170,-97.746,30.190,-97.725' },
+
+  // Austin public favourites — Golf Digest best-public picks plus local institutions.
+  { id: 'falconhead', name: 'Falconhead Golf Course', place: 'Austin, Texas', country: 'US', bbox: '30.308,-97.980,30.328,-97.958' },
+  { id: 'grey-rock', name: 'Grey Rock Golf Course', place: 'Austin, Texas', country: 'US', bbox: '30.176,-97.924,30.196,-97.902' },
+  { id: 'avery-ranch', name: 'Avery Ranch Golf Club', place: 'Austin, Texas', country: 'US', bbox: '30.495,-97.782,30.513,-97.759' },
+  { id: 'forest-creek', name: 'Forest Creek Golf Club', place: 'Round Rock, Texas', country: 'US', bbox: '30.503,-97.614,30.522,-97.591' },
+  { id: 'harvey-penick', name: 'Harvey Penick Golf Campus', place: 'Austin, Texas', country: 'US', bbox: '30.287,-97.668,30.301,-97.650' },
+  { id: 'butler-pitch-putt', name: 'Butler Pitch & Putt', place: 'Austin, Texas', country: 'US', bbox: '30.258,-97.761,30.267,-97.751' },
 ]
 
 const FEATURE_TAGS = {
