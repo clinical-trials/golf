@@ -56,7 +56,9 @@
     .gcell--big{grid-row:1 / span 2;min-height:32rem;}
   }
   .gcell figcaption{position:absolute;left:0;right:0;bottom:0;padding:1.5rem 1.15rem 1rem;background:linear-gradient(transparent,rgba(11,15,19,0.92));font-family:'Archivo Narrow',sans-serif;font-weight:700;font-size:0.95rem;}
-  .gcell--crest{position:relative;display:flex;align-items:center;justify-content:center;background:#0B140F;padding:2rem;}
+  .gcell--crest{position:relative;display:none;align-items:center;justify-content:center;background:#0B140F;padding:2rem;}
+  .gcell--crest.has{display:flex;}
+  @media(min-width:48rem){.gallery:not(:has(.gcell--crest.has)) .gcell--stretch{grid-row:1 / span 2;}}
   .crest{width:min(62%,15rem);height:auto;filter:drop-shadow(0 6px 24px rgba(0,0,0,0.45));}
   .gcell figcaption small{display:block;color:var(--flag);font-size:0.72rem;letter-spacing:0.1em;text-transform:uppercase;margin-bottom:0.2rem;}
 
@@ -139,12 +141,12 @@
         <img src="img/tom-harris-clinic.jpg" alt="Tom Harris running a putting clinic with a grid drill on the practice green" onerror="this.parentElement.classList.add('empty');this.remove()">
         <figcaption><small>On the green</small>Drills that make practice count — not just hitting balls.</figcaption>
       </figure>
-      <figure class="ph gcell" data-need="img/tom-harris-group.jpg" style="margin:0">
+      <figure class="ph gcell gcell--stretch" data-need="img/tom-harris-group.jpg" style="margin:0">
         <img src="img/tom-harris-group.jpg" alt="Tom Harris demonstrating a putting stroke to a group of students" onerror="this.parentElement.classList.add('empty');this.remove()">
         <figcaption><small>Groups &amp; juniors</small>Youth to senior, one method for every level.</figcaption>
       </figure>
-      <div class="gcell gcell--crest ph empty" data-need="img/crest.png">
-        <img class="crest" src="img/crest.png" alt="Tom Harris golf mark" onerror="this.remove()" onload="this.parentElement.classList.remove('empty')">
+      <div class="gcell gcell--crest">
+        <img class="crest" src="img/crest.png" alt="Tom Harris golf mark" onerror="this.parentElement.remove()" onload="this.parentElement.classList.add('has')">
       </div>
     </div>
   </div>
