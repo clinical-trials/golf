@@ -1,0 +1,188 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Schedule a lesson — Tom Harris, PGA</title>
+<meta name="description" content="Pick a lesson, pick a time. Demo of the booking flow — real bookings and payments arrive with the deployed backend.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600&family=Archivo+Black&family=Archivo+Narrow:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#0B0F13;--ink-2:#131A1F;--ink-3:#1B242A;
+    --card:#ECE6D6;--dim:#9EA9A2;
+    --flag:#E9B949;--turf:#7B9153;--penalty:#D2553C;--rule:#232D31;
+  }
+  *{box-sizing:border-box;}
+  body{margin:0;background:var(--ink);color:var(--card);font-family:'Archivo',system-ui,sans-serif;line-height:1.5;-webkit-font-smoothing:antialiased;}
+  h1,h2,h3{font-family:'Archivo Black',sans-serif;font-weight:400;line-height:0.98;letter-spacing:-0.02em;margin:0;}
+  a{color:var(--flag);}
+  .wrap{width:min(100% - 2rem,64rem);margin-inline:auto;}
+  .label{font-family:'Archivo Narrow',sans-serif;font-weight:700;text-transform:uppercase;letter-spacing:0.15em;font-size:0.74rem;color:var(--dim);}
+  .notice{background:var(--flag);color:#231A06;font-family:'Archivo Narrow',sans-serif;font-weight:700;text-transform:uppercase;letter-spacing:0.09em;font-size:0.76rem;text-align:center;padding:0.55rem 1rem;}
+
+  header.top{padding:clamp(2rem,5vw,3rem) 0 1.25rem;border-bottom:1px solid var(--rule);}
+  header.top h1{font-size:clamp(1.9rem,1.3rem + 2.6vw,3.2rem);max-width:20ch;}
+  header.top p{color:var(--dim);max-width:56ch;margin:0.9rem 0 0;}
+  .back{font-family:'Archivo Narrow',sans-serif;font-size:0.9rem;}
+
+  .flow{display:grid;gap:1.25rem;padding:1.75rem 0 4rem;grid-template-columns:1fr;}
+  @media(min-width:56rem){.flow{grid-template-columns:1.25fr 1fr;align-items:start;}}
+  .box{background:var(--ink-2);border:1px solid var(--rule);padding:1.25rem;}
+  .box>.label{display:block;margin-bottom:0.9rem;}
+
+  .products{display:grid;gap:0.5rem;}
+  .prod{appearance:none;background:var(--ink-3);border:1px solid transparent;color:var(--card);text-align:left;padding:0.85rem 0.95rem;cursor:pointer;font-family:'Archivo',sans-serif;display:flex;justify-content:space-between;gap:1rem;align-items:baseline;}
+  .prod strong{font-family:'Archivo Narrow',sans-serif;font-weight:700;display:block;font-size:1rem;}
+  .prod span{color:var(--dim);font-size:0.8rem;}
+  .prod b{font-family:'Archivo Narrow',sans-serif;font-variant-numeric:tabular-nums;color:var(--flag);white-space:nowrap;}
+  .prod[aria-pressed="true"]{border-color:var(--flag);}
+  .prod:focus-visible{outline:2px solid var(--flag);outline-offset:2px;}
+
+  .days{display:flex;gap:0.4rem;overflow-x:auto;padding-bottom:0.5rem;scrollbar-width:thin;}
+  .day{appearance:none;flex:0 0 auto;background:var(--ink-3);border:1px solid transparent;color:var(--card);padding:0.55rem 0.7rem;cursor:pointer;text-align:center;font-family:'Archivo Narrow',sans-serif;min-width:4.6rem;min-height:44px;}
+  .day small{display:block;color:var(--dim);font-size:0.68rem;text-transform:uppercase;letter-spacing:0.08em;}
+  .day b{font-weight:700;font-size:1rem;}
+  .day[aria-pressed="true"]{border-color:var(--flag);}
+  .day[disabled]{opacity:0.35;cursor:default;}
+  .day:focus-visible{outline:2px solid var(--flag);outline-offset:2px;}
+
+  .slots{display:grid;grid-template-columns:repeat(auto-fill,minmax(6.2rem,1fr));gap:0.45rem;margin-top:0.9rem;}
+  .slot{appearance:none;background:var(--ink-3);border:1px solid transparent;color:var(--card);padding:0.6rem 0.4rem;cursor:pointer;font-family:'Archivo Narrow',sans-serif;font-weight:700;font-variant-numeric:tabular-nums;font-size:0.92rem;min-height:44px;}
+  .slot[aria-pressed="true"]{border-color:var(--flag);background:var(--flag);color:#231A06;}
+  .slot:focus-visible{outline:2px solid var(--flag);outline-offset:2px;}
+  .slots__empty{color:var(--dim);font-size:0.9rem;margin:0.9rem 0 0;}
+
+  .summary{position:sticky;top:1rem;}
+  .sumline{display:flex;justify-content:space-between;gap:1rem;padding:0.5rem 0;border-bottom:1px solid var(--rule);font-size:0.95rem;}
+  .sumline b{font-family:'Archivo Narrow',sans-serif;font-variant-numeric:tabular-nums;}
+  .cta{appearance:none;border:0;width:100%;margin-top:1.1rem;background:var(--flag);color:#231A06;font-family:'Archivo Narrow',sans-serif;font-weight:700;text-transform:uppercase;letter-spacing:0.08em;font-size:0.95rem;padding:0.95rem;min-height:50px;cursor:pointer;}
+  .cta[disabled]{opacity:0.4;cursor:default;}
+  .cta:focus-visible{outline:2px solid var(--card);outline-offset:2px;}
+  .held{margin-top:1rem;border:1px solid var(--turf);padding:0.9rem;font-size:0.92rem;display:none;}
+  .held b{font-family:'Archivo Narrow',sans-serif;}
+  .held code{color:var(--flag);}
+  .fine{color:var(--dim);font-size:0.8rem;margin-top:0.9rem;}
+
+  footer{padding:1.5rem 0 3rem;color:var(--dim);font-size:0.85rem;border-top:1px solid var(--rule);}
+  footer p{max-width:72ch;}
+  @media(prefers-reduced-motion:reduce){*{transition:none!important;}}
+</style>
+</head>
+<body>
+
+<p class="notice">Booking demo — times are illustrative and no money moves. Real bookings arrive when the backend deploys.</p>
+
+<header class="top">
+  <div class="wrap">
+    <p class="back"><a href="index.html">← Tom Harris golf</a></p>
+    <h1>Schedule a lesson with Tom.</h1>
+    <p>Pick what you're working on, pick a time. This page runs the same slot engine as the production backend in this repository — shown here with sample availability and demo pricing.</p>
+  </div>
+</header>
+
+<div class="wrap">
+  <div class="flow">
+    <div style="display:grid;gap:1.25rem">
+      <section class="box">
+        <span class="label">1 · Choose a lesson</span>
+        <div class="products" id="products"></div>
+      </section>
+
+      <section class="box">
+        <span class="label">2 · Pick a time</span>
+        <div class="days" id="days"></div>
+        <div class="slots" id="slots"></div>
+        <p class="slots__empty" id="slots-empty" hidden>No times this day — Tom's sample week is Tuesday to Saturday.</p>
+      </section>
+    </div>
+
+    <aside class="box summary">
+      <span class="label">3 · Confirm</span>
+      <div class="sumline"><span>Lesson</span><b id="sum-prod">—</b></div>
+      <div class="sumline"><span>When</span><b id="sum-when">—</b></div>
+      <div class="sumline"><span>Price</span><b id="sum-price">—</b></div>
+      <button class="cta" id="book" disabled>Hold this time</button>
+      <div class="held" id="held">
+        <b>Held (demo).</b> Reference <code id="held-ref"></code><br>
+        In production this hold returns a Stripe <code>clientSecret</code>, the card is taken by Stripe Checkout — never by this site — and the confirm endpoint captures the payment. Until Stripe credentials exist the same flow runs on a stub that moves no money. Either way, the slot disappears for everyone else the moment it's held.
+      </div>
+      <p class="fine">Demo pricing — Tom's real rates are his call. The production engine (availability rules, conflict detection, hold/confirm/cancel, Stripe-ready payments) lives in this repo with 31 passing tests.</p>
+    </aside>
+  </div>
+</div>
+
+<footer>
+  <div class="wrap">
+    <p>This page derives free times with the same pure algorithm as the backend (<code>src/domain/schedule/slots.ts</code>): weekly rules minus exceptions minus existing bookings. Nothing you enter here is stored or sent anywhere.</p>
+  </div>
+</footer>
+
+<script>
+/* Sample availability, clearly illustrative: Tue–Sat, 9:00–17:00, hour slots. */
+const RULES=[2,3,4,5,6].map(weekday=>({weekday,startMinute:540,endMinute:1020,slotMinutes:60}))
+const PRODUCTS=[
+  {id:'full',name:'Full swing lesson',mins:60,priceMinor:12000,note:'Video review included'},
+  {id:'short',name:'Short game & putting',mins:60,priceMinor:12000,note:'Wedges, chipping, SAM PuttLab'},
+  {id:'tpi',name:'TPI movement assessment',mins:90,priceMinor:17500,note:'Physical screen + swing plan'},
+  {id:'playing',name:'On-course playing lesson',mins:120,priceMinor:24000,note:'Nine holes with Tom'},
+]
+const price=m=>'$'+(m/100).toFixed(0)+' (demo)'
+
+/* Same shape as the backend's deriveSlots: rules minus taken, per day. */
+function slotsForDay(date,product){
+  const rule=RULES.find(r=>r.weekday===date.getDay())
+  if(!rule)return[]
+  const out=[]
+  for(let m=rule.startMinute;m+product.mins<=rule.endMinute;m+=rule.slotMinutes){
+    const t=new Date(date);t.setHours(0,m,0,0)
+    if(t>new Date())out.push(t)
+  }
+  return out
+}
+
+let product=PRODUCTS[0],day=null,slot=null,held=false
+const fmtDay=d=>d.toLocaleDateString(undefined,{weekday:'short'})
+const fmtDate=d=>d.toLocaleDateString(undefined,{month:'short',day:'numeric'})
+const fmtTime=d=>d.toLocaleTimeString(undefined,{hour:'numeric',minute:'2-digit'})
+
+const days=[]
+for(let i=1;i<=14;i++){const d=new Date();d.setDate(d.getDate()+i);d.setHours(0,0,0,0);days.push(d)}
+day=days.find(d=>RULES.some(r=>r.weekday===d.getDay()))
+
+function render(){
+  document.getElementById('products').innerHTML=PRODUCTS.map(p=>
+    `<button class="prod" data-id="${p.id}" aria-pressed="${p===product}"><span><strong>${p.name}</strong><span>${p.mins} min · ${p.note}</span></span><b>${price(p.priceMinor)}</b></button>`).join('')
+  document.querySelectorAll('.prod').forEach(b=>b.addEventListener('click',()=>{product=PRODUCTS.find(p=>p.id===b.dataset.id);slot=null;held=false;render()}))
+
+  document.getElementById('days').innerHTML=days.map((d,i)=>{
+    const has=slotsForDay(d,product).length>0
+    return `<button class="day" data-i="${i}" aria-pressed="${day&&d.getTime()===day.getTime()}" ${has?'':'disabled'}><small>${fmtDay(d)}</small><b>${fmtDate(d)}</b></button>`
+  }).join('')
+  document.querySelectorAll('.day:not([disabled])').forEach(b=>b.addEventListener('click',()=>{day=days[+b.dataset.i];slot=null;held=false;render()}))
+
+  const list=day?slotsForDay(day,product):[]
+  document.getElementById('slots').innerHTML=list.map(t=>
+    `<button class="slot" data-t="${t.getTime()}" aria-pressed="${slot&&t.getTime()===slot.getTime()}">${fmtTime(t)}</button>`).join('')
+  document.getElementById('slots-empty').hidden=list.length>0
+  document.querySelectorAll('.slot').forEach(b=>b.addEventListener('click',()=>{slot=new Date(+b.dataset.t);held=false;render()}))
+
+  document.getElementById('sum-prod').textContent=product.name
+  document.getElementById('sum-when').textContent=slot?`${fmtDate(slot)} · ${fmtTime(slot)}`:'—'
+  document.getElementById('sum-price').textContent=price(product.priceMinor)
+  const cta=document.getElementById('book')
+  cta.disabled=!slot||held
+  cta.textContent=held?'Held ✓':'Hold this time'
+  document.getElementById('held').style.display=held?'block':'none'
+}
+document.getElementById('book').addEventListener('click',()=>{
+  if(!slot)return
+  held=true
+  document.getElementById('held-ref').textContent=`stub_demo_${slot.getTime()}`
+  render()
+})
+render()
+</script>
+</body>
+</html>

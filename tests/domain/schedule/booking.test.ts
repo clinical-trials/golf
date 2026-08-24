@@ -25,7 +25,7 @@ beforeEach(resetDatabase)
 describe('booking', () => {
   it('holds a booking with a payment reference and no charge yet', async () => {
     const { pro, product, student } = await fixtures()
-    const booking = await holdBooking({
+    const { booking, clientSecret } = await holdBooking({
       userId: student.id, proId: pro.id, productId: product.id,
       startsAt: new Date('2026-09-07T15:00:00Z'), payments: new StubPayments(),
     })
@@ -34,11 +34,12 @@ describe('booking', () => {
     expect(booking.paymentProvider).toBe('STUB')
     expect(booking.paymentReference).toMatch(/^stub_/)
     expect(booking.priceMinor).toBe(12000)
+    expect(clientSecret).toBeNull()
   })
 
   it('derives the end time from the product length', async () => {
     const { pro, product, student } = await fixtures()
-    const booking = await holdBooking({
+    const { booking } = await holdBooking({
       userId: student.id, proId: pro.id, productId: product.id,
       startsAt: new Date('2026-09-07T15:00:00Z'), payments: new StubPayments(),
     })
@@ -80,7 +81,7 @@ describe('booking', () => {
       startsAt: new Date('2026-09-07T15:00:00Z'), payments,
     })
 
-    const confirmed = await confirmBooking({ bookingId: held.id, payments })
+    const confirmed = await confirmBooking({ bookingId: held.booking.id, payments })
     expect(confirmed.status).toBe('CONFIRMED')
   })
 
@@ -90,10 +91,10 @@ describe('booking', () => {
     const at = new Date('2026-09-07T15:00:00Z')
     const held = await holdBooking({ userId: student.id, proId: pro.id, productId: product.id, startsAt: at, payments })
 
-    const cancelled = await cancelBooking({ bookingId: held.id, payments })
+    const cancelled = await cancelBooking({ bookingId: held.booking.id, payments })
     expect(cancelled.status).toBe('CANCELLED')
 
     const rebooked = await holdBooking({ userId: student.id, proId: pro.id, productId: product.id, startsAt: at, payments })
-    expect(rebooked.status).toBe('HELD')
+    expect(rebooked.booking.status).toBe('HELD')
   })
 })

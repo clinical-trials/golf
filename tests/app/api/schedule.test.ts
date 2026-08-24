@@ -7,6 +7,7 @@ vi.mock('@/lib/payments', () => ({ payments: new StubPayments() }))
 
 const { GET: getSchedule } = await import('@/app/api/schedule/route')
 const { POST: postBooking } = await import('@/app/api/bookings/route')
+const { POST: postConfirm } = await import('@/app/api/bookings/confirm/route')
 
 async function consented(email: string) {
   const user = await prisma.user.create({ data: { email, dateOfBirth: new Date('1985-01-01') } })
@@ -84,5 +85,46 @@ describe('scheduling API', () => {
     expect(res.status).toBe(200)
     expect(body.paymentProvider).toBe('STUB')
     expect(body.status).toBe('HELD')
+    expect(body.clientSecret).toBeNull()
+  })
+
+  it('confirms a held booking through the confirm endpoint', async () => {
+    const proUser = await prisma.user.create({ data: { email: 'p4@example.com' } })
+    const pro = await prisma.pro.create({ data: { userId: proUser.id, displayName: 'P', timezone: 'UTC' } })
+    const product = await prisma.lessonProduct.create({
+      data: { proId: pro.id, name: 'Lesson', minutes: 60, priceMinor: 12000, currency: 'usd' },
+    })
+    const student = await consented('ok4@example.com')
+
+    const held = await (
+      await postBooking(
+        new Request('http://t/api/bookings', {
+          method: 'POST',
+          body: JSON.stringify({
+            userId: student.id, proId: pro.id, productId: product.id, startsAt: '2026-09-08T15:00:00Z',
+          }),
+        }),
+      )
+    ).json()
+
+    const res = await postConfirm(
+      new Request('http://t/api/bookings/confirm', {
+        method: 'POST',
+        body: JSON.stringify({ bookingId: held.bookingId }),
+      }),
+    )
+    const body = await res.json()
+    expect(res.status).toBe(200)
+    expect(body.status).toBe('CONFIRMED')
+  })
+
+  it('rejects confirming an unknown booking', async () => {
+    const res = await postConfirm(
+      new Request('http://t/api/bookings/confirm', {
+        method: 'POST',
+        body: JSON.stringify({ bookingId: 'nope' }),
+      }),
+    )
+    expect(res.status).toBe(409)
   })
 })

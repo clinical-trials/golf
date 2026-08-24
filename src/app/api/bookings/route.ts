@@ -19,7 +19,7 @@ export async function POST(request: Request): Promise<Response> {
   if (missing.length > 0) return Response.json({ error: 'consent required', missing }, { status: 403 })
 
   try {
-    const booking = await holdBooking({
+    const { booking, clientSecret } = await holdBooking({
       userId: input.userId,
       proId: input.proId,
       productId: input.productId,
@@ -32,6 +32,8 @@ export async function POST(request: Request): Promise<Response> {
       paymentProvider: booking.paymentProvider,
       priceMinor: booking.priceMinor,
       currency: booking.currency,
+      // Stripe Elements/Checkout confirms the card with this; null on the stub.
+      clientSecret,
     })
   } catch (error) {
     return Response.json({ error: (error as Error).message }, { status: 409 })

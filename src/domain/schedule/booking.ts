@@ -10,7 +10,13 @@ export interface HoldBookingInput {
   payments: PaymentPort
 }
 
-export async function holdBooking(input: HoldBookingInput): Promise<Booking> {
+export interface HeldBooking {
+  booking: Booking
+  /** Stripe Elements/Checkout needs this client-side; null on the stub. */
+  clientSecret: string | null
+}
+
+export async function holdBooking(input: HoldBookingInput): Promise<HeldBooking> {
   const product = await prisma.lessonProduct.findUniqueOrThrow({ where: { id: input.productId } })
   const endsAt = new Date(input.startsAt.getTime() + product.minutes * 60_000)
 
@@ -31,7 +37,7 @@ export async function holdBooking(input: HoldBookingInput): Promise<Booking> {
     metadata: { proId: input.proId, productId: product.id },
   })
 
-  return prisma.booking.create({
+  const booking = await prisma.booking.create({
     data: {
       userId: input.userId,
       proId: input.proId,
@@ -44,6 +50,8 @@ export async function holdBooking(input: HoldBookingInput): Promise<Booking> {
       paymentReference: intent.reference,
     },
   })
+
+  return { booking, clientSecret: intent.clientSecret }
 }
 
 export async function confirmBooking(input: {
