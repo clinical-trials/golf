@@ -136,6 +136,35 @@ feature.
 
 ---
 
+### Weather forecast for the round window
+
+A forecast tuned to golf: not "is it raining now" but "is the next 4–5 hour window good to
+play," since a round is long. Reference: the HuggingFace Golf-Forecaster space.
+
+- **Recommendation: ADOPT, built on a free public weather API — not a scraped or unlicensed
+  source.** This is genuinely useful and it strengthens the On-Demand Pro: wind speed and
+  direction already feed the strategy engine's dispersion, and a playability read over the
+  round window is a natural companion to booking a tee time or a lesson. The honest build:
+  use a public forecast API (the US National Weather Service api.weather.gov is free, public
+  domain, no key; Open-Meteo is free for non-commercial and CC-BY) and compute a simple
+  playability score over the booking window from wind, precipitation probability, and
+  temperature. Do not present it as a guarantee — a forecast is a forecast, and the
+  on-course disclaimer already covers conditions varying.
+- **Sequencing:** small, and it slots naturally beside the scheduling feature, since both
+  are about a specific time at a specific place. Reasonable as a fast follow.
+
+### Golf-trip itinerary generator
+
+Generate a multi-day golf-trip plan — which courses, in what order, with travel between
+them. Reference: the HuggingFace golf-trip-itinerary-generator space.
+
+- **Recommendation: PARK as a marketing and partnership play, not core coaching.** It does
+  not touch the diagnosis loop or the coaching relationship, so it is not part of the wedge.
+  But it has a real commercial angle the coaching product does not: course and resort
+  partnerships, affiliate booking, and sponsorship. That makes it a plausible later revenue
+  or acquisition surface rather than a v1 feature. Keep it on the list, build it only once
+  the core relationship exists and there is an audience to route to partner courses.
+
 ## Suggested build order impact
 
 None of this changes the critical path, which is still: method extraction → consent layer →

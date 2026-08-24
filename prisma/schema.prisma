@@ -11,4 +11,126 @@ model User {
   email       String    @unique
   dateOfBirth DateTime?
   createdAt   DateTime  @default(now())
+
+  acceptances ConsentAcceptance[] @relation("UserAcceptances")
+  pro         Pro?                @relation("UserPro")
+  bookings    Booking[]           @relation("UserBookings")
+}
+
+// ---------- consent ----------
+
+enum ConsentKind {
+  WAIVER
+  HEALTH_ATTESTATION
+  MINOR_PARENTAL
+  ON_COURSE_DISCLAIMER
+  SECONDARY_USE
+}
+
+model ConsentDocument {
+  id            String      @id @default(cuid())
+  kind          ConsentKind
+  version       Int
+  body          String
+  required      Boolean
+  effectiveFrom DateTime    @default(now())
+  acceptances   ConsentAcceptance[]
+
+  @@unique([kind, version])
+}
+
+model ConsentAcceptance {
+  id               String          @id @default(cuid())
+  userId           String
+  user             User            @relation("UserAcceptances", fields: [userId], references: [id])
+  documentId       String
+  document         ConsentDocument @relation(fields: [documentId], references: [id])
+  acceptedAt       DateTime        @default(now())
+  ipAddress        String?
+  userAgent        String?
+  acceptedByUserId String?
+
+  @@unique([userId, documentId])
+}
+
+// ---------- scheduling ----------
+
+model Pro {
+  id          String  @id @default(cuid())
+  userId      String  @unique
+  user        User    @relation("UserPro", fields: [userId], references: [id])
+  displayName String
+  timezone    String  @default("UTC")
+
+  rules      AvailabilityRule[]
+  exceptions AvailabilityException[]
+  products   LessonProduct[]
+  bookings   Booking[]
+}
+
+model AvailabilityRule {
+  id          String @id @default(cuid())
+  proId       String
+  pro         Pro    @relation(fields: [proId], references: [id], onDelete: Cascade)
+  weekday     Int
+  startMinute Int
+  endMinute   Int
+  slotMinutes Int
+
+  @@unique([proId, weekday])
+}
+
+model AvailabilityException {
+  id      String   @id @default(cuid())
+  proId   String
+  pro     Pro      @relation(fields: [proId], references: [id], onDelete: Cascade)
+  date    DateTime @db.Date
+  blocked Boolean
+
+  @@unique([proId, date])
+}
+
+// ---------- payments and bookings ----------
+
+enum BookingStatus {
+  HELD
+  CONFIRMED
+  CANCELLED
+}
+
+enum PaymentProviderKind {
+  STUB
+  STRIPE
+}
+
+model LessonProduct {
+  id         String    @id @default(cuid())
+  proId      String
+  pro        Pro       @relation(fields: [proId], references: [id], onDelete: Cascade)
+  name       String
+  minutes    Int
+  priceMinor Int
+  currency   String    @default("usd")
+  bookings   Booking[]
+}
+
+model Booking {
+  id               String              @id @default(cuid())
+  userId           String
+  user             User                @relation("UserBookings", fields: [userId], references: [id])
+  proId            String
+  pro              Pro                 @relation(fields: [proId], references: [id])
+  productId        String
+  product          LessonProduct       @relation(fields: [productId], references: [id])
+  startsAt         DateTime
+  endsAt           DateTime
+  status           BookingStatus       @default(HELD)
+  priceMinor       Int
+  currency         String
+  paymentProvider  PaymentProviderKind
+  paymentReference String
+  createdAt        DateTime            @default(now())
+  updatedAt        DateTime            @updatedAt
+
+  @@index([proId, startsAt])
 }
