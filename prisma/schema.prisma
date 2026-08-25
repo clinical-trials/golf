@@ -12,9 +12,117 @@ model User {
   dateOfBirth DateTime?
   createdAt   DateTime  @default(now())
 
-  acceptances ConsentAcceptance[] @relation("UserAcceptances")
-  pro         Pro?                @relation("UserPro")
-  bookings    Booking[]           @relation("UserBookings")
+  acceptances     ConsentAcceptance[] @relation("UserAcceptances")
+  pro             Pro?                @relation("UserPro")
+  bookings        Booking[]           @relation("UserBookings")
+  profile         PlayerProfile?
+  captureSessions CaptureSession[]    @relation("UserSessions")
+}
+
+// ---------- player model ----------
+
+enum Handedness {
+  LEFT
+  RIGHT
+}
+
+enum AgeBand {
+  JUNIOR_7_12
+  JUNIOR_13_18
+  ADULT_19_29
+  ADULT_30_54
+  SENIOR_55_69
+  SENIOR_70_PLUS
+}
+
+enum PracticeAccess {
+  NONE
+  HOME_NET
+  RANGE
+  FULL_FACILITY
+  SIMULATOR
+}
+
+enum PrimaryGoal {
+  FIRST_ROUND
+  BREAK_100
+  BREAK_90
+  BREAK_80
+  CLUB_COMPETITION
+  COLLEGE_RECRUITING
+  PROFESSIONAL
+  ENJOYMENT
+}
+
+enum LearningStyle {
+  FEEL
+  MECHANICS
+  VISUAL
+  DATA
+  UNKNOWN
+}
+
+enum SkillDomain {
+  FULL_SWING
+  SHORT_GAME
+  PUTTING
+}
+
+model PlayerProfile {
+  id             String         @id @default(cuid())
+  userId         String         @unique
+  user           User           @relation(fields: [userId], references: [id])
+
+  handedness     Handedness
+  ageBand        AgeBand
+  practiceAccess PracticeAccess
+  primaryGoal    PrimaryGoal
+  learningStyle  LearningStyle  @default(UNKNOWN)
+  language       String         @default("en")
+
+  // Per-domain assessment. Null until the Video Combine is complete.
+  // Levels are 0-54 handicap-equivalent bands; confidence is 0..1.
+  fullSwingLevel      Int?
+  fullSwingConfidence Float?
+  shortGameLevel      Int?
+  shortGameConfidence Float?
+  puttingLevel        Int?
+  puttingConfidence   Float?
+
+  createdAt      DateTime       @default(now())
+  updatedAt      DateTime       @updatedAt
+}
+
+// ---------- video combine ----------
+
+enum CaptureSessionStatus {
+  OPEN
+  COMPLETE
+  ABANDONED
+}
+
+model CaptureSession {
+  id        String                @id @default(cuid())
+  userId    String
+  user      User                  @relation("UserSessions", fields: [userId], references: [id])
+  status    CaptureSessionStatus  @default(OPEN)
+  clips     SwingClip[]
+  createdAt DateTime              @default(now())
+  updatedAt DateTime              @updatedAt
+}
+
+model SwingClip {
+  id            String         @id @default(cuid())
+  sessionId     String
+  session       CaptureSession @relation(fields: [sessionId], references: [id], onDelete: Cascade)
+  requirementId String
+  swingIndex    Int
+  storageKey    String
+  handedness    Handedness
+  durationMs    Int
+  createdAt     DateTime       @default(now())
+
+  @@unique([sessionId, requirementId, swingIndex])
 }
 
 // ---------- consent ----------
