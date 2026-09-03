@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="icon" type="image/png" sizes="48x48" href="favicon-48.png">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
 <link rel="apple-touch-icon" href="favicon-180.png">
 <title>Pocket Pro — Tom Harris, PGA</title>
 <meta name="description" content="Tom Harris, PGA — your golf mentor in your pocket: player development on the range and on every course.">
@@ -52,10 +52,11 @@
   .hero__cred{color:var(--flag);margin-top:0.6rem;font-family:'Archivo Narrow',sans-serif;font-weight:700;text-transform:uppercase;letter-spacing:0.1em;font-size:0.92rem;line-height:1.4;}
   .hero__line{font-size:clamp(1.15rem,1rem + 0.8vw,1.5rem);margin-top:1.4rem;max-width:24ch;}
   .chips{display:flex;flex-wrap:wrap;gap:0.4rem;margin-top:1.4rem;}
-  .pga{display:inline-flex;align-items:center;gap:0.55rem;border:1.5px solid var(--flag);padding:0.4rem 0.8rem;margin-top:1.2rem;width:max-content;}
-  .pga svg{width:1.5rem;height:1.5rem;flex:0 0 auto;}
-  .pga b{font-family:'Archivo Black',sans-serif;font-size:0.95rem;letter-spacing:0.04em;color:var(--flag);line-height:1;}
-  .pga span{font-family:'Archivo Narrow',sans-serif;font-weight:700;text-transform:uppercase;letter-spacing:0.08em;font-size:0.66rem;color:var(--dim);line-height:1.2;display:block;}
+  .pga{display:inline-flex;align-items:center;gap:0.7rem;margin-top:1.2rem;width:max-content;}
+  .pga__seal{width:66px;height:66px;background:#fff;border-radius:8px;padding:5px;flex:0 0 auto;box-shadow:0 2px 12px rgba(0,0,0,0.35);}
+  .pga__seal img{width:100%;height:100%;object-fit:contain;display:block;}
+  .pga b{font-family:'Archivo Black',sans-serif;font-size:0.9rem;letter-spacing:0.03em;color:var(--card);line-height:1.05;display:block;}
+  .pga span{font-family:'Archivo Narrow',sans-serif;font-weight:700;text-transform:uppercase;letter-spacing:0.08em;font-size:0.66rem;color:var(--dim);line-height:1.2;display:block;margin-top:0.15rem;}
   .chip{font-family:'Archivo Narrow',sans-serif;font-weight:700;font-size:0.72rem;text-transform:uppercase;letter-spacing:0.06em;padding:0.32rem 0.6rem;border:1px solid var(--rule);color:var(--dim);}
   .hero__cta{display:flex;flex-wrap:wrap;gap:0.75rem;margin-top:1.9rem;}
   .btn{display:inline-flex;align-items:center;min-height:46px;padding:0.7rem 1.15rem;font-family:'Archivo Narrow',sans-serif;font-weight:700;text-transform:uppercase;letter-spacing:0.08em;font-size:0.85rem;text-decoration:none;}
@@ -158,9 +159,9 @@
     <span class="label">Your golf mentor, in your pocket</span>
     <h1 class="hero__name">Tom Harris</h1>
     <div class="hero__cred">Class A PGA Professional · Player Development</div>
-    <div class="pga" title="Tom Harris is a Class A member of the PGA of America">
-      <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="8" r="4.4" fill="none" stroke="#E9B949" stroke-width="1.4"/><g fill="#E9B949"><circle cx="10.3" cy="7" r="0.6"/><circle cx="12" cy="6.4" r="0.6"/><circle cx="13.6" cy="7.2" r="0.6"/><circle cx="10.8" cy="8.6" r="0.6"/><circle cx="12.6" cy="8.8" r="0.6"/></g><path d="M7 5 L4.5 2" stroke="#E9B949" stroke-width="1.4" stroke-linecap="round"/><path d="M17 5 L19.5 2" stroke="#E9B949" stroke-width="1.4" stroke-linecap="round"/><path d="M8 21 L9.5 16 M16 21 L14.5 16" stroke="#E9B949" stroke-width="1.4" stroke-linecap="round"/></svg>
-      <div><b>PGA</b><span>Professional · Class A member</span></div>
+    <div class="pga">
+      <span class="pga__seal"><img src="img/pga-member-seal.jpg" width="66" height="66" alt="PGA of America Member Professional seal"></span>
+      <div><b>PGA Member Professional</b><span>Class A &middot; PGA of America</span></div>
     </div>
     <p class="hero__line">One coach. One method. On the range and on every course you play.</p>
     <div class="chips">
