@@ -21,6 +21,17 @@
   a{color:var(--flag);}
   .wrap{width:min(100% - 2rem,80rem);margin-inline:auto;}
   .label{font-family:'Archivo Narrow',sans-serif;font-weight:700;text-transform:uppercase;letter-spacing:0.15em;font-size:0.74rem;color:var(--dim);}
+  /* sticky nav */
+  .nav{position:sticky;top:0;z-index:50;background:rgba(11,15,19,0.92);backdrop-filter:blur(8px);border-bottom:1px solid var(--rule);}
+  .nav__in{display:flex;align-items:center;justify-content:space-between;gap:1rem;padding:0.6rem 0;}
+  .nav__brand{font-family:'Archivo Black',sans-serif;font-size:1.05rem;letter-spacing:-0.01em;color:var(--card);text-decoration:none;}
+  .nav__links{display:none;gap:1.4rem;}
+  @media(min-width:60rem){.nav__links{display:flex;}}
+  .nav__links a{font-family:'Archivo Narrow',sans-serif;font-weight:700;text-transform:uppercase;letter-spacing:0.08em;font-size:0.78rem;color:var(--dim);text-decoration:none;}
+  .nav__links a:hover{color:var(--card);}
+  .nav__cta{background:var(--flag);color:#231A06;font-family:'Archivo Narrow',sans-serif;font-weight:700;text-transform:uppercase;letter-spacing:0.06em;font-size:0.78rem;padding:0.5rem 0.9rem;min-height:40px;display:inline-flex;align-items:center;text-decoration:none;}
+  .nav__cta:focus-visible{outline:2px solid var(--flag);outline-offset:2px;}
+
   .notice{background:var(--flag);color:#231A06;font-family:'Archivo Narrow',sans-serif;font-weight:700;text-transform:uppercase;letter-spacing:0.09em;font-size:0.76rem;text-align:center;padding:0.55rem 1rem;}
 
   /* photo with graceful fallback until the file is added */
@@ -115,8 +126,21 @@
 <body>
 
 <p class="notice">Concept demo — method and product still in build.</p>
+<nav class="nav">
+  <div class="wrap nav__in">
+    <a class="nav__brand" href="#top">Pocket Pro</a>
+    <div class="nav__links">
+      <a href="#dev">Coaching</a>
+      <a href="#modules">Classes</a>
+      <a href="#book">Lessons</a>
+      <a href="#faq">FAQ</a>
+      <a href="prototype.html">Course tool</a>
+    </div>
+    <a class="nav__cta" href="#book">Book a lesson →</a>
+  </div>
+</nav>
 
-<header class="hero">
+<header class="hero" id="top">
   <figure class="ph hero__photo" data-need="img/tom-harris-lesson.jpg" style="margin:0">
     <img src="img/tom-harris-lesson.jpg" alt="Tom Harris coaching a putting stroke on the practice green" onerror="this.parentElement.classList.add('empty');this.remove()">
   </figure>
