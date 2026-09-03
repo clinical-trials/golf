@@ -532,10 +532,73 @@ export const FIRST_90_DAYS: ProgramSpec = {
   ],
 }
 
+/**
+ * 4-week putting intensive. Putting is where amateurs bleed the most fixable
+ * strokes, where a beginner can match a veteran soonest, and where Tom's
+ * teaching is deepest (SAM PuttLab certified per his TPI profile). Weeks 1 and
+ * 4 bracket the course with the same benchmark test, so improvement is a
+ * number, not a feeling.
+ */
+export const PUTTING_FOUR_WEEK: ProgramSpec = {
+  slug: 'putting-intensive-4',
+  name: 'Putting Intensive — 4 Weeks',
+  description:
+    'Four weeks on the green and nothing else: start line, speed, green reading, and holing out under pressure. You take the same 18-putt benchmark test in week 1 and week 4, so your improvement is measured, not guessed. Works on a practice green, a carpet, or a simulator — no course required. Flipped classroom: short lesson at home, focused drills on the green, a quick quiz to lock in the why. Draft curriculum pending Tom Harris review.',
+  priceMinor: 8900,
+  currency: 'usd',
+  weeks: [
+    {
+      week: 1,
+      title: 'Benchmark and start line',
+      videoId: null,
+      homework: 'Take the benchmark: 18 putts — six from 3 feet, six from 10, six from 25 — and record makes and total putts in the app. Then the gate drill: ten minutes rolling balls through a gate two putter-heads wide at 6 feet.',
+      quiz: [
+        q('Where the ball starts is decided almost entirely by…', ['The putter face at impact', 'Your follow-through', 'The brand of ball'], 0, 'Face angle dominates start line; the path matters far less than most golfers think.'),
+        q('The benchmark test exists so that…', ['You feel judged', 'Week 4 shows a measured change, not a feeling', 'You can skip practice'], 1, 'Same test, same distances, four weeks apart — the difference is your progress.'),
+        q('A putt that misses the gate tells you…', ['You need a new putter', 'Your face was open or closed at impact', 'The green is bad'], 1, 'The gate turns an invisible face error into instant feedback.'),
+      ],
+    },
+    {
+      week: 2,
+      title: 'Speed is everything',
+      videoId: null,
+      homework: 'Ladder drill both sessions this week: 10, 20, 30 feet, each ball finishing past the last without racing by. Finish with the 3-foot circle game: six putts around one hole, restart on any miss.',
+      quiz: [
+        q('Three-putts are killed mostly by…', ['Perfect line', 'Speed control', 'A softer grip'], 1, 'Good speed makes every long putt finish near the hole; line alone cannot.'),
+        q('A good lag putt finishes…', ['Anywhere past the hole', 'Inside a short, stress-free circle around the hole', 'Short every time'], 1, 'Think bin-lid circle; two-putt territory, no drama.'),
+        q('Speed is controlled by…', ['Stroke length at even tempo', 'Hitting harder with the wrists', 'Holding your breath'], 0, 'Longer stroke, same rhythm — never a jab.'),
+      ],
+    },
+    {
+      week: 3,
+      title: 'Reading the green',
+      videoId: null,
+      homework: 'Read-then-roll: on ten different putts, commit to a read out loud before you stroke it, then note whether the miss was read or speed. Walk the low side; feel slope through your feet.',
+      quiz: [
+        q('Break depends on…', ['Slope only', 'Slope AND the speed you choose', 'The wind'], 1, 'A firmer putt breaks less, a dying putt breaks most — read and speed are one decision.'),
+        q('The clearest view of a putt&rsquo;s break is usually from…', ['Behind the ball only', 'The low side of the putt', 'The hole looking back'], 1, 'Gravity shows itself best from below the line.'),
+        q('When your read and your friend&rsquo;s read disagree, play…', ['Theirs', 'Yours, committed', 'Split the difference'], 1, 'A committed stroke on your own read beats a doubtful one on anyone&rsquo;s.'),
+      ],
+    },
+    {
+      week: 4,
+      title: 'Pressure, then proof',
+      videoId: null,
+      homework: 'Pressure sets: make ten 3-footers in a row before leaving, twice this week. Then retake the full 18-putt benchmark and log it — compare to week 1 in the app.',
+      quiz: [
+        q('Pressure practice works because…', ['It punishes you', 'A streak with a cost simulates the putt that matters', 'It is longer'], 1, 'Restarting on a miss gives practice a consequence, like the real thing.'),
+        q('Your week-4 benchmark compares against…', ['The course record', 'Your own week-1 numbers', 'Tour averages'], 1, 'You versus you: that is the whole scoreboard.'),
+        q('After the intensive, your putting keeps improving by…', ['Hoping', 'Keeping the ladder and gate drills in your weekly routine', 'Buying putters'], 1, 'Ten focused minutes a week holds the gains; the app keeps the streaks.'),
+      ],
+    },
+  ],
+}
+
 export const ALL_PROGRAMS: ProgramSpec[] = [
   EIGHT_WEEK,
   SIX_WEEK,
   WOMENS_SIX_WEEK,
   FAMILY_SIX_WEEK,
   FIRST_90_DAYS,
+  PUTTING_FOUR_WEEK,
 ]
