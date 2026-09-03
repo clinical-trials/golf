@@ -1,0 +1,143 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Your Pocket Pro — dashboard preview</title>
+<meta name="description" content="Preview of a Pocket Pro student dashboard: program progress, benchmark improvement, round history and lessons.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600&family=Archivo+Black&family=Archivo+Narrow:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{--ink:#0B0F13;--ink-2:#131A1F;--ink-3:#1B242A;--card:#ECE6D6;--dim:#9EA9A2;--flag:#E9B949;--turf:#7B9153;--penalty:#D2553C;--rule:#232D31;}
+  *{box-sizing:border-box;}
+  body{margin:0;background:var(--ink);color:var(--card);font-family:'Archivo',system-ui,sans-serif;line-height:1.5;-webkit-font-smoothing:antialiased;}
+  h1,h2,h3{font-family:'Archivo Black',sans-serif;font-weight:400;letter-spacing:-0.02em;margin:0;line-height:1;}
+  a{color:var(--flag);}
+  .wrap{width:min(100% - 2rem,72rem);margin-inline:auto;}
+  .label{font-family:'Archivo Narrow',sans-serif;font-weight:700;text-transform:uppercase;letter-spacing:0.14em;font-size:0.72rem;color:var(--dim);}
+  .notice{background:var(--flag);color:#231A06;font-family:'Archivo Narrow',sans-serif;font-weight:700;text-transform:uppercase;letter-spacing:0.09em;font-size:0.76rem;text-align:center;padding:0.55rem 1rem;}
+  .nav{position:sticky;top:0;z-index:20;background:rgba(11,15,19,0.92);backdrop-filter:blur(8px);border-bottom:1px solid var(--rule);}
+  .nav__in{display:flex;align-items:center;justify-content:space-between;padding:0.6rem 0;}
+  .nav__brand{font-family:'Archivo Black',sans-serif;font-size:1.05rem;color:var(--card);text-decoration:none;}
+  .nav__cta{background:var(--flag);color:#231A06;font-family:'Archivo Narrow',sans-serif;font-weight:700;text-transform:uppercase;letter-spacing:0.06em;font-size:0.78rem;padding:0.5rem 0.9rem;text-decoration:none;}
+  .hd{padding:clamp(1.75rem,4vw,2.75rem) 0 1rem;}
+  .hd h1{font-size:clamp(1.9rem,1.4rem + 2.4vw,3rem);}
+  .hd p{color:var(--dim);margin:0.6rem 0 0;}
+  .streak{display:inline-flex;gap:0.5rem;align-items:baseline;border:1px solid var(--rule);background:var(--ink-2);padding:0.5rem 0.85rem;margin-top:1rem;}
+  .streak b{font-family:'Archivo Black',sans-serif;font-size:1.2rem;color:var(--flag);}
+  .grid{display:grid;gap:1rem;padding:1rem 0 3rem;grid-template-columns:1fr;}
+  @media(min-width:52rem){.grid{grid-template-columns:1fr 1fr;}}
+  .card{border:1px solid var(--rule);background:var(--ink-2);padding:1.25rem;}
+  .card--wide{grid-column:1/-1;}
+  .card h2{font-size:1.15rem;margin-bottom:0.9rem;}
+  .prog{margin-bottom:1rem;}
+  .prog:last-child{margin-bottom:0;}
+  .prog__top{display:flex;justify-content:space-between;gap:0.75rem;align-items:baseline;font-family:'Archivo Narrow',sans-serif;font-weight:700;}
+  .prog__sub{color:var(--dim);font-size:0.82rem;font-weight:400;}
+  .bar{height:0.55rem;background:var(--ink-3);margin-top:0.4rem;position:relative;overflow:hidden;}
+  .bar>span{position:absolute;inset:0 auto 0 0;background:var(--turf);}
+  .next{color:var(--flag);font-family:'Archivo Narrow',sans-serif;font-weight:700;font-size:0.8rem;margin-top:0.35rem;}
+  table{width:100%;border-collapse:collapse;font-family:'Archivo Narrow',sans-serif;font-variant-numeric:tabular-nums;font-size:0.9rem;}
+  th,td{text-align:right;padding:0.45rem 0.3rem;border-bottom:1px solid var(--rule);}
+  th:first-child,td:first-child{text-align:left;}
+  thead th{color:var(--dim);font-size:0.7rem;text-transform:uppercase;letter-spacing:0.08em;}
+  .msg{display:flex;gap:0.6rem;align-items:flex-start;border-top:1px solid var(--rule);padding-top:0.8rem;margin-top:0.4rem;}
+  .msg__who{font-family:'Archivo Narrow',sans-serif;font-weight:700;color:var(--flag);font-size:0.8rem;}
+  .msg__body{color:var(--card);font-size:0.9rem;}
+  .lock{color:var(--dim);font-size:0.8rem;margin-top:0.8rem;}
+  .verdict{font-family:'Archivo Black',sans-serif;font-size:1.05rem;line-height:1.2;color:var(--card);margin-top:0.85rem;}
+  .verdict b{color:var(--flag);}
+  footer{border-top:1px solid var(--rule);padding:1.5rem 0 3rem;color:var(--dim);font-size:0.82rem;}
+</style>
+</head>
+<body>
+<p class="notice">Preview — sample student, sample data. Your real dashboard appears here once you enrol and start logging rounds.</p>
+<nav class="nav"><div class="wrap nav__in"><a class="nav__brand" href="index.html">Pocket Pro</a><a class="nav__cta" href="index.html#book">Book a lesson →</a></div></nav>
+
+<header class="hd"><div class="wrap">
+  <span class="label">Your dashboard</span>
+  <h1>Welcome back, Jordan.</h1>
+  <p>Here&rsquo;s where your game is, what&rsquo;s next, and what your rounds are telling Tom.</p>
+  <div class="streak"><b>4</b><span style="font-family:'Archivo Narrow',sans-serif;text-transform:uppercase;letter-spacing:0.08em;font-size:0.72rem;color:var(--dim)">weeks in a row practised</span></div>
+</div></header>
+
+<div class="wrap">
+  <div class="grid">
+
+    <section class="card">
+      <h2>Your programs</h2>
+      <div class="prog">
+        <div class="prog__top"><span>Putting Intensive <span class="prog__sub">Week 3 of 4</span></span><span>75%</span></div>
+        <div class="bar"><span style="width:75%"></span></div>
+        <div class="next">Next: green reading — Tue 5:30 pm</div>
+      </div>
+      <div class="prog">
+        <div class="prog__top"><span>Score Improvement <span class="prog__sub">Week 2 of 6</span></span><span>33%</span></div>
+        <div class="bar"><span style="width:33%"></span></div>
+        <div class="next">Homework due: log two rounds this week</div>
+      </div>
+      <div class="prog">
+        <div class="prog__top"><span>Practice Like a Golfer <span class="prog__sub">Completed</span></span><span>100%</span></div>
+        <div class="bar"><span style="width:100%;background:var(--flag)"></span></div>
+      </div>
+    </section>
+
+    <section class="card">
+      <h2>Putting benchmark — moved in 3 weeks</h2>
+      <svg viewBox="0 0 320 170" role="img" aria-label="Putts holed out of 18: week 1 was 5, this week is 9" style="width:100%;height:auto">
+        <line x1="40" y1="140" x2="310" y2="140" stroke="#2C3634"/>
+        <g font-family="Archivo Narrow, sans-serif" font-size="11" fill="#9EA9A2">
+          <text x="90" y="158" text-anchor="middle">Week 1</text>
+          <text x="240" y="158" text-anchor="middle">This week</text>
+        </g>
+        <rect x="60" y="106" width="60" height="34" fill="#5C6259"/>
+        <rect x="210" y="70" width="60" height="70" fill="#7B9153"/>
+        <g font-family="Archivo Black, sans-serif" font-size="18" text-anchor="middle">
+          <text x="90" y="99" fill="#ECE6D6">5</text>
+          <text x="240" y="63" fill="#E9B949">9</text>
+        </g>
+        <text x="40" y="20" font-family="Archivo Narrow, sans-serif" font-size="11" fill="#9EA9A2">putts holed / 18</text>
+      </svg>
+      <div class="verdict">Nearly <b>doubled</b> your makes, and dropped <b>1.4 putts</b> a round.</div>
+    </section>
+
+    <section class="card card--wide">
+      <h2>Recent rounds</h2>
+      <table>
+        <thead><tr><th>Date</th><th>Course</th><th>Score</th><th>Putts</th><th>Penalties</th><th>vs. par</th></tr></thead>
+        <tbody>
+          <tr><td>Aug 30</td><td>Lions Municipal</td><td>91</td><td>33</td><td>2</td><td style="color:var(--penalty)">+19</td></tr>
+          <tr><td>Aug 23</td><td>Roy Kizer</td><td>94</td><td>35</td><td>3</td><td style="color:var(--penalty)">+22</td></tr>
+          <tr><td>Aug 16</td><td>Butler Pitch &amp; Putt</td><td>29</td><td>18</td><td>0</td><td>+2</td></tr>
+          <tr><td>Aug 9</td><td>Lions Municipal</td><td>97</td><td>37</td><td>4</td><td style="color:var(--penalty)">+25</td></tr>
+        </tbody>
+      </table>
+      <p class="lock">Snap a photo of your scorecard after a round — the app reads it, you confirm, and it lands here.</p>
+    </section>
+
+    <section class="card">
+      <h2>Upcoming</h2>
+      <table>
+        <tbody>
+          <tr><td>Tue, Sep 8 · 5:30 pm</td><td style="text-align:right;color:var(--dim)">Putting Intensive — wk 3</td></tr>
+          <tr><td>Sat, Sep 12 · 9:00 am</td><td style="text-align:right;color:var(--dim)">Private lesson with Tom</td></tr>
+          <tr><td>Wed, Nov 5 · 9:00 am</td><td style="text-align:right;color:var(--dim)">Butler beginner mornings</td></tr>
+        </tbody>
+      </table>
+    </section>
+
+    <section class="card">
+      <h2>Message Tom</h2>
+      <p style="color:var(--dim);font-size:0.9rem;margin:0 0 0.2rem">Private channel — part of your coaching membership. Reach Tom directly; his number and email stay private.</p>
+      <div class="msg"><div><div class="msg__who">Tom</div><div class="msg__body">Nice work on the ladder drill — your speed is way better. Bring the driver Saturday, let&rsquo;s get you off the tee.</div></div></div>
+      <div class="msg"><div><div class="msg__who">You</div><div class="msg__body">Will do. Three-putts are basically gone 🙌</div></div></div>
+      <p class="lock">Live chat is part of the $500/mo private coaching membership.</p>
+    </section>
+
+  </div>
+</div>
+
+<footer><div class="wrap">Preview only — sample data for illustration, no real student. The dashboard runs on the same accounts, enrolment, progress and round-logging the backend already implements; it goes live when accounts ship. <a href="index.html">← Back to Pocket Pro</a></div></footer>
+</body>
+</html>
