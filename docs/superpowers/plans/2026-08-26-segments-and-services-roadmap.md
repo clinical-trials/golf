@@ -22,6 +22,7 @@ supplied by the user from NGF 2025 reporting; verify before print use.
 - **Club rental subscriptions & beginner tee-time bundles** — partnership plays with
   courses/retailers, not code. Pairs naturally with First 90 Days (week-1 copy already
   normalizes rentals). Revisit when there's an audience to bring partners.
+- **Corporate leagues** — on the site as an offering (priced per group, arranged directly); deliverable via Programs + scheduling machinery when the first company signs.
 - **Group clinics / leagues / creator events** — deliverable through Programs +
   scheduling once there's demand; no new engineering to pilot one clinic.
 
