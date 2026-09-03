@@ -533,7 +533,7 @@ fetch('courses.json').then(r=>r.json()).then(data=>{
     document.getElementById('tg-all').setAttribute('aria-pressed',String(r==='ALL'))
     renderStrip()
     const list=COURSES.filter(matchesQuery).filter(inRegion)
-    if(list.length && !list.some(c=>c.id===course.id))selectCourse(list[0])
+    if(list.length && (!course || !list.some(c=>c.id===course.id)))selectCourse(list[0])
   }
   renderStrip()
   document.getElementById('tg-us').addEventListener('click',()=>setRegion('US'))

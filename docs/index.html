@@ -906,10 +906,23 @@ fetch('courses.json').then(r=>r.json()).then(d=>{
     document.getElementById('cp-name').textContent=c.name+' \u2014 '+c.place
     document.getElementById('coursepop').showModal()
   }
+  // Non-US courses have no USGS aerial (US-only imagery), so draw their real
+  // OpenStreetMap routing instead of firing a request that returns a blank tile.
+  const routeThumb=(c)=>{
+    const b=bounds(c),W=520,H=390,pad=16
+    const midLat=(b.minLa+b.maxLa)/2,k=Math.cos(midLat*Math.PI/180)
+    const geoW=((b.maxLo-b.minLo)||1e-4)*k,geoH=(b.maxLa-b.minLa)||1e-4
+    const s=Math.min((W-2*pad)/geoW,(H-2*pad)/geoH)
+    const offX=(W-geoW*s)/2,offY=(H-geoH*s)/2
+    const X=lo=>offX+(lo-b.minLo)*k*s,Y=la=>H-(offY+(la-b.minLa)*s)
+    const paths=c.holes.map(h=>`<polyline points='${h.path.map(([la,lo])=>X(lo).toFixed(1)+','+Y(la).toFixed(1)).join(' ')}' fill='none' stroke='#7B9153' stroke-width='1.5' stroke-linejoin='round' stroke-linecap='round'/>`).join('')
+    const svg=`<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 ${W} ${H}'><rect width='${W}' height='${H}' fill='#0C130E'/>${paths}<text x='16' y='378' fill='#6E7A66' font-family='sans-serif' font-size='13'>Real routing · OpenStreetMap</text></svg>`
+    return `<img loading="lazy" decoding="async" alt="Routing map of ${c.name}" src="data:image/svg+xml,${encodeURIComponent(svg)}">`
+  }
   const gt=document.getElementById('great-thumbs')
   if(gt){
     const names=['st-andrews-old','pebble-beach','pinehurst-no2','butler-pitch-putt']
-    gt.innerHTML=names.map(id=>{const c=d.courses.find(x=>x.id===id&&x.holes.length);if(!c)return '';return `<figure class="thumb" style="cursor:pointer" onclick="openCoursePop('${c.id}')" role="button" tabindex="0" onkeydown="if(event.key==='Enter')openCoursePop('${c.id}')"><img loading="lazy" decoding="async" alt="Aerial of ${c.name}" src="${usgs(bounds(c),520,390)}"><figcaption>${c.name} &middot; tap to view</figcaption></figure>`}).join('')
+    gt.innerHTML=names.map(id=>{const c=d.courses.find(x=>x.id===id&&x.holes.length);if(!c)return '';const media=c.country==='US'?`<img loading="lazy" decoding="async" alt="Aerial of ${c.name}" src="${usgs(bounds(c),520,390)}">`:routeThumb(c);return `<figure class="thumb" style="cursor:pointer" onclick="openCoursePop('${c.id}')" role="button" tabindex="0" onkeydown="if(event.key==='Enter')openCoursePop('${c.id}')">${media}<figcaption>${c.name} &middot; tap to view</figcaption></figure>`}).join('')
   }
   // Ground-level CC0 course photography (Wikimedia Commons, public domain), rotated each visit.
   const SCENES=[
