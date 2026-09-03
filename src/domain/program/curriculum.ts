@@ -594,6 +594,95 @@ export const PUTTING_FOUR_WEEK: ProgramSpec = {
   ],
 }
 
+
+/**
+ * 4-week practice-skills clinic. Most beginners don't know HOW to practice —
+ * range structure, drills that stick, tracking, and the pre-round warm-up.
+ * Meta-skill: every other program lands better after this one.
+ */
+export const PRACTICE_FOUR_WEEK: ProgramSpec = {
+  slug: 'practice-like-a-golfer-4',
+  name: 'Practice Like a Golfer — 4 Weeks',
+  description:
+    'Four weeks on the skill nobody teaches: practicing. How to structure a range bucket so it changes your game, the putting and wedge drills worth repeating, how to track progress so improvement is visible, and the 20-minute warm-up that readies you for a round. Draft curriculum pending Tom Harris review.',
+  priceMinor: 7900,
+  currency: 'usd',
+  weeks: [
+    {
+      week: 1,
+      title: 'The range bucket, structured',
+      videoId: null,
+      homework: 'Two range visits with a written 40-ball plan: 10 wedges to a target, 15 mid-irons alternating targets, 10 drivers to a fairway window, 5 pressure balls calling each shot. Every ball has a target.',
+      quiz: [
+        q('Beating balls with the same club at nothing trains…', ['Your swing', 'Very little — no target, no transfer', 'Distance'], 1, 'Practice transfers when every ball has a target and a purpose.'),
+        q('Mixing clubs and targets (random practice) beats blocked repeats for…', ['Warm-ups only', 'Taking it to the course', 'Nothing'], 1, 'Random practice feels worse and transfers better — like real golf, every shot is new.'),
+        q('A range session should end with…', ['The driver, max speed', 'A few pressure balls where you call the shot', 'Whatever is left'], 1, 'Finish like you play: one target, one swing, consequences.'),
+      ],
+    },
+    {
+      week: 2,
+      title: 'Drills that stick: putting and wedges',
+      videoId: 'D4ONSmxTVPQ',
+      homework: 'Two 20-minute sessions: putting ladder (10/20/30 ft) plus the 6-foot gate drill, then the wedge clock — half, three-quarter and full swings with one wedge, carries written down.',
+      quiz: [
+        q('A drill is worth repeating when it has…', ['A cool name', 'A target, feedback, and a score', 'Lots of equipment'], 1, 'Target + feedback + score is what makes practice measurable.'),
+        q('The wedge clock exists to give you…', ['One perfect swing', 'Known carries at several swing lengths', 'More spin'], 1, 'Scoring golf is playing to numbers you own.'),
+        q('Short game deserves what share of practice time?', ['Almost none', 'Roughly half', 'All of it'], 1, 'Half your strokes happen inside 100 yards; practice like it.'),
+      ],
+    },
+    {
+      week: 3,
+      title: 'Track it or it did not happen',
+      videoId: null,
+      homework: 'Add numbers to everything this week: strikes-out-of-ten each range visit, putting benchmark in the app, wedge carries updated. Three lines of notes after each session — what worked, what did not, next focus.',
+      quiz: [
+        q('Progress you cannot see is…', ['Still motivating', 'The main reason people quit practicing', 'Impossible'], 1, 'Visible numbers are why people come back; the app keeps them for you.'),
+        q('A practice journal needs…', ['A page per day', 'Three honest lines', 'Photos'], 1, 'Small and consistent beats elaborate and abandoned.'),
+        q('Retesting the same benchmark matters because…', ['Variety is boring', 'Same test, same conditions — the change is real', 'It is tradition'], 1, 'Only a repeated measure shows true movement.'),
+      ],
+    },
+    {
+      week: 4,
+      title: 'The pre-round warm-up',
+      videoId: null,
+      homework: 'Build and rehearse your 20-minute warm-up: 5 minutes stretch and half swings, 8 minutes through the bag short to long, 2 minutes trouble shots, 5 minutes putting ladder. Then play nine using it and log the round.',
+      quiz: [
+        q('A warm-up&rsquo;s job is…', ['Fixing your swing', 'Finding today&rsquo;s rhythm and tempo', 'Maximum speed'], 1, 'Warm-ups prepare; lessons and range sessions fix.'),
+        q('Warm up short clubs first because…', ['Tradition', 'Contact and tempo build before speed', 'Wedges are cheap'], 1, 'Small swings groove strike quality; the driver comes last.'),
+        q('The last five minutes before the first tee are best spent…', ['Hitting drivers', 'On the putting green, feeling the speed', 'In the shop'], 1, 'Green speed is the first thing the course asks you about.'),
+      ],
+    },
+  ],
+}
+
+
+/**
+ * Single-session workshop: what gear a beginner actually needs. Ninety minutes,
+ * one price, no subscription — the on-ramp before anyone spends real money on
+ * clubs. Pairs with the starter-kit bundle and Tom's fitting certification.
+ */
+export const EQUIPMENT_BASICS: ProgramSpec = {
+  slug: 'equipment-basics-1',
+  name: 'Equipment & Fitting Basics — Single Session',
+  description:
+    'One 90-minute workshop on gear without the sales pitch: the half set a beginner actually needs, how to buy used clubs well, choosing a ball, glove and shoes, setting up a bag, and when a professional fitting is worth it (and when it is not yet). Draft curriculum pending Tom Harris review.',
+  priceMinor: 4900,
+  currency: 'usd',
+  weeks: [
+    {
+      week: 1,
+      title: 'Gear that fits your game and your budget',
+      videoId: null,
+      homework: 'Before the session: list what you own and what you think you need. After: price a used half set online, pick one ball model to play for a month, and bring your questions to the group thread.',
+      quiz: [
+        q('A beginner&rsquo;s first bag should hold…', ['14 new clubs', 'A half set you actually know', 'Whatever was on sale'], 1, 'Fewer clubs, known distances, better golf — and far cheaper.'),
+        q('Used clubs are…', ['Risky', 'The smart way to start — most of the value, a fraction of the price', 'Against the rules'], 1, 'Check the grips and faces; let someone else pay the new-club premium.'),
+        q('A professional fitting matters most…', ['Before your first lesson', 'Once your swing repeats and you know your carries', 'Never'], 1, 'Fit a swing that exists; week one money goes to lessons and balls.'),
+      ],
+    },
+  ],
+}
+
 export const ALL_PROGRAMS: ProgramSpec[] = [
   EIGHT_WEEK,
   SIX_WEEK,
@@ -601,4 +690,6 @@ export const ALL_PROGRAMS: ProgramSpec[] = [
   FAMILY_SIX_WEEK,
   FIRST_90_DAYS,
   PUTTING_FOUR_WEEK,
+  PRACTICE_FOUR_WEEK,
+  EQUIPMENT_BASICS,
 ]

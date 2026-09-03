@@ -70,3 +70,17 @@ people sharing it.
   own game; software drafts, humans decide.
 - **Forecasts are forecasts, estimates are estimates.** Playability scores,
   financial projections and skill levels all carry their confidence honestly.
+
+## What to wear (the doctrine, for every program's week one)
+
+The safe rule anywhere: clean, neat, intentional. A collared or golf-appropriate
+top; tailored shorts, pants, skort or golf dress; golf or clean athletic shoes.
+Skip denim, gym shorts, tank tops, cutoffs and flip-flops. Private clubs run
+formal — shirt tucked, belt on, check the dress code before arriving; public
+courses and simulator lounges are looser. Layers are fine; one bold piece is
+fine. Hot weather: breathable fabrics, hat, sunscreen. Cold: layers that don't
+restrict the swing. Rain: waterproof jacket, rain gloves, spare socks.
+
+The deeper etiquette is effort: look like you respect the place, the group, and
+the game. Nobody needs expensive clothes — they need to look intentional, clean,
+and course-appropriate. Teach it without ever making anyone feel ignorant.

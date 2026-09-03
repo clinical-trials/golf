@@ -1,0 +1,414 @@
+{
+ "note": "Draft curricula pending Tom Harris review. Quiz answers are never published.",
+ "programs": [
+  {
+   "slug": "build-your-swing-8",
+   "name": "Build Your Swing — 8 Weeks",
+   "description": "Fundamentals to full swing in eight weeks, flipped-classroom style: watch the lesson at home, do the homework at the range, check yourself with a short quiz. Draft curriculum pending Tom Harris review.",
+   "weeks": 8,
+   "priceMinor": 19900,
+   "currency": "usd",
+   "modules": [
+    {
+     "week": 1,
+     "title": "Posture and grip",
+     "videoId": "JNYa-7n6KhI",
+     "homework": "Ten minutes a day in front of a mirror: take your grip and posture, hold five seconds, step away, repeat. No ball this week.",
+     "quizQuestions": 3
+    },
+    {
+     "week": 2,
+     "title": "Backswing sequence",
+     "videoId": "sFCHZ4ozj8c",
+     "homework": "Slow-motion backswings: ten reps, three times this week, stopping at the top to check the order — club, arms, shoulders, hips.",
+     "quizQuestions": 3
+    },
+    {
+     "week": 3,
+     "title": "Pelvis movement",
+     "videoId": "A6rHcqT4Uqs",
+     "homework": "Hip-turn drills without a club: five minutes daily. Then ten half-swings feeling the pelvis start the downswing.",
+     "quizQuestions": 3
+    },
+    {
+     "week": 4,
+     "title": "Strike: low point control",
+     "videoId": null,
+     "homework": "Range session: 30 balls with a towel one grip-length behind the ball. Miss the towel, strike the ball first.",
+     "quizQuestions": 3
+    },
+    {
+     "week": 5,
+     "title": "Chipping and pitching",
+     "videoId": "lO1TiiPMMx8",
+     "homework": "Twenty minutes at the short-game area, twice: land three balls in a row on a towel from 10, then 15, then 20 yards.",
+     "quizQuestions": 3
+    },
+    {
+     "week": 6,
+     "title": "Wedge distances",
+     "videoId": "D4ONSmxTVPQ",
+     "homework": "Build your clock: hit ten balls each at half, three-quarter and full wedge swings, write down the carry of each.",
+     "quizQuestions": 3
+    },
+    {
+     "week": 7,
+     "title": "Putting: speed first",
+     "videoId": null,
+     "homework": "Ladder drill, 15 minutes twice this week: putt to 10, 20, 30 feet, stopping each ball past the last without hitting it.",
+     "quizQuestions": 3
+    },
+    {
+     "week": 8,
+     "title": "Take it to the course",
+     "videoId": null,
+     "homework": "Play nine holes, photograph the scorecard into the app, and mark one hole to review with your pro.",
+     "quizQuestions": 3
+    }
+   ]
+  },
+  {
+   "slug": "score-better-6",
+   "name": "Score Better — 6 Weeks",
+   "description": "Six weeks aimed purely at lower scores: short game, putting, wedges and course strategy. Flipped classroom — lesson at home, homework at the range, low-stakes quiz to check understanding. Draft curriculum pending Tom Harris review.",
+   "weeks": 6,
+   "priceMinor": 14900,
+   "currency": "usd",
+   "modules": [
+    {
+     "week": 1,
+     "title": "Where your strokes actually go",
+     "videoId": null,
+     "homework": "Log two rounds in the app (photo the scorecards). Note every penalty and every three-putt.",
+     "quizQuestions": 3
+    },
+    {
+     "week": 2,
+     "title": "Chipping basics that hold up",
+     "videoId": "lO1TiiPMMx8",
+     "homework": "Three short-game sessions: 20 chips each from good lies, aiming to land on a towel.",
+     "quizQuestions": 3
+    },
+    {
+     "week": 3,
+     "title": "Kill the three-putt",
+     "videoId": null,
+     "homework": "Ladder drill twice, plus 20 putts from 3 feet daily — make ten in a row before you leave.",
+     "quizQuestions": 3
+    },
+    {
+     "week": 4,
+     "title": "One wedge distance you own",
+     "videoId": "D4ONSmxTVPQ",
+     "homework": "Pick your favorite wedge. 50 balls at your three-quarter swing; write down your carry number.",
+     "quizQuestions": 3
+    },
+    {
+     "week": 5,
+     "title": "Course strategy: play the percentages",
+     "videoId": null,
+     "homework": "Play nine holes hitting whatever club keeps you in play off every tee — driver only where the app agrees.",
+     "quizQuestions": 3
+    },
+    {
+     "week": 6,
+     "title": "Scoring round and review",
+     "videoId": null,
+     "homework": "Play a full round applying weeks 1–5. Photo the card. Compare penalties and putts to week 1.",
+     "quizQuestions": 3
+    }
+   ]
+  },
+  {
+   "slug": "womens-golf-6",
+   "name": "Women's Golf — 6 Weeks",
+   "description": "Six weeks built for women, whether you're new to the game or coming back to it: fundamentals, short game, realistic club distances benchmarked to women's data (not men's defaults), and the on-course confidence to book the tee time. Flipped classroom — lesson at home, homework at the range, a short quiz to check understanding. Draft curriculum pending Tom Harris review.",
+   "weeks": 6,
+   "priceMinor": 14900,
+   "currency": "usd",
+   "modules": [
+    {
+     "week": 1,
+     "title": "Setup you can trust",
+     "videoId": "JNYa-7n6KhI",
+     "homework": "Mirror work, ten minutes daily: grip and posture, hold five seconds, reset. Comfort before speed.",
+     "quizQuestions": 3
+    },
+    {
+     "week": 2,
+     "title": "A swing that fits you",
+     "videoId": "sFCHZ4ozj8c",
+     "homework": "Slow-motion swings, ten reps three times this week. Film one set face-on with the app.",
+     "quizQuestions": 3
+    },
+    {
+     "week": 3,
+     "title": "Short game, quickly useful",
+     "videoId": "lO1TiiPMMx8",
+     "homework": "Two 20-minute sessions: land chips on a towel from 10 and 15 yards; finish with ten 3-foot putts in a row.",
+     "quizQuestions": 3
+    },
+    {
+     "week": 4,
+     "title": "Know your real distances",
+     "videoId": null,
+     "homework": "Range session with the app: ten balls per club, write down your true average carry for each.",
+     "quizQuestions": 3
+    },
+    {
+     "week": 5,
+     "title": "The course is yours: etiquette & flow",
+     "videoId": null,
+     "homework": "Nine holes at a quiet time (the app suggests one). Goal: pace, positions, and enjoying it — score optional.",
+     "quizQuestions": 3
+    },
+    {
+     "week": 6,
+     "title": "Your first scoring round",
+     "videoId": null,
+     "homework": "Play nine or eighteen, photograph the scorecard into the app, and pick one thing to work on with your pro.",
+     "quizQuestions": 3
+    }
+   ]
+  },
+  {
+   "slug": "family-golf-6",
+   "name": "Family Golf — 6 Weeks (Juniors & Parents)",
+   "description": "Six weeks for kids and the grown-ups who bring them: games first, short holes early, and a family scramble to finish. Homework happens at putting greens, par-3s and pitch-and-putts — no championship tees required. A parent or guardian enrolls and plays along. Runs equally well as a summer-camp or after-school block, one week per session. Flipped classroom: short lesson at home, playful practice out in the world, a quick quiz kids can ace. Draft curriculum pending Tom Harris review.",
+   "weeks": 6,
+   "priceMinor": 12900,
+   "currency": "usd",
+   "modules": [
+    {
+     "week": 1,
+     "title": "Golf is a game: putting games",
+     "videoId": null,
+     "homework": "Twenty minutes at any putting green (or carpet): play \"first to five\" from 3 feet, then ladder to 10 feet. Let the kid keep score.",
+     "quizQuestions": 3
+    },
+    {
+     "week": 2,
+     "title": "Chip it, land it",
+     "videoId": "lO1TiiPMMx8",
+     "homework": "Chipping catch: land chips onto a towel from 5, then 10 paces — parent and junior alternate, closest to the towel wins the hole.",
+     "quizQuestions": 3
+    },
+    {
+     "week": 3,
+     "title": "The half swing",
+     "videoId": "sFCHZ4ozj8c",
+     "homework": "At the range or a net: 20 half-swings each with a short iron. Game: call your shot — \"high or low\" — before you hit.",
+     "quizQuestions": 3
+    },
+    {
+     "week": 4,
+     "title": "Pitch-and-putt night",
+     "videoId": null,
+     "homework": "Play 9 holes at a pitch-and-putt or par-3 course as a team scramble: both hit, play the better ball. Photo the scorecard into the app.",
+     "quizQuestions": 3
+    },
+    {
+     "week": 5,
+     "title": "Etiquette as a superpower",
+     "videoId": null,
+     "homework": "Nine more short-course holes, this time playing your own balls. Junior is in charge of pace, safety and where to stand.",
+     "quizQuestions": 3
+    },
+    {
+     "week": 6,
+     "title": "The family cup",
+     "videoId": null,
+     "homework": "Family match at a short course, front nine. Winner names the trophy. Photo the card; the app tracks the rematches.",
+     "quizQuestions": 3
+    }
+   ]
+  },
+  {
+   "slug": "first-90-days",
+   "name": "Your First 90 Days of Golf",
+   "description": "Twelve weeks from \"never held a club\" to \"I play golf now.\" No prior experience, no equipment needed to start — rentals are fine and week 2 tells you what to borrow. Short lessons at home, low-pressure practice in the world, and by the end: three real outings played, your own scoring history, and a standing game. Flipped classroom with quick quizzes that build confidence, not stress. Draft curriculum pending Tom Harris review.",
+   "weeks": 12,
+   "priceMinor": 9900,
+   "currency": "usd",
+   "modules": [
+    {
+     "week": 1,
+     "title": "Hold a club, hit a ball",
+     "videoId": "JNYa-7n6KhI",
+     "homework": "One range visit with rented or borrowed clubs: a small bucket, short irons only. Goal is contact, not distance. Ten minutes of grip practice at home first.",
+     "quizQuestions": 3
+    },
+    {
+     "week": 2,
+     "title": "The half swing is your whole game (for now)",
+     "videoId": "sFCHZ4ozj8c",
+     "homework": "Range visit two: 30 balls, all half swings with an 8- or 9-iron. Count your clean strikes out of every ten.",
+     "quizQuestions": 3
+    },
+    {
+     "week": 3,
+     "title": "Putting: the equalizer",
+     "videoId": null,
+     "homework": "Twenty minutes on any practice green: ladder drill to 10, 20, 30 feet, then ten 3-footers in a row. Free, no tee time needed.",
+     "quizQuestions": 3
+    },
+    {
+     "week": 4,
+     "title": "Chipping and your first up-and-down",
+     "videoId": "lO1TiiPMMx8",
+     "homework": "Short-game area: 20 chips landing on a towel, then play \"chip and one putt\" — chip, then hole out. Track your best streak.",
+     "quizQuestions": 3
+    },
+    {
+     "week": 5,
+     "title": "First outing: pitch-and-putt",
+     "videoId": null,
+     "homework": "Play 9 holes at a pitch-and-putt or par-3 course. Rentals are fine. Photograph the scorecard into the app — your history starts today.",
+     "quizQuestions": 3
+    },
+    {
+     "week": 6,
+     "title": "Reading the card, playing the game",
+     "videoId": null,
+     "homework": "Learn your scorecard: par, handicap holes, tees. Then nine holes again — count only putts and penalties this time.",
+     "quizQuestions": 3
+    },
+    {
+     "week": 7,
+     "title": "The driver, finally",
+     "videoId": "A6rHcqT4Uqs",
+     "homework": "Range visit: 15 half-swing drivers off a high tee, then 15 smooth full ones. Fairway-finder first; the hero swing can wait.",
+     "quizQuestions": 3
+    },
+    {
+     "week": 8,
+     "title": "Nine holes on a full course",
+     "videoId": null,
+     "homework": "Book a quiet-time nine (the app suggests when). Play from the forward tees. Photo the card. One goal: finish every hole.",
+     "quizQuestions": 3
+    },
+    {
+     "week": 9,
+     "title": "Play with strangers (it&rsquo;s fine)",
+     "videoId": null,
+     "homework": "Join a walk-on pairing, a scramble, or a league night — one round with people you did not arrive with.",
+     "quizQuestions": 3
+    },
+    {
+     "week": 10,
+     "title": "Your distances, your clubs",
+     "videoId": "D4ONSmxTVPQ",
+     "homework": "Range with the app: measure your real carry with each club you use. Decide what your (rented or owned) starter half-set should be.",
+     "quizQuestions": 3
+    },
+    {
+     "week": 11,
+     "title": "Strategy: play smart, score better",
+     "videoId": null,
+     "homework": "Nine holes played to the app&rsquo;s club and target calls: middle of greens, safe sides, take the bogey. Compare the card to week 6.",
+     "quizQuestions": 3
+    },
+    {
+     "week": 12,
+     "title": "Day 90: you play golf now",
+     "videoId": null,
+     "homework": "Full nine (or eighteen) with someone from week 9, or your household. Photo the card. Book the next game before you leave the parking lot.",
+     "quizQuestions": 3
+    }
+   ]
+  },
+  {
+   "slug": "putting-intensive-4",
+   "name": "Putting Intensive — 4 Weeks",
+   "description": "Four weeks on the green and nothing else: start line, speed, green reading, and holing out under pressure. You take the same 18-putt benchmark test in week 1 and week 4, so your improvement is measured, not guessed. Works on a practice green, a carpet, or a simulator — no course required. Flipped classroom: short lesson at home, focused drills on the green, a quick quiz to lock in the why. Draft curriculum pending Tom Harris review.",
+   "weeks": 4,
+   "priceMinor": 8900,
+   "currency": "usd",
+   "modules": [
+    {
+     "week": 1,
+     "title": "Benchmark and start line",
+     "videoId": null,
+     "homework": "Take the benchmark: 18 putts — six from 3 feet, six from 10, six from 25 — and record makes and total putts in the app. Then the gate drill: ten minutes rolling balls through a gate two putter-heads wide at 6 feet.",
+     "quizQuestions": 3
+    },
+    {
+     "week": 2,
+     "title": "Speed is everything",
+     "videoId": null,
+     "homework": "Ladder drill both sessions this week: 10, 20, 30 feet, each ball finishing past the last without racing by. Finish with the 3-foot circle game: six putts around one hole, restart on any miss.",
+     "quizQuestions": 3
+    },
+    {
+     "week": 3,
+     "title": "Reading the green",
+     "videoId": null,
+     "homework": "Read-then-roll: on ten different putts, commit to a read out loud before you stroke it, then note whether the miss was read or speed. Walk the low side; feel slope through your feet.",
+     "quizQuestions": 3
+    },
+    {
+     "week": 4,
+     "title": "Pressure, then proof",
+     "videoId": null,
+     "homework": "Pressure sets: make ten 3-footers in a row before leaving, twice this week. Then retake the full 18-putt benchmark and log it — compare to week 1 in the app.",
+     "quizQuestions": 3
+    }
+   ]
+  },
+  {
+   "slug": "practice-like-a-golfer-4",
+   "name": "Practice Like a Golfer — 4 Weeks",
+   "description": "Four weeks on the skill nobody teaches: practicing. How to structure a range bucket so it changes your game, the putting and wedge drills worth repeating, how to track progress so improvement is visible, and the 20-minute warm-up that readies you for a round. Draft curriculum pending Tom Harris review.",
+   "weeks": 4,
+   "priceMinor": 7900,
+   "currency": "usd",
+   "modules": [
+    {
+     "week": 1,
+     "title": "The range bucket, structured",
+     "videoId": null,
+     "homework": "Two range visits with a written 40-ball plan: 10 wedges to a target, 15 mid-irons alternating targets, 10 drivers to a fairway window, 5 pressure balls calling each shot. Every ball has a target.",
+     "quizQuestions": 3
+    },
+    {
+     "week": 2,
+     "title": "Drills that stick: putting and wedges",
+     "videoId": "D4ONSmxTVPQ",
+     "homework": "Two 20-minute sessions: putting ladder (10/20/30 ft) plus the 6-foot gate drill, then the wedge clock — half, three-quarter and full swings with one wedge, carries written down.",
+     "quizQuestions": 3
+    },
+    {
+     "week": 3,
+     "title": "Track it or it did not happen",
+     "videoId": null,
+     "homework": "Add numbers to everything this week: strikes-out-of-ten each range visit, putting benchmark in the app, wedge carries updated. Three lines of notes after each session — what worked, what did not, next focus.",
+     "quizQuestions": 3
+    },
+    {
+     "week": 4,
+     "title": "The pre-round warm-up",
+     "videoId": null,
+     "homework": "Build and rehearse your 20-minute warm-up: 5 minutes stretch and half swings, 8 minutes through the bag short to long, 2 minutes trouble shots, 5 minutes putting ladder. Then play nine using it and log the round.",
+     "quizQuestions": 3
+    }
+   ]
+  },
+  {
+   "slug": "equipment-basics-1",
+   "name": "Equipment & Fitting Basics — Single Session",
+   "description": "One 90-minute workshop on gear without the sales pitch: the half set a beginner actually needs, how to buy used clubs well, choosing a ball, glove and shoes, setting up a bag, and when a professional fitting is worth it (and when it is not yet). Draft curriculum pending Tom Harris review.",
+   "weeks": 1,
+   "priceMinor": 4900,
+   "currency": "usd",
+   "modules": [
+    {
+     "week": 1,
+     "title": "Gear that fits your game and your budget",
+     "videoId": null,
+     "homework": "Before the session: list what you own and what you think you need. After: price a used half set online, pick one ball model to play for a month, and bring your questions to the group thread.",
+     "quizQuestions": 3
+    }
+   ]
+  }
+ ]
+}

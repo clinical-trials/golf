@@ -55,3 +55,11 @@ selling to course maintenance — different buyer, different product, different 
 risk profile. Real anchor: Purdue's W.H. Daniel Turfgrass Research & Diagnostic
 Center — a collaboration conversation, not a feature branch. Park until the core
 coaching business is funded and running; revisit as a spin-off or partnership.
+
+## Program tiers & packaging (2026-09-02 additions — build on existing programs, don't duplicate)
+
+- **Beginner Bootcamp (4 wks)** — compressed First 90 Days: range + short game + etiquette + first 9. Same curriculum spine, faster cadence.
+- **Women's Golf Social** — the shipped Women's 6-week + a weekly simulator night / 9-hole mixer. Community layer, not new curriculum.
+- **Junior Pathway** — tier the Family program: beginner → intermediate → tournament-ready. Tournament tier waits for Tom's competitive input.
+- **Corporate/Tech Golf Academy** — corporate leagues + etiquette module + simulator competition. Sales packaging of existing pieces.
+- **Booking-management pain (validated)** — a local operator (atxgolf) reports tee-time/booking management is genuinely hard. Direct validation for the concierge roadmap: streamline booking/rebooking flows as the wedge, before any tee-time inventory partnerships.

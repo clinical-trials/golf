@@ -71,6 +71,13 @@
   .surf h3{font-size:1.35rem;margin:0.6rem 0 0.5rem;}
   .surf p{margin:0;color:var(--dim);}
 
+  /* full-bleed aerial photo bands — real USGS imagery, public domain */
+  .photoband{position:relative;min-height:clamp(16rem,44vh,30rem);overflow:hidden;background:#0D1512;border-top:1px solid var(--rule);border-bottom:1px solid var(--rule);}
+  .photoband img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;filter:saturate(1.06) contrast(1.02);}
+  .photoband figcaption{position:absolute;left:0;right:0;bottom:0;padding:2.2rem 1.25rem 0.9rem;background:linear-gradient(transparent,rgba(11,15,19,0.85));display:flex;flex-wrap:wrap;justify-content:space-between;align-items:baseline;gap:0.5rem;}
+  .photoband__name{font-family:'Archivo Black',sans-serif;font-size:clamp(1.1rem,1rem + 1vw,1.6rem);}
+  .photoband__credit{font-family:'Archivo Narrow',sans-serif;font-size:0.72rem;letter-spacing:0.08em;text-transform:uppercase;color:var(--dim);}
+
   /* course strip */
   .courses{padding:clamp(2.5rem,6vw,4rem) 0;border-bottom:1px solid var(--rule);}
   .courses__hd{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:end;gap:1rem;}
@@ -183,7 +190,7 @@
       <article class="surf">
         <span class="where">On the course</span>
         <h3>He calls your shot</h3>
-        <p>He knows the hole in front of you and knows how you actually miss. So he tells you the club, the line, and when to take the bogey.</p>
+        <p>Any course you play — the local muni, a buddies trip, a bucket-list round — he knows the hole in front of you and how you actually miss. The club, the line, when to take the bogey: feedback tailored to that course, that day, your game.</p>
       </article>
     </div>
   </div>
@@ -214,13 +221,18 @@
   </div>
 </section>
 
+<figure class="photoband" data-course="chambers-bay" style="margin:0">
+  <img loading="lazy" decoding="async" alt="Aerial photograph of Chambers Bay golf course" onerror="this.closest('.photoband').remove()">
+  <figcaption><span class="photoband__name"></span><span class="photoband__credit">Real aerial photography &middot; USGS National Map, public domain</span></figcaption>
+</figure>
 <section class="surfaces">
   <div class="wrap">
     <span class="label">Ways to learn with Tom</span>
     <div class="two" style="margin-top:1.25rem">
       <article class="surf">
         <span class="where">Classes</span>
-        <h3>Six programs, every kind of golfer</h3>
+        <h3>Eight programs, every kind of golfer</h3>
+        <p style="color:var(--flag);font-family:'Archivo Narrow',sans-serif;font-weight:700;margin:0 0 0.5rem">The goal: your game moves fast enough that your friends start asking what changed.</p>
         <p>Build Your Swing (8 wks) &middot; Score Better (6) &middot; Women&rsquo;s Golf (6) &middot; Family Golf for juniors &amp; parents (6, runs as summer camp or after-school) &middot; Your First 90 Days for brand-new golfers (12) &middot; Putting Intensive (4) — benchmarked week 1 and week 4 so your progress is a number, not a feeling. Lesson at home, homework at the range, a quick quiz to check understanding.</p>
       </article>
       <article class="surf">
@@ -246,6 +258,19 @@
   </div>
 </section>
 
+<section class="surfaces" id="modules">
+  <div class="wrap">
+    <span class="label">Teaching modules &amp; upcoming classes</span>
+    <h2 style="font-size:clamp(1.5rem,1.1rem + 1.7vw,2.3rem);max-width:24ch;margin-top:0.7rem">Every week of every program, in the open.</h2>
+    <p style="color:var(--dim);max-width:64ch;margin-top:0.8rem;font-size:0.95rem">Lesson at home, homework in the world, a short quiz to lock it in. Founding cohorts are forming now — enrollment opens the moment Tom confirms the calendar, and dates are announced rather than invented. Draft curricula pending his review.</p>
+    <div id="modules-list" style="margin-top:1.25rem;display:grid;gap:0.6rem"></div>
+  </div>
+</section>
+
+<figure class="photoband" data-course="tpc-sawgrass" style="margin:0">
+  <img loading="lazy" decoding="async" alt="Aerial photograph of TPC Sawgrass" onerror="this.closest('.photoband').remove()">
+  <figcaption><span class="photoband__name"></span><span class="photoband__credit">Real aerial photography &middot; USGS National Map, public domain</span></figcaption>
+</figure>
 <section class="surfaces">
   <div class="wrap">
     <span class="label">Study the great courses</span>
@@ -277,6 +302,10 @@
   </div>
 </section>
 
+<figure class="photoband" data-course="torrey-pines" style="margin:0">
+  <img loading="lazy" decoding="async" alt="Aerial photograph of Torrey Pines golf course" onerror="this.closest('.photoband').remove()">
+  <figcaption><span class="photoband__name"></span><span class="photoband__credit">Real aerial photography &middot; USGS National Map, public domain</span></figcaption>
+</figure>
 <section class="surfaces" id="faq">
   <div class="wrap">
     <span class="label">New-golfer FAQ</span>
@@ -305,6 +334,24 @@
     </div>
   </div>
 </section>
+
+<dialog id="checkout" style="background:var(--ink-2);color:var(--card);border:1px solid var(--rule);max-width:26rem;width:calc(100% - 2rem);padding:0">
+  <div style="padding:1.4rem 1.4rem 1.2rem">
+    <p class="label" style="margin:0 0 0.6rem">Demo checkout &middot; no card is charged</p>
+    <h3 id="co-name" style="font-size:1.2rem;margin:0"></h3>
+    <p id="co-sched" style="color:var(--dim);font-size:0.88rem;margin:0.3rem 0 0.9rem"></p>
+    <div style="display:grid;gap:0.5rem">
+      <input disabled placeholder="Card number &mdash; enabled at launch" style="background:var(--ink-3);border:1px solid var(--rule);color:var(--dim);padding:0.7rem;font-family:'Archivo Narrow',sans-serif">
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:0.5rem">
+        <input disabled placeholder="MM / YY" style="background:var(--ink-3);border:1px solid var(--rule);color:var(--dim);padding:0.7rem;font-family:'Archivo Narrow',sans-serif">
+        <input disabled placeholder="CVC" style="background:var(--ink-3);border:1px solid var(--rule);color:var(--dim);padding:0.7rem;font-family:'Archivo Narrow',sans-serif">
+      </div>
+      <button disabled class="btn btn--y" style="justify-content:center;opacity:0.75;cursor:not-allowed">Pay <span id="co-price" style="margin-left:0.35rem"></span></button>
+    </div>
+    <p style="color:var(--dim);font-size:0.78rem;margin:0.8rem 0 0">Payments run on Stripe when enrollment opens (2.9% + 30&cent; standard processing). This preview collects nothing.</p>
+    <p style="margin:0.9rem 0 0;text-align:right"><button class="btn btn--o" onclick="document.getElementById('checkout').close()">Close</button></p>
+  </div>
+</dialog>
 
 <footer>
   <div class="wrap">
@@ -358,12 +405,59 @@ if(vgrid&&needsBar){
 }
 
 const usgs=(b,w,h)=>`https://basemap.nationalmap.gov/arcgis/rest/services/USGSImageryOnly/MapServer/export?bbox=${b.minLo},${b.minLa},${b.maxLo},${b.maxLa}&bboxSR=4326&imageSR=4326&size=${w},${h}&format=jpg&f=image`
+const SCHEDULE={
+  'build-your-swing-8':{day:'Mondays',time:'6:00\u20137:00 pm',start:'2026-10-05'},
+  'score-better-6':{day:'Wednesdays',time:'6:00\u20137:00 pm',start:'2026-10-07'},
+  'womens-golf-6':{day:'Thursdays',time:'6:00\u20137:00 pm',start:'2026-10-08'},
+  'family-golf-6':{day:'Sundays',time:'3:00\u20134:00 pm',start:'2026-10-11'},
+  'first-90-days':{day:'Saturdays',time:'9:00\u201310:00 am',start:'2026-10-10'},
+  'equipment-basics-1':{day:'Saturday',time:'10:00\u201311:30 am',start:'2026-10-17'},
+  'practice-like-a-golfer-4':{day:'Fridays',time:'6:00\u20137:00 pm',start:'2026-10-09'},
+  'putting-intensive-4':{day:'Tuesdays',time:'5:30\u20136:30 pm',start:'2026-10-06'},
+}
+const TAGS={'build-your-swing-8':'All levels','score-better-6':'Scoring \u00b7 Short game','womens-golf-6':'Women','family-golf-6':'Juniors \u0026 families','first-90-days':'True beginners','putting-intensive-4':'Putting clinic','practice-like-a-golfer-4':'Practice skills','equipment-basics-1':'Gear basics'}
+const fmtD=iso=>new Date(iso+'T12:00:00Z').toLocaleDateString('en-US',{month:'short',day:'numeric'})
+const cohort=(slug,weeks)=>{const c=SCHEDULE[slug];if(!c)return ''
+  const end=new Date(new Date(c.start+'T12:00:00Z').getTime()+(weeks-1)*7*864e5)
+  return weeks===1?`${c.day} ${c.time} \u00b7 ${fmtD(c.start)} \u00b7 single session`:`${c.day} ${c.time} \u00b7 ${fmtD(c.start)} \u2013 ${end.toLocaleDateString('en-US',{month:'short',day:'numeric'})} \u00b7 ${weeks} weeks`}
+fetch('programs.json').then(r=>r.json()).then(d=>{
+  const list=document.getElementById('modules-list'); if(!list) return
+  const price=p=>'$'+(p.priceMinor/100).toFixed(0)
+  list.innerHTML=d.programs.map(p=>`<details style="border:1px solid var(--rule);background:var(--ink-2);padding:0.9rem 1.1rem">
+    <summary style="font-family:'Archivo Narrow',sans-serif;font-weight:700;cursor:pointer;display:flex;flex-wrap:wrap;gap:0.5rem 1rem;align-items:baseline">
+      <span>${p.name}</span>
+      <span style="border:1px solid var(--turf);color:var(--turf);font-size:0.7rem;letter-spacing:0.08em;text-transform:uppercase;padding:0.15rem 0.5rem">${TAGS[p.slug]||''}</span>
+      <span style="color:var(--flag)">${price(p)}</span>
+      <span style="color:var(--dim);font-weight:400">${cohort(p.slug,p.weeks)}</span>
+      <span style="color:var(--turf);font-weight:700;font-size:0.72rem;letter-spacing:0.08em;text-transform:uppercase">Proposed dates &middot; confirmed at enrollment</span>
+    </summary>
+    <p style="color:var(--dim);margin:0.7rem 0 0.6rem;font-size:0.92rem">${p.description}</p>
+    <ol style="margin:0.4rem 0 0.2rem;padding-left:1.3rem;display:grid;gap:0.45rem">
+      ${p.modules.map(m=>`<li style="color:var(--card)"><b style="font-family:'Archivo Narrow',sans-serif">${m.title}</b>${m.videoId?` &middot; <a href="https://www.youtube.com/watch?v=${m.videoId}" target="_blank" rel="noopener">watch the lesson</a>`:''}<br><span style="color:var(--dim);font-size:0.88rem">${m.homework} <em>(${m.quizQuestions}-question quiz)</em></span></li>`).join('')}
+    </ol>
+    <p style="margin:0.9rem 0 0.2rem"><button class="btn btn--y enroll-demo" data-name="${p.name}" data-price="${price(p)}" data-sched="${cohort(p.slug,p.weeks)}">Enroll — demo checkout</button></p>
+  </details>`).join('')
+  document.querySelectorAll('.enroll-demo').forEach(b=>b.addEventListener('click',()=>{
+    document.getElementById('co-name').textContent=b.dataset.name
+    document.getElementById('co-sched').textContent=b.dataset.sched
+    document.getElementById('co-price').textContent=b.dataset.price
+    document.getElementById('checkout').showModal()
+  }))
+}).catch(()=>{})
+
 fetch('courses.json').then(r=>r.json()).then(d=>{
-  const pref=['pebble-beach','lions-municipal','roy-kizer','bethpage-black']
+  const pref=['pebble-beach','lions-municipal','roy-kizer','bethpage-black','pinehurst-no2','chambers-bay','torrey-pines','tpc-sawgrass']
   const us=d.courses.filter(c=>c.country==='US'&&c.holes.length)
-  const pick=[...pref.map(id=>us.find(c=>c.id===id)).filter(Boolean),...us].filter((c,i,a)=>a.indexOf(c)===i).slice(0,4)
+  const pick=[...pref.map(id=>us.find(c=>c.id===id)).filter(Boolean),...us].filter((c,i,a)=>a.indexOf(c)===i).slice(0,8)
   const bounds=c=>{let a=90,b=-90,x=180,y=-180;for(const h of c.holes)for(const[la,lo]of h.path){if(la<a)a=la;if(la>b)b=la;if(lo<x)x=lo;if(lo>y)y=lo}const pa=(b-a)*0.06+6e-4,px=(y-x)*0.06+6e-4;return{minLa:a-pa,maxLa:b+pa,minLo:x-px,maxLo:y+px}}
   document.getElementById('thumbs').innerHTML=pick.map(c=>`<figure class="thumb"><img loading="lazy" decoding="async" alt="Aerial of ${c.name}" src="${usgs(bounds(c),520,390)}"><figcaption>${c.name}</figcaption></figure>`).join('')
+  document.querySelectorAll('.photoband').forEach(f=>{
+    const c=d.courses.find(x=>x.id===f.dataset.course && x.holes.length)
+    if(!c){f.remove();return}
+    const b=bounds(c), w=1600, h=Math.round(Math.min(900, Math.max(500, w*((b.maxLa-b.minLa)/(b.maxLo-b.minLo))*1.3)))
+    f.querySelector('img').src=usgs(b,w,h)
+    f.querySelector('.photoband__name').textContent=c.name
+  })
 }).catch(()=>{})
 </script>
 </body>
