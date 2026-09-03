@@ -141,7 +141,7 @@ export const EIGHT_WEEK: ProgramSpec = {
 /** 6 weeks: scoring-focused short course. */
 export const SIX_WEEK: ProgramSpec = {
   slug: 'score-better-6',
-  name: 'Score Better — 6 Weeks',
+  name: 'Score Improvement — 6 Weeks',
   description:
     'Six weeks aimed purely at lower scores: short game, putting, wedges and course strategy. Flipped classroom — lesson at home, homework at the range, low-stakes quiz to check understanding. Draft curriculum pending Tom Harris review.',
   priceMinor: 14900,

@@ -166,7 +166,11 @@
   <div class="wrap">
     <span class="label">Schedule a lesson with Tom</span>
     <h2 style="font-size:clamp(1.6rem,1.1rem + 1.9vw,2.6rem);max-width:20ch;margin-top:0.7rem">Book time. Pay securely. Show up ready.</h2>
-    <p style="color:var(--dim);max-width:60ch;margin-top:0.8rem;font-size:0.95rem">Pick a lesson, choose a time, and check out — payment runs on Stripe, and your slot is held the moment it clears. Times below are Tom&rsquo;s proposed availability; the live calendar confirms the exact opening at checkout. <a href="#modules">See upcoming class times →</a></p>
+    <p style="color:var(--dim);max-width:60ch;margin-top:0.8rem;font-size:0.95rem">Pick a lesson that&rsquo;s right for you, choose a time that works with your schedule, and check out — your slot is held the moment payment clears. <a href="#modules">See upcoming class times →</a></p>
+    <figure style="margin:1.25rem 0 0;position:relative;aspect-ratio:21/9;overflow:hidden;border:1px solid var(--rule);background:#0D1512">
+      <img loading="lazy" decoding="async" width="1600" height="686" alt="Tom Harris giving a lesson on the practice green" src="img/tom-harris-lesson.jpg" style="width:100%;height:100%;object-fit:cover;object-position:center 35%">
+      <figcaption style="position:absolute;left:0;right:0;bottom:0;padding:1.4rem 1rem 0.7rem;background:linear-gradient(transparent,rgba(11,15,19,0.9));font-family:'Archivo Narrow',sans-serif;font-size:0.72rem;letter-spacing:0.08em;text-transform:uppercase;color:var(--dim)">Lessons in person, virtual, or hybrid &middot; 2026</figcaption>
+    </figure>
     <article class="surf" style="border-color:var(--flag);margin-top:1.25rem">
       <span class="where" style="color:var(--flag)">Membership &middot; limited seats</span>
       <h3 style="display:flex;flex-wrap:wrap;gap:0.5rem 0.8rem;align-items:baseline">Private Coaching with Tom <span style="color:var(--flag)">$500 / month</span></h3>
@@ -601,14 +605,14 @@ const TAGS={'build-your-swing-8':'All levels','score-better-6':'Scoring \u00b7 S
 const fmtD=iso=>new Date(iso+'T12:00:00Z').toLocaleDateString('en-US',{month:'short',day:'numeric'})
 const cohort=(slug,weeks)=>{const c=SCHEDULE[slug];if(!c)return ''
   const end=new Date(new Date(c.start+'T12:00:00Z').getTime()+(weeks-1)*7*864e5)
-  return weeks===1?`${c.day} ${c.time} \u00b7 ${fmtD(c.start)} \u00b7 single session`:`${c.day} ${c.time} \u00b7 ${fmtD(c.start)} \u2013 ${end.toLocaleDateString('en-US',{month:'short',day:'numeric'})} \u00b7 ${weeks} weeks`}
+  return weeks===1?`${c.day} ${c.time} \u00b7 ${fmtD(c.start)}, 2026 \u00b7 single session`:`${c.day} ${c.time} \u00b7 ${fmtD(c.start)} \u2013 ${end.toLocaleDateString('en-US',{month:'short',day:'numeric'})}, 2026 \u00b7 ${weeks} weeks`}
 fetch('programs.json').then(r=>r.json()).then(d=>{
   const list=document.getElementById('modules-list'); if(!list) return
   const price=p=>'$'+(p.priceMinor/100).toFixed(0)
-  list.innerHTML=[...d.programs].sort((a,b)=>(SCHEDULE[a.slug]?.start||'9999').localeCompare(SCHEDULE[b.slug]?.start||'9999')).map(p=>{const soon=(SCHEDULE[p.slug]?.start||'').slice(0,7)==='2026-09';const holiday=(SCHEDULE[p.slug]?.start||'').slice(0,7)==='2026-11';return `<details${soon?' open':''} style="border:1px solid ${soon?'var(--flag)':'var(--rule)'};background:${soon?'#1c2410':'var(--ink-2)'};padding:0.9rem 1.1rem">
+  list.innerHTML=[...d.programs].sort((a,b)=>(SCHEDULE[a.slug]?.start||'9999').localeCompare(SCHEDULE[b.slug]?.start||'9999')).map(p=>{const soon=(SCHEDULE[p.slug]?.start||'').slice(0,7)==='2026-09';const holiday=(SCHEDULE[p.slug]?.start||'').slice(0,7)==='2026-11';return `<details style="border:1px solid ${soon?'var(--flag)':'var(--rule)'};background:${soon?'#1c2410':'var(--ink-2)'};padding:0.9rem 1.1rem">
     <summary style="font-family:'Archivo Narrow',sans-serif;font-weight:700;cursor:pointer;display:flex;flex-wrap:wrap;gap:0.5rem 1rem;align-items:baseline">
       <span>${p.name}</span>
-      ${soon?'<span style="background:var(--flag);color:#231A06;font-size:0.68rem;letter-spacing:0.08em;text-transform:uppercase;padding:0.15rem 0.5rem;font-weight:700">Starting September</span>':''}${holiday?'<span style="background:var(--penalty);color:#fff;font-size:0.68rem;letter-spacing:0.08em;text-transform:uppercase;padding:0.15rem 0.5rem;font-weight:700">Holiday special &middot; giftable</span>':''}
+      ${soon?'<span style="background:var(--flag);color:#231A06;font-size:0.68rem;letter-spacing:0.08em;text-transform:uppercase;padding:0.15rem 0.5rem;font-weight:700">Enrolling September 2026</span>':''}${holiday?'<span style="background:var(--penalty);color:#fff;font-size:0.68rem;letter-spacing:0.08em;text-transform:uppercase;padding:0.15rem 0.5rem;font-weight:700">Holiday special &middot; giftable</span>':''}
       <span style="border:1px solid var(--turf);color:var(--turf);font-size:0.7rem;letter-spacing:0.08em;text-transform:uppercase;padding:0.15rem 0.5rem">${TAGS[p.slug]||''}</span>
       <span style="color:var(--flag)">${price(p)}</span>
       <span style="color:var(--dim);font-weight:400">${cohort(p.slug,p.weeks)}</span>
@@ -679,7 +683,7 @@ fetch('courses.json').then(r=>r.json()).then(d=>{
 (function(){
   const list=document.getElementById('lesson-list'); if(!list) return
   const LESSONS=[
-    {name:'Corporate Team Session — 8 players', price:'$640', per:80, group:8, min:120, times:'Weekday evenings / offsites', note:'A private group session billed for the whole team of eight — team building that happens to be golf. One checkout, one invoice.'},
+    {name:'Corporate Team Session — 8 players', price:'$640', per:80, group:8, min:120, times:'Weekday evenings / offsites', note:'A private session for a team of eight — team building that happens to be golf. Ask about 6&ndash;8 week short-course leagues for local tech teams: we offer standing corporate discounts to Austin companies including Apple, Tesla, Dell, Oracle, AMD, Visa and Samsung — verify a work email for the team rate. One checkout, one invoice.'},
     {name:'Private Lesson — 1 hour', price:'$110', per:110, min:60, times:'Tue/Thu 4:00, 5:00, 6:00 pm', note:'Full swing, short game or putting — your call. Bring up to 8; each player is added to the total.'},
     {name:'Playing Lesson — 9 holes', price:'$220', per:220, min:150, times:'Sat/Sun mornings', note:'On the course, where it counts: club choice, strategy and pressure, hole by hole.'},
     {name:'Putting Lab — 45 min', price:'$85', per:85, min:45, times:'Mon/Wed 5:30, 6:15 pm', note:'SAM PuttLab session: start line, speed and stroke, measured.'},
