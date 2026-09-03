@@ -18,6 +18,26 @@ model User {
   profile         PlayerProfile?
   captureSessions CaptureSession[]    @relation("UserSessions")
   rounds          Round[]             @relation("UserRounds")
+  authSessions    Session[]           @relation("UserAuthSessions")
+}
+
+// ---------- auth sessions ----------
+
+/**
+ * An opaque login session. Only the SHA-256 hash of the token is stored, so a
+ * database leak never exposes a usable token. This is real session machinery;
+ * how a user proves their email to get one (magic link) arrives with the email
+ * channel — until then issuance is dev-gated. See src/domain/auth/session.ts.
+ */
+model Session {
+  id        String   @id @default(cuid())
+  tokenHash String   @unique
+  userId    String
+  user      User     @relation("UserAuthSessions", fields: [userId], references: [id], onDelete: Cascade)
+  createdAt DateTime @default(now())
+  expiresAt DateTime
+
+  @@index([userId])
 }
 
 // ---------- courses ----------

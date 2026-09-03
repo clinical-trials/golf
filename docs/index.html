@@ -83,6 +83,57 @@
 
   /* two surfaces, compact */
   .surfaces{padding:clamp(2.5rem,6vw,4rem) 0;border-bottom:1px solid var(--rule);}
+
+  /* new-golfer attire guide (two columns, wraps cleanly, never overlaps) */
+  .wearguide{display:grid;gap:0.7rem;grid-template-columns:1fr 1fr;margin:0.9rem 0 0.2rem;}
+  @media(max-width:34rem){.wearguide{grid-template-columns:1fr;}}
+  .wearcol{background:var(--ink-3);border:1px solid var(--rule);padding:0.85rem 1rem;}
+  .wearcol__h{display:block;font-family:'Archivo Narrow',sans-serif;font-weight:700;text-transform:uppercase;letter-spacing:0.12em;font-size:0.72rem;margin-bottom:0.55rem;}
+  .wearcol__h--do{color:var(--turf);}
+  .wearcol__h--dont{color:var(--penalty);}
+  .wearcol ul{list-style:none;margin:0;padding:0;display:grid;gap:0.45rem;}
+  .wearcol li{position:relative;padding-left:1.5rem;color:var(--card);font-size:0.9rem;line-height:1.35;}
+  .wearcol li::before{position:absolute;left:0;font-weight:700;}
+  .wearcol--do li::before{content:"\2713";color:var(--turf);}
+  .wearcol--dont li::before{content:"\2715";color:var(--penalty);}
+
+  /* women's outfit builder (preppy cream panel) */
+  .wear{background:var(--card);color:#1C221C;border-top:6px solid var(--turf);}
+  .wear .label{color:var(--turf);}
+  .wear__h{font-family:'Archivo Black',sans-serif;font-weight:400;letter-spacing:-0.02em;line-height:1.02;font-size:clamp(1.5rem,1.1rem + 1.7vw,2.3rem);max-width:20ch;margin-top:0.5rem;color:#171C18;}
+  .wear__lede{color:#3F443C;max-width:60ch;margin-top:0.7rem;}
+  .wear__grid{display:grid;gap:1rem;grid-template-columns:1fr;margin-top:1.3rem;}
+  @media(min-width:52rem){.wear__grid{grid-template-columns:0.9fr 1.1fr;align-items:start;}}
+  .wear__controls{display:grid;gap:0.7rem;grid-template-columns:1fr 1fr;}
+  .wear__controls label{display:grid;gap:0.3rem;font-family:'Archivo Narrow',sans-serif;font-weight:700;text-transform:uppercase;letter-spacing:0.08em;font-size:0.7rem;color:#5C6259;}
+  .wear__controls select{background:#fff;border:1px solid #C9C1AC;color:#1C221C;font-family:'Archivo',sans-serif;font-weight:400;text-transform:none;letter-spacing:0;font-size:0.95rem;padding:0.55rem 0.5rem;min-height:44px;}
+  .wear__controls select:focus{outline:2px solid var(--turf);outline-offset:1px;}
+  .wear__controls select:disabled{opacity:0.5;}
+  .wear__look{background:#fff;border:1px solid #D9D1BC;padding:1.1rem 1.2rem;}
+  .wear__look .label{color:#5C6259;}
+  .wear__swatches{display:flex;gap:0.4rem;margin:0.55rem 0 0.85rem;}
+  .wear__swatches span{width:2rem;height:2rem;border-radius:50%;border:1px solid rgba(0,0,0,0.12);box-shadow:0 1px 3px rgba(0,0,0,0.14);}
+  .wear__desc{font-family:'Archivo Black',sans-serif;font-size:1.05rem;line-height:1.25;color:#171C18;margin:0;}
+  .wear__where{color:#3D6A4E;font-family:'Archivo Narrow',sans-serif;font-weight:700;font-size:0.86rem;margin:0.7rem 0 0;line-height:1.4;}
+  .wear__tip{color:#5C6259;font-size:0.85rem;margin:0.5rem 0 0;font-style:italic;}
+  .wear__decoder{display:grid;gap:0.7rem;grid-template-columns:1fr;margin-top:1.5rem;}
+  @media(min-width:46rem){.wear__decoder{grid-template-columns:1fr 1fr 1fr;}}
+  .wear__decoder div{border-left:3px solid var(--turf);padding:0.1rem 0 0.1rem 0.75rem;}
+  .wear__decoder b{display:block;font-family:'Archivo Narrow',sans-serif;text-transform:uppercase;letter-spacing:0.06em;font-size:0.8rem;color:#171C18;margin-bottom:0.15rem;}
+  .wear__decoder span{font-size:0.85rem;color:#4A4F47;line-height:1.4;}
+  .wear__skip{margin-top:1.3rem;font-size:0.82rem;color:#6B6F64;max-width:70ch;}
+
+  /* platform / operations module map */
+  .mods{display:grid;gap:0.8rem;grid-template-columns:1fr;margin-top:1.3rem;}
+  @media(min-width:40rem){.mods{grid-template-columns:1fr 1fr;}}
+  @media(min-width:64rem){.mods{grid-template-columns:1fr 1fr 1fr;}}
+  .mod{background:var(--ink-2);border:1px solid var(--rule);padding:1.1rem 1.15rem;display:flex;flex-direction:column;gap:0.5rem;}
+  .mod h3{font-family:'Archivo Black',sans-serif;font-weight:400;font-size:1.02rem;line-height:1.1;color:var(--card);margin:0;}
+  .mod p{color:var(--dim);font-size:0.88rem;margin:0;line-height:1.45;}
+  .mod__chip{align-self:flex-start;font-family:'Archivo Narrow',sans-serif;font-weight:700;text-transform:uppercase;letter-spacing:0.08em;font-size:0.66rem;padding:0.18rem 0.5rem;border:1px solid;}
+  .mod__chip--live{color:var(--turf);border-color:var(--turf);}
+  .mod__chip--build{color:var(--flag);border-color:var(--flag);}
+  .mod__chip--plan{color:var(--dim);border-color:var(--rule);}
   .two{display:grid;gap:1rem;margin-top:1.5rem;grid-template-columns:1fr;}
   @media(min-width:52rem){.two{grid-template-columns:1fr 1fr;}}
   .surf{border:1px solid var(--rule);background:var(--ink-2);padding:1.6rem;}
@@ -423,6 +474,11 @@
         <h3>Butler Pitch &amp; Putt</h3>
         <p>Nine short holes and every one counts. Short courses are where beginners fall in love with the game — and where good players sharpen their scoring.</p>
       </article>
+      <article class="surf">
+        <span class="where">Off-course, all ages</span>
+        <h3>PopStroke &mdash; Austin</h3>
+        <p>Two designed putting courses, a restaurant and lawn games at 13000 Harris Ridge Blvd. Off the championship course but real practice &mdash; where kids and adults sharpen their putting and short game while having fun. A low-pressure first taste of the sport.</p>
+      </article>
     </div>
     <div class="thumbs" id="great-thumbs" style="margin-top:1.5rem"></div>
     <p style="margin-top:1rem"><a class="btn btn--y" href="prototype.html">Take Tom to these courses →</a></p>
@@ -440,51 +496,9 @@
     <div style="margin-top:1.25rem;display:grid;gap:0.6rem">
       <details style="border:1px solid var(--rule);background:var(--ink-2);padding:0.9rem 1.1rem">
         <summary style="font-family:'Archivo Narrow',sans-serif;font-weight:700;cursor:pointer">What do I wear?</summary>
-        <div style="margin:0.9rem 0 0.2rem;overflow-x:auto"><svg viewBox="0 0 640 240" role="img" aria-label="Golf attire guide: wear a collared top, tailored bottoms and golf shoes; avoid denim, tanks and flip-flops" style="width:100%;min-width:520px;height:auto;display:block">
-  <rect width="640" height="240" fill="#131A1F"/>
-  <line x1="320" y1="20" x2="320" y2="220" stroke="#232D31"/>
-  <text x="24" y="34" fill="#7B9153" font-family="Archivo Narrow,sans-serif" font-weight="700" font-size="15" letter-spacing="1.5">WEAR THIS</text>
-  <text x="344" y="34" fill="#C4462F" font-family="Archivo Narrow,sans-serif" font-weight="700" font-size="15" letter-spacing="1.5">SKIP THIS</text>
-  <!-- WEAR: collared top -->
-  <g stroke="#E9B949" stroke-width="2.5" fill="none">
-    <path d="M60 70 l18 -10 12 12 12 -12 18 10 -12 16 -6 -4 v42 h-36 v-42 l-6 4 z"/>
-    <path d="M84 64 l6 8 6 -8"/>
-  </g>
-  <text x="42" y="150" fill="#ECE6D6" font-family="Archivo Narrow,sans-serif" font-size="13">Collared / golf top</text>
-  <!-- WEAR: tailored shorts -->
-  <g stroke="#E9B949" stroke-width="2.5" fill="none">
-    <path d="M170 66 h44 l4 40 -18 2 -8 -30 -8 30 -18 -2 z"/>
-  </g>
-  <text x="150" y="150" fill="#ECE6D6" font-family="Archivo Narrow,sans-serif" font-size="13">Tailored shorts / pants</text>
-  <!-- WEAR: golf shoe -->
-  <g stroke="#E9B949" stroke-width="2.5" fill="none">
-    <path d="M250 96 h30 l14 14 h18 a6 6 0 0 1 0 12 h-62 z"/>
-    <path d="M262 118 v-8 M274 118 v-8 M286 118 v-6"/>
-  </g>
-  <text x="252" y="150" fill="#ECE6D6" font-family="Archivo Narrow,sans-serif" font-size="13">Golf / clean shoes</text>
-  <!-- SKIP: denim -->
-  <g stroke="#C4462F" stroke-width="2.5" fill="none">
-    <path d="M360 66 h44 l4 40 -18 2 -8 -30 -8 30 -18 -2 z"/>
-    <path d="M360 62 l52 52 M412 62 l-52 52" stroke-width="3"/>
-  </g>
-  <text x="356" y="150" fill="#ECE6D6" font-family="Archivo Narrow,sans-serif" font-size="13">Denim / gym shorts</text>
-  <!-- SKIP: tank -->
-  <g stroke="#C4462F" stroke-width="2.5" fill="none">
-    <path d="M456 62 l14 8 v46 h-36 v-46 l14 -8 M456 62 a10 10 0 0 1 -22 0"/>
-    <path d="M430 60 l46 58 M476 60 l-46 58" stroke-width="3"/>
-  </g>
-  <text x="440" y="150" fill="#ECE6D6" font-family="Archivo Narrow,sans-serif" font-size="13">Tank / graphic tee</text>
-  <!-- SKIP: flip-flop -->
-  <g stroke="#C4462F" stroke-width="2.5" fill="none">
-    <ellipse cx="556" cy="108" rx="26" ry="12"/>
-    <path d="M556 96 l-8 12 M556 96 l8 12"/>
-    <path d="M528 88 l56 40 M584 88 l-56 40" stroke-width="3"/>
-  </g>
-  <text x="522" y="150" fill="#ECE6D6" font-family="Archivo Narrow,sans-serif" font-size="13">Flip-flops / sandals</text>
-  <text x="24" y="196" fill="#9EA9A2" font-family="Archivo,sans-serif" font-size="12">Public courses &amp; sim lounges: looser. Private clubs: shirt tucked, belt on &mdash; check the dress code first.</text>
-  <text x="24" y="216" fill="#7B9153" font-family="Archivo Narrow,sans-serif" font-weight="700" font-size="12" letter-spacing="0.5">THE RULE: LOOK CLEAN, NEAT AND INTENTIONAL. YOU DON&apos;T NEED EXPENSIVE CLOTHES.</text>
-</svg></div>
-<p style="color:var(--dim);margin:0.7rem 0 0">Safe rule: clean and neat — a collared or golf-appropriate top, tailored shorts, pants, skort or golf dress, and golf or clean athletic shoes. Skip denim, gym shorts, tank tops and flip-flops. Private clubs run more formal (shirt tucked, belt on, check their dress code first); public courses and simulator lounges are looser. One bold piece is fine — the deeper etiquette is effort: look intentional and course-appropriate. You don&rsquo;t need expensive clothes.</p>
+        <div class="wearguide"><div class="wearcol wearcol--do"><span class="wearcol__h wearcol__h--do">Wear this</span><ul><li>Collared or golf-appropriate top</li><li>Tailored shorts, pants, skort or golf dress</li><li>Golf shoes or clean athletic shoes</li></ul></div><div class="wearcol wearcol--dont"><span class="wearcol__h wearcol__h--dont">Skip this</span><ul><li>Denim or gym shorts</li><li>Tank tops or graphic tees</li><li>Flip-flops or sandals</li></ul></div></div>
+<p style="color:var(--dim);margin:0.7rem 0 0">Safe rule: clean and neat — a collared or golf-appropriate top, tailored shorts, pants, skort or golf dress, and golf or clean athletic shoes. Skip denim, gym shorts, tank tops and flip-flops. Private clubs run more formal (shirt tucked, belt on, check their dress code first); public courses and simulator lounges are more relaxed. One bold piece is fine — the deeper etiquette is effort: look intentional and course-appropriate. You don&rsquo;t need expensive clothes.</p>
+<p style="margin:0.6rem 0 0"><a href="#wear-women" style="font-family:'Archivo Narrow',sans-serif;font-weight:700;text-transform:uppercase;letter-spacing:0.06em;font-size:0.8rem">New to golf? Build a cute, course-ready look &rarr;</a></p>
       </details>
       <details style="border:1px solid var(--rule);background:var(--ink-2);padding:0.9rem 1.1rem">
         <summary style="font-family:'Archivo Narrow',sans-serif;font-weight:700;cursor:pointer">Do I need my own clubs?</summary>
@@ -505,6 +519,97 @@
     </div>
   </div>
 </section>
+
+<section class="surfaces wear" id="wear-women">
+  <div class="wrap">
+    <span class="label">For women new to golf</span>
+    <h2 class="wear__h">What to wear &mdash; build a cute, course-ready look.</h2>
+    <p class="wear__lede">Golf style is having a moment, and you don&rsquo;t have to choose between looking great and passing a starter&rsquo;s dress code. Mix and match below &mdash; we&rsquo;ll put the outfit together and tell you exactly where it works. Every option here is course-appropriate; the rest is your taste.</p>
+    <div class="wear__grid">
+      <div class="wear__controls">
+        <label>Top
+          <select id="w-top">
+            <option value="sleeveless">Sleeveless collared polo</option>
+            <option value="polo">Short-sleeve polo</option>
+            <option value="quarterzip">Mock-neck quarter-zip</option>
+            <option value="dress">Golf dress (one &amp; done)</option>
+          </select>
+        </label>
+        <label>Bottom
+          <select id="w-bottom">
+            <option value="skort">Skort</option>
+            <option value="skirt">Golf skirt</option>
+            <option value="shorts">Tailored shorts</option>
+            <option value="pants">Golf pants</option>
+            <option value="joggers">Golf joggers</option>
+            <option value="leggings">Golf leggings</option>
+          </select>
+        </label>
+        <label>Palette
+          <select id="w-pal">
+            <option value="classic">Classic white &amp; navy</option>
+            <option value="pastel">Soft pastels</option>
+            <option value="bold">Coral pop</option>
+            <option value="club">Country-club green</option>
+          </select>
+        </label>
+        <label>Finishing touch
+          <select id="w-finish">
+            <option value="visor">Visor</option>
+            <option value="cap">Ball cap</option>
+            <option value="sleeves">Sun sleeves</option>
+            <option value="belt">Statement belt</option>
+            <option value="none">Keep it simple</option>
+          </select>
+        </label>
+      </div>
+      <div class="wear__look">
+        <span class="label">Your look</span>
+        <div class="wear__swatches" id="look-swatches"></div>
+        <p class="wear__desc" id="look-desc"></p>
+        <p class="wear__where" id="look-where"></p>
+        <p class="wear__tip" id="look-tip"></p>
+      </div>
+    </div>
+    <div class="wear__decoder">
+      <div><b>Muni &amp; public</b><span>Relaxed. A polo or golf top with a skort, shorts or leggings is perfect &mdash; sim lounges are casual.</span></div>
+      <div><b>Resort</b><span>Smart-casual. Coordinate your colours and you&rsquo;ll fit right in from the first tee.</span></div>
+      <div><b>Private club</b><span>Most formal: collared top, mid-thigh length, and check whether leggings need a skort over them. Unsure? Call the pro shop.</span></div>
+    </div>
+    <p class="wear__skip">Leave at home: denim, cotton gym tees, swimwear cover-ups, and anything you couldn&rsquo;t swing freely in. This is general golf-attire guidance &mdash; each club&rsquo;s dress code is the final word.</p>
+  </div>
+</section>
+<script>
+(function(){
+  var TOPS={sleeveless:'a sleeveless collared polo',polo:'a short-sleeve polo',quarterzip:'a mock-neck quarter-zip',dress:'a golf dress'};
+  var BOTTOMS={skort:'a skort',skirt:'a golf skirt',shorts:'tailored shorts',pants:'golf pants',joggers:'golf joggers',leggings:'golf leggings'};
+  var FIN={visor:'a visor',cap:'a ball cap',sleeves:'sun sleeves',belt:'a statement belt',none:''};
+  var PAL={classic:{n:'classic white & navy',c:['#FFFFFF','#1E2A44','#C7A008']},pastel:{n:'soft pastels',c:['#F1D7DD','#BFD1B4','#FFFFFF']},bold:{n:'a coral pop',c:['#E8613C','#FFFFFF','#1E2A44']},club:{n:'country-club green',c:['#2F5D42','#ECE6D6','#C7A008']}};
+  var top=document.getElementById('w-top'),bot=document.getElementById('w-bottom'),pal=document.getElementById('w-pal'),fin=document.getElementById('w-finish');
+  if(!top)return;
+  function cap(s){return s.charAt(0).toUpperCase()+s.slice(1);}
+  function tip(t,b,f,p){
+    if(f==='belt')return 'Style tip: let the belt be the star and keep the top a solid colour.';
+    if(p==='bold')return 'Style tip: one bold piece, everything else quiet — that’s the whole trick.';
+    if(b==='leggings')return 'Style tip: a longer top or a skort over leggings reads polished anywhere.';
+    if(t==='quarterzip')return 'Style tip: push the sleeves once and tuck just the front hem.';
+    return 'Style tip: match your visor or cap to your shoes, not your top.';
+  }
+  function render(){
+    var t=top.value,b=bot.value,p=pal.value,f=fin.value,isDress=(t==='dress');
+    bot.disabled=isDress;
+    document.getElementById('look-swatches').innerHTML=PAL[p].c.map(function(c){return '<span style="background:'+c+'"></span>';}).join('');
+    var pieces=isDress?TOPS.dress:(TOPS[t]+' with '+BOTTOMS[b]);
+    var finish=FIN[f]?(', finished with '+FIN[f]):'';
+    document.getElementById('look-desc').textContent=cap(pieces)+' in '+PAL[p].n+finish+', on spikeless golf shoes or clean white sneakers.';
+    var caveat=isDress?'Private club: perfect at mid-thigh length.':(b==='leggings'?'Private club: many ask for a skort or shorts over leggings — check first.':(b==='shorts'?'Private club: keep them mid-thigh and you’re compliant.':'Private club: reads country-club-ready.'));
+    document.getElementById('look-where').textContent='Works at munis, public courses, resorts and sim lounges. '+caveat;
+    document.getElementById('look-tip').textContent=tip(t,b,f,p);
+  }
+  [top,bot,pal,fin].forEach(function(el){el.addEventListener('change',render);});
+  render();
+})();
+</script>
 
 <dialog id="checkout" style="background:var(--ink-2);color:var(--card);border:1px solid var(--rule);max-width:26rem;width:calc(100% - 2rem);padding:0">
   <div style="padding:1.4rem 1.4rem 1.2rem">
@@ -540,8 +645,15 @@
 <section class="surfaces" id="corporate">
   <div class="wrap" style="max-width:48rem">
     <span class="label">Corporate &amp; team golf</span>
-    <h2 style="font-size:clamp(1.5rem,1.1rem + 1.7vw,2.3rem);max-width:24ch;margin-top:0.7rem">Bring golf to your team.</h2>
-    <p style="color:var(--dim);margin-top:0.8rem;font-size:0.95rem">A 6&ndash;8 week simulator or short-course league with Tom, run as team building. Tell us about your group and we&rsquo;ll put a proposal together &mdash; priced per season, not per head.</p>
+    <h2 style="font-size:clamp(1.5rem,1.1rem + 1.7vw,2.3rem);max-width:26ch;margin-top:0.7rem">The best team building doesn&rsquo;t feel like team building.</h2>
+    <p style="color:var(--dim);margin-top:0.8rem;font-size:0.95rem;max-width:60ch">Golf is the rare work event where the new hire and the VP share a cart, nobody&rsquo;s stuck in a trust fall, and the quiet person on the team turns out to have the sweetest swing. Tom runs it as a <b style="color:var(--card)">season</b> &mdash; a 6&ndash;8 week simulator or short-course league &mdash; so your people get better together, not just once.</p>
+    <ul style="list-style:none;padding:0;margin:1.1rem 0 0;display:grid;gap:0.55rem;max-width:62ch">
+      <li style="color:var(--dim);font-size:0.92rem;padding-left:1.5rem;position:relative"><span style="position:absolute;left:0;color:var(--turf);font-weight:700">&#10003;</span> <b style="color:var(--card)">Everyone plays.</b> A scramble format needs zero experience &mdash; total beginners contribute from the first hole.</li>
+      <li style="color:var(--dim);font-size:0.92rem;padding-left:1.5rem;position:relative"><span style="position:absolute;left:0;color:var(--turf);font-weight:700">&#10003;</span> <b style="color:var(--card)">It builds real relationships.</b> Four hours beside someone beats four meetings across the table from them.</li>
+      <li style="color:var(--dim);font-size:0.92rem;padding-left:1.5rem;position:relative"><span style="position:absolute;left:0;color:var(--turf);font-weight:700">&#10003;</span> <b style="color:var(--card)">It&rsquo;s a season, not a stunt.</b> Weekly reps mean visible improvement and something the team looks forward to.</li>
+      <li style="color:var(--dim);font-size:0.92rem;padding-left:1.5rem;position:relative"><span style="position:absolute;left:0;color:var(--turf);font-weight:700">&#10003;</span> <b style="color:var(--card)">Weather-proof.</b> Simulator leagues run year-round and fit into a weeknight evening.</li>
+    </ul>
+    <p style="color:var(--dim);margin-top:1.1rem;font-size:0.95rem">Tell us about your group and we&rsquo;ll put a proposal together &mdash; priced per season, not per head.</p>
     <form id="corp-form" style="display:grid;gap:0.6rem;margin-top:1.25rem">
       <div style="display:grid;grid-template-columns:1fr 1fr;gap:0.6rem">
         <input required name="name" placeholder="Your name" style="background:var(--ink-3);border:1px solid var(--rule);color:var(--card);padding:0.7rem;font-family:inherit">
@@ -556,6 +668,26 @@
       <p id="corp-msg" style="color:var(--turf);font-size:0.88rem;margin:0" hidden></p>
     </form>
     <p style="color:var(--dim);font-size:0.75rem;margin:0.7rem 0 0">Preview form &mdash; submissions are captured and routed to the team once the booking backend is live.</p>
+  </div>
+</section>
+
+<section class="surfaces" id="platform">
+  <div class="wrap">
+    <span class="label">How Tom runs the business</span>
+    <h2 style="font-size:clamp(1.5rem,1.1rem + 1.7vw,2.3rem);max-width:22ch;margin-top:0.7rem">The platform behind the coaching.</h2>
+    <p style="color:var(--dim);max-width:62ch;margin-top:0.8rem;font-size:0.95rem">Pocket Pro isn&rsquo;t just lessons &mdash; it&rsquo;s the software that runs Tom&rsquo;s whole operation: booking, events, retention, scoring and the private line to Tom. Here&rsquo;s the module map, with what&rsquo;s live in this demo and what&rsquo;s in build.</p>
+    <div class="mods">
+      <div class="mod"><span class="mod__chip mod__chip--live">Live demo</span><h3>Booking &amp; checkout</h3><p>Pick a lesson or class, choose a time, check out &mdash; your slot holds the moment payment clears. Stripe switches on at launch (2.9% + 30&cent;); nothing is charged in preview.</p></div>
+      <div class="mod"><span class="mod__chip mod__chip--build">In build</span><h3>Events &amp; leagues</h3><p>Runs corporate leagues, junior camps and family cups as managed events &mdash; registration, teams, schedule and results in one place. This is the corporate revenue line.</p></div>
+      <div class="mod"><span class="mod__chip mod__chip--build">In build</span><h3>Communication &amp; reminders</h3><p>Automated email + SMS: lesson reminders, homework nudges, event updates. The single biggest retention lever &mdash; paired with the private Tom-messaging relay.</p></div>
+      <div class="mod"><span class="mod__chip mod__chip--build">In build</span><h3>Live scoring &amp; leaderboards</h3><p>Real-time scoring turns a corporate or family season into something people check daily. Standings, skins and closest-to-the-pin, updated hole by hole.</p></div>
+      <div class="mod"><span class="mod__chip mod__chip--build">In build</span><h3>Handicap tracking &rarr; GHIN</h3><p>A trending handicap is pure motivation. We start with an internal index from your logged rounds, then add official USGA GHIN sync once membership is in place.</p></div>
+      <div class="mod"><span class="mod__chip mod__chip--build">In build</span><h3>Launch-monitor ingestion (TrackMan)</h3><p>Import sim and range data &mdash; ball speed, launch, spin, carry &mdash; straight into the diagnosis layer, so Tom&rsquo;s read is grounded in your real numbers. Feeds the markerless swing analysis.</p></div>
+      <div class="mod"><span class="mod__chip mod__chip--build">In build</span><h3>Message Tom (private relay)</h3><p>Students reach Tom directly inside the app &mdash; his phone and email stay private. Part of the $500/mo private-coaching membership.</p></div>
+      <div class="mod"><span class="mod__chip mod__chip--live">Preview</span><h3>Student dashboard</h3><p>Program progress, putting benchmarks, round history and what your scores are telling Tom. <a href="dashboard.html">See the preview &rarr;</a></p></div>
+      <div class="mod"><span class="mod__chip mod__chip--live">Live demo</span><h3>Course intelligence</h3><p>Real aerial imagery and a professional&rsquo;s strategy read on every hole, searchable by course. <a href="prototype.html">Open the course tool &rarr;</a></p></div>
+    </div>
+    <p style="color:var(--dim);font-size:0.75rem;margin:1rem 0 0">Status tags are honest: &ldquo;live&rdquo; runs in this demo today, &ldquo;in build&rdquo; is scoped and on the roadmap. Nothing here is faked or sold before it works.</p>
   </div>
 </section>
 

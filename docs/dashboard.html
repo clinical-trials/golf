@@ -54,14 +54,14 @@
 </style>
 </head>
 <body>
-<p class="notice">Preview — sample student, sample data. Your real dashboard appears here once you enrol and start logging rounds.</p>
+<p class="notice" id="notice">Preview — sample student, sample data. Your real dashboard appears here once you enrol and start logging rounds.</p>
 <nav class="nav"><div class="wrap nav__in"><a class="nav__brand" href="index.html">Pocket Pro</a><a class="nav__cta" href="index.html#book">Book a lesson →</a></div></nav>
 
 <header class="hd"><div class="wrap">
   <span class="label">Your dashboard</span>
-  <h1>Welcome back, Jordan.</h1>
-  <p>Here&rsquo;s where your game is, what&rsquo;s next, and what your rounds are telling Tom.</p>
-  <div class="streak"><b>4</b><span style="font-family:'Archivo Narrow',sans-serif;text-transform:uppercase;letter-spacing:0.08em;font-size:0.72rem;color:var(--dim)">weeks in a row practised</span></div>
+  <h1 id="greeting">Welcome back, Jordan.</h1>
+  <p id="hd-sub">Here&rsquo;s where your game is, what&rsquo;s next, and what your rounds are telling Tom.</p>
+  <div class="streak" id="streak"><b>4</b><span style="font-family:'Archivo Narrow',sans-serif;text-transform:uppercase;letter-spacing:0.08em;font-size:0.72rem;color:var(--dim)">weeks in a row practised</span></div>
 </div></header>
 
 <div class="wrap">
@@ -69,6 +69,7 @@
 
     <section class="card">
       <h2>Your programs</h2>
+      <div id="programs">
       <div class="prog">
         <div class="prog__top"><span>Putting Intensive <span class="prog__sub">Week 3 of 4</span></span><span>75%</span></div>
         <div class="bar"><span style="width:75%"></span></div>
@@ -83,9 +84,10 @@
         <div class="prog__top"><span>Practice Like a Golfer <span class="prog__sub">Completed</span></span><span>100%</span></div>
         <div class="bar"><span style="width:100%;background:var(--flag)"></span></div>
       </div>
+      </div>
     </section>
 
-    <section class="card">
+    <section class="card" id="putting-card">
       <h2>Putting benchmark — moved in 3 weeks</h2>
       <svg viewBox="0 0 320 170" role="img" aria-label="Putts holed out of 18: week 1 was 5, this week is 9" style="width:100%;height:auto">
         <line x1="40" y1="140" x2="310" y2="140" stroke="#2C3634"/>
@@ -108,7 +110,7 @@
       <h2>Recent rounds</h2>
       <table>
         <thead><tr><th>Date</th><th>Course</th><th>Score</th><th>Putts</th><th>Penalties</th><th>vs. par</th></tr></thead>
-        <tbody>
+        <tbody id="rounds">
           <tr><td>Aug 30</td><td>Lions Municipal</td><td>91</td><td>33</td><td>2</td><td style="color:var(--penalty)">+19</td></tr>
           <tr><td>Aug 23</td><td>Roy Kizer</td><td>94</td><td>35</td><td>3</td><td style="color:var(--penalty)">+22</td></tr>
           <tr><td>Aug 16</td><td>Butler Pitch &amp; Putt</td><td>29</td><td>18</td><td>0</td><td>+2</td></tr>
@@ -121,7 +123,7 @@
     <section class="card">
       <h2>Upcoming</h2>
       <table>
-        <tbody>
+        <tbody id="upcoming">
           <tr><td>Tue, Sep 8 · 5:30 pm</td><td style="text-align:right;color:var(--dim)">Putting Intensive — wk 3</td></tr>
           <tr><td>Sat, Sep 12 · 9:00 am</td><td style="text-align:right;color:var(--dim)">Private lesson with Tom</td></tr>
           <tr><td>Wed, Nov 5 · 9:00 am</td><td style="text-align:right;color:var(--dim)">Butler beginner mornings</td></tr>
@@ -140,6 +142,97 @@
   </div>
 </div>
 
-<footer><div class="wrap">Preview only — sample data for illustration, no real student. The dashboard runs on the same accounts, enrolment, progress and round-logging the backend already implements; it goes live when accounts ship. <a href="index.html">← Back to Pocket Pro</a></div></footer>
+<footer><div class="wrap" id="foot">Preview only — sample data for illustration, no real student. The dashboard reads real accounts, enrolment, week progress, logged rounds and bookings from the backend (<code>GET /api/dashboard</code>); with a backend and a signed-in session configured it replaces this sample with your own data. <a href="index.html">← Back to Pocket Pro</a></div></footer>
+
+<script>
+/* Progressive enhancement. This page ships as a labelled sample. If a backend
+   base URL (pp_api) and a session token (pp_session) are present in
+   localStorage, it fetches the real dashboard and replaces the sample. No
+   config, or any error, and the sample stays exactly as shown. Nothing here
+   invents data: empty lists render as honest empty states. */
+(function () {
+  var api, tok;
+  try { api = localStorage.getItem('pp_api'); tok = localStorage.getItem('pp_session'); } catch (e) { return; }
+  if (!api || !tok) return;
+  var base = api.replace(/\/+$/, '');
+  fetch(base + '/api/dashboard', { headers: { Authorization: 'Bearer ' + tok } })
+    .then(function (r) { if (!r.ok) throw new Error('status ' + r.status); return r.json(); })
+    .then(render)
+    .catch(function () { /* leave the labelled sample in place */ });
+
+  function esc(s) { var d = document.createElement('div'); d.textContent = s == null ? '' : String(s); return d.innerHTML; }
+  function set(id, txt) { var el = document.getElementById(id); if (el) el.textContent = txt; }
+  function fmtDate(iso) { try { return new Date(iso).toLocaleDateString(undefined, { month: 'short', day: 'numeric' }); } catch (e) { return iso; } }
+  function fmtDateTime(iso) { try { return new Date(iso).toLocaleString(undefined, { weekday: 'short', month: 'short', day: 'numeric', hour: 'numeric', minute: '2-digit' }); } catch (e) { return iso; } }
+
+  function bars(first, latest) {
+    var max = Math.max(first, latest, 1);
+    var h1 = Math.round(70 * first / max), h2 = Math.round(70 * latest / max);
+    return '<svg viewBox="0 0 320 170" role="img" aria-label="Putts per round: first ' + first + ', latest ' + latest + '" style="width:100%;height:auto">' +
+      '<line x1="40" y1="140" x2="310" y2="140" stroke="#2C3634"/>' +
+      '<rect x="60" y="' + (140 - h1) + '" width="60" height="' + h1 + '" fill="#5C6259"/>' +
+      '<rect x="210" y="' + (140 - h2) + '" width="60" height="' + h2 + '" fill="#7B9153"/>' +
+      '<g font-family="Archivo Black, sans-serif" font-size="18" text-anchor="middle">' +
+      '<text x="90" y="' + (133 - h1) + '" fill="#ECE6D6">' + first + '</text>' +
+      '<text x="240" y="' + (133 - h2) + '" fill="#E9B949">' + latest + '</text></g>' +
+      '<g font-family="Archivo Narrow, sans-serif" font-size="11" fill="#9EA9A2">' +
+      '<text x="90" y="158" text-anchor="middle">First</text>' +
+      '<text x="240" y="158" text-anchor="middle">Latest</text></g>' +
+      '<text x="40" y="20" font-family="Archivo Narrow, sans-serif" font-size="11" fill="#9EA9A2">putts / round</text></svg>';
+  }
+
+  function render(d) {
+    set('notice', 'Live — your data, read from the backend.');
+    set('greeting', 'Welcome back.');
+    set('hd-sub', 'Signed in as ' + d.student.email + '. Here’s where your game is and what’s next.');
+    var streak = document.getElementById('streak'); if (streak) streak.style.display = 'none';
+
+    var pc = document.getElementById('programs');
+    if (pc) {
+      pc.innerHTML = d.programs.length ? d.programs.map(function (p) {
+        var sub = p.status === 'COMPLETED' ? 'Completed' : ('Week ' + Math.min(p.weeksComplete + 1, p.weeksTotal) + ' of ' + p.weeksTotal);
+        var next = p.nextUp ? '<div class="next">Next: ' + esc(p.nextUp) + '</div>' : '';
+        var barcol = p.percent >= 100 ? 'background:var(--flag)' : '';
+        return '<div class="prog"><div class="prog__top"><span>' + esc(p.name) + ' <span class="prog__sub">' + esc(sub) +
+          '</span></span><span>' + p.percent + '%</span></div><div class="bar"><span style="width:' + p.percent + '%;' + barcol + '"></span></div>' + next + '</div>';
+      }).join('') : '<p style="color:var(--dim)">No programs yet. <a href="index.html#modules">Browse classes →</a></p>';
+    }
+
+    var pcard = document.getElementById('putting-card');
+    if (pcard) {
+      if (d.putting) {
+        var pu = d.putting, better = pu.delta < 0;
+        var verdict = better ? 'Down <b>' + Math.abs(pu.delta) + ' putts</b> a round since you started.'
+          : (pu.delta === 0 ? 'Holding steady at <b>' + pu.latestRoundPutts + ' putts</b> a round.'
+            : 'Up ' + pu.delta + ' putts — let’s tighten this up.');
+        pcard.innerHTML = '<h2>Putting trend</h2>' + bars(pu.firstRoundPutts, pu.latestRoundPutts) +
+          '<div class="verdict">' + verdict + '</div>' +
+          '<p class="lock">Putts per round, earliest vs latest of your ' + pu.rounds + ' logged rounds.</p>';
+      } else {
+        pcard.innerHTML = '<h2>Putting trend</h2><p style="color:var(--dim)">Log at least two rounds and your putting trend shows here.</p>';
+      }
+    }
+
+    var rb = document.getElementById('rounds');
+    if (rb) {
+      rb.innerHTML = d.recentRounds.length ? d.recentRounds.map(function (r) {
+        var vs = r.vsPar == null ? '—' : (r.vsPar > 0 ? '+' + r.vsPar : String(r.vsPar));
+        var vscol = (r.vsPar != null && r.vsPar > 0) ? ' style="color:var(--penalty)"' : '';
+        return '<tr><td>' + esc(fmtDate(r.playedOn)) + '</td><td>' + esc(r.courseName) + '</td><td>' + r.strokes +
+          '</td><td>' + r.putts + '</td><td>' + r.penalties + '</td><td' + vscol + '>' + vs + '</td></tr>';
+      }).join('') : '<tr><td colspan="6" style="color:var(--dim)">No rounds logged yet.</td></tr>';
+    }
+
+    var ub = document.getElementById('upcoming');
+    if (ub) {
+      ub.innerHTML = d.upcoming.length ? d.upcoming.map(function (u) {
+        return '<tr><td>' + esc(fmtDateTime(u.startsAt)) + '</td><td style="text-align:right;color:var(--dim)">' + esc(u.productName) + '</td></tr>';
+      }).join('') : '<tr><td colspan="2" style="color:var(--dim)">Nothing booked yet. <a href="index.html#book">Book a lesson →</a></td></tr>';
+    }
+
+    set('foot', 'Live data from the backend. Signed in as ' + d.student.email + '.');
+  }
+})();
+</script>
 </body>
 </html>

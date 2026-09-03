@@ -48,6 +48,20 @@ const COURSES = [
   { id: 'forest-creek', name: 'Forest Creek Golf Club', place: 'Round Rock, Texas', country: 'US', bbox: '30.503,-97.614,30.522,-97.591' },
   { id: 'harvey-penick', name: 'Harvey Penick Golf Campus', place: 'Austin, Texas', country: 'US', bbox: '30.287,-97.668,30.301,-97.650' },
   { id: 'butler-pitch-putt', name: 'Butler Pitch & Putt', place: 'Austin, Texas', country: 'US', bbox: '30.258,-97.761,30.267,-97.751' },
+
+  // Continuing to chart the world's courses. Single-course venues chosen to
+  // avoid merging neighbours; anything OSM has not tagged simply returns no
+  // holes and is not shown — nothing is invented to fill a gap.
+  { id: 'augusta-national', name: 'Augusta National Golf Club', place: 'Georgia, USA', country: 'US', bbox: '33.495,-82.030,33.512,-82.008' },
+  { id: 'oakmont', name: 'Oakmont Country Club', place: 'Pennsylvania, USA', country: 'US', bbox: '40.522,-79.843,40.540,-79.818' },
+  { id: 'shinnecock-hills', name: 'Shinnecock Hills Golf Club', place: 'New York, USA', country: 'US', bbox: '40.881,-72.455,40.899,-72.426' },
+  { id: 'kiawah-ocean', name: 'The Ocean Course, Kiawah Island', place: 'South Carolina, USA', country: 'US', bbox: '32.604,-80.040,32.620,-80.008' },
+  { id: 'muirfield-village', name: 'Muirfield Village Golf Club', place: 'Ohio, USA', country: 'US', bbox: '40.136,-83.170,40.156,-83.140' },
+  { id: 'royal-birkdale', name: 'Royal Birkdale Golf Club', place: 'Merseyside, England', country: 'GB', bbox: '53.610,-3.037,53.632,-3.004' },
+  { id: 'valderrama', name: 'Real Club Valderrama', place: 'Andalusia, Spain', country: 'ES', bbox: '36.273,-5.291,36.293,-5.262' },
+  { id: 'banff-springs', name: 'Fairmont Banff Springs', place: 'Alberta, Canada', country: 'CA', bbox: '51.150,-115.575,51.176,-115.528' },
+  { id: 'cape-kidnappers', name: 'Cape Kidnappers', place: "Hawke's Bay, New Zealand", country: 'NZ', bbox: '-39.658,177.070,-39.628,177.108' },
+  { id: 'new-south-wales', name: 'New South Wales Golf Club', place: 'Sydney, Australia', country: 'AU', bbox: '-33.998,151.230,-33.968,151.262' },
 ]
 
 const FEATURE_TAGS = {

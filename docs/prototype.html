@@ -38,6 +38,11 @@
   .label{font-family:'Archivo Narrow',sans-serif;font-weight:700;text-transform:uppercase;letter-spacing:0.15em;font-size:0.75rem;color:var(--card-dim);}
 
   .notice{background:var(--flag);color:#231A06;font-family:'Archivo Narrow',sans-serif;font-weight:700;text-transform:uppercase;letter-spacing:0.09em;font-size:0.78rem;text-align:center;padding:0.6rem 1rem;}
+  .backbar{position:sticky;top:0;z-index:30;background:rgba(11,15,19,0.92);backdrop-filter:blur(8px);border-bottom:1px solid var(--rule);}
+  .backbar__in{display:flex;align-items:center;justify-content:space-between;gap:1rem;padding:0.45rem 0;min-height:44px;}
+  .backbar a{color:var(--card);text-decoration:none;font-family:'Archivo Narrow',sans-serif;font-weight:700;text-transform:uppercase;letter-spacing:0.06em;font-size:0.8rem;display:inline-flex;align-items:center;gap:0.4rem;min-height:40px;}
+  .backbar a:hover{color:var(--flag);}
+  .backbar__cta{background:var(--flag);color:#231A06 !important;padding:0.4rem 0.85rem;}
 
   /* hero */
   .hero{position:relative;min-height:min(82vh,720px);display:flex;align-items:flex-end;overflow:hidden;border-bottom:1px solid var(--rule);}
@@ -59,6 +64,13 @@
   .tg[aria-pressed="true"]{background:var(--flag);color:#231A06;}
   .tg:focus-visible{outline:2px solid var(--flag);outline-offset:2px;}
   .strip{display:flex;gap:0.75rem;overflow-x:auto;padding:1rem 0 0.75rem;scrollbar-width:thin;}
+  .course-search{position:relative;margin-top:0.9rem;}
+  .course-search svg{position:absolute;left:0.9rem;top:50%;transform:translateY(-50%);width:18px;height:18px;pointer-events:none;}
+  .course-search input{width:100%;background:var(--ink-2);border:1px solid var(--rule);color:var(--card);font-family:'Archivo Narrow',sans-serif;font-weight:600;font-size:1rem;padding:0.72rem 0.9rem 0.72rem 2.7rem;min-height:46px;}
+  .course-search input::placeholder{color:var(--card-dim);font-weight:400;}
+  .course-search input:focus{outline:none;border-color:var(--flag);}
+  .strip-empty{border:1px dashed var(--rule);background:var(--ink-2);color:var(--card-dim);padding:1.1rem 1.2rem;margin:1rem 0 0.5rem;font-size:0.93rem;line-height:1.5;}
+  .strip-empty .linkish{background:none;border:0;color:var(--flag);font:inherit;cursor:pointer;padding:0;text-decoration:underline;}
   .tile{flex:0 0 auto;width:14rem;background:var(--ink-2);border:1px solid var(--rule);cursor:pointer;padding:0;text-align:left;overflow:hidden;color:var(--card);}
   .tile img,.tile svg{display:block;width:100%;height:8rem;object-fit:cover;background:#0A0E11;}
   .tile__cap{padding:0.6rem 0.8rem 0.75rem;}
@@ -141,6 +153,7 @@
 </head>
 <body>
 
+<div class="backbar"><div class="wrap backbar__in"><a href="index.html">&larr; Back to Pocket Pro</a><a class="backbar__cta" href="index.html#book">Book a lesson</a></div></div>
 <p class="notice">Working prototype — real aerial imagery, real course geometry, live strategy engine. Nothing on this page is fabricated.</p>
 
 <header class="hero" id="hero">
@@ -163,7 +176,9 @@
         <button class="tg" id="tg-all" aria-pressed="false">Global</button>
       </div>
     </div>
+    <div class="course-search"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="#9BA79D" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg><input id="course-search-input" type="search" autocomplete="off" placeholder="Search your course — name or city" aria-label="Search for a golf course"></div>
     <div class="strip" id="strip" role="group" aria-label="Course"></div>
+    <p class="strip-empty" id="strip-empty" hidden></p>
   </div>
 </section>
 
@@ -482,28 +497,49 @@ fetch('courses.json').then(r=>r.json()).then(data=>{
   ].map(([n,l])=>`<div><b>${n}</b><span>${l}</span></div>`).join('')
 
   // filmstrip with US / Global toggle (defaults to US)
-  let region='US'
+  let region='US', query=''
   const inRegion=c=>region==='US'?c.country==='US':true
+  const norm=s=>(s||'').toLowerCase()
+  const matchesQuery=c=>{const q=norm(query).trim();return !q||norm(c.name).includes(q)||norm(c.place).includes(q)}
+  const esc=s=>s.replace(/[&<>"]/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[m]))
+  function tileHTML(c){
+    const b=courseBounds(c),a=aspect(b)
+    const thumb=c.country==='US'?`<img loading="lazy" decoding="async" alt="" src="${usgsUrl(b,420,Math.round(420/Math.max(a.ratio,1)))}">`:`<svg viewBox="0 0 100 60" aria-hidden="true"><rect width="100" height="60" fill="#0D1512"/><text x="50" y="33" text-anchor="middle" font-family="Archivo Narrow,sans-serif" font-size="8" fill="#7B9153">vector</text></svg>`
+    return `<button class="tile" data-id="${c.id}" aria-pressed="${course&&c.id===course.id}"><div class="tile__wrap">${c.country==='US'?'<span class="tile__badge">Photo</span>':''}${thumb}</div><div class="tile__cap"><div class="tile__name">${c.name}</div><div class="tile__place">${c.place}</div></div></button>`
+  }
   function renderStrip(){
-    const list=COURSES.filter(inRegion)
-    document.getElementById('strip').innerHTML=list.map(c=>{
-      const b=courseBounds(c),a=aspect(b)
-      const thumb=c.country==='US'?`<img loading="lazy" decoding="async" alt="" src="${usgsUrl(b,420,Math.round(420/Math.max(a.ratio,1)))}">`:`<svg viewBox="0 0 100 60" aria-hidden="true"><rect width="100" height="60" fill="#0D1512"/><text x="50" y="33" text-anchor="middle" font-family="Archivo Narrow,sans-serif" font-size="8" fill="#7B9153">vector</text></svg>`
-      return `<button class="tile" data-id="${c.id}" aria-pressed="${course&&c.id===course.id}"><div class="tile__wrap">${c.country==='US'?'<span class="tile__badge">Photo</span>':''}${thumb}</div><div class="tile__cap"><div class="tile__name">${c.name}</div><div class="tile__place">${c.place}</div></div></button>`
-    }).join('')
-    document.querySelectorAll('.tile').forEach(t=>t.addEventListener('click',()=>selectCourse(COURSES.find(c=>c.id===t.dataset.id))))
+    const matched=COURSES.filter(matchesQuery)
+    const list=matched.filter(inRegion)
+    const strip=document.getElementById('strip'), empty=document.getElementById('strip-empty')
+    if(list.length){
+      strip.hidden=false; empty.hidden=true
+      strip.innerHTML=list.map(tileHTML).join('')
+      strip.querySelectorAll('.tile').forEach(t=>t.addEventListener('click',()=>selectCourse(COURSES.find(c=>c.id===t.dataset.id))))
+    } else {
+      strip.hidden=true; empty.hidden=false
+      const q=esc(query.trim())
+      if(region==='US' && matched.length){
+        empty.innerHTML=`No U.S. course matches &ldquo;${q}&rdquo;. <button type="button" class="linkish" id="empty-global">Show ${matched.length} result${matched.length>1?'s':''} worldwide &rarr;</button>`
+        const g=document.getElementById('empty-global'); if(g)g.addEventListener('click',()=>setRegion('ALL'))
+      } else {
+        empty.innerHTML=`We haven&rsquo;t charted &ldquo;${q}&rdquo; yet — this demo maps ${COURSES.length} of the world&rsquo;s 30&ndash;38k courses, and the same pipeline runs on any course on request. <button type="button" class="linkish" id="empty-clear">Clear search &rarr;</button>`
+        const cl=document.getElementById('empty-clear'); if(cl)cl.addEventListener('click',()=>{const inp=document.getElementById('course-search-input');if(inp)inp.value='';query='';renderStrip()})
+      }
+    }
   }
   function setRegion(r){
     region=r
     document.getElementById('tg-us').setAttribute('aria-pressed',String(r==='US'))
     document.getElementById('tg-all').setAttribute('aria-pressed',String(r==='ALL'))
     renderStrip()
-    const list=COURSES.filter(inRegion)
-    if(!list.some(c=>c.id===course.id))selectCourse(list[0])
+    const list=COURSES.filter(matchesQuery).filter(inRegion)
+    if(list.length && !list.some(c=>c.id===course.id))selectCourse(list[0])
   }
   renderStrip()
   document.getElementById('tg-us').addEventListener('click',()=>setRegion('US'))
   document.getElementById('tg-all').addEventListener('click',()=>setRegion('ALL'))
+  const searchInput=document.getElementById('course-search-input')
+  if(searchInput)searchInput.addEventListener('input',()=>{query=searchInput.value;renderStrip()})
 
   // globe stats
   document.getElementById('globe').innerHTML=[

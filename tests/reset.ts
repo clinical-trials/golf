@@ -23,5 +23,6 @@ export async function resetDatabase(): Promise<void> {
   await prisma.consentDocument.deleteMany()
   await prisma.playerProfile.deleteMany()
   await prisma.pro.deleteMany()
+  await prisma.session.deleteMany()
   await prisma.user.deleteMany()
 }
