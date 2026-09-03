@@ -26,6 +26,27 @@ supplied by the user from NGF 2025 reporting; verify before print use.
 - **Group clinics / leagues / creator events** — deliverable through Programs +
   scheduling once there's demand; no new engineering to pilot one clinic.
 
+## Market-condition plays (de-localized — tech-hub metro, hot summers, busy tee sheets)
+
+- **Corporate tech-team leagues** — 6-8 week simulator/short-course seasons sold as team
+  building; $2K-$8K per company season (founder estimate) + sponsor nights + F&B partners.
+  Employer team discount live on site: 8+ colleagues on a work email = team rate, any
+  company. NO third-party logos/badges — implies endorsement that doesn't exist.
+- **Outing planner / concierge** — SHIPPED (v2): ranked charted courses per group type +
+  heat-aware best-window scheduling on NWS data. Honest scope: no live tee-time inventory
+  until course partnerships exist. Booking-fee/markup/commission model when they do.
+- **Heat-proof formats** — dawn/twilight/indoor scheduling powered by the windows engine;
+  partner with existing simulator venues before leasing space (metro guides list 11-17).
+- **Mobile simulator events** — lean event business (parties, offsites, activations),
+  $750-$2,500/event (founder estimate). Equipment/logistics risk; no lease.
+- **Beginner starter kit** — fitting + used clubs + glove/balls + first lesson + first
+  9-hole playing lesson, one price. Sellable today as a LessonProduct bundle.
+- **Women's beginner community** — membership framing ($149-$299/mo founder estimate)
+  around the shipped Women's 6-week program: clinics, simulator nights, 9-hole socials.
+  National chapter orgs (e.g. LPGA Amateurs) prove league demand.
+- **Junior/family subscription** — monthly per-kid framing around the shipped Family
+  program; camps $400-$800/week (founder estimate).
+
 ## Turf AI (separate product line — do not fold into the golfer app)
 
 Pixel-level turf condition from imagery + soil-moisture sensors; mow-timing and
