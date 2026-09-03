@@ -6,6 +6,12 @@ import { prisma } from '@/lib/db'
  * rows that violate foreign keys when a later test deletes their parents.
  */
 export async function resetDatabase(): Promise<void> {
+  await prisma.scorecardUpload.deleteMany()
+  await prisma.holeScore.deleteMany()
+  await prisma.round.deleteMany()
+  await prisma.courseFeature.deleteMany()
+  await prisma.hole.deleteMany()
+  await prisma.course.deleteMany()
   await prisma.swingClip.deleteMany()
   await prisma.captureSession.deleteMany()
   await prisma.booking.deleteMany()

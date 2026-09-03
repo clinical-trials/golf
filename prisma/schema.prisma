@@ -17,6 +17,176 @@ model User {
   bookings        Booking[]           @relation("UserBookings")
   profile         PlayerProfile?
   captureSessions CaptureSession[]    @relation("UserSessions")
+  rounds          Round[]             @relation("UserRounds")
+}
+
+// ---------- courses ----------
+
+enum CoverageGrade {
+  LISTED
+  ROUTED
+  DETAILED
+  VERIFIED
+}
+
+enum FeatureKind {
+  GREEN
+  BUNKER
+  WATER
+  FAIRWAY
+  TEE
+  ROUGH
+}
+
+model Course {
+  id        String        @id @default(cuid())
+  sourceId  String        @unique
+  slug      String        @unique
+  name      String
+  country   String
+  place     String
+  latitude  Float
+  longitude Float
+  coverage  CoverageGrade @default(LISTED)
+  holes     Hole[]
+  features  CourseFeature[]
+  rounds    Round[]
+  createdAt DateTime      @default(now())
+  updatedAt DateTime      @updatedAt
+}
+
+model Hole {
+  id           String      @id @default(cuid())
+  courseId     String
+  course       Course      @relation(fields: [courseId], references: [id], onDelete: Cascade)
+  number       Int
+  par          Int?
+  lengthMeters Float?
+  strokeIndex  Int?
+  path         Json
+  scores       HoleScore[]
+
+  @@unique([courseId, number])
+}
+
+model CourseFeature {
+  id         String      @id @default(cuid())
+  courseId   String
+  course     Course      @relation(fields: [courseId], references: [id], onDelete: Cascade)
+  kind       FeatureKind
+  holeNumber Int?
+  ring       Json
+}
+
+// ---------- rounds ----------
+
+enum ScoreProvenance {
+  MANUAL
+  OCR_CONFIRMED
+  IMPORTED
+}
+
+model Round {
+  id        String      @id @default(cuid())
+  userId    String
+  user      User        @relation("UserRounds", fields: [userId], references: [id])
+  courseId  String
+  course    Course      @relation(fields: [courseId], references: [id])
+  playedOn  DateTime
+  scores    HoleScore[]
+  uploads   ScorecardUpload[]
+  createdAt DateTime    @default(now())
+
+  @@index([userId, playedOn])
+}
+
+model HoleScore {
+  id                String          @id @default(cuid())
+  roundId           String
+  round             Round           @relation(fields: [roundId], references: [id], onDelete: Cascade)
+  holeId            String
+  hole              Hole            @relation(fields: [holeId], references: [id])
+  holeNumber        Int
+  strokes           Int
+  putts             Int
+  fairwayHit        Boolean?
+  greenInRegulation Boolean
+  penalties         Int             @default(0)
+  provenance        ScoreProvenance @default(MANUAL)
+
+  @@unique([roundId, holeNumber])
+}
+
+// ---------- class programs (flipped classroom) ----------
+
+enum EnrollmentStatus {
+  HELD
+  ACTIVE
+  COMPLETED
+  CANCELLED
+}
+
+model Program {
+  id          String        @id @default(cuid())
+  slug        String        @unique
+  name        String
+  description String
+  weeks       Int
+  priceMinor  Int
+  currency    String        @default("usd")
+  published   Boolean       @default(false)
+  weeksContent ProgramWeek[]
+  enrollments Enrollment[]
+}
+
+model ProgramWeek {
+  id        String  @id @default(cuid())
+  programId String
+  program   Program @relation(fields: [programId], references: [id], onDelete: Cascade)
+  week      Int
+  title     String
+  videoId   String?
+  homework  String
+  quiz      Json
+
+  @@unique([programId, week])
+}
+
+model Enrollment {
+  id               String           @id @default(cuid())
+  userId           String
+  programId        String
+  program          Program          @relation(fields: [programId], references: [id])
+  status           EnrollmentStatus @default(HELD)
+  paymentProvider  String
+  paymentReference String
+  createdAt        DateTime         @default(now())
+  progress         WeekProgress[]
+
+  @@unique([userId, programId])
+}
+
+model WeekProgress {
+  id           String     @id @default(cuid())
+  enrollmentId String
+  enrollment   Enrollment @relation(fields: [enrollmentId], references: [id], onDelete: Cascade)
+  week         Int
+  homeworkDone Boolean    @default(false)
+  quizScore    Int?
+  quizTotal    Int?
+  completedAt  DateTime?
+
+  @@unique([enrollmentId, week])
+}
+
+model ScorecardUpload {
+  id         String   @id @default(cuid())
+  roundId    String
+  round      Round    @relation(fields: [roundId], references: [id], onDelete: Cascade)
+  storageKey String
+  rawCells   Json
+  confirmed  Boolean  @default(false)
+  createdAt  DateTime @default(now())
 }
 
 // ---------- player model ----------
