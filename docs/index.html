@@ -142,6 +142,12 @@
     <span class="label">Schedule a lesson with Tom</span>
     <h2 style="font-size:clamp(1.6rem,1.1rem + 1.9vw,2.6rem);max-width:20ch;margin-top:0.7rem">Book time. Pay securely. Show up ready.</h2>
     <p style="color:var(--dim);max-width:60ch;margin-top:0.8rem;font-size:0.95rem">Pick a lesson, choose a time, and check out — payment runs on Stripe, and your slot is held the moment it clears. Times below are Tom&rsquo;s proposed availability; the live calendar confirms the exact opening at checkout. <a href="#modules">See upcoming class times →</a></p>
+    <article class="surf" style="border-color:var(--flag);margin-top:1.25rem">
+      <span class="where" style="color:var(--flag)">Membership &middot; limited seats</span>
+      <h3 style="display:flex;flex-wrap:wrap;gap:0.5rem 0.8rem;align-items:baseline">Private Coaching with Tom <span style="color:var(--flag)">$500 / month</span></h3>
+      <p>Ongoing one-to-one coaching: a standing lesson slot, unlimited async video review between sessions, and your plan rewritten every week around what your rounds actually show. Capped at 20 members so everyone gets real attention.</p>
+      <p style="margin:0.9rem 0 0"><button class="btn btn--y book-btn" data-name="Private Coaching Membership" data-price="$500 / month" data-per="500" data-group="1" data-suffix=" / month" data-sched="Monthly &middot; standing weekly slot arranged with Tom">Join the membership &rarr;</button></p>
+    </article>
     <div class="two" id="lesson-list" style="margin-top:1.25rem"></div>
   </div>
 </section>
@@ -558,10 +564,16 @@ fetch('courses.json').then(r=>r.json()).then(d=>{
   window.openCoursePop=function(id){
     const c=d.courses.find(x=>x.id===id&&x.holes.length); if(!c)return
     const b=bounds(c)
-    document.getElementById('cp-img').src=usgs(b,1400,900)
-    document.getElementById('cp-img').alt='Aerial photograph of '+c.name
+    const img=document.getElementById('cp-img'), tip=document.getElementById('cp-tip')
+    if(c.country==='US'){
+      img.style.display=''; img.src=usgs(b,1400,900); img.onerror=function(){this.style.display='none'}
+      img.alt='Aerial photograph of '+c.name
+      tip.innerHTML="Tom\u2019s course note lands here once he\u2019s reviewed it."
+    } else {
+      img.style.display='none'
+      tip.innerHTML="High-resolution aerials are US-only, so there\u2019s no photo for this one yet \u2014 but you can walk its real routing in the <a href='prototype.html'>course tool</a>. Tom\u2019s note lands here after his review."
+    }
     document.getElementById('cp-name').textContent=c.name+' \u2014 '+c.place
-    document.getElementById('cp-tip').textContent="Tom\u2019s course note lands here once he\u2019s reviewed it."
     document.getElementById('coursepop').showModal()
   }
   const gt=document.getElementById('great-thumbs')
@@ -586,7 +598,7 @@ fetch('courses.json').then(r=>r.json()).then(d=>{
     f.querySelector('.photoband__name').textContent=sc.name
     const cr=f.querySelector('.photoband__credit'); if(cr)cr.textContent='Original photograph'
   })
-}).catch(()=>{})
+}).catch(()=>{});
 (function(){
   const list=document.getElementById('lesson-list'); if(!list) return
   const LESSONS=[
@@ -605,15 +617,16 @@ fetch('courses.json').then(r=>r.json()).then(d=>{
   const perEl=()=>document.getElementById('co-per'), cntEl=()=>document.getElementById('co-count'), rowEl=()=>document.getElementById('co-count-row')
   function recalc(){
     const per=Number(perEl().dataset.per||0), grp=Number(perEl().dataset.group||0)
+    const suffix=perEl().dataset.suffix||''
     const n=grp?grp:Number(cntEl().value||1)
-    document.getElementById('co-price').textContent='$'+(per*n).toLocaleString()
-    document.getElementById('co-count-label').textContent=grp?`${grp} players (team rate)`:`${n} player${n>1?'s':''} \u00d7 $${per}`
+    document.getElementById('co-price').textContent='$'+(per*n).toLocaleString()+suffix
+    document.getElementById('co-count-label').textContent=grp===1?'Monthly membership \u00b7 one of a limited number of seats':(grp?`${grp} players (team rate)`:`${n} player${n>1?'s':''} \u00d7 $${per}`)
   }
-  list.querySelectorAll('.book-btn').forEach(b=>b.addEventListener('click',()=>{
+  document.querySelectorAll('.book-btn').forEach(b=>b.addEventListener('click',()=>{
     document.getElementById('co-name').textContent=b.dataset.name
     document.getElementById('co-sched').textContent=b.dataset.sched
     const grp=Number(b.dataset.group||0)
-    perEl().dataset.per=b.dataset.per; perEl().dataset.group=b.dataset.group
+    perEl().dataset.per=b.dataset.per; perEl().dataset.group=b.dataset.group; perEl().dataset.suffix=b.dataset.suffix||''
     rowEl().style.display=grp?'none':'flex'
     cntEl().value=1
     recalc()
