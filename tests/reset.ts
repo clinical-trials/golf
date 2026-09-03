@@ -9,6 +9,7 @@ export async function resetDatabase(): Promise<void> {
   await prisma.scorecardUpload.deleteMany()
   await prisma.holeScore.deleteMany()
   await prisma.round.deleteMany()
+  await prisma.courseTip.deleteMany()
   await prisma.courseFeature.deleteMany()
   await prisma.hole.deleteMany()
   await prisma.course.deleteMany()

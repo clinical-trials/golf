@@ -51,6 +51,7 @@ model Course {
   holes     Hole[]
   features  CourseFeature[]
   rounds    Round[]
+  tips      CourseTip[]
   createdAt DateTime      @default(now())
   updatedAt DateTime      @updatedAt
 }
@@ -76,6 +77,25 @@ model CourseFeature {
   kind       FeatureKind
   holeNumber Int?
   ring       Json
+}
+
+/**
+ * Tom's own note on a course, or a specific hole of it. This is the unique
+ * asset no other app has: a PGA pro's read on the course you're about to play.
+ * Every tip is DRAFT until he approves it (published=false), so nothing goes
+ * out in his name that he hasn't written or corrected.
+ */
+model CourseTip {
+  id         String   @id @default(cuid())
+  courseId   String
+  course     Course   @relation(fields: [courseId], references: [id], onDelete: Cascade)
+  holeNumber Int?
+  body       String
+  published  Boolean  @default(false)
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+
+  @@index([courseId, holeNumber])
 }
 
 // ---------- rounds ----------
