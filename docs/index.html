@@ -131,11 +131,20 @@
       <span class="chip">2023 S. Ohio Player Development Award</span>
     </div>
     <div class="hero__cta">
-      <a class="btn btn--y" href="schedule.html">Schedule a lesson with Tom →</a>
+      <a class="btn btn--y" href="#book">Schedule a lesson with Tom →</a>
       <a class="btn btn--o" href="prototype.html">Take Tom on the course →</a>
     </div>
   </div>
 </header>
+
+<section class="surfaces" id="book">
+  <div class="wrap">
+    <span class="label">Schedule a lesson with Tom</span>
+    <h2 style="font-size:clamp(1.6rem,1.1rem + 1.9vw,2.6rem);max-width:20ch;margin-top:0.7rem">Book time. Pay securely. Show up ready.</h2>
+    <p style="color:var(--dim);max-width:60ch;margin-top:0.8rem;font-size:0.95rem">Pick a lesson, choose a time, and check out — payment runs on Stripe, and your slot is held the moment it clears. Times below are Tom&rsquo;s proposed availability; the live calendar confirms the exact opening at checkout.</p>
+    <div class="two" id="lesson-list" style="margin-top:1.25rem"></div>
+  </div>
+</section>
 
 <section class="dev" id="dev">
   <div class="wrap dev__hd">
@@ -199,11 +208,11 @@
 <section class="surfaces">
   <div class="wrap">
     <span class="label">What a golf mentor does</span>
-    <h2 style="font-size:clamp(1.5rem,1.1rem + 1.7vw,2.3rem);max-width:22ch;margin-top:0.7rem">From &ldquo;I&rsquo;m interested&rdquo; to &ldquo;I play golf.&rdquo;</h2>
+    <h2 style="font-size:clamp(1.5rem,1.1rem + 1.7vw,2.3rem);max-width:22ch;margin-top:0.7rem">Takes you from &ldquo;I&rsquo;m interested&rdquo; to &ldquo;I play golf.&rdquo;</h2>
     <div class="two" style="margin-top:1.25rem">
       <article class="surf">
         <h3 style="margin-top:0">Diagnoses the person, not just the swing</h3>
-        <p>Your goals, schedule, confidence and body — a junior, a retiree and a college player need different mentorship.</p>
+        <p>Your goals, schedule, confidence and body — a junior, a retiree, and a college player need different mentorship.</p>
       </article>
       <article class="surf">
         <h3 style="margin-top:0">Makes golf less intimidating</h3>
@@ -459,6 +468,27 @@ fetch('courses.json').then(r=>r.json()).then(d=>{
     f.querySelector('.photoband__name').textContent=c.name
   })
 }).catch(()=>{})
+(function(){
+  const list=document.getElementById('lesson-list'); if(!list) return
+  const LESSONS=[
+    {name:'Private Lesson — 1 hour', price:'$110', min:60, times:'Tue/Thu 4:00, 5:00, 6:00 pm', note:'Full swing, short game or putting — your call. Filmed, with a plan you keep.'},
+    {name:'Playing Lesson — 9 holes', price:'$220', min:150, times:'Sat/Sun mornings', note:'On the course, where it counts: club choice, strategy and pressure, hole by hole.'},
+    {name:'Putting Lab — 45 min', price:'$85', min:45, times:'Mon/Wed 5:30, 6:15 pm', note:'SAM PuttLab session: start line, speed and stroke, measured.'},
+    {name:'Club Fitting — 1 hour', price:'$120', min:60, times:'By appointment', note:'Fit the clubs to the swing you actually have. Launch-monitor based.'},
+  ]
+  list.innerHTML=LESSONS.map(l=>`<article class="surf">
+    <span class="where">${l.times}</span>
+    <h3 style="display:flex;flex-wrap:wrap;gap:0.5rem 0.8rem;align-items:baseline">${l.name} <span style="color:var(--flag)">${l.price}</span></h3>
+    <p>${l.note}</p>
+    <p style="margin:0.9rem 0 0"><button class="btn btn--y book-btn" data-name="${l.name}" data-price="${l.price}" data-sched="${l.times} \u00b7 held at checkout">Book &amp; pay →</button></p>
+  </article>`).join('')
+  list.querySelectorAll('.book-btn').forEach(b=>b.addEventListener('click',()=>{
+    document.getElementById('co-name').textContent=b.dataset.name
+    document.getElementById('co-sched').textContent=b.dataset.sched
+    document.getElementById('co-price').textContent=b.dataset.price
+    document.getElementById('checkout').showModal()
+  }))
+})();
 </script>
 </body>
 </html>
