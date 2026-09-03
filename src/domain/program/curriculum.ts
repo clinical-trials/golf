@@ -683,6 +683,68 @@ export const EQUIPMENT_BASICS: ProgramSpec = {
   ],
 }
 
+
+/**
+ * Seasonal in-person clinic (not self-paced): four Wednesday mornings with Tom
+ * at Butler Pitch & Putt, a laid-back downtown short course. The gentlest
+ * possible on-ramp — a real, low-pressure beginner option, launched as a
+ * November holiday / Black Friday special and sold as a giftable package.
+ */
+export const BUTLER_CLINIC: ProgramSpec = {
+  slug: 'butler-beginner-clinic-4',
+  name: 'Beginner Mornings at Butler Pitch & Putt',
+  description:
+    "Four Wednesday mornings with Tom at Butler Pitch \u0026 Putt, a relaxed downtown short course \u2014 the friendliest way to start golf. Short holes, no pressure, real coaching, coffee weather. A holiday-season special and a genuinely good gift for the curious beginner in your life. In-person clinic (not self-paced). Draft curriculum pending Tom Harris review.",
+  priceMinor: 12900,
+  currency: 'usd',
+  weeks: [
+    {
+      week: 1,
+      title: 'Meet the game: putting & the short hole',
+      videoId: null,
+      homework: "Just show up. We start on the green and the shortest holes \u2014 you'll hit good shots on day one.",
+      quiz: [
+        q('The best first club for a brand-new golfer is usually the\u2026', ['Driver', 'Putter or wedge on a short hole', 'A 3-iron'], 1, 'Short shots build confidence and contact first.'),
+        q('A pitch-and-putt is\u2026', ['Not real golf', 'Real golf, on a friendly scale', 'Only for kids'], 1, 'Short courses are where a lot of great golfers fell in love with the game.'),
+        q('What do you need to bring week one?', ['Your own clubs', 'Nothing \u2014 rentals and clubs are provided', 'A handicap'], 1, 'Come as you are; gear is sorted.'),
+      ],
+    },
+    {
+      week: 2,
+      title: 'The little swing',
+      videoId: 'sFCHZ4ozj8c',
+      homework: 'Between sessions, ten minutes of mirror swings at home \u2014 no ball, just the motion Tom showed you.',
+      quiz: [
+        q('A good beginner swing is\u2026', ['As hard as possible', 'Smooth and balanced', 'Copied from TV'], 1, 'Balance and rhythm beat effort every time.'),
+        q('Where should your eyes be at impact?', ['On the target', 'On the ball', 'Closed'], 1, 'See the ball, strike the ball.'),
+        q('Practice at home this week means\u2026', ['Nothing', 'A few minutes of slow swings', 'Hours of range work'], 1, 'Small and steady wins for beginners.'),
+      ],
+    },
+    {
+      week: 3,
+      title: 'Chipping around the green',
+      videoId: 'lO1TiiPMMx8',
+      homework: 'Notice one thing that improved since week one, and tell Tom next session. Confidence is the goal.',
+      quiz: [
+        q('A chip mostly\u2026', ['Flies high', 'Rolls after a little hop', 'Spins back'], 1, 'Land it early, let it roll.'),
+        q('When a shot goes badly, you\u2026', ['Get upset', 'Laugh, reset, hit the next one', 'Go home'], 1, 'Golf rewards a short memory and good company.'),
+        q('The point of these mornings is\u2026', ['A perfect score', 'Fun, confidence, and coming back', 'Turning pro'], 1, 'Curiosity into commitment, one Wednesday at a time.'),
+      ],
+    },
+    {
+      week: 4,
+      title: 'Play the whole thing',
+      videoId: null,
+      homework: 'Play all nine short holes with the group, keep your own score for the first time, and book your next round before you leave.',
+      quiz: [
+        q('After four mornings you are\u2026', ['Still not a golfer', 'A golfer', 'A spectator'], 1, 'You played, you improved, you belong.'),
+        q('The best way to keep going is\u2026', ['Stop', 'A standing game or the next class', 'Watching golf only'], 1, 'A next date on the calendar is what makes it stick.'),
+        q('This clinic makes a good\u2026', ['Secret', 'Holiday gift for a curious beginner', 'Nothing'], 1, 'Giftable, friendly, and genuinely fun.'),
+      ],
+    },
+  ],
+}
+
 export const ALL_PROGRAMS: ProgramSpec[] = [
   EIGHT_WEEK,
   SIX_WEEK,
@@ -692,4 +754,5 @@ export const ALL_PROGRAMS: ProgramSpec[] = [
   PUTTING_FOUR_WEEK,
   PRACTICE_FOUR_WEEK,
   EQUIPMENT_BASICS,
+  BUTLER_CLINIC,
 ]

@@ -409,6 +409,44 @@
      "quizQuestions": 3
     }
    ]
+  },
+  {
+   "slug": "butler-beginner-clinic-4",
+   "name": "Beginner Mornings at Butler Pitch & Putt",
+   "description": "Four Wednesday mornings with Tom at Butler Pitch & Putt, a relaxed downtown short course — the friendliest way to start golf. Short holes, no pressure, real coaching, coffee weather. A holiday-season special and a genuinely good gift for the curious beginner in your life. In-person clinic (not self-paced). Draft curriculum pending Tom Harris review.",
+   "weeks": 4,
+   "priceMinor": 12900,
+   "currency": "usd",
+   "modules": [
+    {
+     "week": 1,
+     "title": "Meet the game: putting & the short hole",
+     "videoId": null,
+     "homework": "Just show up. We start on the green and the shortest holes — you'll hit good shots on day one.",
+     "quizQuestions": 3
+    },
+    {
+     "week": 2,
+     "title": "The little swing",
+     "videoId": "sFCHZ4ozj8c",
+     "homework": "Between sessions, ten minutes of mirror swings at home — no ball, just the motion Tom showed you.",
+     "quizQuestions": 3
+    },
+    {
+     "week": 3,
+     "title": "Chipping around the green",
+     "videoId": "lO1TiiPMMx8",
+     "homework": "Notice one thing that improved since week one, and tell Tom next session. Confidence is the goal.",
+     "quizQuestions": 3
+    },
+    {
+     "week": 4,
+     "title": "Play the whole thing",
+     "videoId": null,
+     "homework": "Play all nine short holes with the group, keep your own score for the first time, and book your next round before you leave.",
+     "quizQuestions": 3
+    }
+   ]
   }
  ]
 }
