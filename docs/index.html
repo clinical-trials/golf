@@ -780,7 +780,10 @@
           if(!ev){evEl.textContent='—';fallback('No tournament scheduled right now.');return;}
           var comp=(ev.competitions||[])[0]||{}, cs=(comp.competitors||[]).slice();
           var st=ev.status&&ev.status.type&&(ev.status.type.shortDetail||ev.status.type.description)||'';
-          evEl.textContent=ev.name+(st?(' · '+st):'');
+          var md=function(iso){var x=new Date(iso);return isNaN(x)?'':x.toLocaleDateString('en-US',{month:'short',day:'numeric',timeZone:'UTC'});};
+          var s=ev.date?new Date(ev.date):null, e=ev.endDate?new Date(ev.endDate):null, dates='';
+          if(s&&!isNaN(s)){dates=(e&&!isNaN(e))?(s.getUTCMonth()===e.getUTCMonth()?md(ev.date)+'–'+e.getUTCDate():md(ev.date)+' – '+md(ev.endDate)):md(ev.date);}
+          evEl.textContent=ev.name+(dates?(' · '+dates+', '+s.getUTCFullYear()):'')+(st?(' · '+st):'');
           if(!cs.length){fallback('Live scoring appears here once play begins.');return;}
           cs.sort(function(a,b){return (a.order==null?999:a.order)-(b.order==null?999:b.order);});
           var rows=cs.slice(0,10).map(function(c){
