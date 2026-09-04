@@ -2,3 +2,6 @@ node_modules/
 .next/
 .env
 src/generated/
+
+# Player review-center sample media — real person, not published without consent
+docs/media/

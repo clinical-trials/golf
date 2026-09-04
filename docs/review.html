@@ -1,0 +1,192 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="favicon-180.png">
+<title>Player Review Center — Pocket Pro (coach backend)</title>
+<meta name="description" content="Coach-side preview: Tom keeps every player's swings as they progress, reviews them in slow motion, and logs the fix.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600&family=Archivo+Black&family=Archivo+Narrow:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{--ink:#0B0F13;--ink-2:#131A1F;--ink-3:#1B242A;--card:#ECE6D6;--dim:#9EA9A2;--flag:#E9B949;--turf:#7B9153;--penalty:#D2553C;--rule:#232D31;}
+  *{box-sizing:border-box;}
+  body{margin:0;background-color:#0A0F0B;background-image:repeating-linear-gradient(115deg,rgba(123,145,83,0.05) 0 44px,rgba(123,145,83,0) 44px 88px),radial-gradient(130% 90% at 50% -8%,rgba(45,106,79,0.13),rgba(45,106,79,0) 55%);background-attachment:fixed;color:var(--card);font-family:'Archivo',system-ui,sans-serif;line-height:1.5;-webkit-font-smoothing:antialiased;}
+  h1,h2,h3{font-family:'Archivo Black',sans-serif;font-weight:400;letter-spacing:-0.02em;margin:0;line-height:1.05;}
+  a{color:var(--flag);}
+  .wrap{width:min(100% - 2rem,74rem);margin-inline:auto;}
+  .label{font-family:'Archivo Narrow',sans-serif;font-weight:700;text-transform:uppercase;letter-spacing:0.14em;font-size:0.72rem;color:var(--dim);}
+  .notice{background:var(--flag);color:#231A06;font-family:'Archivo Narrow',sans-serif;font-weight:700;text-transform:uppercase;letter-spacing:0.09em;font-size:0.76rem;text-align:center;padding:0.55rem 1rem;}
+  .backbar{position:sticky;top:0;z-index:30;background:rgba(10,15,11,0.92);backdrop-filter:blur(8px);border-bottom:1px solid var(--rule);}
+  .backbar__in{display:flex;align-items:center;justify-content:space-between;gap:1rem;padding:0.45rem 0;min-height:44px;}
+  .backbar a{color:var(--card);text-decoration:none;font-family:'Archivo Narrow',sans-serif;font-weight:700;text-transform:uppercase;letter-spacing:0.06em;font-size:0.8rem;display:inline-flex;align-items:center;gap:0.4rem;min-height:40px;}
+  .backbar a:hover{color:var(--flag);}
+  .backbar__cta{background:var(--flag);color:#231A06 !important;padding:0.4rem 0.85rem;}
+  .hd{padding:clamp(1.6rem,4vw,2.5rem) 0 0.5rem;}
+  .hd h1{font-size:clamp(1.9rem,1.4rem + 2.4vw,3rem);}
+  .hd p{color:var(--dim);margin:0.6rem 0 0;max-width:60ch;}
+
+  .grid{display:grid;gap:1.1rem;padding:1.2rem 0 3rem;grid-template-columns:1fr;}
+  @media(min-width:60rem){.grid{grid-template-columns:minmax(0,1.5fr) minmax(0,1fr);align-items:start;}}
+  .card{border:1px solid var(--rule);background:var(--ink-2);padding:1.2rem;}
+  .card h2{font-size:1.1rem;margin-bottom:0.35rem;}
+
+  /* roster */
+  .roster{display:flex;flex-wrap:wrap;gap:0.5rem;margin-top:0.9rem;}
+  .pl{appearance:none;border:1px solid var(--rule);background:var(--ink-3);color:var(--card);padding:0.5rem 0.8rem;cursor:pointer;font-family:'Archivo Narrow',sans-serif;font-weight:700;letter-spacing:0.02em;display:flex;gap:0.5rem;align-items:center;}
+  .pl[aria-pressed="true"]{border-color:var(--flag);color:var(--flag);}
+  .pl small{color:var(--dim);font-weight:400;}
+  .pl__dot{width:0.5rem;height:0.5rem;border-radius:50%;background:var(--turf);}
+
+  /* video */
+  .review{display:grid;gap:1rem;grid-template-columns:1fr;}
+  @media(min-width:34rem){.review{grid-template-columns:auto 1fr;}}
+  .vwrap{position:relative;width:min(100%,17rem);margin-inline:auto;background:#05080A;border:1px solid var(--rule);aspect-ratio:9/16;overflow:hidden;}
+  .vwrap video{display:block;width:100%;height:100%;object-fit:cover;background:#05080A;}
+  .vfallback{position:absolute;inset:0;display:none;flex-direction:column;gap:0.5rem;align-items:center;justify-content:center;text-align:center;padding:1.4rem;color:var(--dim);font-family:'Archivo Narrow',sans-serif;font-size:0.86rem;}
+  .vwrap.novideo video{display:none;}
+  .vwrap.novideo .vfallback{display:flex;}
+  .vfallback svg{width:44px;height:44px;opacity:0.8;}
+  .vmeta{display:flex;flex-direction:column;gap:0.7rem;}
+  .ctrls{display:flex;flex-wrap:wrap;gap:0.4rem;}
+  .ctrl{appearance:none;border:1px solid var(--rule);background:var(--ink-3);color:var(--card);padding:0.45rem 0.7rem;cursor:pointer;font-family:'Archivo Narrow',sans-serif;font-weight:700;font-size:0.78rem;letter-spacing:0.03em;min-height:40px;}
+  .ctrl[aria-pressed="true"]{border-color:var(--flag);color:var(--flag);}
+  .ctrl:focus-visible{outline:2px solid var(--flag);outline-offset:2px;}
+  .cgroup{display:flex;gap:0.35rem;align-items:center;}
+  .cgroup .label{margin-right:0.15rem;}
+
+  .read{border-left:3px solid var(--flag);padding:0.2rem 0 0.2rem 0.85rem;margin-top:0.2rem;}
+  .read__date{font-family:'Archivo Narrow',sans-serif;font-weight:700;text-transform:uppercase;letter-spacing:0.08em;font-size:0.72rem;color:var(--flag);}
+  .read__body{color:var(--card);font-size:0.98rem;margin:0.35rem 0 0;}
+  .tags{display:flex;flex-wrap:wrap;gap:0.4rem;margin-top:0.8rem;}
+  .tag{font-family:'Archivo Narrow',sans-serif;font-weight:700;text-transform:uppercase;letter-spacing:0.06em;font-size:0.68rem;color:var(--turf);border:1px solid var(--turf);padding:0.18rem 0.5rem;}
+
+  /* timeline */
+  .tl{display:grid;gap:0.75rem;margin-top:0.9rem;}
+  .ses{border:1px solid var(--rule);background:var(--ink-3);padding:0.85rem 0.95rem;}
+  .ses--live{border-color:var(--flag);}
+  .ses--empty{border-style:dashed;color:var(--dim);}
+  .ses__top{display:flex;justify-content:space-between;gap:0.75rem;align-items:baseline;}
+  .ses__date{font-family:'Archivo Narrow',sans-serif;font-weight:700;letter-spacing:0.03em;}
+  .ses__pill{font-family:'Archivo Narrow',sans-serif;font-weight:700;text-transform:uppercase;letter-spacing:0.06em;font-size:0.64rem;padding:0.12rem 0.45rem;border:1px solid var(--rule);color:var(--dim);}
+  .ses--live .ses__pill{color:var(--flag);border-color:var(--flag);}
+  .ses__note{color:var(--dim);font-size:0.85rem;margin:0.4rem 0 0;}
+  footer{border-top:1px solid var(--rule);padding:1.4rem 0 3rem;color:var(--dim);font-size:0.82rem;}
+  footer .wrap{max-width:70ch;}
+</style>
+</head>
+<body>
+<p class="notice">Coach backend preview — Tom's private player review center. Sample player, real coaching note. Player video is not published; it lives in Tom's secured backend.</p>
+<div class="backbar"><div class="wrap backbar__in"><a href="index.html">&larr; Back to Pocket Pro</a><a class="backbar__cta" href="index.html#platform">The platform</a></div></div>
+
+<header class="hd"><div class="wrap">
+  <span class="label">Tom's coach backend</span>
+  <h1>Player Review Center.</h1>
+  <p>Every player's swings, kept as they progress. Pull up any session, loop it, slow it down frame by frame, and log the one thing to fix &mdash; so the next clip is measured against the last, not a memory.</p>
+</div></header>
+
+<div class="wrap">
+  <section class="card" style="margin-top:0.4rem">
+    <span class="label">Your players</span>
+    <div class="roster">
+      <button class="pl" aria-pressed="true"><span class="pl__dot"></span> A. M. <small>&middot; active</small></button>
+      <button class="pl" aria-pressed="false" disabled>J. R. <small>&middot; sample</small></button>
+      <button class="pl" aria-pressed="false" disabled>New intake <small>&middot; sample</small></button>
+    </div>
+  </section>
+
+  <div class="grid">
+
+    <section class="card">
+      <h2>Swing review &mdash; A. M.</h2>
+      <p class="label" style="margin-bottom:0.9rem">Session Jul 26, 2026 &middot; driver, face-on</p>
+      <div class="review">
+        <div id="vwrap" class="vwrap">
+          <video id="swing" src="media/sample-swing.mp4" poster="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%20180%20320'%3E%3Crect%20width='180'%20height='320'%20fill='%2305080A'/%3E%3Ccircle%20cx='90'%20cy='160'%20r='30'%20fill='none'%20stroke='%23E9B949'%20stroke-width='2'/%3E%3Cpath%20d='M82%20146%20l20%2014%20-20%2014%20z'%20fill='%23E9B949'/%3E%3C/svg%3E" muted loop playsinline autoplay preload="metadata"></video>
+          <div class="vfallback"><svg viewBox="0 0 24 24" fill="none" stroke="#7B9153" stroke-width="1.6"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M10 9l5 3-5 3z" fill="#7B9153" stroke="none"/></svg><span>Sample swing lives in Tom&rsquo;s secured coach backend &mdash; not published on the public site.</span></div>
+        </div>
+        <div class="vmeta">
+          <div class="cgroup"><span class="label">Speed</span>
+            <div class="ctrls" role="group" aria-label="Playback speed">
+              <button class="ctrl spd" data-r="0.25" aria-pressed="false">0.25&times;</button>
+              <button class="ctrl spd" data-r="0.5" aria-pressed="true">0.5&times;</button>
+              <button class="ctrl spd" data-r="1" aria-pressed="false">1&times;</button>
+            </div>
+          </div>
+          <div class="ctrls">
+            <button class="ctrl" id="playBtn" aria-pressed="true">Pause</button>
+            <button class="ctrl" id="loopBtn" aria-pressed="true">Loop: on</button>
+          </div>
+          <div class="read">
+            <div class="read__date">Tom&rsquo;s read &middot; Jul 26, 2026</div>
+            <p class="read__body">Keep working on rotation to the target with pelvis and torso more level. Tendency is to stall the body and side bend with an early release to square the club.</p>
+          </div>
+          <div>
+            <span class="label">Corrective focus</span>
+            <div class="tags">
+              <span class="tag">Rotate through to target</span>
+              <span class="tag">Level pelvis &amp; torso</span>
+              <span class="tag">Stop the stall / side-bend</span>
+              <span class="tag">Quiet the early release</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="card">
+      <h2>Progress timeline</h2>
+      <p style="color:var(--dim);font-size:0.85rem;margin:0.2rem 0 0">Each session Tom captures a swing, it stacks here, and the next one is compared to the last.</p>
+      <div class="tl">
+        <div class="ses ses--live">
+          <div class="ses__top"><span class="ses__date">Jul 26, 2026</span><span class="ses__pill">Latest &middot; reviewed</span></div>
+          <p class="ses__note">Driver, face-on. Focus: rotation to target, level through the strike, quiet the early release.</p>
+        </div>
+        <div class="ses ses--empty">
+          <div class="ses__top"><span class="ses__date">Next session</span><span class="ses__pill">Awaiting upload</span></div>
+          <p class="ses__note">The app captures the swing on the player&rsquo;s phone and it appears here for Tom &mdash; side-by-side with Jul 26 to see the change.</p>
+        </div>
+        <div class="ses ses--empty">
+          <div class="ses__top"><span class="ses__date">Future</span><span class="ses__pill">History builds</span></div>
+          <p class="ses__note">Over a program, the timeline becomes the proof: same player, same camera protocol, the fault fading clip by clip.</p>
+        </div>
+      </div>
+    </section>
+
+  </div>
+</div>
+
+<footer><div class="wrap">
+  Coach backend preview. The swing clip is a real player&rsquo;s sample, kept local to Tom&rsquo;s secured backend and <b>not published</b> on the public site &mdash; player video and identity are never posted without consent. The review loop shown here (phone capture &rarr; loop &amp; slow-mo &rarr; Tom&rsquo;s read &rarr; tracked progress) is the same one described in the <a href="index.html#platform">platform module map</a> and the biomechanics plan. <a href="index.html">&larr; Back to Pocket Pro</a>
+</div></footer>
+
+<script>
+(function(){
+  var v=document.getElementById('swing');
+  if(!v)return;
+  v.loop=true; v.playbackRate=0.5;
+  // speed
+  document.querySelectorAll('.spd').forEach(function(b){
+    b.addEventListener('click',function(){
+      v.playbackRate=parseFloat(b.dataset.r);
+      document.querySelectorAll('.spd').forEach(function(x){x.setAttribute('aria-pressed',String(x===b));});
+    });
+  });
+  // play / pause
+  var playBtn=document.getElementById('playBtn');
+  playBtn.addEventListener('click',function(){ if(v.paused){v.play();} else {v.pause();} });
+  v.addEventListener('play',function(){playBtn.textContent='Pause';playBtn.setAttribute('aria-pressed','true');});
+  v.addEventListener('pause',function(){playBtn.textContent='Play';playBtn.setAttribute('aria-pressed','false');});
+  // loop
+  var loopBtn=document.getElementById('loopBtn');
+  loopBtn.addEventListener('click',function(){
+    v.loop=!v.loop; loopBtn.setAttribute('aria-pressed',String(v.loop)); loopBtn.textContent=v.loop?'Loop: on':'Loop: off';
+  });
+  // graceful fallback when the clip isn't present (e.g. public site)
+  v.addEventListener('error',function(){document.getElementById('vwrap').classList.add('novideo');});
+})();
+</script>
+</body>
+</html>
