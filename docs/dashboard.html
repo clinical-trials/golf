@@ -106,6 +106,60 @@
       <div class="verdict">Nearly <b>doubled</b> your makes, and dropped <b>1.4 putts</b> a round.</div>
     </section>
 
+    <style>
+      .sw{display:grid;gap:1rem;grid-template-columns:1fr;margin-top:0.9rem}
+      @media(min-width:34rem){.sw{grid-template-columns:auto 1fr}}
+      .sw__v{position:relative;width:min(100%,13.5rem);margin-inline:auto;background:#05080A;border:1px solid var(--rule);aspect-ratio:9/16;overflow:hidden}
+      .sw__v video{display:block;width:100%;height:100%;object-fit:cover;background:#05080A}
+      .sw__fb{position:absolute;inset:0;display:none;flex-direction:column;gap:0.5rem;align-items:center;justify-content:center;text-align:center;padding:1.1rem;color:var(--dim);font-family:'Archivo Narrow',sans-serif;font-size:0.82rem}
+      .sw__v.novideo video{display:none}
+      .sw__v.novideo .sw__fb{display:flex}
+      .sw__fb svg{width:38px;height:38px;opacity:0.85}
+      .sw__meta{display:flex;flex-direction:column;gap:0.7rem}
+      .sw__ctrls{display:flex;flex-wrap:wrap;gap:0.35rem;align-items:center}
+      .sw__btn{appearance:none;border:1px solid var(--rule);background:var(--ink-3);color:var(--card);padding:0.4rem 0.65rem;cursor:pointer;font-family:'Archivo Narrow',sans-serif;font-weight:700;font-size:0.76rem;letter-spacing:0.03em;min-height:38px}
+      .sw__btn[aria-pressed="true"]{border-color:var(--flag);color:var(--flag)}
+      .sw__btn:focus-visible{outline:2px solid var(--flag);outline-offset:2px}
+      .sw__read{border-left:3px solid var(--flag);padding:0.15rem 0 0.15rem 0.8rem}
+      .sw__read b.d{display:block;font-family:'Archivo Narrow',sans-serif;font-weight:700;text-transform:uppercase;letter-spacing:0.08em;font-size:0.7rem;color:var(--flag)}
+      .sw__read p{color:var(--card);font-size:0.94rem;margin:0.3rem 0 0}
+      .sw__tags{display:flex;flex-wrap:wrap;gap:0.35rem;margin-top:0.3rem}
+      .sw__tag{font-family:'Archivo Narrow',sans-serif;font-weight:700;text-transform:uppercase;letter-spacing:0.06em;font-size:0.66rem;color:var(--turf);border:1px solid var(--turf);padding:0.16rem 0.45rem}
+      .sw__priv{color:var(--dim);font-size:0.8rem;margin:0.2rem 0 0}
+    </style>
+    <section class="card card--wide" id="swing-reviews">
+      <h2>Swing reviews</h2>
+      <p class="sw__priv" style="margin-top:0.35rem"><b style="color:var(--card)">Private &mdash; visible only to you and Tom.</b> Record a swing in the app; Tom reviews it here and logs the fix, so every session is measured against the last.</p>
+      <div class="sw">
+        <div class="sw__v" id="sw-v">
+          <video id="sw-video" src="media/sample-swing.mp4" poster="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%20180%20320'%3E%3Crect%20width='180'%20height='320'%20fill='%2305080A'/%3E%3Ccircle%20cx='90'%20cy='160'%20r='30'%20fill='none'%20stroke='%23E9B949'%20stroke-width='2'/%3E%3Cpath%20d='M82%20146%20l20%2014%20-20%2014%20z'%20fill='%23E9B949'/%3E%3C/svg%3E" muted loop playsinline autoplay preload="metadata"></video>
+          <div class="sw__fb"><svg viewBox="0 0 24 24" fill="none" stroke="#7B9153" stroke-width="1.6"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M10 9l5 3-5 3z" fill="#7B9153" stroke="none"/></svg><span>Your swing plays here in your private review center &mdash; the sample clip stays in the secured backend, not on the public site.</span></div>
+        </div>
+        <div class="sw__meta">
+          <div class="sw__ctrls" role="group" aria-label="Playback">
+            <span class="label">Speed</span>
+            <button class="sw__btn sw-spd" data-r="0.25" aria-pressed="false">0.25&times;</button>
+            <button class="sw__btn sw-spd" data-r="0.5" aria-pressed="true">0.5&times;</button>
+            <button class="sw__btn sw-spd" data-r="1" aria-pressed="false">1&times;</button>
+            <button class="sw__btn" id="sw-loop" aria-pressed="true">Loop: on</button>
+          </div>
+          <div class="sw__read"><b class="d">Tom&rsquo;s read &middot; Jul 26, 2026</b><p>Keep working on rotation to the target with pelvis and torso more level. Tendency is to stall the body and side bend with an early release to square the club.</p></div>
+          <div><span class="label">What we&rsquo;re working on</span><div class="sw__tags"><span class="sw__tag">Rotate through to target</span><span class="sw__tag">Level pelvis &amp; torso</span><span class="sw__tag">Stop the stall / side-bend</span><span class="sw__tag">Quiet the early release</span></div></div>
+          <p class="sw__priv">Jul 26 &middot; driver, face-on. Your next swing stacks up beside this one so you can watch the change.</p>
+        </div>
+      </div>
+    </section>
+    <script>
+    (function(){
+      var v=document.getElementById('sw-video'); if(!v)return;
+      v.loop=true; v.playbackRate=0.5;
+      document.querySelectorAll('.sw-spd').forEach(function(b){b.addEventListener('click',function(){v.playbackRate=parseFloat(b.dataset.r);document.querySelectorAll('.sw-spd').forEach(function(x){x.setAttribute('aria-pressed',String(x===b));});});});
+      var lb=document.getElementById('sw-loop');
+      lb.addEventListener('click',function(){v.loop=!v.loop;lb.setAttribute('aria-pressed',String(v.loop));lb.textContent=v.loop?'Loop: on':'Loop: off';});
+      v.addEventListener('error',function(){document.getElementById('sw-v').classList.add('novideo');});
+    })();
+    </script>
+
     <section class="card card--wide">
       <h2>Recent rounds</h2>
       <table>
