@@ -193,7 +193,6 @@
       <a href="#modules">Classes</a>
       <a href="#book">Lessons</a>
       <a href="#swing">Swing mechanics</a>
-      <a href="#golf-now">Golf now</a>
       <a href="#faq">FAQ</a>
       <a href="prototype.html">Course tool</a>
       <a href="dashboard.html">My progress</a>
@@ -232,6 +231,18 @@
     <span class="label">Schedule a lesson with Tom</span>
     <h2 style="font-size:clamp(1.6rem,1.1rem + 1.9vw,2.6rem);max-width:20ch;margin-top:0.7rem">Book time. Pay securely. Show up ready.</h2>
     <p style="color:var(--dim);max-width:60ch;margin-top:0.8rem;font-size:0.95rem">Pick a lesson that&rsquo;s right for you, choose a time that works with your schedule, and check out — your slot is held the moment payment clears. <a href="#modules">See upcoming class times →</a></p>
+    <style>
+      .how3{display:grid;gap:0.7rem;grid-template-columns:1fr;margin-top:1.3rem}
+      @media(min-width:44rem){.how3{grid-template-columns:1fr 1fr 1fr}}
+      .how3 .step{border:1px solid var(--rule);background:var(--ink-2);padding:0.95rem 1.05rem}
+      .how3 .step b{font-family:'Archivo Black',sans-serif;font-weight:400;color:var(--flag);font-size:0.9rem;display:block;letter-spacing:0.01em}
+      .how3 .step p{color:var(--dim);font-size:0.9rem;margin:0.35rem 0 0;line-height:1.45}
+    </style>
+    <div class="how3">
+      <div class="step"><b>1 &middot; Before</b><p>A quick questionnaire &mdash; your experience, your equipment, any physical limits &mdash; then film two swings from our template: down the line (toward the target) and face-on.</p></div>
+      <div class="step"><b>2 &middot; Your session</b><p>One-on-one with Tom, in person or virtual. Fire away with questions and start to see the root causes of your most common shots.</p></div>
+      <div class="step"><b>3 &middot; After</b><p>You leave with 2&ndash;3 drills &mdash; the homework &mdash; so you feel and understand the fix and it carries to the course.</p></div>
+    </div>
     <figure style="margin:1.25rem auto 0;position:relative;max-width:24rem;aspect-ratio:3/4;overflow:hidden;border:1px solid var(--rule);background:#0D1512">
       <img loading="lazy" decoding="async" alt="Two golfers on the tee reading the hole before a shot" src="img/lesson-tee.jpg" style="width:100%;height:100%;object-fit:cover;object-position:center">
       <figcaption style="position:absolute;left:0;right:0;bottom:0;padding:1.4rem 1rem 0.7rem;background:linear-gradient(transparent,rgba(11,15,19,0.9));font-family:'Archivo Narrow',sans-serif;font-size:0.72rem;letter-spacing:0.08em;text-transform:uppercase;color:var(--dim)">Read the hole, pick the shot &middot; lessons in person, virtual, or hybrid</figcaption>
@@ -515,8 +526,8 @@
         <p style="color:var(--dim);margin:0.7rem 0 0">Be polite. Be patient. Shake hands at the end of a game (men remove hats, ladies do not). Four things cover 90%: be quiet and still while others hit, stand safely to the side, keep pace (be ready on your turn), and fix your ball marks and divots. If you are falling behind your playing partners or the group in front of you, pick up and go to the next hole. Yell &ldquo;Fore!&rdquo; loudly if a ball might reach someone. Everything else you&rsquo;ll pick up by playing.</p>
       </details>
       <details style="border:1px solid var(--rule);background:var(--ink-2);padding:0.9rem 1.1rem">
-        <summary style="font-family:'Archivo Narrow',sans-serif;font-weight:700;cursor:pointer">How do the classes work?</summary>
-        <p style="color:var(--dim);margin:0.7rem 0 0">Flipped classroom: watch a short lesson at home, do a focused piece of homework at the range or a short course, then take a quick low-stakes quiz — instant feedback, no grades. Five programs cover beginners, women, families and improvers.</p>
+        <summary style="font-family:'Archivo Narrow',sans-serif;font-weight:700;cursor:pointer">How do the sessions work?</summary>
+        <p style="color:var(--dim);margin:0.7rem 0 0">Fill out a quick questionnaire &mdash; your past experience, your equipment, and any physical limitations. You&rsquo;ll get a template on how to film yourself for practice: send in one clip from down the line (toward the target) and one face-on &mdash; the video walks you through exactly how. Then your session, in person or virtual, is one-on-one with Tom: fire away with questions and start to understand the root causes of the most common shots. You&rsquo;ll leave with 2&ndash;3 drills (the homework) to help you feel and understand the concepts that improve your game.</p>
       </details>
     </div>
   </div>
@@ -709,17 +720,70 @@
 
 <section class="surfaces" id="golf-now">
   <div class="wrap" style="max-width:48rem">
-    <span class="label">Following the game</span>
+    <span class="label">Tour update &middot; Following the game</span>
     <h2 style="font-size:clamp(1.5rem,1.1rem + 1.7vw,2.3rem);margin-top:0.7rem">Keep up with the pros.</h2>
     <p style="color:var(--dim);margin:0.8rem 0 0;font-size:0.95rem">Part of loving golf is following it. Straight links to who&rsquo;s playing where &mdash; watch a tournament, then bring one thing you saw to your next lesson.</p>
-    <div style="display:flex;flex-wrap:wrap;gap:0.5rem;margin-top:1.1rem">
-      <a class="btn btn--o" href="https://www.pgatour.com/schedule" target="_blank" rel="noopener">PGA Tour schedule</a>
-      <a class="btn btn--o" href="https://www.pgatour.com/leaderboard" target="_blank" rel="noopener">Live leaderboard</a>
-      <a class="btn btn--o" href="https://www.lpga.com/tournaments" target="_blank" rel="noopener">LPGA</a>
-      <a class="btn btn--o" href="https://www.masters.com" target="_blank" rel="noopener">The Masters</a>
-      <a class="btn btn--o" href="https://www.usopen.com" target="_blank" rel="noopener">U.S. Open</a>
+    <style>
+      .lb__tabs{display:flex;border:1px solid var(--rule);width:max-content;margin-top:1.1rem}
+      .lb__tab{appearance:none;background:transparent;color:var(--dim);border:0;font-family:'Archivo Narrow',sans-serif;font-weight:700;text-transform:uppercase;letter-spacing:0.06em;font-size:0.8rem;padding:0.55rem 1.15rem;min-height:42px;cursor:pointer}
+      .lb__tab[aria-pressed="true"]{background:var(--flag);color:#231A06}
+      .lb__tab:focus-visible{outline:2px solid var(--flag);outline-offset:2px}
+      .lb{border:1px solid var(--rule);background:var(--ink-2);margin-top:0.8rem}
+      .lb__hd{display:flex;justify-content:space-between;align-items:baseline;gap:0.75rem;flex-wrap:wrap;padding:0.7rem 1rem;border-bottom:1px solid var(--rule)}
+      .lb__event{font-family:'Archivo Narrow',sans-serif;font-weight:700;letter-spacing:0.02em;color:var(--card)}
+      .lb__full{font-family:'Archivo Narrow',sans-serif;font-weight:700;text-transform:uppercase;letter-spacing:0.06em;font-size:0.72rem;white-space:nowrap}
+      .lb table{width:100%;border-collapse:collapse;font-family:'Archivo Narrow',sans-serif;font-variant-numeric:tabular-nums}
+      .lb td,.lb th{padding:0.5rem 1rem;border-bottom:1px solid var(--rule);text-align:right;font-size:0.9rem}
+      .lb th{color:var(--dim);font-size:0.68rem;text-transform:uppercase;letter-spacing:0.08em}
+      .lb td:nth-child(2),.lb th:nth-child(2){text-align:left;width:100%}
+      .lb tr:last-child td{border-bottom:0}
+      .lb__rank{color:var(--flag);font-weight:700}
+      .lb__msg{padding:1.1rem 1rem;color:var(--dim);font-size:0.9rem;line-height:1.5}
+      .lb__msg a{color:var(--flag)}
+    </style>
+    <div class="lb__tabs" role="group" aria-label="Tour">
+      <button class="lb__tab" id="lb-pga" aria-pressed="true">PGA Tour</button>
+      <button class="lb__tab" id="lb-lpga" aria-pressed="false">LPGA</button>
     </div>
-    <p style="color:var(--dim);font-size:0.75rem;margin:0.8rem 0 0">Live scores and a &ldquo;this week in golf&rdquo; feed can pull from the official tour data later &mdash; for now these go straight to the source rather than us reprinting dates that go stale.</p>
+    <div class="lb">
+      <div class="lb__hd"><span class="lb__event" id="lb-event">Loading&hellip;</span><a class="lb__full" id="lb-full" href="https://www.pgatour.com/leaderboard" target="_blank" rel="noopener">Full leaderboard &rarr;</a></div>
+      <div class="lb__msg" id="lb-body">Loading live leaderboard&hellip;</div>
+    </div>
+    <p style="color:var(--dim);font-size:0.75rem;margin:0.9rem 0 0">Live scores from ESPN&rsquo;s public feed, refreshed when you reload &mdash; the two buttons go straight to each tour&rsquo;s official site for the full field, tee times and results.</p>
+    <script>
+    (function(){
+      var TOURS={pga:{api:'https://site.api.espn.com/apis/site/v2/sports/golf/pga/scoreboard',full:'https://www.pgatour.com/leaderboard'},lpga:{api:'https://site.api.espn.com/apis/site/v2/sports/golf/lpga/scoreboard',full:'https://www.lpga.com/leaderboard'}};
+      var cur='pga';
+      var evEl=document.getElementById('lb-event'), bodyEl=document.getElementById('lb-body'), fullEl=document.getElementById('lb-full');
+      if(!evEl)return;
+      function esc(s){return String(s==null?'':s).replace(/[<>&]/g,function(c){return{'<':'&lt;','>':'&gt;','&':'&amp;'}[c];});}
+      function fallback(msg){bodyEl.className='lb__msg';bodyEl.innerHTML=esc(msg)+' <a href="'+TOURS[cur].full+'" target="_blank" rel="noopener">See the official leaderboard &rarr;</a>';}
+      function load(){
+        var t=TOURS[cur]; fullEl.href=t.full;
+        evEl.textContent='Loading…'; bodyEl.className='lb__msg'; bodyEl.textContent='Loading live leaderboard…';
+        fetch(t.api).then(function(r){if(!r.ok)throw 0;return r.json();}).then(function(d){
+          var ev=(d.events||[])[0];
+          if(!ev){evEl.textContent='—';fallback('No tournament scheduled right now.');return;}
+          var comp=(ev.competitions||[])[0]||{}, cs=(comp.competitors||[]).slice();
+          var st=ev.status&&ev.status.type&&(ev.status.type.shortDetail||ev.status.type.description)||'';
+          evEl.textContent=ev.name+(st?(' · '+st):'');
+          if(!cs.length){fallback('Live scoring appears here once play begins.');return;}
+          cs.sort(function(a,b){return (a.order==null?999:a.order)-(b.order==null?999:b.order);});
+          var rows=cs.slice(0,10).map(function(c){
+            var name=esc(c.athlete&&c.athlete.displayName||'—');
+            var pos=esc(c.order==null?'':c.order);
+            var score=esc(c.score==null?'':c.score);
+            return '<tr><td class="lb__rank">'+pos+'</td><td>'+name+'</td><td>'+score+'</td></tr>';
+          }).join('');
+          bodyEl.className=''; bodyEl.innerHTML='<table><thead><tr><th>Pos</th><th>Player</th><th>Score</th></tr></thead><tbody>'+rows+'</tbody></table>';
+        }).catch(function(){fallback('Couldn’t reach the live feed just now.');});
+      }
+      function setTour(t){cur=t;document.getElementById('lb-pga').setAttribute('aria-pressed',String(t==='pga'));document.getElementById('lb-lpga').setAttribute('aria-pressed',String(t==='lpga'));load();}
+      document.getElementById('lb-pga').addEventListener('click',function(){setTour('pga');});
+      document.getElementById('lb-lpga').addEventListener('click',function(){setTour('lpga');});
+      load();
+    })();
+    </script>
   </div>
 </section>
 
