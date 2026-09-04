@@ -447,10 +447,23 @@
     <span class="label">Upcoming classes</span>
     <h2 style="font-size:clamp(1.5rem,1.1rem + 1.7vw,2.3rem);max-width:24ch;margin-top:0.7rem">Every week you are on your program, learning from a Pro.</h2>
     <p style="color:var(--dim);max-width:64ch;margin-top:0.8rem;font-size:0.95rem"><b style="color:var(--card)">Classes are group</b> &mdash; you learn alongside a small team, in person, virtual, or hybrid, with golf homework for mastery and data analysis to really lock in your game. (Want one-on-one? That&rsquo;s a <a href="#book">lesson with Tom</a>.) Founding cohorts are forming new teams; enrollment opens Sept 2026.</p>
-    <figure style="margin:1.25rem 0 0;position:relative;aspect-ratio:21/9;overflow:hidden;border:1px solid var(--rule);background:#0D1512">
-      <img loading="lazy" decoding="async" alt="A golfer on the tee, about to play" src="img/practice-tee.jpg" style="width:100%;height:100%;object-fit:cover;object-position:center 40%">
-      <figcaption style="position:absolute;left:0;right:0;bottom:0;padding:1.4rem 1rem 0.7rem;background:linear-gradient(transparent,rgba(11,15,19,0.9));font-family:'Archivo Narrow',sans-serif;font-size:0.72rem;letter-spacing:0.08em;text-transform:uppercase;color:var(--dim)">Real practice, real courses &middot; original photography</figcaption>
-    </figure>
+    <style>
+      .feat{margin:1.25rem 0 0;border:1px solid var(--flag);background:linear-gradient(160deg,#1c2410,#131A1F)}
+      .feat__track{padding:1.4rem 1.3rem 0.4rem}
+      .feat__ey{display:flex;flex-wrap:wrap;gap:0.5rem;align-items:center;margin-bottom:0.6rem}
+      .feat__badge{background:var(--flag);color:#231A06;font-family:'Archivo Narrow',sans-serif;font-weight:700;text-transform:uppercase;letter-spacing:0.08em;font-size:0.66rem;padding:0.18rem 0.55rem}
+      .feat__tag{border:1px solid var(--turf);color:var(--turf);font-family:'Archivo Narrow',sans-serif;font-weight:700;text-transform:uppercase;letter-spacing:0.08em;font-size:0.66rem;padding:0.16rem 0.5rem}
+      .feat__name{font-family:'Archivo Black',sans-serif;font-weight:400;font-size:clamp(1.3rem,1.05rem + 1vw,1.9rem);line-height:1.02;color:var(--card);margin:0}
+      .feat__desc{color:var(--dim);margin:0.55rem 0 0;font-size:0.95rem;max-width:60ch}
+      .feat__meta{font-family:'Archivo Narrow',sans-serif;font-weight:700;color:var(--card);margin:0.7rem 0 0;font-size:0.85rem;letter-spacing:0.02em}
+      .feat__price{color:var(--flag)}
+      .feat__cta{display:flex;flex-wrap:wrap;gap:0.5rem;margin:1rem 0 0}
+      .feat__dots{display:flex;gap:0.4rem;padding:0.3rem 1.3rem 1rem}
+      .feat__dot{appearance:none;width:0.7rem;height:0.7rem;border-radius:50%;border:1px solid var(--flag);background:transparent;cursor:pointer;padding:0}
+      .feat__dot[aria-pressed="true"]{background:var(--flag)}
+      .feat__dot:focus-visible{outline:2px solid var(--flag);outline-offset:2px}
+    </style>
+    <div class="feat" id="modules-featured" role="region" aria-label="Featured upcoming classes"></div>
     <p style="margin:1.1rem 0 0"><button id="expand-all" class="need" type="button" aria-expanded="false">Expand all classes</button></p>
     <div id="modules-list" style="margin-top:1.25rem;display:grid;gap:0.6rem"></div>
   </div>
@@ -516,7 +529,7 @@
       </details>
       <details style="border:1px solid var(--rule);background:var(--ink-2);padding:0.9rem 1.1rem">
         <summary style="font-family:'Archivo Narrow',sans-serif;font-weight:700;cursor:pointer">Do I need my own clubs?</summary>
-        <p style="color:var(--dim);margin:0.7rem 0 0">No. Rentals can be expensive (especially if they&rsquo;re any good) and borrowed clubs (pitching wedge, putter, 7&nbsp;iron and 5&nbsp;wood) are how most golfers start, and our First 90 Days program assumes exactly that. Buy clubs around week 10, once you know your distances — or start with a fitted starter kit when you&rsquo;re ready. In some cases you only need a single club to get going — a 7&nbsp;iron alone can do it.</p>
+        <p style="color:var(--dim);margin:0.7rem 0 0">No. Rentals can be expensive (especially if they&rsquo;re any good) and borrowed clubs (pitching wedge, putter, 7&nbsp;iron, and 5&nbsp;wood) are how most golfers start, and our First 90 Days program assumes exactly that. Buy clubs around week 10, once you know your distances — or start with a fitted starter kit when you&rsquo;re ready. In some cases you only need a single club to get going — a 7&nbsp;iron alone can do it.</p>
       </details>
       <details style="border:1px solid var(--rule);background:var(--ink-2);padding:0.9rem 1.1rem">
         <summary style="font-family:'Archivo Narrow',sans-serif;font-weight:700;cursor:pointer">Am I good enough to play a real course?</summary>
@@ -524,7 +537,7 @@
       </details>
       <details style="border:1px solid var(--rule);background:var(--ink-2);padding:0.9rem 1.1rem">
         <summary style="font-family:'Archivo Narrow',sans-serif;font-weight:700;cursor:pointer">What&rsquo;s the etiquette I actually need?</summary>
-        <p style="color:var(--dim);margin:0.7rem 0 0">Be polite. Be patient. Shake hands at the end of a game (men remove hats, ladies do not). Four things cover 90%: be quiet and still while others hit, stand safely to the side, keep pace (be ready on your turn), and fix your ball marks and divots. If you are falling behind your playing partners or the group in front of you, pick up and go to the next hole. Yell &ldquo;Fore!&rdquo; loudly if a ball might reach someone. Everything else you&rsquo;ll pick up by playing.</p>
+        <p style="color:var(--dim);margin:0.7rem 0 0">Be polite. Be patient. Shake hands at the end of a game (men remove hats, ladies do not have to but can). Four things cover 90%: be quiet and still while others hit, stand safely to the side, keep pace (be ready on your turn), and fix your ball marks and divots. If you are falling behind your playing partners or the group in front of you, pick up and go to the next hole. Yell &ldquo;Fore!&rdquo; loudly if a ball might reach someone. Everything else you&rsquo;ll pick up by playing.</p>
       </details>
       <details style="border:1px solid var(--rule);background:var(--ink-2);padding:0.9rem 1.1rem">
         <summary style="font-family:'Archivo Narrow',sans-serif;font-weight:700;cursor:pointer">How do the sessions work?</summary>
@@ -922,6 +935,34 @@ fetch('programs.json').then(r=>r.json()).then(d=>{
   document.querySelectorAll('.enroll-demo').forEach(b=>b.addEventListener('click',()=>{
     if(window.openCheckout){window.openCheckout({name:b.dataset.name,sched:b.dataset.sched,mode:'program',base:b.dataset.base})}
   }))
+  // Featured-classes rotator at the top of #modules (emphasises the group nature)
+  ;(function(){
+    var feat=document.getElementById('modules-featured'); if(!feat) return
+    var order=['putting-intensive-4','womens-golf-6','first-90-days','score-better-6','family-golf-6']
+    var byslug={}; d.programs.forEach(function(p){byslug[p.slug]=p})
+    var items=order.map(function(s){return byslug[s]}).filter(Boolean)
+    if(!items.length){feat.remove();return}
+    var money=function(p){return '$'+(p.priceMinor/100).toFixed(0)}
+    var esc=function(s){return String(s==null?'':s).replace(/"/g,'&quot;')}
+    var shortDesc=function(t){t=(t||'').replace(/\s*Draft curriculum.*$/,'').trim();var i=t.indexOf('.');return (i>0&&i<170)?t.slice(0,i+1):t.slice(0,150)}
+    feat.innerHTML='<div class="feat__track" id="feat-track">'+items.map(function(p,i){return '<article class="feat__card" data-i="'+i+'"'+(i?' hidden':'')+'>'+
+      '<div class="feat__ey"><span class="feat__badge">Featured group class</span><span class="feat__tag">'+(TAGS[p.slug]||'')+'</span></div>'+
+      '<h3 class="feat__name">'+p.name+'</h3>'+
+      '<p class="feat__desc">'+shortDesc(p.description)+'</p>'+
+      '<p class="feat__meta">'+(cohort(p.slug,p.weeks)||'Dates confirmed at enrollment')+' &middot; <span class="feat__price">'+money(p)+'</span> &middot; small group</p>'+
+      '<div class="feat__cta"><button class="btn btn--y feat-enroll" data-name="'+esc(p.name)+'" data-base="'+(p.priceMinor/100)+'" data-sched="'+esc(cohort(p.slug,p.weeks))+'">Reserve your seat &mdash; demo checkout</button> <a class="btn btn--o" href="#modules-list">See all classes</a></div>'+
+      '</article>'}).join('')+'</div><div class="feat__dots" id="feat-dots">'+items.map(function(p,i){return '<button class="feat__dot" data-i="'+i+'" aria-pressed="'+(i===0)+'" aria-label="Show '+esc(p.name)+'"></button>'}).join('')+'</div>'
+    var track=document.getElementById('feat-track'), dots=document.getElementById('feat-dots')
+    var cur=0,timer,reduce=window.matchMedia&&window.matchMedia('(prefers-reduced-motion: reduce)').matches
+    function show(i){cur=(i+items.length)%items.length;track.querySelectorAll('.feat__card').forEach(function(c){c.hidden=(+c.dataset.i!==cur)});dots.querySelectorAll('.feat__dot').forEach(function(x){x.setAttribute('aria-pressed',String(+x.dataset.i===cur))})}
+    function next(){show(cur+1)}
+    function reset(){clearInterval(timer);if(!reduce)timer=setInterval(next,5000)}
+    feat.querySelectorAll('.feat-enroll').forEach(function(b){b.addEventListener('click',function(){if(window.openCheckout)window.openCheckout({name:b.dataset.name,sched:b.dataset.sched,mode:'program',base:b.dataset.base})})})
+    dots.querySelectorAll('.feat__dot').forEach(function(x){x.addEventListener('click',function(){show(+x.dataset.i);reset()})})
+    feat.addEventListener('mouseenter',function(){clearInterval(timer)})
+    feat.addEventListener('mouseleave',reset)
+    reset()
+  })()
 }).catch(()=>{})
 
 ;(function(){
