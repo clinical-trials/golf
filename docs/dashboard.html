@@ -126,6 +126,10 @@
       .sw__tags{display:flex;flex-wrap:wrap;gap:0.35rem;margin-top:0.3rem}
       .sw__tag{font-family:'Archivo Narrow',sans-serif;font-weight:700;text-transform:uppercase;letter-spacing:0.06em;font-size:0.66rem;color:var(--turf);border:1px solid var(--turf);padding:0.16rem 0.45rem}
       .sw__priv{color:var(--dim);font-size:0.8rem;margin:0.2rem 0 0}
+      .sw__ann{position:absolute;left:0;right:0;bottom:0;background:linear-gradient(transparent,rgba(5,8,10,0.9));padding:1.3rem 0.6rem 0.45rem;pointer-events:none}
+      .sw__ann b{display:block;font-family:'Archivo Narrow',sans-serif;font-weight:700;text-transform:uppercase;letter-spacing:0.08em;font-size:0.6rem;color:var(--flag)}
+      .sw__ann span{display:block;font-family:'Archivo Narrow',sans-serif;font-weight:700;color:#fff;font-size:0.72rem;line-height:1.2;margin-top:0.15rem}
+      .sw__v.novideo .sw__ann{display:none}
     </style>
     <section class="card card--wide" id="swing-reviews">
       <h2>Swing reviews</h2>
@@ -133,7 +137,8 @@
       <div class="sw">
         <div class="sw__v" id="sw-v">
           <video id="sw-video" src="media/sample-swing.mp4" poster="media/swing-poster.jpg" muted loop playsinline autoplay preload="metadata"></video>
-          <div class="sw__fb"><svg viewBox="0 0 24 24" fill="none" stroke="#7B9153" stroke-width="1.6"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M10 9l5 3-5 3z" fill="#7B9153" stroke="none"/></svg><span>Your swing plays in your private review center &mdash; kept off the public preview for privacy.</span></div>
+          <div class="sw__ann"><b>Watch your swing for</b><span>Rotation through to the target &middot; level pelvis &amp; torso</span></div>
+          <div class="sw__fb"><svg viewBox="0 0 24 24" fill="none" stroke="#7B9153" stroke-width="1.6"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M10 9l5 3-5 3z" fill="#7B9153" stroke="none"/></svg><span>Your swing plays in your private student portal &mdash; this is a reference stand-in.</span></div>
         </div>
         <div class="sw__meta">
           <div class="sw__ctrls" role="group" aria-label="Playback">

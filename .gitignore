@@ -3,6 +3,6 @@ node_modules/
 .env
 src/generated/
 
-# Player review-center media — real person's likeness, kept local / NOT published
-# publicly without the subject's documented consent (pseudonym alone is not enough).
+# Player review-center media (a real person's swing) — reference stand-in kept
+# LOCAL / private to the student portal; not published to the public site.
 docs/media/

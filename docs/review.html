@@ -48,6 +48,10 @@
   .vfallback{position:absolute;inset:0;display:none;flex-direction:column;gap:0.5rem;align-items:center;justify-content:center;text-align:center;padding:1.4rem;color:var(--dim);font-family:'Archivo Narrow',sans-serif;font-size:0.86rem;}
   .vwrap.novideo video{display:none;}
   .vwrap.novideo .vfallback{display:flex;}
+  .vann{position:absolute;left:0;right:0;bottom:0;background:linear-gradient(transparent,rgba(5,8,10,0.9));padding:1.5rem 0.7rem 0.55rem;pointer-events:none;}
+  .vann b{display:block;font-family:'Archivo Narrow',sans-serif;font-weight:700;text-transform:uppercase;letter-spacing:0.08em;font-size:0.64rem;color:var(--flag);}
+  .vann span{display:block;font-family:'Archivo Narrow',sans-serif;font-weight:700;color:#fff;font-size:0.8rem;line-height:1.2;margin-top:0.2rem;}
+  .vwrap.novideo .vann{display:none;}
   .vfallback svg{width:44px;height:44px;opacity:0.8;}
   .vmeta{display:flex;flex-direction:column;gap:0.7rem;}
   .ctrls{display:flex;flex-wrap:wrap;gap:0.4rem;}
@@ -105,6 +109,7 @@
       <div class="review">
         <div id="vwrap" class="vwrap">
           <video id="swing" src="media/sample-swing.mp4" poster="media/swing-poster.jpg" muted loop playsinline autoplay preload="metadata"></video>
+          <div class="vann"><b>Watch your swing for</b><span>Rotation through to the target &middot; level pelvis &amp; torso &middot; quiet the early release</span></div>
           <div class="vfallback"><svg viewBox="0 0 24 24" fill="none" stroke="#7B9153" stroke-width="1.6"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M10 9l5 3-5 3z" fill="#7B9153" stroke="none"/></svg><span>The swing plays in Tom&rsquo;s private review center &mdash; kept off the public preview for the player&rsquo;s privacy.</span></div>
         </div>
         <div class="vmeta">
