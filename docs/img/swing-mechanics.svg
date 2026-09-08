@@ -1,0 +1,30 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 380" role="img" aria-label="Swing mechanics diagram: swing plane, posture, sequence, low point, face and path">
+  <rect width="720" height="380" fill="#0D1512"/>
+  <!-- ground -->
+  <line x1="40" y1="318" x2="680" y2="318" stroke="#26302B" stroke-width="2"/>
+  <!-- swing plane -->
+  <ellipse cx="352" cy="196" rx="164" ry="128" fill="none" stroke="#E9B949" stroke-width="2.5" stroke-dasharray="8 8" opacity="0.9" transform="rotate(-20 352 196)"/>
+  <!-- golfer (face-on, at impact) -->
+  <g stroke="#ECE6D6" stroke-width="7" stroke-linecap="round" fill="none">
+    <line x1="330" y1="242" x2="342" y2="150"/>            <!-- spine -->
+    <line x1="330" y1="242" x2="306" y2="316"/>            <!-- left leg -->
+    <line x1="330" y1="242" x2="356" y2="316"/>            <!-- right leg -->
+    <line x1="342" y1="150" x2="372" y2="226"/>            <!-- arms -->
+  </g>
+  <circle cx="344" cy="130" r="16" fill="#ECE6D6"/>        <!-- head -->
+  <line x1="372" y1="226" x2="420" y2="315" stroke="#ECE6D6" stroke-width="4.5" stroke-linecap="round"/> <!-- club -->
+  <circle cx="424" cy="314" r="7" fill="#ffffff"/>          <!-- ball -->
+  <!-- annotations -->
+  <g font-family="'Archivo Narrow',sans-serif" font-weight="700" font-size="15" fill="#9EA9A2" text-transform="uppercase">
+    <line x1="342" y1="185" x2="452" y2="120" stroke="#7B9153" stroke-width="1.5"/>
+    <text x="458" y="118" fill="#ECE6D6">Posture &amp; spine angle</text>
+    <line x1="332" y1="244" x2="150" y2="214" stroke="#7B9153" stroke-width="1.5"/>
+    <text x="40" y="210" fill="#ECE6D6">Sequence</text>
+    <text x="40" y="230" fill="#9EA9A2" font-size="12.5">hips &rarr; torso &rarr; arms</text>
+    <line x1="424" y1="308" x2="470" y2="270" stroke="#7B9153" stroke-width="1.5"/>
+    <text x="474" y="268" fill="#ECE6D6">Low point</text>
+    <text x="486" y="352" fill="#E9B949">Face &amp; path</text>
+    <line x1="482" y1="348" x2="430" y2="300" stroke="#E9B949" stroke-width="1.5"/>
+    <text x="52" y="352" fill="#E9B949">Swing plane</text>
+  </g>
+</svg>
