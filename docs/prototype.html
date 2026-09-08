@@ -539,7 +539,12 @@ fetch('courses.json').then(r=>r.json()).then(data=>{
   document.getElementById('tg-us').addEventListener('click',()=>setRegion('US'))
   document.getElementById('tg-all').addEventListener('click',()=>setRegion('ALL'))
   const searchInput=document.getElementById('course-search-input')
-  if(searchInput)searchInput.addEventListener('input',()=>{query=searchInput.value;renderStrip()})
+  if(searchInput){
+    searchInput.addEventListener('input',()=>{query=searchInput.value;renderStrip()})
+    // deep link: prototype.html?q=Austin pre-filters the tool (used by "See Austin courses")
+    const dlq=new URLSearchParams(location.search).get('q')
+    if(dlq){searchInput.value=dlq;query=dlq;renderStrip();const sw=document.querySelector('.strip-wrap');if(sw)setTimeout(()=>{sw.scrollIntoView({behavior:'smooth',block:'start'})},500)}
+  }
 
   // globe stats
   document.getElementById('globe').innerHTML=[
