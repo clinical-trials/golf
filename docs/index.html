@@ -924,7 +924,11 @@
       function setTour(t){cur=t;document.getElementById('lb-pga').setAttribute('aria-pressed',String(t==='pga'));document.getElementById('lb-lpga').setAttribute('aria-pressed',String(t==='lpga'));load();}
       document.getElementById('lb-pga').addEventListener('click',function(){setTour('pga');});
       document.getElementById('lb-lpga').addEventListener('click',function(){setTour('lpga');});
-      load();
+      // default to whichever tour is live now, else the one starting soonest
+      (function(){
+        function key(d){var ev=(d&&d.events||[])[0];if(!ev)return 1e15;var st=(ev.status&&ev.status.type)||{},state=st.state||'',now=Date.now(),start=ev.date?new Date(ev.date).getTime():now;if(state==='in')return -1e12;if(state==='pre')return Math.max(0,start-now);return 1e12+(now-start);}
+        Promise.all([fetch(TOURS.pga.api).then(function(r){return r.json();}).catch(function(){return null;}),fetch(TOURS.lpga.api).then(function(r){return r.json();}).catch(function(){return null;})]).then(function(res){setTour(key(res[0])<=key(res[1])?'pga':'lpga');}).catch(function(){setTour('pga');});
+      })();
     })();
     </script>
   </div>
