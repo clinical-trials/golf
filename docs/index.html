@@ -195,16 +195,12 @@
   <div class="wrap nav__in">
     <a class="nav__brand" href="#top">Pocket Pro</a>
     <div class="nav__links" id="nav-links">
-      <a href="#dev">Coaching</a>
-      <a href="#austin">Austin</a>
+      <a href="#offerings">Coaching</a>
       <a href="#modules">Classes</a>
-      <a href="#book">Lessons</a>
-      <a href="#swing">Swing mechanics</a>
-      <a href="#faq">FAQ</a>
+      <a href="#austin">Austin</a>
       <a href="prototype.html">Course tool</a>
-      <a href="dashboard.html">My progress</a>
+      <a href="dashboard.html">Progress</a>
       <a href="#golf-now">Leaderboard</a>
-      <a href="#shop">Shop</a>
     </div>
     <button class="nav__toggle" aria-label="Open menu" aria-expanded="false" aria-controls="nav-links">&#9776;</button>
     <a class="nav__cta" href="#book">Book a lesson →</a>
@@ -215,8 +211,8 @@
 </script>
 
 <header class="hero" id="top">
-  <figure class="ph hero__photo" data-need="img/tom-harris-lesson.jpg" style="margin:0">
-    <img src="img/tom-harris-lesson.jpg" width="2000" height="1500" decoding="async" fetchpriority="high" alt="Tom Harris coaching a putting stroke on the practice green" onerror="this.parentElement.classList.add('empty');this.remove()">
+  <figure class="ph hero__photo" data-need="img/cred-graa.jpg" style="margin:0">
+    <img src="img/cred-graa.jpg" decoding="async" fetchpriority="high" alt="Tom Harris with his GRAA Top 100 Growth of the Game award" onerror="this.parentElement.classList.add('empty');this.remove()">
   </figure>
   <div class="hero__body">
     <span style="display:inline-block;background:#fff;border-radius:12px;padding:14px 18px;margin:0 0 1.1rem;box-shadow:0 2px 14px rgba(0,0,0,0.3);max-width:min(268px,74%)"><img src="img/tom-harris-golf.svg" alt="Tom Harris Golf" style="width:100%;height:auto;display:block" decoding="async"></span>
@@ -381,10 +377,6 @@
       <div class="step"><b>2 &middot; Your session</b><p>One-on-one with Tom, in person or virtual. Fire away with questions and start to see the root causes of your most common shots.</p></div>
       <div class="step"><b>3 &middot; After</b><p>You leave with 2&ndash;3 drills &mdash; the homework &mdash; so you feel and understand the fix and it carries to the course.</p></div>
     </div>
-    <figure style="margin:1.25rem auto 0;position:relative;max-width:24rem;aspect-ratio:3/4;overflow:hidden;border:1px solid var(--rule);background:#0D1512">
-      <img loading="lazy" decoding="async" alt="Two golfers on the tee reading the hole before a shot" src="img/lesson-tee.jpg" style="width:100%;height:100%;object-fit:cover;object-position:center">
-      <figcaption style="position:absolute;left:0;right:0;bottom:0;padding:1.4rem 1rem 0.7rem;background:linear-gradient(transparent,rgba(11,15,19,0.9));font-family:'Archivo Narrow',sans-serif;font-size:0.72rem;letter-spacing:0.08em;text-transform:uppercase;color:var(--dim)">Read the hole, pick the shot &middot; lessons in person, virtual, or hybrid</figcaption>
-    </figure>
     <article class="surf" style="margin-top:1.25rem;background:var(--ink-3)">
       <span class="where">Gift a golfer</span>
       <h3>Gift cards for classes &amp; lessons</h3>
@@ -406,20 +398,18 @@
     <h2 style="font-size:clamp(1.7rem,1.2rem + 2vw,2.8rem);max-width:20ch;margin-top:0.7rem">He builds golfers, from the first putt up.</h2>
   </div>
   <div class="wrap">
-    <div class="gallery">
-      <figure class="ph gcell gcell--big" data-need="img/tom-harris-clinic.jpg" style="margin:0">
-        <img src="img/tom-harris-clinic.jpg" alt="Tom Harris running a putting clinic with a grid drill on the practice green" onerror="this.parentElement.classList.add('empty');this.remove()">
-        <figcaption><small>On the green</small>Drills that make practice count — not just hitting balls.</figcaption>
-      </figure>
-      <figure class="ph gcell gcell--stretch" data-need="img/tom-harris-group.jpg" style="margin:0">
-        <img src="img/tom-harris-group.jpg" alt="Tom Harris demonstrating a putting stroke to a group of students" onerror="this.parentElement.classList.add('empty');this.remove()">
-        <figcaption><small>Groups &amp; juniors</small>Youth to senior, one method for every level.</figcaption>
-      </figure>
-      <figure class="ph gcell" data-need="img/tom-harris-tech.jpg" style="margin:0">
-        <img src="img/tom-harris-tech.jpg" alt="Tom Harris coaching a putting lesson indoors on a SAM PuttLab" onerror="this.parentElement.classList.add('empty');this.remove()">
-        <figcaption><small>Indoors &amp; data</small>Putting labs, launch monitors, force plates — year-round, heat-proof coaching.</figcaption>
-      </figure>
-      </div>
+    <style>
+      .pd-grid{display:grid;gap:1rem;grid-template-columns:1fr;margin-top:0.4rem}
+      @media(min-width:44rem){.pd-grid{grid-template-columns:repeat(3,1fr)}}
+      .pd-card{border:1px solid var(--rule);background:var(--ink-2);padding:1.1rem 1.15rem;display:flex;flex-direction:column;gap:0.45rem}
+      .pd-card small{font-family:'Archivo Narrow',sans-serif;font-weight:700;text-transform:uppercase;letter-spacing:0.08em;font-size:0.66rem;color:var(--flag)}
+      .pd-card p{margin:0;color:var(--dim);font-size:0.92rem;line-height:1.5}
+    </style>
+    <div class="pd-grid">
+      <article class="pd-card"><small>On the green</small><p>Drills that make practice count &mdash; not just hitting balls.</p></article>
+      <article class="pd-card"><small>Groups &amp; juniors</small><p>Youth to senior, one method for every level.</p></article>
+      <article class="pd-card"><small>Indoors &amp; data</small><p>Putting labs, launch monitors and force plates &mdash; year-round, heat-proof coaching.</p></article>
+    </div>
   </div>
 </section>
 
@@ -1057,6 +1047,25 @@
 
 <footer>
   <div class="wrap">
+    <style>
+      .foot-nav{display:flex;flex-wrap:wrap;gap:0.55rem 1.3rem;margin:0.55rem 0 1.6rem}
+      .foot-nav a{font-family:'Archivo Narrow',sans-serif;font-weight:700;text-transform:uppercase;letter-spacing:0.06em;font-size:0.76rem;color:var(--dim);text-decoration:none}
+      .foot-nav a:hover{color:var(--card)}
+    </style>
+    <span class="label">Explore</span>
+    <nav class="foot-nav" aria-label="Footer">
+      <a href="#offerings">Coaching</a>
+      <a href="#modules">Classes</a>
+      <a href="#book">Lessons &amp; gift cards</a>
+      <a href="#dev">Four pillars</a>
+      <a href="#swing">Swing mechanics</a>
+      <a href="#faq">FAQ</a>
+      <a href="#austin">Austin</a>
+      <a href="prototype.html">Course tool</a>
+      <a href="dashboard.html">Progress</a>
+      <a href="#golf-now">Leaderboard</a>
+      <a href="#shop">Shop</a>
+    </nav>
     <span class="label">What&rsquo;s real</span>
     <p style="margin-top:0.8rem">Tom Harris is a real Class A PGA professional (credentials per pga.com and mytpi.com). Courses, aerials and the strategy engine are real data — imagery from the USGS National Map (public domain), geometry © OpenStreetMap (ODbL). His method and the product are still in build; nothing here is fabricated. <a href="prototype.html">See the working course tool →</a></p>
     <p style="margin-top:0.9rem"><span class="label">Follow</span></p>

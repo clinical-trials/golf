@@ -1,12 +1,13 @@
 # Images
 
-Tom Harris instruction photos, courtesy of the Golf Range Association of America
-(golfrange.org GRAA award profile). Used with the pro's involvement in the project.
+Tom Harris credential and award photos, courtesy of the Golf Range Association of
+America (golfrange.org GRAA award profile). Used with the pro's involvement.
 
-- `tom-harris-lesson.jpg` — one-to-one putting lesson (hero)
-- `tom-harris-clinic.jpg` — group putting clinic with the grid drill
-- `tom-harris-group.jpg`  — demonstrating a putt to a group of students
-- `tom-harris-tech.jpg`   — indoor putting lesson on a SAM PuttLab (tech/data coaching)
+**Student/coaching photos are withheld until Tom has each player's permission.**
+They are kept locally in `docs/media/` (gitignored), off the public site:
+`tom-harris-lesson.jpg`, `tom-harris-clinic.jpg`, `tom-harris-group.jpg`,
+`tom-harris-tech.jpg`, `lesson-tee.jpg`. Move them back into `docs/img/` and
+re-reference them once permission is in hand.
 
 - `crest.png` — the Tom Harris logo/crest chosen from the brand candidates.
   Drop the chosen file here with this exact name; the landing page prefers it
