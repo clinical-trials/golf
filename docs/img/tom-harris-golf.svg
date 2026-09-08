@@ -9,7 +9,7 @@
   <!-- TOM HARRIS -->
   <text x="220" y="270" text-anchor="middle" font-family="Georgia,'Times New Roman',serif" font-weight="700" font-size="48" letter-spacing="1" fill="#1C2A26">TOM HARRIS</text>
   <!-- GOLF with flanking rules -->
-  <line x1="96" y1="305" x2="176" y2="305" stroke="#2C7A3D" stroke-width="3"/>
-  <text x="220" y="318" text-anchor="middle" font-family="Georgia,serif" font-weight="700" font-size="34" letter-spacing="9" fill="#2C7A3D">GOLF</text>
-  <line x1="264" y1="305" x2="344" y2="305" stroke="#2C7A3D" stroke-width="3"/>
+  <line x1="66" y1="305" x2="146" y2="305" stroke="#2C7A3D" stroke-width="3"/>
+  <text x="220" y="318" text-anchor="middle" font-family="Georgia,serif" font-weight="700" font-size="31" letter-spacing="6" fill="#2C7A3D">GOLF</text>
+  <line x1="294" y1="305" x2="374" y2="305" stroke="#2C7A3D" stroke-width="3"/>
 </svg>
