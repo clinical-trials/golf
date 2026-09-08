@@ -1,9 +1,11 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 440 366" role="img" aria-label="Tom Harris Golf">
-  <!-- gold swoosh (behind the monogram) -->
-  <path d="M40 264 C150 174 300 170 392 216" fill="none" stroke="#E9B949" stroke-width="15" stroke-linecap="round"/>
-  <!-- gold flag -->
-  <line x1="368" y1="120" x2="368" y2="250" stroke="#E9B949" stroke-width="7" stroke-linecap="round"/>
-  <path d="M372 126 L414 141 L372 160 Z" fill="#E9B949"/>
+  <!-- gold swoosh: sweeps up over the monogram, then swoops down into the hole -->
+  <path d="M40 262 C150 176 300 150 366 248" fill="none" stroke="#E9B949" stroke-width="15" stroke-linecap="round"/>
+  <!-- the hole (cup) the swoosh dives into, at the flag base -->
+  <ellipse cx="368" cy="250" rx="16" ry="5" fill="none" stroke="#E9B949" stroke-width="4"/>
+  <!-- gold flag, planted in the hole -->
+  <line x1="368" y1="118" x2="368" y2="250" stroke="#E9B949" stroke-width="7" stroke-linecap="round"/>
+  <path d="M372 124 L414 139 L372 158 Z" fill="#E9B949"/>
   <!-- TH monogram: T green, H cream -->
   <text x="218" y="226" text-anchor="middle" font-family="Georgia,'Times New Roman',serif" font-weight="700" font-size="186" letter-spacing="-12"><tspan fill="#8FB264">T</tspan><tspan fill="#ECE6D6">H</tspan></text>
   <!-- TOM HARRIS -->
