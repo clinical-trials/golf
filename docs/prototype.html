@@ -251,7 +251,7 @@
     <h2>Every golf course on earth, the same way.</h2>
     <p class="lede">There are somewhere between 30,000 and 38,000 golf courses in the world, depending on who counts. This demo charts a handful to prove the method: hole geometry from OpenStreetMap, aerial photography from public imagery, strategy computed per player. The same pipeline runs on any course on request — nothing here is hand-drawn or invented.</p>
     <div class="globe" id="globe"></div>
-    <p class="cite">Counts: Golfshake and World Golf Quest cite roughly 30,000; AllSquare catalogues around 33,000; the R&amp;A's Golf Around the World survey reports 38,081 across 206 countries. We state the range rather than pick one. United States courses carry real 1-metre aerial photography today; elsewhere, high-resolution public imagery is thinner, so those courses show as vector routings until better sources are licensed.</p>
+    <p class="cite">Counts: Golfshake and World Golf Quest cite roughly 30,000; AllSquare catalogs around 33,000; the R&amp;A's Golf Around the World survey reports 38,081 across 206 countries. We state the range rather than pick one. United States courses carry real 1-meter aerial photography today; elsewhere, high-resolution public imagery is thinner, so those courses show as vector routings until better sources are licensed.</p>
   </div>
 </section>
 
@@ -287,7 +287,7 @@ function courseBounds(c){
   const padLa=(maxLa-minLa)*0.06+0.0006, padLo=(maxLo-minLo)*0.06+0.0006
   return {minLa:minLa-padLa,maxLa:maxLa+padLa,minLo:minLo-padLo,maxLo:maxLo+padLo}
 }
-// bbox in metres -> pick an SVG height that matches real aspect
+// bbox in meters -> pick an SVG height that matches real aspect
 function aspect(b){const w=(b.maxLo-b.minLo)*mLon((b.minLa+b.maxLa)/2);const h=(b.maxLa-b.minLa)*mLat;return {w,h,ratio:w/h}}
 function projector(b,vw,vh){
   return ([la,lo])=>[ (lo-b.minLo)/(b.maxLo-b.minLo)*vw, (b.maxLa-la)/(b.maxLa-b.minLa)*vh ]
@@ -339,7 +339,7 @@ function renderCourse(){
     svg.appendChild(el('rect',{x:0,y:0,width:VW,height:VH,fill:'#0D1512'}))
   }
 
-  // routing thread through hole centrelines, hole 1 -> 18
+  // routing thread through hole centerlines, hole 1 -> 18
   const nodes=[]
   course.holes.forEach((h,i)=>{
     const pts=h.path.map(to)
@@ -413,7 +413,7 @@ function holeBounds(g){
   let minLa=90,maxLa=-90,minLo=180,maxLo=-180
   const pushLL=([la,lo])=>{if(la<minLa)minLa=la;if(la>maxLa)maxLa=la;if(lo<minLo)minLo=lo;if(lo>maxLo)maxLo=lo}
   h.path.forEach(pushLL)
-  for(const f of g.features){/* features stored in metres; skip for bbox */}
+  for(const f of g.features){/* features stored in meters; skip for bbox */}
   const padLa=(maxLa-minLa)*0.25+0.0004, padLo=(maxLo-minLo)*0.25+0.0004
   return {minLa:minLa-padLa,maxLa:maxLa+padLa,minLo:minLo-padLo,maxLo:maxLo+padLo}
 }
@@ -432,7 +432,7 @@ function renderHole(){
   const VW=1000, VH=Math.round(VW/Math.max(a.ratio,0.7))
   const svg=document.getElementById('hole-map'); svg.setAttribute('viewBox',`0 0 ${VW} ${VH}`); svg.textContent=''
   const o={lat:h.path[0][0],lon:h.path[0][1]}, mpll=mLon(o.lat)
-  // metres(from tee) -> latlon -> view
+  // meters(from tee) -> latlon -> view
   const toLL=([mx,my])=>[o.lat - my/mLat, o.lon + mx/mpll]
   const toV=([la,lo])=>[(lo-b.minLo)/(b.maxLo-b.minLo)*VW,(b.maxLa-la)/(b.maxLa-b.minLa)*VH]
   const M=(p)=>toV(toLL(p))

@@ -54,14 +54,14 @@
 </style>
 </head>
 <body>
-<p class="notice" id="notice">Preview — sample student, sample data. Your real dashboard appears here once you enrol and start logging rounds.</p>
+<p class="notice" id="notice">Preview — sample student, sample data. Your real dashboard appears here once you enroll and start logging rounds.</p>
 <nav class="nav"><div class="wrap nav__in"><a class="nav__brand" href="index.html">Pocket Pro</a><a class="nav__cta" href="index.html#book">Book a lesson →</a></div></nav>
 
 <header class="hd"><div class="wrap">
   <span class="label">Your dashboard</span>
   <h1 id="greeting">Welcome back, Jordan.</h1>
   <p id="hd-sub">Here&rsquo;s where your game is, what&rsquo;s next, and what your rounds are telling Tom.</p>
-  <div class="streak" id="streak"><b>4</b><span style="font-family:'Archivo Narrow',sans-serif;text-transform:uppercase;letter-spacing:0.08em;font-size:0.72rem;color:var(--dim)">weeks in a row practised</span></div>
+  <div class="streak" id="streak"><b>4</b><span style="font-family:'Archivo Narrow',sans-serif;text-transform:uppercase;letter-spacing:0.08em;font-size:0.72rem;color:var(--dim)">weeks in a row practiced</span></div>
 </div></header>
 
 <div class="wrap">
@@ -204,7 +204,7 @@
 <footer><div class="wrap" id="foot">Preview only — sample data for illustration, no real student. The dashboard reads real accounts, enrolment, week progress, logged rounds and bookings from the backend (<code>GET /api/dashboard</code>); with a backend and a signed-in session configured it replaces this sample with your own data. <a href="index.html">← Back to Pocket Pro</a></div></footer>
 
 <script>
-/* Progressive enhancement. This page ships as a labelled sample. If a backend
+/* Progressive enhancement. This page ships as a labeled sample. If a backend
    base URL (pp_api) and a session token (pp_session) are present in
    localStorage, it fetches the real dashboard and replaces the sample. No
    config, or any error, and the sample stays exactly as shown. Nothing here
@@ -217,7 +217,7 @@
   fetch(base + '/api/dashboard', { headers: { Authorization: 'Bearer ' + tok } })
     .then(function (r) { if (!r.ok) throw new Error('status ' + r.status); return r.json(); })
     .then(render)
-    .catch(function () { /* leave the labelled sample in place */ });
+    .catch(function () { /* leave the labeled sample in place */ });
 
   function esc(s) { var d = document.createElement('div'); d.textContent = s == null ? '' : String(s); return d.innerHTML; }
   function set(id, txt) { var el = document.getElementById(id); if (el) el.textContent = txt; }
