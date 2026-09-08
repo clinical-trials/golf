@@ -422,12 +422,7 @@
       </div>
       <a class="btn btn--o" href="https://www.youtube.com/@Tomharrisgolf/videos" target="_blank" rel="noopener">All 100+ lessons on YouTube →</a>
     </div>
-    <figure style="margin:1.4rem 0 0;border:1px solid var(--rule);background:#0D1512;overflow:hidden">
-      <video controls playsinline preload="none" poster="video/tom-teaching-poster.jpg" style="display:block;width:100%;height:auto;max-height:72vh;aspect-ratio:16/9;background:#05080A">
-        <source src="video/tom-teaching.mp4" type="video/mp4">
-      </video>
-      <figcaption style="padding:0.6rem 0.9rem;font-family:'Archivo Narrow',sans-serif;font-weight:700;text-transform:uppercase;letter-spacing:0.06em;font-size:0.74rem;color:var(--dim)">Featured lesson &middot; Tom on the practice green</figcaption>
-    </figure>
+    <p style="color:var(--dim);max-width:64ch;margin:1.1rem 0 0;font-size:0.95rem">A flipped classroom: pick what you&rsquo;re working on, watch the lesson, then take it to the range. Each video is a lesson &mdash; drawn from Tom&rsquo;s YouTube portfolio.</p>
     <div class="needs" id="needs" role="tablist" aria-label="Pick what you are working on"></div>
     <p class="needs__say" id="needs-say"></p>
     <div class="vgrid" id="vgrid"></div>
@@ -938,11 +933,8 @@
       function setTour(t){cur=t;document.getElementById('lb-pga').setAttribute('aria-pressed',String(t==='pga'));document.getElementById('lb-lpga').setAttribute('aria-pressed',String(t==='lpga'));load();}
       document.getElementById('lb-pga').addEventListener('click',function(){setTour('pga');});
       document.getElementById('lb-lpga').addEventListener('click',function(){setTour('lpga');});
-      // default to whichever tour is live now, else the one starting soonest
-      (function(){
-        function key(d){var ev=(d&&d.events||[])[0];if(!ev)return 1e15;var st=(ev.status&&ev.status.type)||{},state=st.state||'',now=Date.now(),start=ev.date?new Date(ev.date).getTime():now;if(state==='in')return -1e12;if(state==='pre')return Math.max(0,start-now);return 1e12+(now-start);}
-        Promise.all([fetch(TOURS.pga.api).then(function(r){return r.json();}).catch(function(){return null;}),fetch(TOURS.lpga.api).then(function(r){return r.json();}).catch(function(){return null;})]).then(function(res){setTour(key(res[0])<=key(res[1])?'pga':'lpga');}).catch(function(){setTour('pga');});
-      })();
+      // default to the PGA Tour (pro golf); LPGA stays one tap away
+      setTour('pga');
     })();
     </script>
   </div>
@@ -958,9 +950,9 @@
       .merch-use{display:flex;flex-wrap:wrap;gap:0.5rem;align-items:center;margin-top:1.3rem}
       .merch-use .tag{font-family:'Archivo Narrow',sans-serif;font-weight:700;text-transform:uppercase;letter-spacing:0.08em;font-size:0.72rem;color:var(--turf);border:1px solid var(--turf);padding:0.22rem 0.6rem}
     </style>
-    <span class="label">Apparel &amp; merch</span>
+    <span class="label">Pro shop &middot; apparel &amp; merch</span>
     <h2 style="font-size:clamp(1.6rem,1.1rem + 1.9vw,2.5rem);max-width:18ch;margin-top:0.5rem">Wear the patch.</h2>
-    <p style="color:var(--dim);max-width:62ch;margin-top:0.8rem;font-size:0.95rem">Tom Harris Golf emblems &mdash; embroidered patches and marks made for hats, polos and stickers. Production runs through Tom&rsquo;s apparel &amp; monogram partner (or a Shopify store) once the shop opens.</p>
+    <p style="color:var(--dim);max-width:62ch;margin-top:0.8rem;font-size:0.95rem">Tom&rsquo;s pro shop starts here &mdash; Tom Harris Golf emblems: embroidered patches and marks made for hats, polos and stickers. Gear and &ldquo;Tom&rsquo;s bag&rdquo; picks come later. Production runs through Tom&rsquo;s apparel &amp; monogram partner (or a Shopify store) once the shop opens.</p>
     <div class="merch">
       <figure class="patch"><img src="img/tom-harris-badge.jpg" alt="Tom Harris caddie-bib patch, number 26" loading="lazy" decoding="async"><figcaption>The bib &middot; 26</figcaption></figure>
       <figure class="patch"><img src="img/th-patch-scorecard.jpg" alt="Tom Harris scorecard-and-flag crest patch" loading="lazy" decoding="async"><figcaption>Scorecard crest</figcaption></figure>
@@ -1034,7 +1026,7 @@
     <div class="road">
       <article class="road__c"><span class="road__t">Planned</span><h4>Self-paced video courses</h4><p>Record Tom&rsquo;s method once, sell it forever &mdash; the highest-margin product, and it scales without his time.</p></article>
       <article class="road__c"><span class="road__t">Planned</span><h4>Freemium app membership &middot; ~$12&ndash;19/mo</h4><p>Swing capture, the course tool, dashboard and drills &mdash; without live Tom. A tier below the top coaching membership, and a funnel into it.</p></article>
-      <article class="road__c"><span class="road__t">Planned</span><h4>Tom&rsquo;s pro shop &amp; gear</h4><p>&ldquo;Tom&rsquo;s bag&rdquo; and drill-specific training aids via affiliate links &mdash; commission that also upgrades the student&rsquo;s kit.</p></article>
+      <article class="road__c"><span class="road__t">Planned</span><h4>Tom&rsquo;s pro shop &amp; gear</h4><p>The <a href="#shop" style="color:var(--flag)">pro shop</a> starts with branded merch; next comes &ldquo;Tom&rsquo;s bag&rdquo; and drill-specific training aids via affiliate links &mdash; commission that also upgrades the student&rsquo;s kit.</p></article>
       <article class="road__c"><span class="road__t">Spring</span><h4>Golf trips &amp; retreats</h4><p>Curated experiences to the courses we already feature, with Tom coaching on-site. Booked for spring, with time to plan &mdash; high ticket, strong brand halo.</p></article>
       <article class="road__c"><span class="road__t">Summer</span><h4>Junior academy &amp; camps</h4><p>Summer and after-school youth programs with seasonal enrollment and school partnerships &mdash; building on today&rsquo;s family golf.</p></article>
       <article class="road__c"><span class="road__t">Exploring</span><h4>Corporate wellness benefit</h4><p>Golf as an employer-paid HR perk &mdash; recurring B2B with bigger seat counts. Part of shopping the corporate idea to Austin&rsquo;s big employers.</p></article>
@@ -1056,6 +1048,8 @@
     <nav class="foot-nav" aria-label="Footer">
       <a href="#offerings">Coaching</a>
       <a href="#modules">Classes</a>
+      <a href="#wear-women">Women&rsquo;s golf</a>
+      <a href="#corporate">Corporate golf</a>
       <a href="#book">Lessons &amp; gift cards</a>
       <a href="#dev">Four pillars</a>
       <a href="#swing">Swing mechanics</a>
@@ -1064,7 +1058,7 @@
       <a href="prototype.html">Course tool</a>
       <a href="dashboard.html">Progress</a>
       <a href="#golf-now">Leaderboard</a>
-      <a href="#shop">Shop</a>
+      <a href="#shop">Pro shop</a>
     </nav>
     <span class="label">What&rsquo;s real</span>
     <p style="margin-top:0.8rem">Tom Harris is a real Class A PGA professional (credentials per pga.com and mytpi.com). Courses, aerials and the strategy engine are real data — imagery from the USGS National Map (public domain), geometry © OpenStreetMap (ODbL). His method and the product are still in build; nothing here is fabricated. <a href="prototype.html">See the working course tool →</a></p>
@@ -1093,7 +1087,7 @@ const NEEDS=[
    vids:[{id:'sFCHZ4ozj8c',t:'Sequence of the backswing'},{id:'A6rHcqT4Uqs',t:'Pelvis movement in the swing'}]},
   {key:'scoring',step:'3',label:'The scoring shots',
    say:'Off the tee sets up the hole; on and around the green is where the score is made. Most golfers bleed shots here — and it is the fastest place to get them back.',
-   vids:[{id:'lO1TiiPMMx8',t:'Chipping and pitching'},{id:'D4ONSmxTVPQ',t:'Wedge school'},{id:'b2iHQKCA48g',t:'Wedge shots'}]},
+   vids:[{mp4:'video/tom-teaching.mp4',poster:'video/tom-teaching-poster.jpg',t:'On the practice green'},{id:'lO1TiiPMMx8',t:'Chipping and pitching'},{id:'D4ONSmxTVPQ',t:'Wedge school'},{id:'b2iHQKCA48g',t:'Wedge shots'}]},
   {key:'measure',step:'4',label:'Measure & improve',
    say:'Instruction only sticks when it is individualized — assess, practice what the assessment found, then retest. That loop is Tom’s buttery sauce.',
    vids:[{id:'ehHgwvTBhSM',t:'TPI assessment overview'},{id:'KjCPOCTts1U',t:'Trackman Combine — off-season practice'}]},
@@ -1106,15 +1100,27 @@ if(vgrid&&needsBar){
   function renderVids(){
     document.getElementById('needs-say').textContent=active.say
     needsBar.querySelectorAll('.need').forEach(b=>b.setAttribute('aria-selected',String(b.dataset.key===active.key)))
-    vgrid.innerHTML=active.vids.map(v=>`<button class="vid" data-id="${v.id}" aria-label="Play: ${v.t}"><img loading="lazy" decoding="async" alt="${v.t}" src="https://i.ytimg.com/vi/${v.id}/hqdefault.jpg">${PLAY}<span class="vid__t">${v.t}</span></button>`).join('')
+    vgrid.innerHTML=active.vids.map(v=>{
+      const thumb=v.mp4?v.poster:`https://i.ytimg.com/vi/${v.id}/hqdefault.jpg`
+      const data=v.mp4?`data-mp4="${v.mp4}"`:`data-id="${v.id}"`
+      return `<button class="vid" ${data} aria-label="Play: ${v.t}"><img loading="lazy" decoding="async" alt="${v.t}" src="${thumb}">${PLAY}<span class="vid__t">${v.t}</span></button>`
+    }).join('')
     vgrid.querySelectorAll('.vid').forEach(b=>b.addEventListener('click',()=>{
-      const f=document.createElement('iframe')
-      f.src=`https://www.youtube-nocookie.com/embed/${b.dataset.id}?autoplay=1&rel=0`
-      f.title='Tom Harris golf lesson'
-      f.allow='accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture'
-      f.allowFullscreen=true
-      b.replaceChildren(f)
-    }))
+      let el
+      if(b.dataset.mp4){
+        el=document.createElement('video')
+        el.src=b.dataset.mp4
+        el.controls=el.autoplay=el.playsInline=true
+        el.style.cssText='width:100%;height:100%;display:block;background:#05080A'
+      }else{
+        el=document.createElement('iframe')
+        el.src=`https://www.youtube-nocookie.com/embed/${b.dataset.id}?autoplay=1&rel=0`
+        el.title='Tom Harris golf lesson'
+        el.allow='accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture'
+        el.allowFullscreen=true
+      }
+      b.replaceChildren(el)
+    },{once:true}))
   }
   needsBar.innerHTML=NEEDS.map(n=>`<button class="need" role="tab" data-key="${n.key}" aria-selected="${n===active}">${n.label}</button>`).join('')
   needsBar.querySelectorAll('.need').forEach(b=>b.addEventListener('click',()=>{active=NEEDS.find(n=>n.key===b.dataset.key);renderVids()}))
