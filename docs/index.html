@@ -14,11 +14,11 @@
 <meta property="og:title" content="Pocket Pro — Tom Harris, PGA">
 <meta property="og:description" content="Your golf mentor in your pocket. Class A PGA professional Tom Harris: lessons, classes and coaching on the range and on every course you play.">
 <meta property="og:url" content="https://clinical-trials.github.io/golf/">
-<meta property="og:image" content="https://clinical-trials.github.io/golf/docs/img/tom-harris-lesson.jpg">
+<meta property="og:image" content="https://clinical-trials.github.io/golf/docs/img/tom-teaching.jpg">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="Pocket Pro — Tom Harris, PGA">
 <meta name="twitter:description" content="Your golf mentor in your pocket — lessons, classes and coaching with Class A PGA professional Tom Harris.">
-<meta name="twitter:image" content="https://clinical-trials.github.io/golf/docs/img/tom-harris-lesson.jpg">
+<meta name="twitter:image" content="https://clinical-trials.github.io/golf/docs/img/tom-teaching.jpg">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600&family=Archivo+Black&family=Archivo+Narrow:wght@400;600;700&display=swap" rel="stylesheet">
@@ -207,16 +207,16 @@
   <div class="wrap nav__in">
     <a class="nav__brand" href="#top">Pocket Pro</a>
     <div class="nav__links" id="nav-links">
-      <a href="#offerings">Coaching</a>
-      <a href="#modules">Classes</a>
-      <a href="#austin">Austin</a>
-      <a href="prototype.html">Course tool</a>
-      <a href="dashboard.html">Progress</a>
+      <a href="#offerings">Offerings</a>
+      <a href="#videos">Courses</a>
+      <a href="#recognition">Awards</a>
+      <a href="#faq">FAQ</a>
       <a href="#golf-now">Leaderboard</a>
-      <a href="#shop">Pro shop</a>
+      <a href="#newsletter">Newsletter</a>
+      <a href="#contact">Contact</a>
     </div>
     <button class="nav__toggle" aria-label="Open menu" aria-expanded="false" aria-controls="nav-links">&#9776;</button>
-    <a class="nav__cta" href="#book">Book a lesson →</a>
+    <a class="nav__cta" href="#offerings">Get started →</a>
   </div>
 </nav>
 <script>
@@ -224,8 +224,8 @@
 </script>
 
 <header class="hero" id="top">
-  <figure class="ph hero__photo" data-need="img/tom-harris-lesson.jpg" style="margin:0">
-    <img src="img/tom-harris-lesson.jpg" width="2000" height="1500" decoding="async" fetchpriority="high" alt="Tom Harris coaching a putting stroke on the practice green" onerror="this.parentElement.classList.add('empty');this.remove()">
+  <figure class="ph hero__photo" data-need="img/tom-teaching.jpg" style="margin:0">
+    <img src="img/tom-teaching.jpg" width="1280" height="720" decoding="async" fetchpriority="high" alt="Tom Harris demonstrating setup and alignment on the practice green" onerror="this.parentElement.classList.add('empty');this.remove()">
   </figure>
   <div class="hero__body">
     <span style="display:inline-block;background:#fff;border-radius:12px;padding:14px 18px;margin:0 0 1.1rem;box-shadow:0 2px 14px rgba(0,0,0,0.3);max-width:min(268px,74%)"><img src="img/tom-harris-golf.svg" alt="Tom Harris Golf" style="width:100%;height:auto;display:block" decoding="async"></span>
@@ -244,39 +244,11 @@
       <span class="chip">2023 S. Ohio Player Development Award</span>
     </div>
     <div class="hero__cta">
-      <a class="btn btn--y" href="#book">Schedule a lesson with Tom →</a>
-      <a class="btn btn--o" href="prototype.html">Take Tom on the course →</a>
+      <a class="btn btn--y" href="#offerings">See Tom&rsquo;s offerings →</a>
+      <a class="btn btn--o" href="#videos">Watch Tom teach →</a>
     </div>
   </div>
 </header>
-
-<section class="surfaces" id="finder" style="border-top:4px solid var(--flag)">
-  <div class="wrap" style="max-width:54rem">
-    <span class="label" style="color:var(--flag)">Not sure where to start?</span>
-    <h2 style="font-size:clamp(1.7rem,1.2rem + 2vw,2.7rem);margin-top:0.5rem">Find your class in 20 seconds.</h2>
-    <p style="color:var(--dim);margin-top:0.6rem;font-size:0.95rem;max-width:54ch">Two quick taps &mdash; we&rsquo;ll point you to the right program: beginner, women&rsquo;s, family, putting or scoring.</p>
-    <div id="wiz" style="margin-top:1.25rem">
-      <div class="wiz-step" data-step="1">
-        <p style="font-family:'Archivo Narrow',sans-serif;font-weight:700;margin:0 0 0.6rem">How much have you played?</p>
-        <div style="display:flex;flex-wrap:wrap;gap:0.5rem">
-          <button class="need wiz-a" data-q="exp" data-v="new">Never / just starting</button>
-          <button class="need wiz-a" data-q="exp" data-v="some">A bit, casually</button>
-          <button class="need wiz-a" data-q="exp" data-v="reg">I play regularly</button>
-        </div>
-      </div>
-      <div class="wiz-step" data-step="2" hidden style="margin-top:1rem">
-        <p style="font-family:'Archivo Narrow',sans-serif;font-weight:700;margin:0 0 0.6rem">What do you most want?</p>
-        <div style="display:flex;flex-wrap:wrap;gap:0.5rem">
-          <button class="need wiz-a" data-q="goal" data-v="fun">Learn &amp; have fun</button>
-          <button class="need wiz-a" data-q="goal" data-v="score">Lower my scores</button>
-          <button class="need wiz-a" data-q="goal" data-v="putt">Fix my putting</button>
-          <button class="need wiz-a" data-q="goal" data-v="family">Golf with my family</button>
-        </div>
-      </div>
-      <div id="wiz-result" hidden style="margin-top:1.1rem;border:1px solid var(--flag);background:#1c2410;padding:1.1rem"></div>
-    </div>
-  </div>
-</section>
 
 <section class="surfaces" id="offerings" style="border-top:4px solid var(--flag)">
   <div class="wrap">
@@ -306,7 +278,7 @@
         <span class="offer__k">Start here &middot; free</span>
         <h3 class="offer__name">Watch Tom Teach</h3>
         <div class="offer__price">Free</div>
-        <p class="offer__desc">Lessons to raise your game &mdash; the four pillars and Tom&rsquo;s teaching videos, free to everyone. This is how &ldquo;I&rsquo;m interested&rdquo; becomes &ldquo;I&rsquo;m a golfer.&rdquo; <a href="#dev">See the pillars &rarr;</a></p>
+        <p class="offer__desc">Lessons to raise your game &mdash; Tom&rsquo;s teaching videos, free to everyone. This is how &ldquo;I&rsquo;m interested&rdquo; becomes &ldquo;I&rsquo;m a golfer.&rdquo; <a href="#videos">Watch the lessons &rarr;</a></p>
       </div>
       <div class="offer">
         <span class="offer__k">One-off</span>
@@ -346,7 +318,11 @@
         <p class="offer__desc">A live Zoom or FaceTime session every week, unlimited swing/shot analysis, unlimited messaging, plus a weekly practice plan and progress report.</p>
       </div>
     </div>
-    <p style="color:var(--dim);font-size:0.75rem;margin-top:1.1rem">Descriptions and sign-up are handled on Tom&rsquo;s CoachNow while the on-site checkout is in build. <b style="color:var(--dim)">(Link goes to coachnow.io &mdash; swap for Tom&rsquo;s exact CoachNow page.)</b></p>
+    <div style="border:1px solid var(--rule);background:var(--ink-2);padding:1.1rem 1.2rem;margin-top:1.3rem">
+      <p style="font-family:'Archivo Narrow',sans-serif;font-weight:700;text-transform:uppercase;letter-spacing:0.06em;font-size:0.72rem;color:var(--flag);margin:0 0 0.4rem">Two ways to pay</p>
+      <p style="color:var(--dim);font-size:0.9rem;margin:0;line-height:1.5"><b style="color:var(--card)">Online</b> &mdash; secure card checkout (via Stripe, coming soon). <b style="color:var(--card)">Or in person</b> &mdash; pay manually by cash, Venmo or Zelle when you start. Gift a class, too &mdash; just ask.</p>
+    </div>
+    <p style="color:var(--dim);font-size:0.75rem;margin-top:1.1rem">Descriptions and sign-up live on Tom&rsquo;s CoachNow while online checkout is set up. <b style="color:var(--dim)">(Link goes to coachnow.io &mdash; swap for Tom&rsquo;s exact CoachNow page.)</b></p>
   </div>
 </section>
 
@@ -371,63 +347,6 @@
     </div>
   </div>
 </section>
-
-<section class="surfaces" id="book">
-  <div class="wrap">
-    <span class="label">Schedule a lesson with Tom</span>
-    <h2 style="font-size:clamp(1.6rem,1.1rem + 1.9vw,2.6rem);max-width:20ch;margin-top:0.7rem">Book time. Pay securely. Show up ready.</h2>
-    <p style="color:var(--dim);max-width:60ch;margin-top:0.8rem;font-size:0.95rem"><b style="color:var(--card)">Lessons are one-on-one</b> &mdash; just you and Tom, built entirely around your game and your goals. Browse the full range and sign up on Tom&rsquo;s CoachNow; here&rsquo;s how a session works, start to finish. (Prefer to learn with a small team? <a href="#modules">See the group classes</a>.)</p>
-    <p style="margin-top:1rem"><a class="btn btn--y" href="https://coachnow.io" target="_blank" rel="noopener">Browse Tom&rsquo;s Instruction Offerings &rarr;</a></p>
-    <style>
-      .how3{display:grid;gap:0.7rem;grid-template-columns:1fr;margin-top:1.3rem}
-      @media(min-width:44rem){.how3{grid-template-columns:1fr 1fr 1fr}}
-      .how3 .step{border:1px solid var(--rule);background:var(--ink-2);padding:0.95rem 1.05rem}
-      .how3 .step b{font-family:'Archivo Black',sans-serif;font-weight:400;color:var(--flag);font-size:0.9rem;display:block;letter-spacing:0.01em}
-      .how3 .step p{color:var(--dim);font-size:0.9rem;margin:0.35rem 0 0;line-height:1.45}
-    </style>
-    <div class="how3">
-      <div class="step"><b>1 &middot; Before</b><p>A quick questionnaire &mdash; your experience, your equipment, any physical limits &mdash; then film two swings from our template: down the line (toward the target) and face-on.</p></div>
-      <div class="step"><b>2 &middot; Your session</b><p>One-on-one with Tom, in person or virtual. Fire away with questions and start to see the root causes of your most common shots.</p></div>
-      <div class="step"><b>3 &middot; After</b><p>You leave with 2&ndash;3 drills &mdash; the homework &mdash; so you feel and understand the fix and it carries to the course.</p></div>
-    </div>
-    <article class="surf" style="margin-top:1.25rem;background:var(--ink-3)">
-      <span class="where">Gift a golfer</span>
-      <h3>Gift cards for classes &amp; lessons</h3>
-      <p>The easy holiday gift for the curious beginner or the friend who keeps saying they'll start. Redeemable against any class or lesson &mdash; including the November beginner mornings at Butler Pitch &amp; Putt. Delivered by email; you pick the amount.</p>
-      <div style="display:flex;flex-wrap:wrap;gap:0.5rem;margin-top:0.9rem">
-        <button class="btn btn--o gift-btn" data-amt="50">$50</button>
-        <button class="btn btn--o gift-btn" data-amt="100">$100</button>
-        <button class="btn btn--y gift-btn" data-amt="200">$200</button>
-      </div>
-    </article>
-    <p style="color:var(--dim);font-family:'Archivo Narrow',sans-serif;font-size:0.8rem;text-transform:uppercase;letter-spacing:0.08em;margin:1.6rem 0 0">For teams &amp; groups</p>
-    <div class="two" id="lesson-list" style="margin-top:0.6rem"></div>
-  </div>
-</section>
-
-<section class="dev" id="dev">
-  <div class="wrap dev__hd">
-    <span class="label">Player development</span>
-    <h2 style="font-size:clamp(1.7rem,1.2rem + 2vw,2.8rem);max-width:20ch;margin-top:0.7rem">He builds golfers, from the first putt up.</h2>
-  </div>
-  <div class="wrap">
-    <div class="gallery">
-      <figure class="ph gcell gcell--big" data-need="img/tom-harris-clinic.jpg" style="margin:0">
-        <img src="img/tom-harris-clinic.jpg" alt="Tom Harris running a putting clinic with a grid drill on the practice green" onerror="this.parentElement.classList.add('empty');this.remove()">
-        <figcaption><small>On the green</small>Drills that make practice count — not just hitting balls.</figcaption>
-      </figure>
-      <figure class="ph gcell gcell--stretch" data-need="img/tom-harris-group.jpg" style="margin:0">
-        <img src="img/tom-harris-group.jpg" alt="Tom Harris demonstrating a putting stroke to a group of students" onerror="this.parentElement.classList.add('empty');this.remove()">
-        <figcaption><small>Groups &amp; juniors</small>Youth to senior, one method for every level.</figcaption>
-      </figure>
-      <figure class="ph gcell" data-need="img/tom-harris-tech.jpg" style="margin:0">
-        <img src="img/tom-harris-tech.jpg" alt="Tom Harris coaching a putting lesson indoors on a SAM PuttLab" onerror="this.parentElement.classList.add('empty');this.remove()">
-        <figcaption><small>Indoors &amp; data</small>Putting labs, launch monitors, force plates — year-round, heat-proof coaching.</figcaption>
-      </figure>
-      </div>
-  </div>
-</section>
-
 <section class="videos" id="videos">
   <div class="wrap">
     <div class="videos__hd">
@@ -443,226 +362,6 @@
     <div class="vgrid" id="vgrid"></div>
   </div>
 </section>
-
-<section class="surfaces">
-  <div class="wrap">
-    <span class="label">One relationship, two places</span>
-    <div class="two">
-      <article class="surf">
-        <span class="where">On the range</span>
-        <h3>He reads your swing</h3>
-        <p>Film your shots. He names the fault in his words and prescribes the fix for someone built like you — then retests to see whether it moved.</p>
-      </article>
-      <article class="surf">
-        <span class="where">On the course</span>
-        <h3>He calls your shot</h3>
-        <p>Your home muni or a bucket-list golf trip — he knows the hole in front of you and how you actually miss. The club, the line, when to take the bogey: feedback tailored to that course, that day, your game.</p>
-      </article>
-    </div>
-  </div>
-</section>
-
-<section class="surfaces">
-  <div class="wrap">
-    <span class="label">What a golf mentor does</span>
-    <h2 style="font-size:clamp(1.5rem,1.1rem + 1.7vw,2.3rem);max-width:22ch;margin-top:0.7rem">Takes you from &ldquo;I&rsquo;m interested&rdquo; to &ldquo;I play golf.&rdquo;</h2>
-    <div class="two" style="margin-top:1.25rem">
-      <article class="surf">
-        <h3 style="margin-top:0">Diagnoses the person, not just the swing</h3>
-        <p>Your goals, schedule, confidence and body — a junior, a retiree, and a college player need different mentorship.</p>
-      </article>
-      <article class="surf">
-        <h3 style="margin-top:0">Makes golf less intimidating</h3>
-        <p>Etiquette, gear, scoring and expectations, explained without ever making you feel ignorant.</p>
-        <p style="margin:0.9rem 0 0"><a href="#faq" style="font-family:'Archivo Narrow',sans-serif;font-weight:700;text-transform:uppercase;letter-spacing:0.06em;font-size:0.8rem">Read the new-golfer FAQ →</a></p>
-      </article>
-      <article class="surf">
-        <h3 style="margin-top:0">Simplifies improvement</h3>
-        <p>One or two clear priorities — never ten swing thoughts. You leave knowing exactly what to practice and why.</p>
-      </article>
-      <article class="surf">
-        <h3 style="margin-top:0">Builds a golfer, not just a score</h3>
-        <p>Early wins, visible progress, people to play with, and a reason to come back next week and play.</p>
-      </article>
-    </div>
-  </div>
-</section>
-
-<figure class="photoband" data-course="chambers-bay" style="margin:0">
-  <img loading="lazy" decoding="async" alt="Aerial photograph of Chambers Bay golf course" onerror="this.closest('.photoband').remove()">
-  <figcaption><span class="photoband__name"></span><span class="photoband__credit">Real aerial photography &middot; USGS National Map, public domain</span></figcaption>
-</figure>
-<section class="surfaces">
-  <div class="wrap">
-    <span class="label">Ways to learn with Tom</span>
-    <div class="two" style="margin-top:1.25rem">
-      <article class="surf">
-        <span class="where">Classes</span>
-        <h3>Classes and programs for every kind of golfer</h3>
-        <p style="color:var(--flag);font-family:'Archivo Narrow',sans-serif;font-weight:700;margin:0 0 0.5rem">The goal: your game moves fast enough that your friends start asking what changed.</p>
-        <p>Build Your Swing (8 wks) &middot; Score Improvement (6 wks) &middot; Women&rsquo;s Golf (6 wks) &middot; Family Golf for juniors &amp; parents (6 wks, runs as summer camp or after-school) &middot; Your First 90 Days for brand-new golfers (12 wks) &middot; Putting Intensive Seminar (4 wks) — we benchmark your progress and track the data, not a feeling. Take lessons at home, do your homework on the range or simulator, and take a quick quiz after each session to check understanding.</p>
-      </article>
-      <article class="surf">
-        <span class="where">Services</span>
-        <h3>Lessons, fittings, corporate leagues</h3>
-        <p>One-to-one lessons and club fittings, bookable online. Corporate leagues for tech teams — a 6-week short-course season that doubles as team building, priced per group. Starter-kit bundles for brand-new golfers (fitting, used-club advice, first lessons, first nine holes), plus swing-coaching and ergonomics. Evening, dawn and indoor formats keep it all going through the hottest months.</p>
-        <p style="margin:0.9rem 0 0.4rem;font-family:'Archivo Narrow',sans-serif;font-weight:700;text-transform:uppercase;letter-spacing:0.08em;font-size:0.72rem;color:var(--turf)">Employer team discount — verify a work email</p>
-        <div style="display:flex;flex-wrap:wrap;gap:0.35rem">
-          <span class="chip">Apple</span><span class="chip">Tesla</span><span class="chip">Dell</span><span class="chip">Oracle</span><span class="chip">AMD</span><span class="chip">Visa</span><span class="chip">Samsung</span><span class="chip">+ more</span>
-        </div>
-        <p style="color:var(--dim);font-size:0.75rem;margin:0.55rem 0 0">Employees of large employers get the team rate by verifying a work email. Not affiliated with or endorsed by these companies.</p>
-      </article>
-    </div>
-  </div>
-</section>
-
-<section class="courses">
-  <div class="wrap">
-    <div class="courses__hd">
-      <div>
-        <span class="label">He knows every course</span>
-        <h2 style="font-size:clamp(1.6rem,1.2rem + 1.8vw,2.5rem);max-width:16ch;margin-top:0.7rem">Real aerials. Real strategy.</h2>
-      </div>
-      <a class="btn btn--y" href="prototype.html">Take Tom on the course →</a>
-    </div>
-    <div class="thumbs" id="thumbs"></div>
-    <p style="color:var(--dim);font-size:0.85rem;margin-top:1.25rem;max-width:62ch">Real USGS aerial photography, real hole geometry from OpenStreetMap — including Austin&rsquo;s public courses. The same pipeline runs on any of the world&rsquo;s ~30,000–38,000 courses.</p>
-  </div>
-</section>
-
-
-
-<section class="surfaces" id="swing">
-  <div class="wrap">
-    <span class="label">Swing mechanics</span>
-    <h2 style="font-size:clamp(1.6rem,1.1rem + 1.9vw,2.6rem);max-width:20ch;margin-top:0.7rem">See your swing the way Tom does.</h2>
-    <p style="color:var(--dim);max-width:62ch;margin-top:0.8rem;font-size:0.95rem">Film your swing with your phone &mdash; markerless motion capture, no sensors and no suit. It reads the fundamentals Tom coaches: posture, sequence, low point, face and path &mdash; and tracks them over time so you can see change, not just feel it. In person, Tom pairs it with Swing Catalyst, force plates, a launch monitor and SAM PuttLab. At a simulator or the range, the app records the instant you swing, loops the replay right there beside your ball data, and submits it for Tom&rsquo;s diagnosis and a corrective plan.</p>
-    <figure style="margin:1.4rem 0 0;border:1px solid var(--rule);overflow:hidden"><img src="img/swing-mechanics.svg" alt="Swing mechanics diagram: swing plane, posture, sequence, low point, face and path" style="width:100%;height:auto;display:block"><figcaption style="padding:0.55rem 0.85rem;font-family:'Archivo Narrow',sans-serif;font-weight:700;font-size:0.72rem;letter-spacing:0.08em;text-transform:uppercase;color:var(--dim)">The fundamentals the read tracks &middot; illustrative diagram</figcaption></figure>
-    <div class="two" style="margin-top:1.25rem">
-      <article class="surf">
-        <span class="where">The standard capture</span>
-        <h3>Eight shots, three swings each</h3>
-        <p>Driver and a mid-iron from two angles, a pitch, a chip and two putting views &mdash; the same protocol every time, so a month from now the difference is you improving, not the camera moving.</p>
-      </article>
-      <article class="surf">
-        <span class="where">Grounded in the science</span>
-        <h3>Measured, not guessed</h3>
-        <p>The read is built on published golf-swing biomechanics and on Tom&rsquo;s own fault library, and it compares you to golfers built like you &mdash; not a men&rsquo;s-only textbook. Research on <b style="color:var(--card)">low-handicap women</b> finds there&rsquo;s no single &ldquo;correct&rdquo; swing (individual mechanics matter), while newer work grades the swing on one index of <b style="color:var(--card)">pelvis-and-torso rotation</b> &mdash; the sequence Tom drills. He coaches the golfer in front of him.</p>
-        <p style="color:var(--dim);font-size:0.82rem;margin:0.6rem 0 0">Science, cited: <a href="https://doi.org/10.1080/02640414.2011.605161" target="_blank" rel="noopener">female-golfer swing study</a> &middot; <a href="https://doi.org/10.3389/fspor.2022.986281" target="_blank" rel="noopener">Swing Performance Index</a> &middot; <a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC9227529/" target="_blank" rel="noopener">swing biomechanics</a> &middot; via PubMed</p>
-      </article>
-    </div>
-    <p style="color:var(--turf);font-family:'Archivo Narrow',sans-serif;font-weight:700;text-transform:uppercase;letter-spacing:0.06em;font-size:0.72rem;margin-top:1rem">Capture works today &middot; the automatic read in Tom&rsquo;s method is in build, pending his review</p>
-    <p style="color:var(--dim);font-size:0.82rem;margin-top:1rem;max-width:64ch">The technology: markerless pose estimation from ordinary video (as in recent golf-pose research), read against open golf-biomechanics datasets and Tom&rsquo;s labels &mdash; a coaching layer we build ourselves rather than rent. <a href="https://openbiomechanics.org" target="_blank" rel="noopener">OpenBiomechanics</a> &middot; <a href="https://minghanlee.github.io/papers/ICPR_2024_GolfPose.pdf" target="_blank" rel="noopener">GolfPose (ICPR 2024)</a></p>
-    <p style="margin-top:1rem"><a class="btn btn--y" href="#book">Start with a lesson &rarr;</a></p>
-  </div>
-</section>
-
-<section class="surfaces" id="modules">
-  <div class="wrap">
-    <span class="label">Upcoming classes</span>
-    <h2 style="font-size:clamp(1.5rem,1.1rem + 1.7vw,2.3rem);max-width:24ch;margin-top:0.7rem">Every week you are on your program, learning from a Pro.</h2>
-    <p style="color:var(--dim);max-width:64ch;margin-top:0.8rem;font-size:0.95rem"><b style="color:var(--card)">Classes are group</b> &mdash; you learn alongside a small team, in person, virtual, or hybrid, with golf homework for mastery and data analysis to really lock in your game. (Want one-on-one? That&rsquo;s a <a href="#book">lesson with Tom</a>.) Founding cohorts are forming new teams; enrollment opens Sept 2026.</p>
-    <style>
-      .feat{margin:1.25rem 0 0;border:1px solid var(--flag);background:linear-gradient(160deg,#1c2410,#131A1F)}
-      .feat__track{padding:1.4rem 1.3rem 0.4rem}
-      .feat__ey{display:flex;flex-wrap:wrap;gap:0.5rem;align-items:center;margin-bottom:0.6rem}
-      .feat__badge{background:var(--flag);color:#231A06;font-family:'Archivo Narrow',sans-serif;font-weight:700;text-transform:uppercase;letter-spacing:0.08em;font-size:0.66rem;padding:0.18rem 0.55rem}
-      .feat__tag{border:1px solid var(--turf);color:var(--turf);font-family:'Archivo Narrow',sans-serif;font-weight:700;text-transform:uppercase;letter-spacing:0.08em;font-size:0.66rem;padding:0.16rem 0.5rem}
-      .feat__name{font-family:'Archivo Black',sans-serif;font-weight:400;font-size:clamp(1.3rem,1.05rem + 1vw,1.9rem);line-height:1.02;color:var(--card);margin:0}
-      .feat__desc{color:var(--dim);margin:0.55rem 0 0;font-size:0.95rem;max-width:60ch}
-      .feat__meta{font-family:'Archivo Narrow',sans-serif;font-weight:700;color:var(--card);margin:0.7rem 0 0;font-size:0.85rem;letter-spacing:0.02em}
-      .feat__price{color:var(--flag)}
-      .feat__cta{display:flex;flex-wrap:wrap;gap:0.5rem;margin:1rem 0 0}
-      .feat__dots{display:flex;gap:0.4rem;padding:0.3rem 1.3rem 1rem}
-      .feat__dot{appearance:none;width:0.7rem;height:0.7rem;border-radius:50%;border:1px solid var(--flag);background:transparent;cursor:pointer;padding:0}
-      .feat__dot[aria-pressed="true"]{background:var(--flag)}
-      .feat__dot:focus-visible{outline:2px solid var(--flag);outline-offset:2px}
-    </style>
-    <div class="feat" id="modules-featured" role="region" aria-label="Featured upcoming classes"></div>
-    <p style="margin:1.1rem 0 0"><button id="expand-all" class="need" type="button" aria-expanded="false">Expand all classes</button></p>
-    <div id="modules-list" style="margin-top:1.25rem;display:grid;gap:0.6rem"></div>
-  </div>
-</section>
-
-<figure class="photoband" data-course="tpc-sawgrass" style="margin:0">
-  <img loading="lazy" decoding="async" alt="Aerial photograph of TPC Sawgrass" onerror="this.closest('.photoband').remove()">
-  <figcaption><span class="photoband__name"></span><span class="photoband__credit">Real aerial photography &middot; USGS National Map, public domain</span></figcaption>
-</figure>
-<section class="surfaces">
-  <div class="wrap">
-    <span class="label">Tom knows (almost) every course</span>
-    <h2 style="font-size:clamp(1.5rem,1.1rem + 1.7vw,2.3rem);max-width:22ch;margin-top:0.7rem">Courses worth learning from.</h2>
-    <p style="color:var(--dim);max-width:62ch;margin-top:0.8rem;font-size:0.95rem">Great courses teach golf by themselves — open any of these in the course tool and walk the routing. Tom&rsquo;s personal picks and his notes on each &mdash; available to you.</p>
-    <div class="two" style="margin-top:1.25rem">
-      <article class="surf">
-        <span class="where">The home of golf</span>
-        <h3>The Old Course at St Andrews</h3>
-        <p>Golf has been played here for centuries. Huge shared greens, bunkers with names, and wind that teaches course management faster than any lesson.</p>
-      </article>
-      <article class="surf">
-        <span class="where">Public golf&rsquo;s summit</span>
-        <h3>Pebble Beach</h3>
-        <p>An ocean-walled U.S. Open venue that anyone can book — proof that the game&rsquo;s greatest stages aren&rsquo;t all behind private gates.</p>
-      </article>
-      <article class="surf">
-        <span class="where">Design classic</span>
-        <h3>Pinehurst</h3>
-        <p>Donald Ross&rsquo;s crowned greens punish the long miss and reward the smart one — the clearest lesson in aiming for the middle you&rsquo;ll ever play.</p>
-      </article>
-      <article class="surf">
-        <span class="where">Short course, real golf</span>
-        <h3>Butler Pitch &amp; Putt</h3>
-        <p>Nine short holes and every one counts. Short courses are where beginners fall in love with the game — and where good players sharpen their scoring.</p>
-      </article>
-      <article class="surf">
-        <span class="where">Off-course, all ages</span>
-        <h3>PopStroke &mdash; Austin</h3>
-        <p>Two designed putting courses, a restaurant and lawn games at 13000 Harris Ridge Blvd. Off the championship course but real practice &mdash; where kids and adults sharpen their putting and short game while having fun. A low-pressure first taste of the sport.</p>
-      </article>
-    </div>
-    <div class="thumbs" id="great-thumbs" style="margin-top:1.5rem"></div>
-    <p style="margin-top:1rem"><a class="btn btn--y" href="prototype.html">Take Tom to these courses →</a></p>
-  </div>
-</section>
-
-<section class="surfaces" id="austin" style="border-top:4px solid var(--turf)">
-  <div class="wrap">
-    <span class="label" style="color:var(--turf)">Local &middot; Austin &amp; Central Texas</span>
-    <h2 style="font-size:clamp(1.6rem,1.1rem + 1.9vw,2.5rem);max-width:20ch;margin-top:0.5rem">Golf in Austin, with a pro who knows it.</h2>
-    <p style="color:var(--dim);max-width:62ch;margin-top:0.8rem;font-size:0.95rem">Tom coaches across the Austin area &mdash; city munis, hill-country layouts and the short courses where beginners fall in love with the game. Here&rsquo;s where to start, play and practice.</p>
-    <div class="two" style="margin-top:1.25rem">
-      <article class="surf">
-        <span class="where">City munis &middot; golfATX</span>
-        <h3>Affordable, walkable, real golf</h3>
-        <p>Lions Municipal, Morris Williams, Hancock, Jimmy Clay and Roy Kizer &mdash; the city courses where most Austin golfers learn, and where a weekly practice round costs less than dinner.</p>
-      </article>
-      <article class="surf">
-        <span class="where">Start here &middot; short &amp; off-course</span>
-        <h3>Butler Pitch &amp; Putt &middot; PopStroke</h3>
-        <p>Butler&rsquo;s nine short holes are the classic Austin first course; PopStroke (13000 Harris Ridge Blvd) is putting and food for all ages; Harvey Penick&rsquo;s campus is pure practice.</p>
-      </article>
-      <article class="surf">
-        <span class="where">Public favorites</span>
-        <h3>Falconhead &middot; Grey Rock &middot; Avery Ranch &middot; Forest Creek</h3>
-        <p>When you&rsquo;re ready for a full 18, these are the local public picks &mdash; hill-country views and enough test to show what you&rsquo;ve been working on with Tom.</p>
-      </article>
-      <article class="surf" style="border-color:var(--flag)">
-        <span class="where">Corporate &amp; teams</span>
-        <h3>Austin company leagues</h3>
-        <p>Simulator or short-course leagues for Austin teams, run as a season &mdash; the new hire and the VP in the same group. <a href="#corporate">Bring golf to your team &rarr;</a></p>
-      </article>
-    </div>
-    <p style="margin-top:1.25rem;display:flex;flex-wrap:wrap;gap:0.5rem">
-      <a class="btn btn--y" href="#book">Book a lesson in Austin &rarr;</a>
-      <a class="btn btn--o" href="prototype.html?q=Austin">See Austin courses in the tool &rarr;</a>
-    </p>
-  </div>
-</section>
-
-<figure class="photoband" data-course="torrey-pines" style="margin:0">
-  <img loading="lazy" decoding="async" alt="Aerial photograph of Torrey Pines golf course" onerror="this.closest('.photoband').remove()">
-  <figcaption><span class="photoband__name"></span><span class="photoband__credit">Real aerial photography &middot; USGS National Map, public domain</span></figcaption>
-</figure>
 <section class="surfaces" id="faq">
   <div class="wrap">
     <span class="label">New-golfer FAQ</span>
@@ -786,101 +485,6 @@
   render();
 })();
 </script>
-
-<dialog id="checkout" style="background:var(--ink-2);color:var(--card);border:1px solid var(--rule);max-width:26rem;width:calc(100% - 2rem);padding:0">
-  <div style="padding:1.4rem 1.4rem 1.2rem">
-    <p class="label" style="margin:0 0 0.6rem">Demo checkout &middot; no card is charged</p>
-    <h3 id="co-name" style="font-size:1.2rem;margin:0"></h3>
-    <p id="co-sched" style="color:var(--dim);font-size:0.88rem;margin:0.3rem 0 0.7rem"></p>
-    <span id="co-per" data-per="0" data-group="0" hidden></span>
-    <div id="co-count-row" style="display:flex;align-items:center;justify-content:space-between;gap:0.6rem;margin:0 0 0.5rem">
-      <label for="co-count" style="font-family:'Archivo Narrow',sans-serif;font-weight:700;text-transform:uppercase;letter-spacing:0.06em;font-size:0.72rem;color:var(--dim)">Players</label>
-      <select id="co-count" style="background:var(--ink-3);border:1px solid var(--rule);color:var(--card);padding:0.5rem;font-family:'Archivo Narrow',sans-serif;min-height:40px">
-        <option>1</option><option>2</option><option>3</option><option>4</option><option>5</option><option>6</option><option>7</option><option>8</option>
-      </select>
-    </div>
-    <p id="co-count-label" style="color:var(--turf);font-size:0.8rem;margin:0 0 0.9rem"></p>
-    <div id="co-upsells" style="margin:0 0 0.9rem;display:none">
-      <p class="label" style="margin:0 0 0.4rem">Add to your order</p>
-      <label style="display:flex;gap:0.5rem;align-items:flex-start;margin-bottom:0.35rem;font-size:0.85rem;color:var(--card);cursor:pointer"><input type="checkbox" class="co-addon" data-amt="40" style="margin-top:0.2rem"> A filmed swing review from Tom <span style="color:var(--flag);margin-left:auto">+$40</span></label>
-      <label style="display:flex;gap:0.5rem;align-items:flex-start;font-size:0.85rem;color:var(--card);cursor:pointer"><input type="checkbox" class="co-addon" data-amt="60" style="margin-top:0.2rem"> A 30-min on-course playing lesson <span style="color:var(--flag);margin-left:auto">+$60</span></label>
-    </div>
-    <div style="display:grid;gap:0.5rem">
-      <input disabled placeholder="Card number &mdash; enabled at launch" style="background:var(--ink-3);border:1px solid var(--rule);color:var(--dim);padding:0.7rem;font-family:'Archivo Narrow',sans-serif">
-      <div style="display:grid;grid-template-columns:1fr 1fr;gap:0.5rem">
-        <input disabled placeholder="MM / YY" style="background:var(--ink-3);border:1px solid var(--rule);color:var(--dim);padding:0.7rem;font-family:'Archivo Narrow',sans-serif">
-        <input disabled placeholder="CVC" style="background:var(--ink-3);border:1px solid var(--rule);color:var(--dim);padding:0.7rem;font-family:'Archivo Narrow',sans-serif">
-      </div>
-      <button disabled class="btn btn--y" style="justify-content:center;opacity:0.75;cursor:not-allowed">Pay <span id="co-price" style="margin-left:0.35rem"></span></button>
-    </div>
-    <p style="color:var(--dim);font-size:0.78rem;margin:0.8rem 0 0">Payments run on Stripe when enrollment opens (2.9% + 30&cent; standard processing). This preview collects nothing.</p>
-    <p style="margin:0.9rem 0 0;text-align:right"><button class="btn btn--o" onclick="document.getElementById('checkout').close()">Close</button></p>
-  </div>
-</dialog>
-
-<section class="surfaces" id="corporate">
-  <div class="wrap" style="max-width:48rem">
-    <span class="label">Corporate &amp; team golf</span>
-    <h2 style="font-size:clamp(1.5rem,1.1rem + 1.7vw,2.3rem);max-width:26ch;margin-top:0.7rem">The best team building doesn&rsquo;t feel like team building.</h2>
-    <p style="color:var(--dim);margin-top:0.8rem;font-size:0.95rem;max-width:60ch">Golf is the rare work event where the new hire and the VP share a cart, nobody&rsquo;s stuck in a trust fall, and the quiet person on the team turns out to have the sweetest swing. Tom runs it as a <b style="color:var(--card)">season</b> &mdash; a 6&ndash;8 week simulator or short-course league &mdash; so your people get better together, not just once.</p>
-    <ul style="list-style:none;padding:0;margin:1.1rem 0 0;display:grid;gap:0.55rem;max-width:62ch">
-      <li style="color:var(--dim);font-size:0.92rem;padding-left:1.5rem;position:relative"><span style="position:absolute;left:0;color:var(--turf);font-weight:700">&#10003;</span> <b style="color:var(--card)">Everyone plays.</b> A scramble format needs zero experience &mdash; total beginners contribute from the first hole.</li>
-      <li style="color:var(--dim);font-size:0.92rem;padding-left:1.5rem;position:relative"><span style="position:absolute;left:0;color:var(--turf);font-weight:700">&#10003;</span> <b style="color:var(--card)">It builds real relationships.</b> Four hours beside someone beats four meetings across the table from them.</li>
-      <li style="color:var(--dim);font-size:0.92rem;padding-left:1.5rem;position:relative"><span style="position:absolute;left:0;color:var(--turf);font-weight:700">&#10003;</span> <b style="color:var(--card)">It&rsquo;s a season, not a stunt.</b> Weekly reps mean visible improvement and something the team looks forward to.</li>
-      <li style="color:var(--dim);font-size:0.92rem;padding-left:1.5rem;position:relative"><span style="position:absolute;left:0;color:var(--turf);font-weight:700">&#10003;</span> <b style="color:var(--card)">Weather-proof.</b> Simulator leagues run year-round and fit into a weeknight evening.</li>
-    </ul>
-    <p style="color:var(--dim);margin-top:1.1rem;font-size:0.95rem">Tell us about your group and we&rsquo;ll put a proposal together &mdash; priced per season, not per head.</p>
-    <form id="corp-form" style="display:grid;gap:0.6rem;margin-top:1.25rem">
-      <div style="display:grid;grid-template-columns:1fr 1fr;gap:0.6rem">
-        <input required name="name" placeholder="Your name" style="background:var(--ink-3);border:1px solid var(--rule);color:var(--card);padding:0.7rem;font-family:inherit">
-        <input required name="company" placeholder="Company" style="background:var(--ink-3);border:1px solid var(--rule);color:var(--card);padding:0.7rem;font-family:inherit">
-      </div>
-      <div style="display:grid;grid-template-columns:1fr 1fr;gap:0.6rem">
-        <input required type="email" name="email" placeholder="Work email" style="background:var(--ink-3);border:1px solid var(--rule);color:var(--card);padding:0.7rem;font-family:inherit">
-        <input name="size" placeholder="Roughly how many people?" style="background:var(--ink-3);border:1px solid var(--rule);color:var(--card);padding:0.7rem;font-family:inherit">
-      </div>
-      <textarea name="notes" rows="3" placeholder="When are you thinking, and what are you after? (optional)" style="background:var(--ink-3);border:1px solid var(--rule);color:var(--card);padding:0.7rem;font-family:inherit;resize:vertical"></textarea>
-      <button class="btn btn--y" type="submit" style="justify-content:center">Request a proposal</button>
-      <p id="corp-msg" style="color:var(--turf);font-size:0.88rem;margin:0" hidden></p>
-    </form>
-    <p style="color:var(--dim);font-size:0.75rem;margin:0.7rem 0 0">Preview form &mdash; submissions are captured and routed to the team once the booking backend is live.</p>
-  </div>
-</section>
-
-<section class="surfaces" id="platform">
-  <div class="wrap">
-    <span class="label">How Tom runs the business</span>
-    <h2 style="font-size:clamp(1.5rem,1.1rem + 1.7vw,2.3rem);max-width:22ch;margin-top:0.7rem">The platform behind the coaching.</h2>
-    <p style="color:var(--dim);max-width:62ch;margin-top:0.8rem;font-size:0.95rem">Pocket Pro isn&rsquo;t just lessons &mdash; it&rsquo;s the software that runs Tom&rsquo;s whole operation: booking, events, retention, scoring and the private line to Tom. Here&rsquo;s the module map, with what&rsquo;s live in this demo and what&rsquo;s in build.</p>
-    <div class="mods">
-      <div class="mod"><span class="mod__chip mod__chip--live">Live demo</span><h3>Booking &amp; checkout</h3><p>Pick a lesson or class, choose a time, check out &mdash; your slot holds the moment payment clears. Stripe switches on at launch (2.9% + 30&cent;); nothing is charged in preview.</p></div>
-      <div class="mod"><span class="mod__chip mod__chip--build">In build</span><h3>Events &amp; leagues</h3><p>Runs corporate leagues, junior camps and family cups as managed events &mdash; registration, teams, schedule and results in one place. This is the corporate revenue line.</p></div>
-      <div class="mod"><span class="mod__chip mod__chip--build">In build</span><h3>Communication &amp; reminders</h3><p>Automated email + SMS: lesson reminders, homework nudges, event updates. The single biggest retention lever &mdash; paired with the private Tom-messaging relay.</p></div>
-      <div class="mod"><span class="mod__chip mod__chip--build">In build</span><h3>Live scoring &amp; leaderboards</h3><p>Real-time scoring turns a corporate or family season into something people check daily. Standings, skins and closest-to-the-pin, updated hole by hole.</p></div>
-      <div class="mod"><span class="mod__chip mod__chip--build">In build</span><h3>Handicap tracking &rarr; GHIN</h3><p>A trending handicap is pure motivation. We start with an internal index from your logged rounds, then add official USGA GHIN sync once membership is in place.</p></div>
-      <div class="mod"><span class="mod__chip mod__chip--build">In build</span><h3>Launch-monitor ingestion (TrackMan)</h3><p>Import sim and range data &mdash; ball speed, launch, spin, carry &mdash; straight into the diagnosis layer, so Tom&rsquo;s read is grounded in your real numbers. Feeds the markerless swing analysis.</p></div>
-      <div class="mod"><span class="mod__chip mod__chip--build">In build</span><h3>Message Tom (private relay)</h3><p>Students reach Tom directly inside the app &mdash; his phone and email stay private. Part of the Monthly &amp; Full-Time coaching memberships.</p></div>
-      <div class="mod"><span class="mod__chip mod__chip--live">Preview</span><h3>Player review center</h3><p>Tom&rsquo;s backend to keep every player&rsquo;s swings as they progress &mdash; loop, slow-mo, and a logged fix per session. <a href="review.html">Open the coach preview &rarr;</a></p></div>
-      <div class="mod"><span class="mod__chip mod__chip--live">Preview</span><h3>Student dashboard</h3><p>Program progress, putting benchmarks, round history and what your scores are telling Tom. <a href="dashboard.html">See the preview &rarr;</a></p></div>
-      <div class="mod"><span class="mod__chip mod__chip--live">Live demo</span><h3>Course intelligence</h3><p>Real aerial imagery and a professional&rsquo;s strategy read on every hole, searchable by course. <a href="prototype.html">Open the course tool &rarr;</a></p></div>
-    </div>
-    <p style="color:var(--dim);font-size:0.75rem;margin:1rem 0 0">Status tags are honest: &ldquo;live&rdquo; runs in this demo today, &ldquo;in build&rdquo; is scoped and on the roadmap. Nothing here is faked or sold before it works.</p>
-  </div>
-</section>
-
-<section class="surfaces" id="refer">
-  <div class="wrap" style="max-width:44rem">
-    <span class="label">Refer a friend</span>
-    <h2 style="font-size:clamp(1.5rem,1.1rem + 1.7vw,2.3rem);margin-top:0.7rem">Give $20, get $20.</h2>
-    <p style="color:var(--dim);margin-top:0.8rem;font-size:0.95rem">Golf is more fun with your people. Send a friend $20 off their first class or lesson; when they book, you get $20 toward yours. Share your code:</p>
-    <div style="display:flex;flex-wrap:wrap;gap:0.5rem;align-items:center;margin-top:1rem">
-      <code id="ref-code" style="background:var(--ink-3);border:1px dashed var(--flag);color:var(--flag);padding:0.7rem 1.1rem;font-size:1.05rem;letter-spacing:0.12em;font-family:'Archivo Narrow',sans-serif;font-weight:700">TOM-FRIEND-20</code>
-      <button id="ref-copy" class="btn btn--o" type="button">Copy code</button>
-    </div>
-    <p style="color:var(--dim);font-size:0.75rem;margin:0.8rem 0 0">Preview &mdash; referral credits apply automatically at checkout once payments go live. One sample code shown; each member gets their own.</p>
-  </div>
-</section>
-
 <section class="surfaces" id="golf-now">
   <div class="wrap" style="max-width:48rem">
     <span class="label">Tour update &middot; Following the game</span>
@@ -953,39 +557,6 @@
     </script>
   </div>
 </section>
-
-<section class="surfaces" id="shop">
-  <div class="wrap">
-    <style>
-      .merch{display:grid;gap:1rem;grid-template-columns:repeat(auto-fill,minmax(148px,1fr));margin-top:1.3rem}
-      .patch{margin:0;background:#fff;border:1px solid var(--rule);border-radius:12px;padding:10px}
-      .patch img{width:100%;height:auto;border-radius:8px;display:block}
-      .patch figcaption{font-family:'Archivo Narrow',sans-serif;font-weight:700;text-transform:uppercase;letter-spacing:0.06em;font-size:0.68rem;color:#5C6259;text-align:center;margin-top:0.5rem}
-      .merch-use{display:flex;flex-wrap:wrap;gap:0.5rem;align-items:center;margin-top:1.3rem}
-      .merch-use .tag{font-family:'Archivo Narrow',sans-serif;font-weight:700;text-transform:uppercase;letter-spacing:0.08em;font-size:0.72rem;color:var(--turf);border:1px solid var(--turf);padding:0.22rem 0.6rem}
-    </style>
-    <span class="label">Pro shop &middot; apparel &amp; merch</span>
-    <h2 style="font-size:clamp(1.6rem,1.1rem + 1.9vw,2.5rem);max-width:18ch;margin-top:0.5rem">Wear the patch.</h2>
-    <p style="color:var(--dim);max-width:62ch;margin-top:0.8rem;font-size:0.95rem">Tom&rsquo;s pro shop starts here &mdash; Tom Harris Golf emblems: embroidered patches and marks made for hats, polos and stickers. Gear and &ldquo;Tom&rsquo;s bag&rdquo; picks come later. Production runs through Tom&rsquo;s apparel &amp; monogram partner (or a Shopify store) once the shop opens.</p>
-    <div class="merch">
-      <figure class="patch"><img src="img/tom-harris-badge.jpg" alt="Tom Harris caddie-bib patch, number 26" loading="lazy" decoding="async"><figcaption>The bib &middot; 26</figcaption></figure>
-      <figure class="patch"><img src="img/th-patch-scorecard.jpg" alt="Tom Harris scorecard-and-flag crest patch" loading="lazy" decoding="async"><figcaption>Scorecard crest</figcaption></figure>
-      <figure class="patch"><img src="img/th-patch-crest.jpg" alt="Tom Harris oval signet crest patch" loading="lazy" decoding="async"><figcaption>Signet crest</figcaption></figure>
-      <figure class="patch"><img src="img/th-patch-texas.jpg" alt="Tom Harris Texas patch" loading="lazy" decoding="async"><figcaption>Texas</figcaption></figure>
-      <figure class="patch"><img src="img/th-patch-evolution.jpg" alt="Tom Harris evolution-of-golf patch" loading="lazy" decoding="async"><figcaption>Evolution of golf</figcaption></figure>
-    </div>
-    <div class="merch-use">
-      <span class="tag">Hats</span><span class="tag">Polos</span><span class="tag">Stickers</span>
-    </div>
-    <form class="merch-notify" onsubmit="event.preventDefault();var m=this.querySelector('.mn-msg');m.hidden=false;m.textContent='Thanks — you’re on the merch list. Placeholder: email capture goes live with the shop, nothing is sent yet.';this.querySelector('input').value='';" style="display:flex;flex-wrap:wrap;gap:0.6rem;margin-top:1.1rem;align-items:center">
-      <input type="email" required placeholder="you@email.com" aria-label="Email for merch notifications" style="flex:1 1 15rem;max-width:22rem;background:var(--ink-3);border:1px solid var(--rule);color:var(--card);padding:0.72rem;font-family:'Archivo Narrow',sans-serif;min-height:46px">
-      <button class="btn btn--y" type="submit">Notify me when merch drops &rarr;</button>
-      <p class="mn-msg" hidden style="flex-basis:100%;color:var(--turf);font-size:0.85rem;margin:0.3rem 0 0" aria-live="polite"></p>
-    </form>
-    <p style="color:var(--dim);font-size:0.75rem;margin-top:1rem">Designs shown are concepts. The shop is a future build &mdash; nothing is for sale yet; fulfilment would run through Tom&rsquo;s apparel/monogram partner or a Shopify store.</p>
-  </div>
-</section>
-
 <section class="surfaces" id="newsletter">
   <div class="wrap" style="max-width:44rem">
     <span class="label">Monday Bites &middot; free weekly newsletter</span>
@@ -1001,53 +572,19 @@
   </div>
 </section>
 
-<dialog id="coursepop" style="background:var(--ink-2);color:var(--card);border:1px solid var(--rule);max-width:56rem;width:calc(100% - 2rem);padding:0">
-  <figure style="margin:0">
-    <img id="cp-img" alt="" style="width:100%;height:auto;max-height:70vh;object-fit:cover;display:block;background:#0D1512">
-    <figcaption style="padding:1rem 1.25rem;display:flex;flex-wrap:wrap;justify-content:space-between;align-items:baseline;gap:0.5rem 1rem">
-      <span id="cp-name" style="font-family:'Archivo Black',sans-serif;font-size:1.25rem"></span>
-      <span style="font-family:'Archivo Narrow',sans-serif;font-size:0.72rem;letter-spacing:0.08em;text-transform:uppercase;color:var(--dim)">Real aerial &middot; USGS National Map, public domain</span>
-    </figcaption>
-    <p id="cp-tip" style="margin:0;padding:0 1.25rem 0.6rem;color:var(--turf);font-size:0.9rem"></p>
-    <p style="margin:0;padding:0 1.25rem 1.1rem;text-align:right"><button class="btn btn--o" onclick="document.getElementById('coursepop').close()">Close</button></p>
-  </figure>
-</dialog>
-
-<section class="surfaces" id="partners">
-  <div class="wrap">
-    <style>
-      .road{display:grid;gap:0.9rem;grid-template-columns:1fr;margin-top:1rem}
-      @media(min-width:44rem){.road{grid-template-columns:1fr 1fr}}
-      @media(min-width:70rem){.road{grid-template-columns:1fr 1fr 1fr}}
-      .road__c{border:1px dashed var(--rule);background:var(--ink-2);padding:1rem 1.05rem;display:flex;flex-direction:column;gap:0.45rem}
-      .road__c h4{margin:0;font-family:'Archivo Narrow',sans-serif;font-weight:700;font-size:1.02rem;color:var(--card);letter-spacing:0.01em}
-      .road__c p{margin:0;color:var(--dim);font-size:0.85rem;line-height:1.45}
-      .road__t{align-self:flex-start;font-family:'Archivo Narrow',sans-serif;font-weight:700;text-transform:uppercase;letter-spacing:0.07em;font-size:0.6rem;color:var(--flag);border:1px solid var(--flag);padding:0.09rem 0.42rem;border-radius:2px}
-      .road__t--p3{color:var(--turf);border-color:var(--turf)}
-      .road__t--future{color:var(--dim);border-color:var(--rule)}
-    </style>
-    <span class="label">Partners &amp; perks &middot; roadmap</span>
-    <h2 style="font-size:clamp(1.5rem,1.1rem + 1.7vw,2.3rem);max-width:24ch;margin-top:0.7rem">Perks for Tom&rsquo;s students &mdash; and where this is headed.</h2>
-    <p style="color:var(--dim);max-width:62ch;margin-top:0.8rem;font-size:0.95rem">We&rsquo;re building partnerships so students get real discounts on the gear and getaways they already want. Brands and resorts: there&rsquo;s a spot for you here.</p>
-    <div class="two" style="margin-top:1.25rem;grid-template-columns:repeat(2,1fr)">
-      <article class="surf" style="border-style:dashed;text-align:center;color:var(--dim)"><h3 style="font-size:1rem">Golf balls &amp; gear</h3><p style="font-size:0.85rem">Student pricing</p></article>
-      <article class="surf" style="border-style:dashed;text-align:center;color:var(--dim)"><h3 style="font-size:1rem">Club fittings</h3><p style="font-size:0.85rem">Partner rate</p></article>
-      <article class="surf" style="border-style:dashed;text-align:center;color:var(--dim)"><h3 style="font-size:1rem">Resort destinations</h3><p style="font-size:0.85rem">Golf-trip discounts &amp; trips forthcoming</p></article>
-      <article class="surf" style="border-style:dashed;text-align:center;color:var(--dim)"><h3 style="font-size:1rem">Apparel</h3><p style="font-size:0.85rem">Member perks</p></article>
-    </div>
-    <h3 style="font-family:'Archivo Black',sans-serif;font-weight:400;font-size:1.05rem;margin:2rem 0 0;color:var(--card)">On the roadmap &mdash; future builds</h3>
-    <p style="color:var(--dim);max-width:64ch;margin:0.5rem 0 0;font-size:0.9rem">Where Pocket Pro is headed &mdash; the revenue lines we&rsquo;re sequencing. Nothing here is live yet; these cards hold the place while the real sections get built.</p>
-    <div class="road">
-      <article class="road__c"><span class="road__t">Planned</span><h4>Self-paced video courses</h4><p>Record Tom&rsquo;s method once, sell it forever &mdash; the highest-margin product, and it scales without his time.</p></article>
-      <article class="road__c"><span class="road__t">Planned</span><h4>Freemium app membership &middot; ~$12&ndash;19/mo</h4><p>Swing capture, the course tool, dashboard and drills &mdash; without live Tom. A tier below the top coaching membership, and a funnel into it.</p></article>
-      <article class="road__c"><span class="road__t">Planned</span><h4>Tom&rsquo;s pro shop &amp; gear</h4><p>The <a href="#shop" style="color:var(--flag)">pro shop</a> starts with branded merch; next comes &ldquo;Tom&rsquo;s bag&rdquo; and drill-specific training aids via affiliate links &mdash; commission that also upgrades the student&rsquo;s kit.</p></article>
-      <article class="road__c"><span class="road__t">Spring</span><h4>Golf trips &amp; retreats</h4><p>Curated experiences to the courses we already feature, with Tom coaching on-site. Booked for spring, with time to plan &mdash; high ticket, strong brand halo.</p></article>
-      <article class="road__c"><span class="road__t">Summer</span><h4>Junior academy &amp; camps</h4><p>Summer and after-school youth programs with seasonal enrollment and school partnerships &mdash; building on today&rsquo;s family golf.</p></article>
-      <article class="road__c"><span class="road__t">Exploring</span><h4>Corporate wellness benefit</h4><p>Golf as an employer-paid HR perk &mdash; recurring B2B with bigger seat counts. Part of shopping the corporate idea to Austin&rsquo;s big employers.</p></article>
-      <article class="road__c"><span class="road__t road__t--p3">Phase 3</span><h4>License to other PGA pros</h4><p>B2B SaaS: other coaches run a branded academy on Pocket Pro&rsquo;s rails for a seat fee plus rev-share &mdash; the original scale thesis.</p></article>
-      <article class="road__c"><span class="road__t road__t--future">Future</span><h4>Tom Harris Golf Club</h4><p>A branded dues club (that badge!): priority booking, member events, a private feed and Q&amp;A with Tom, gear discounts and merch drops &mdash; possibly the name of the top membership tier.</p></article>
-    </div>
-    <p style="color:var(--dim);font-size:0.75rem;margin:1.1rem 0 0">Roadmap placeholders &mdash; nothing here is live, implied or committed yet; each card is replaced by the real feature as it ships. <a href="#corporate">Interested in partnering? Get in touch →</a></p>
+<section class="surfaces" id="contact" style="border-top:4px solid var(--flag)">
+  <div class="wrap" style="max-width:44rem">
+    <span class="label" style="color:var(--flag)">Contact</span>
+    <h2 style="font-size:clamp(1.5rem,1.1rem + 1.7vw,2.3rem);margin-top:0.7rem">Ready to start? Get in touch.</h2>
+    <p style="color:var(--dim);margin:0.8rem 0 0;font-size:0.95rem">Tell Tom where you are in your golf journey and what you want to work on. He&rsquo;ll help you pick the right lesson and set up payment &mdash; online by card, or in person by cash, Venmo or Zelle.</p>
+    <form id="contact-form" style="display:grid;gap:0.6rem;margin-top:1.1rem" onsubmit="event.preventDefault();var m=document.getElementById('contact-msg');m.textContent='Thanks — your note is ready. (Wire this to Tom&rsquo;s email or booking link at launch; nothing is sent yet.)';this.reset();">
+      <input type="text" required placeholder="Your name" aria-label="Your name" style="background:var(--ink-3);border:1px solid var(--rule);color:var(--card);padding:0.75rem;font-family:'Archivo Narrow',sans-serif;min-height:46px">
+      <input type="email" required placeholder="you@email.com" aria-label="Email address" style="background:var(--ink-3);border:1px solid var(--rule);color:var(--card);padding:0.75rem;font-family:'Archivo Narrow',sans-serif;min-height:46px">
+      <textarea required placeholder="What would you like to work on?" aria-label="Message" rows="3" style="background:var(--ink-3);border:1px solid var(--rule);color:var(--card);padding:0.75rem;font-family:'Archivo Narrow',sans-serif"></textarea>
+      <button class="btn btn--y" type="submit" style="justify-self:start">Send to Tom →</button>
+    </form>
+    <p id="contact-msg" style="color:var(--turf);font-size:0.85rem;margin:0.7rem 0 0" aria-live="polite"></p>
+    <p style="color:var(--dim);font-size:0.8rem;margin-top:1rem">Or find Tom on <a href="https://www.youtube.com/@Tomharrisgolf" target="_blank" rel="noopener" style="color:var(--flag)">YouTube</a>. <b style="color:var(--dim)">(Placeholder form &mdash; add Tom&rsquo;s real email or booking link to make it live.)</b></p>
   </div>
 </section>
 
@@ -1060,22 +597,17 @@
     </style>
     <span class="label">Explore</span>
     <nav class="foot-nav" aria-label="Footer">
-      <a href="#offerings">Coaching</a>
-      <a href="#modules">Classes</a>
-      <a href="#wear-women">Women&rsquo;s golf</a>
-      <a href="#corporate">Corporate golf</a>
-      <a href="#book">Lessons &amp; gift cards</a>
-      <a href="#dev">Four pillars</a>
-      <a href="#swing">Swing mechanics</a>
+      <a href="#offerings">Offerings</a>
+      <a href="#videos">Courses</a>
+      <a href="#recognition">Awards</a>
       <a href="#faq">FAQ</a>
-      <a href="#austin">Austin</a>
-      <a href="prototype.html">Course tool</a>
-      <a href="dashboard.html">Progress</a>
+      <a href="#wear-women">Women&rsquo;s golf</a>
       <a href="#golf-now">Leaderboard</a>
-      <a href="#shop">Pro shop</a>
+      <a href="#newsletter">Newsletter</a>
+      <a href="#contact">Contact</a>
     </nav>
     <span class="label">What&rsquo;s real</span>
-    <p style="margin-top:0.8rem">Tom Harris is a real Class A PGA professional (credentials per pga.com and mytpi.com). Courses, aerials and the strategy engine are real data — imagery from the USGS National Map (public domain), geometry © OpenStreetMap (ODbL). His method and the product are still in build; nothing here is fabricated. <a href="prototype.html">See the working course tool →</a></p>
+    <p style="margin-top:0.8rem">Tom Harris is a real Class A PGA professional (credentials per pga.com and mytpi.com). His method and the product are still in build; nothing here is fabricated.</p>
     <p style="margin-top:0.9rem"><span class="label">Follow</span></p>
     <div style="display:flex;flex-wrap:wrap;gap:0.6rem;margin-top:0.5rem">
       <a class="btn btn--o" href="https://www.youtube.com/@Tomharrisgolf" target="_blank" rel="noopener">YouTube</a>
@@ -1140,206 +672,6 @@ if(vgrid&&needsBar){
   needsBar.querySelectorAll('.need').forEach(b=>b.addEventListener('click',()=>{active=NEEDS.find(n=>n.key===b.dataset.key);renderVids()}))
   renderVids()
 }
-
-const usgs=(b,w,h)=>`https://basemap.nationalmap.gov/arcgis/rest/services/USGSImageryOnly/MapServer/export?bbox=${b.minLo},${b.minLa},${b.maxLo},${b.maxLa}&bboxSR=4326&imageSR=4326&size=${w},${h}&format=jpg&f=image`
-const SCHEDULE={
-  'putting-intensive-4':{day:'Tuesdays',time:'5:30\u20136:30 pm',start:'2026-09-15'},
-  'first-90-days':{day:'Saturdays',time:'9:00\u201310:00 am',start:'2026-09-19'},
-  'womens-golf-6':{day:'Thursdays',time:'6:00\u20137:00 pm',start:'2026-09-24'},
-  'score-better-6':{day:'Wednesdays',time:'6:00\u20137:00 pm',start:'2026-10-07'},
-  'family-golf-6':{day:'Sundays',time:'3:00\u20134:00 pm',start:'2026-10-19'},
-  'equipment-basics-1':{day:'Saturday',time:'10:00\u201311:30 am',start:'2026-11-01'},
-  'practice-like-a-golfer-4':{day:'Fridays',time:'6:00\u20137:00 pm',start:'2026-11-13'},
-  'build-your-swing-8':{day:'Mondays',time:'6:00\u20137:00 pm',start:'2026-12-01'},
-}
-const TAGS={'build-your-swing-8':'All levels','score-better-6':'Scoring \u00b7 Short game','womens-golf-6':'Women','family-golf-6':'Juniors \u0026 families','first-90-days':'True beginners','putting-intensive-4':'Putting clinic','practice-like-a-golfer-4':'Practice skills','equipment-basics-1':'Gear basics','butler-beginner-clinic-4':'Beginner \u00b7 Holiday special'}
-const fmtD=iso=>new Date(iso+'T12:00:00Z').toLocaleDateString('en-US',{month:'short',day:'numeric'})
-const cohort=(slug,weeks)=>{const c=SCHEDULE[slug];if(!c)return ''
-  const end=new Date(new Date(c.start+'T12:00:00Z').getTime()+(weeks-1)*7*864e5)
-  return weeks===1?`${c.day} ${c.time} \u00b7 ${fmtD(c.start)}, 2026 \u00b7 single session`:`${c.day} ${c.time} \u00b7 ${fmtD(c.start)} \u2013 ${end.toLocaleDateString('en-US',{month:'short',day:'numeric'})}, 2026 \u00b7 ${weeks} weeks`}
-fetch('programs.json').then(r=>r.json()).then(d=>{
-  const list=document.getElementById('modules-list'); if(!list) return
-  const price=p=>'$'+(p.priceMinor/100).toFixed(0)
-  list.innerHTML=[...d.programs].sort((a,b)=>(SCHEDULE[a.slug]?.start||'9999').localeCompare(SCHEDULE[b.slug]?.start||'9999')).map(p=>{const soon=(SCHEDULE[p.slug]?.start||'').slice(0,7)==='2026-09';const holiday=(SCHEDULE[p.slug]?.start||'').slice(0,7)==='2026-11';return `<details style="border:1px solid ${soon?'var(--flag)':'var(--rule)'};background:${soon?'#1c2410':'var(--ink-2)'};padding:0.9rem 1.1rem">
-    <summary style="font-family:'Archivo Narrow',sans-serif;font-weight:700;cursor:pointer;display:flex;flex-wrap:wrap;gap:0.5rem 1rem;align-items:baseline">
-      <span>${p.name}</span>
-      ${soon?'<span style="background:var(--flag);color:#231A06;font-size:0.68rem;letter-spacing:0.08em;text-transform:uppercase;padding:0.15rem 0.5rem;font-weight:700">Enrolling September 2026</span>':''}${holiday?'<span style="background:var(--penalty);color:#fff;font-size:0.68rem;letter-spacing:0.08em;text-transform:uppercase;padding:0.15rem 0.5rem;font-weight:700">Holiday special &middot; giftable</span>':''}
-      <span style="border:1px solid var(--turf);color:var(--turf);font-size:0.7rem;letter-spacing:0.08em;text-transform:uppercase;padding:0.15rem 0.5rem">${TAGS[p.slug]||''}</span>
-      <span style="color:var(--flag)">${price(p)}</span>
-      <span style="color:var(--dim);font-weight:400">${cohort(p.slug,p.weeks)}</span>
-      <span style="color:var(--turf);font-weight:700;font-size:0.72rem;letter-spacing:0.08em;text-transform:uppercase">Proposed dates &middot; confirmed at enrollment</span>
-    </summary>
-    <p style="color:var(--dim);margin:0.7rem 0 0.6rem;font-size:0.92rem">${p.description}</p>
-    <ol style="margin:0.4rem 0 0.2rem;padding-left:1.3rem;display:grid;gap:0.45rem">
-      ${p.modules.map(m=>`<li style="color:var(--card)"><b style="font-family:'Archivo Narrow',sans-serif">${m.title}</b>${m.videoId?` &middot; <a href="https://www.youtube.com/watch?v=${m.videoId}" target="_blank" rel="noopener">watch the lesson</a>`:''}<br><span style="color:var(--dim);font-size:0.88rem">${m.homework} <em>(${m.quizQuestions}-question quiz)</em></span></li>`).join('')}
-    </ol>
-    <p style="margin:0.9rem 0 0.2rem"><button class="btn btn--y enroll-demo" data-name="${p.name}" data-price="${price(p)}" data-base="${(p.priceMinor/100)}" data-mode="program" data-sched="${cohort(p.slug,p.weeks)}">Enroll — demo checkout</button></p>
-  </details>`}).join('')
-  document.querySelectorAll('.enroll-demo').forEach(b=>b.addEventListener('click',()=>{
-    if(window.openCheckout){window.openCheckout({name:b.dataset.name,sched:b.dataset.sched,mode:'program',base:b.dataset.base})}
-  }))
-  // Featured-classes rotator at the top of #modules (emphasises the group nature)
-  ;(function(){
-    var feat=document.getElementById('modules-featured'); if(!feat) return
-    var order=['putting-intensive-4','womens-golf-6','first-90-days','score-better-6','family-golf-6']
-    var byslug={}; d.programs.forEach(function(p){byslug[p.slug]=p})
-    var items=order.map(function(s){return byslug[s]}).filter(Boolean)
-    if(!items.length){feat.remove();return}
-    var money=function(p){return '$'+(p.priceMinor/100).toFixed(0)}
-    var esc=function(s){return String(s==null?'':s).replace(/"/g,'&quot;')}
-    var shortDesc=function(t){t=(t||'').replace(/\s*Draft curriculum.*$/,'').trim();var i=t.indexOf('.');return (i>0&&i<170)?t.slice(0,i+1):t.slice(0,150)}
-    feat.innerHTML='<div class="feat__track" id="feat-track">'+items.map(function(p,i){return '<article class="feat__card" data-i="'+i+'"'+(i?' hidden':'')+'>'+
-      '<div class="feat__ey"><span class="feat__badge">Featured group class</span><span class="feat__tag">'+(TAGS[p.slug]||'')+'</span></div>'+
-      '<h3 class="feat__name">'+p.name+'</h3>'+
-      '<p class="feat__desc">'+shortDesc(p.description)+'</p>'+
-      '<p class="feat__meta">'+(cohort(p.slug,p.weeks)||'Dates confirmed at enrollment')+' &middot; <span class="feat__price">'+money(p)+'</span> &middot; small group</p>'+
-      '<div class="feat__cta"><button class="btn btn--y feat-enroll" data-name="'+esc(p.name)+'" data-base="'+(p.priceMinor/100)+'" data-sched="'+esc(cohort(p.slug,p.weeks))+'">Reserve your seat &mdash; demo checkout</button> <a class="btn btn--o" href="#modules-list">See all classes</a></div>'+
-      '</article>'}).join('')+'</div><div class="feat__dots" id="feat-dots">'+items.map(function(p,i){return '<button class="feat__dot" data-i="'+i+'" aria-pressed="'+(i===0)+'" aria-label="Show '+esc(p.name)+'"></button>'}).join('')+'</div>'
-    var track=document.getElementById('feat-track'), dots=document.getElementById('feat-dots')
-    var cur=0,timer,reduce=window.matchMedia&&window.matchMedia('(prefers-reduced-motion: reduce)').matches
-    function show(i){cur=(i+items.length)%items.length;track.querySelectorAll('.feat__card').forEach(function(c){c.hidden=(+c.dataset.i!==cur)});dots.querySelectorAll('.feat__dot').forEach(function(x){x.setAttribute('aria-pressed',String(+x.dataset.i===cur))})}
-    function next(){show(cur+1)}
-    function reset(){clearInterval(timer);if(!reduce)timer=setInterval(next,5000)}
-    feat.querySelectorAll('.feat-enroll').forEach(function(b){b.addEventListener('click',function(){if(window.openCheckout)window.openCheckout({name:b.dataset.name,sched:b.dataset.sched,mode:'program',base:b.dataset.base})})})
-    dots.querySelectorAll('.feat__dot').forEach(function(x){x.addEventListener('click',function(){show(+x.dataset.i);reset()})})
-    feat.addEventListener('mouseenter',function(){clearInterval(timer)})
-    feat.addEventListener('mouseleave',reset)
-    reset()
-  })()
-}).catch(()=>{})
-
-;(function(){
-  const NAMES={'putting-intensive-4':['Putting Intensive \u2014 4 Weeks','the fastest strokes to save are on the green'],'family-golf-6':['Family Golf \u2014 6 Weeks','games first, short holes, a family scramble to finish'],'first-90-days':['Your First 90 Days of Golf','from never-held-a-club to \u201CI play golf now\u201D'],'build-your-swing-8':['Build Your Swing \u2014 8 Weeks','fundamentals through the full swing, step by step'],'practice-like-a-golfer-4':['Practice Like a Golfer \u2014 4 Weeks','learn how to practice so it actually sticks'],'score-better-6':['Score Improvement \u2014 6 Weeks','short game, putting and strategy that lower the number']}
-  const ans={}
-  function recommend(){const g=ans.goal,e=ans.exp
-    if(g==='putt')return 'putting-intensive-4'
-    if(g==='family')return 'family-golf-6'
-    if(e==='new')return g==='fun'?'first-90-days':'build-your-swing-8'
-    if(g==='fun')return 'practice-like-a-golfer-4'
-    return 'score-better-6'}
-  document.querySelectorAll('.wiz-a').forEach(b=>b.addEventListener('click',()=>{
-    ans[b.dataset.q]=b.dataset.v
-    b.parentElement.querySelectorAll('.wiz-a').forEach(x=>x.setAttribute('aria-selected',String(x===b)))
-    if(b.dataset.q==='exp'){document.querySelector('.wiz-step[data-step="2"]').hidden=false}
-    if(ans.exp&&ans.goal){const slug=recommend(),n=NAMES[slug],r=document.getElementById('wiz-result')
-      r.hidden=false
-      r.innerHTML='<p style="font-family:\'Archivo Narrow\',sans-serif;font-weight:700;text-transform:uppercase;letter-spacing:0.08em;font-size:0.72rem;color:var(--flag);margin:0 0 0.3rem">We recommend</p><h3 style="margin:0 0 0.4rem">'+n[0]+'</h3><p style="color:var(--dim);font-size:0.92rem;margin:0 0 0.8rem">Because '+n[1]+'.</p><a class="btn btn--y" href="#modules">See it in the class list \u2192</a>'
-      r.scrollIntoView({behavior:'smooth',block:'nearest'})}
-  }))
-})();
-
-;(function(){
-  const f=document.getElementById('corp-form')
-  if(f)f.addEventListener('submit',e=>{e.preventDefault();const m=document.getElementById('corp-msg');const name=(new FormData(f)).get('name')||'there';m.hidden=false;m.textContent='Thanks, '+name+' \u2014 got it. This is a preview, so nothing was sent yet; once the backend is live your request routes straight to the team.';f.querySelector('button[type=submit]').textContent='Request received'})
-  const rc=document.getElementById('ref-copy')
-  if(rc)rc.addEventListener('click',()=>{const code=document.getElementById('ref-code').textContent.trim();(navigator.clipboard?navigator.clipboard.writeText(code):Promise.reject()).then(()=>{rc.textContent='Copied!';setTimeout(()=>rc.textContent='Copy code',1500)}).catch(()=>{rc.textContent='Select & copy: '+code})})
-})();
-
-fetch('courses.json').then(r=>r.json()).then(d=>{
-  const pref=['pebble-beach','lions-municipal','roy-kizer','bethpage-black','pinehurst-no2','chambers-bay','torrey-pines','tpc-sawgrass']
-  const us=d.courses.filter(c=>c.country==='US'&&c.holes.length)
-  const pick=[...pref.map(id=>us.find(c=>c.id===id)).filter(Boolean),...us].filter((c,i,a)=>a.indexOf(c)===i).slice(0,8)
-  const bounds=c=>{let a=90,b=-90,x=180,y=-180;for(const h of c.holes)for(const[la,lo]of h.path){if(la<a)a=la;if(la>b)b=la;if(lo<x)x=lo;if(lo>y)y=lo}const pa=(b-a)*0.06+6e-4,px=(y-x)*0.06+6e-4;return{minLa:a-pa,maxLa:b+pa,minLo:x-px,maxLo:y+px}}
-  document.getElementById('thumbs').innerHTML=pick.map(c=>`<figure class="thumb" style="cursor:pointer" onclick="openCoursePop('${c.id}')" role="button" tabindex="0" onkeydown="if(event.key==='Enter')openCoursePop('${c.id}')"><img loading="lazy" decoding="async" alt="Aerial of ${c.name}" src="${usgs(bounds(c),520,390)}"><figcaption>${c.name} &middot; tap to view</figcaption></figure>`).join('')
-  window.openCoursePop=function(id){
-    const c=d.courses.find(x=>x.id===id&&x.holes.length); if(!c)return
-    const b=bounds(c)
-    const img=document.getElementById('cp-img'), tip=document.getElementById('cp-tip')
-    if(c.country==='US'){
-      img.style.display=''; img.src=usgs(b,1400,900); img.onerror=function(){this.style.display='none'}
-      img.alt='Aerial photograph of '+c.name
-      tip.innerHTML="Tom\u2019s course note lands here once he\u2019s reviewed it."
-    } else {
-      img.style.display='none'
-      tip.innerHTML="High-resolution aerials are US-only, so there\u2019s no photo for this one yet \u2014 but you can walk its real routing in the <a href='prototype.html'>course tool</a>. Tom\u2019s note lands here after his review."
-    }
-    document.getElementById('cp-name').textContent=c.name+' \u2014 '+c.place
-    document.getElementById('coursepop').showModal()
-  }
-  // Non-US courses have no USGS aerial (US-only imagery), so draw their real
-  // OpenStreetMap routing instead of firing a request that returns a blank tile.
-  const routeThumb=(c)=>{
-    const b=bounds(c),W=520,H=390,pad=16
-    const midLat=(b.minLa+b.maxLa)/2,k=Math.cos(midLat*Math.PI/180)
-    const geoW=((b.maxLo-b.minLo)||1e-4)*k,geoH=(b.maxLa-b.minLa)||1e-4
-    const s=Math.min((W-2*pad)/geoW,(H-2*pad)/geoH)
-    const offX=(W-geoW*s)/2,offY=(H-geoH*s)/2
-    const X=lo=>offX+(lo-b.minLo)*k*s,Y=la=>H-(offY+(la-b.minLa)*s)
-    const paths=c.holes.map(h=>`<polyline points='${h.path.map(([la,lo])=>X(lo).toFixed(1)+','+Y(la).toFixed(1)).join(' ')}' fill='none' stroke='#7B9153' stroke-width='1.5' stroke-linejoin='round' stroke-linecap='round'/>`).join('')
-    const svg=`<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 ${W} ${H}'><rect width='${W}' height='${H}' fill='#0C130E'/>${paths}<text x='16' y='378' fill='#6E7A66' font-family='sans-serif' font-size='13'>Real routing · OpenStreetMap</text></svg>`
-    return `<img loading="lazy" decoding="async" alt="Routing map of ${c.name}" src="data:image/svg+xml,${encodeURIComponent(svg)}">`
-  }
-  const gt=document.getElementById('great-thumbs')
-  if(gt){
-    const names=['st-andrews-old','pebble-beach','pinehurst-no2','butler-pitch-putt']
-    gt.innerHTML=names.map(id=>{const c=d.courses.find(x=>x.id===id&&x.holes.length);if(!c)return '';const media=c.country==='US'?`<img loading="lazy" decoding="async" alt="Aerial of ${c.name}" src="${usgs(bounds(c),520,390)}">`:routeThumb(c);return `<figure class="thumb" style="cursor:pointer" onclick="openCoursePop('${c.id}')" role="button" tabindex="0" onkeydown="if(event.key==='Enter')openCoursePop('${c.id}')">${media}<figcaption>${c.name} &middot; tap to view</figcaption></figure>`}).join('')
-  }
-  // Ground-level CC0 course photography (Wikimedia Commons, public domain), rotated each visit.
-  const SCENES=[
-    {src:'img/tomcourse-5.jpg', name:'On the tee with Tom'},
-    {src:'img/tomcourse-2.jpg', name:'Where the lessons pay off'},
-    {src:'img/tomcourse-4.jpg', name:'Your next round'},
-    {src:'img/tomcourse-6.jpg', name:'Real courses, real feedback'},
-    {src:'img/tomcourse-7.jpg', name:'Out where it counts'},
-    {src:'img/tomcourse-3.jpg', name:'Every hole, a lesson'},
-  ]
-  const order=SCENES.map(s=>[Math.random(),s]).sort((a,b)=>a[0]-b[0]).map(x=>x[1])
-  document.querySelectorAll('.photoband').forEach((f,i)=>{
-    const sc=order[i%order.length]
-    f.querySelector('img').src=sc.src
-    f.querySelector('img').alt='Golf course, ground level'
-    f.querySelector('.photoband__name').textContent=sc.name
-    const cr=f.querySelector('.photoband__credit'); if(cr)cr.textContent='Original photograph'
-  })
-}).catch(()=>{});
-(function(){
-  const list=document.getElementById('lesson-list'); if(!list) return
-  const LESSONS=[
-    {name:'Corporate Team Session — 8 players', price:'$640', per:80, group:8, min:120, times:'Weekday evenings / offsites', note:'A private session for a team of eight — team building that happens to be golf. Ask about 6&ndash;8 week short-course leagues for local tech teams: we offer standing corporate discounts to Austin companies including Apple, Tesla, Dell, Oracle, AMD, Visa and Samsung — verify a work email for the team rate. One checkout, one invoice.'},
-  ]
-  list.innerHTML=LESSONS.map(l=>`<article class="surf">
-    <span class="where">${l.times}</span>
-    <h3 style="display:flex;flex-wrap:wrap;gap:0.5rem 0.8rem;align-items:baseline">${l.name} <span style="color:var(--flag)">${l.price}</span></h3>
-    <p>${l.note}</p>
-    <p style="margin:0.9rem 0 0"><button class="btn btn--y book-btn" data-name="${l.name}" data-price="${l.price}" data-per="${l.per}" data-group="${l.group||0}" data-sched="${l.times} \u00b7 held at checkout">Book &amp; pay →</button></p>
-  </article>`).join('')
-  const perEl=()=>document.getElementById('co-per'), cntEl=()=>document.getElementById('co-count'), rowEl=()=>document.getElementById('co-count-row')
-  function recalc(){
-    const d=perEl().dataset
-    const per=Number(d.per||0), grp=Number(d.group||0), base=Number(d.base||0), mode=d.mode||'unit', suffix=d.suffix||''
-    const n=grp?grp:Number(cntEl().value||1)
-    const subtotal = mode==='unit' ? per*n : base
-    const showUps = (mode==='unit' && grp!==1) || mode==='program'
-    document.getElementById('co-upsells').style.display = showUps ? '' : 'none'
-    let add=0
-    if(showUps) document.querySelectorAll('.co-addon:checked').forEach(a=>add+=Number(a.dataset.amt||0))
-    document.getElementById('co-price').textContent='$'+(subtotal+add).toLocaleString()+suffix
-    document.getElementById('co-count-label').textContent = grp===1
-      ? 'Monthly membership \u00b7 one of a limited number of seats'
-      : (grp ? `${grp} players (team rate)` : (mode==='unit' ? `${n} player${n>1?'s':''} \u00d7 $${per}` : ''))
-  }
-  window.openCheckout=function(o){
-    document.getElementById('co-name').textContent=o.name||''
-    document.getElementById('co-sched').textContent=o.sched||''
-    const d=perEl().dataset
-    d.mode=o.mode||'unit'; d.per=o.per||0; d.group=o.group||0; d.base=o.base||0; d.suffix=o.suffix||''
-    const grp=Number(o.group||0)
-    rowEl().style.display=(d.mode==='unit'&&!grp)?'flex':'none'
-    cntEl().value=1
-    document.querySelectorAll('.co-addon').forEach(a=>a.checked=false)
-    recalc()
-    document.getElementById('checkout').showModal()
-  }
-  document.querySelectorAll('.book-btn').forEach(b=>b.addEventListener('click',()=>window.openCheckout({
-    name:b.dataset.name, sched:b.dataset.sched, mode:b.dataset.mode||'unit',
-    per:b.dataset.per, group:b.dataset.group, base:b.dataset.base, suffix:b.dataset.suffix
-  })))
-  document.querySelectorAll('.gift-btn').forEach(b=>b.addEventListener('click',()=>window.openCheckout({
-    name:'Gift card \u2014 '+b.dataset.amt+' dollars', sched:'Delivered by email \u00b7 redeemable against any class or lesson', mode:'gift', base:b.dataset.amt
-  })))
-  document.addEventListener('input',e=>{if(e.target && e.target.id==='co-count')recalc()})
-  document.addEventListener('change',e=>{if(e.target && e.target.classList && e.target.classList.contains('co-addon'))recalc()})
-})();
 </script>
 </body>
 </html>
