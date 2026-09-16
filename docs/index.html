@@ -621,6 +621,31 @@
     </script>
   </div>
 </section>
+<section class="surfaces" id="shop" style="border-top:4px solid var(--flag)">
+  <div class="wrap" style="max-width:48rem">
+    <span class="label" style="color:var(--flag)">Pro shop &middot; coming soon</span>
+    <h2 style="font-size:clamp(1.5rem,1.1rem + 1.7vw,2.3rem);margin-top:0.7rem">Tom&rsquo;s Pro Shop &mdash; stickers, hats &amp; more.</h2>
+    <p style="color:var(--dim);margin:0.8rem 0 0;font-size:0.95rem">Premium <b style="color:var(--card)">G/FORE hats</b> custom-embroidered with the Tom Harris mark, plus Tom&rsquo;s <b style="color:var(--card)">sticker series</b> &mdash; easy gifts for the golfer in your life, and a little brand to wear proud. Drop your email and you&rsquo;ll be first in line when the shop opens, just in time for the holidays.</p>
+    <div style="display:grid;gap:1rem;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));margin-top:1.3rem">
+      <figure style="margin:0;border:1px dashed var(--rule);background:var(--ink-2);padding:1.1rem;text-align:center">
+        <img src="img/clubhouse-bites.jpg" alt="The Club Sandwich hat design — Tom Harris Clubhouse Bites crest" onerror="this.style.display='none'" style="width:132px;height:132px;border-radius:50%;display:block;margin:0 auto;box-shadow:0 2px 12px rgba(0,0,0,0.4)" loading="lazy" decoding="async">
+        <figcaption style="margin-top:0.7rem"><b style="display:block;font-family:'Archivo Narrow',sans-serif;font-weight:700;color:var(--card);font-size:0.95rem">The Club Sandwich</b><span style="color:var(--dim);font-size:0.8rem">Clubhouse Bites crest &middot; <b style="color:var(--flag)">$75</b></span></figcaption>
+      </figure>
+      <figure style="margin:0;border:1px dashed var(--rule);background:var(--ink-2);padding:1.1rem;text-align:center">
+        <img src="img/th-golf-club.jpg" alt="Tom Harris Golf Club hat design — evolution-of-golf patch" onerror="this.style.display='none'" style="width:132px;height:132px;border-radius:50%;display:block;margin:0 auto;box-shadow:0 2px 12px rgba(0,0,0,0.4)" loading="lazy" decoding="async">
+        <figcaption style="margin-top:0.7rem"><b style="display:block;font-family:'Archivo Narrow',sans-serif;font-weight:700;color:var(--card);font-size:0.95rem">Tom Harris Golf Club</b><span style="color:var(--dim);font-size:0.8rem">Evolution-of-golf patch &middot; <b style="color:var(--flag)">$75</b></span></figcaption>
+      </figure>
+    </div>
+    <p style="color:var(--dim);font-size:0.82rem;margin:0.9rem 0 0">Two prototype designs to start &mdash; on premium G/FORE caps, $75 each. Stickers of both coming too.</p>
+    <form id="shop-form" style="display:flex;flex-wrap:wrap;gap:0.6rem;margin-top:1.3rem" onsubmit="event.preventDefault();var m=document.getElementById('shop-msg');m.textContent='Thanks — you&rsquo;re on the list. We&rsquo;ll email you the moment the pro shop opens.';this.reset();">
+      <input type="email" required placeholder="you@email.com" aria-label="Email address" style="flex:1 1 16rem;background:var(--ink-3);border:1px solid var(--rule);color:var(--card);padding:0.75rem;font-family:'Archivo Narrow',sans-serif;min-height:46px">
+      <button class="btn btn--y" type="submit">Notify me &rarr;</button>
+    </form>
+    <p id="shop-msg" style="color:var(--turf);font-size:0.85rem;margin:0.7rem 0 0" aria-live="polite"></p>
+    <p style="color:var(--dim);font-size:0.78rem;margin-top:0.9rem">A pilot &mdash; we&rsquo;re gauging interest before we open. No spam; just a heads-up when it launches.</p>
+  </div>
+</section>
+
 <section class="surfaces" id="newsletter">
   <div class="wrap" style="max-width:44rem">
     <img src="img/clubhouse-bites.jpg" alt="Tom Harris Clubhouse Bites crest" width="512" height="512" style="width:132px;height:132px;border-radius:50%;display:block;box-shadow:0 3px 16px rgba(0,0,0,0.45);margin:0 0 0.9rem" loading="lazy" decoding="async">
@@ -667,6 +692,7 @@
       <a href="#recognition">Awards</a>
       <a href="#faq">FAQ</a>
       <a href="#wear-women">Women&rsquo;s golf</a>
+      <a href="#shop">Pro shop</a>
       <a href="#golf-now">Leaderboard</a>
       <a href="#newsletter">Newsletter</a>
       <a href="#contact">Contact</a>
@@ -764,6 +790,7 @@ window.STRIPE_LINKS = {
   document.addEventListener('click',function(e){ if(e.target.closest && e.target.closest('#vgrid .vid')) goal('Lesson play'); });
   var nf=document.getElementById('news-form'); if(nf) nf.addEventListener('submit',function(){goal('Newsletter signup')});
   var cf=document.getElementById('contact-form'); if(cf) cf.addEventListener('submit',function(){goal('Contact submit')});
+  var sf=document.getElementById('shop-form'); if(sf) sf.addEventListener('submit',function(){goal('Shop notify')});
 })();
 </script>
 </body>
