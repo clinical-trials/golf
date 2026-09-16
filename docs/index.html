@@ -143,11 +143,11 @@
   .wearcol--dont li::before{content:"\2715";color:var(--penalty);}
 
   /* women's outfit builder (preppy cream panel) */
-  .wear{background:var(--card);color:#1C221C;border-top:6px solid var(--turf);}
+  .wear{background:var(--card);color:#1C221C;border-top:6px solid var(--turf);padding:clamp(1.6rem,4vw,2.5rem) 0;}
   .wear .label{color:var(--turf);}
   .wear__h{font-family:'Archivo Black',sans-serif;font-weight:400;letter-spacing:-0.02em;line-height:1.02;font-size:clamp(1.5rem,1.1rem + 1.7vw,2.3rem);max-width:20ch;margin-top:0.5rem;color:#171C18;}
   .wear__lede{color:#3F443C;max-width:60ch;margin-top:0.7rem;}
-  .wear__grid{display:grid;gap:1rem;grid-template-columns:1fr;margin-top:1.3rem;}
+  .wear__grid{display:grid;gap:0.9rem;grid-template-columns:1fr;margin-top:0.9rem;}
   @media(min-width:52rem){.wear__grid{grid-template-columns:0.9fr 1.1fr;align-items:start;}}
   .wear__controls{display:grid;gap:0.7rem;grid-template-columns:1fr 1fr;}
   .wear__controls label{display:grid;gap:0.3rem;font-family:'Archivo Narrow',sans-serif;font-weight:700;text-transform:uppercase;letter-spacing:0.08em;font-size:0.7rem;color:#5C6259;}
@@ -161,12 +161,12 @@
   .wear__desc{font-family:'Archivo Black',sans-serif;font-size:1.05rem;line-height:1.25;color:#171C18;margin:0;}
   .wear__where{color:#3D6A4E;font-family:'Archivo Narrow',sans-serif;font-weight:700;font-size:0.86rem;margin:0.7rem 0 0;line-height:1.4;}
   .wear__tip{color:#5C6259;font-size:0.85rem;margin:0.5rem 0 0;font-style:italic;}
-  .wear__decoder{display:grid;gap:0.7rem;grid-template-columns:1fr;margin-top:1.5rem;}
+  .wear__decoder{display:grid;gap:0.7rem;grid-template-columns:1fr;margin-top:1rem;}
   @media(min-width:46rem){.wear__decoder{grid-template-columns:1fr 1fr 1fr;}}
   .wear__decoder div{border-left:3px solid var(--turf);padding:0.1rem 0 0.1rem 0.75rem;}
   .wear__decoder b{display:block;font-family:'Archivo Narrow',sans-serif;text-transform:uppercase;letter-spacing:0.06em;font-size:0.8rem;color:#171C18;margin-bottom:0.15rem;}
   .wear__decoder span{font-size:0.85rem;color:#4A4F47;line-height:1.4;}
-  .wear__skip{margin-top:1.3rem;font-size:0.82rem;color:#6B6F64;max-width:70ch;}
+  .wear__skip{margin-top:0.9rem;font-size:0.82rem;color:#6B6F64;max-width:70ch;}
 
   /* platform / operations module map */
   .mods{display:grid;gap:0.8rem;grid-template-columns:1fr;margin-top:1.3rem;}
@@ -463,7 +463,7 @@
   <div class="wrap">
     <span class="label">For players new to golf</span>
     <h2 class="wear__h">What to wear &mdash; build a smart, course-ready look.</h2>
-    <p class="wear__lede">Golf style is having a moment, and you don&rsquo;t have to choose between looking great and passing a starter&rsquo;s dress code. Mix and match below &mdash; we&rsquo;ll put the outfit together and tell you exactly where it works. Every option here is course-appropriate; the rest is your taste.</p>
+    <p class="wear__lede">Mix and match below &mdash; every option is course-appropriate, and we&rsquo;ll tell you exactly where it works.</p>
     <div class="wear__grid">
       <div class="wear__controls">
         <label>Top
@@ -515,7 +515,7 @@
       <div><b>Resort</b><span>Smart-casual. Coordinate your colors and you&rsquo;ll fit right in from the first tee.</span></div>
       <div><b>Private club</b><span>Most formal: collared top, mid-thigh length, and check whether leggings need a skort over them. Unsure? Call the pro shop.</span></div>
     </div>
-    <p class="wear__skip">Leave at home: denim, cotton gym tees, swimwear cover-ups, and anything you couldn&rsquo;t swing freely in. This is general golf-attire guidance &mdash; each club&rsquo;s dress code is the final word.</p>
+    <p class="wear__skip">Leave at home: denim, gym tees, and anything you can&rsquo;t swing freely in. General guidance &mdash; each club&rsquo;s dress code is the final word.</p>
   </div>
 </section>
 <script>
