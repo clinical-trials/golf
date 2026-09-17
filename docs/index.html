@@ -222,6 +222,18 @@
   .vid__t{position:absolute;left:0;right:0;bottom:0;padding:1.5rem 0.75rem 0.6rem;background:linear-gradient(transparent,rgba(11,15,19,0.92));font-family:'Archivo Narrow',sans-serif;font-weight:700;font-size:0.85rem;text-align:left;pointer-events:none;}
   .vid:focus-visible{outline:2px solid var(--flag);outline-offset:2px;}
 
+  /* click-to-open panels — kept out of the main scroll, opened only from the footer */
+  dialog.sheet{width:min(60rem,94vw);max-width:none;max-height:92vh;padding:0;border:1px solid var(--rule);background:#0A0F0B;color:var(--card);box-shadow:0 24px 70px rgba(0,0,0,0.6);overflow:auto;}
+  dialog.sheet::backdrop{background:rgba(6,10,8,0.74);}
+  .sheet__bar{position:sticky;top:0;z-index:6;display:flex;justify-content:space-between;align-items:center;gap:1rem;padding:0.55rem 0.7rem 0.55rem 1rem;background:rgba(11,15,19,0.94);backdrop-filter:blur(6px);border-bottom:1px solid var(--rule);}
+  .sheet__tag{font-family:'Archivo Narrow',sans-serif;font-weight:700;text-transform:uppercase;letter-spacing:0.1em;font-size:0.72rem;color:var(--dim);}
+  .sheet__x{appearance:none;background:transparent;border:1px solid var(--rule);color:var(--card);font-family:'Archivo Narrow',sans-serif;font-weight:700;text-transform:uppercase;letter-spacing:0.06em;font-size:0.74rem;padding:0.4rem 0.7rem;min-height:38px;cursor:pointer;}
+  .sheet__x:hover{border-color:var(--flag);color:var(--flag);}
+  .sheet__x:focus-visible{outline:2px solid var(--flag);outline-offset:2px;}
+  .foot-open{appearance:none;background:transparent;border:0;cursor:pointer;font-family:'Archivo Narrow',sans-serif;font-weight:700;text-transform:uppercase;letter-spacing:0.06em;font-size:0.76rem;color:var(--dim);padding:0;}
+  .foot-open:hover{color:var(--card);}
+  .foot-open:focus-visible{outline:2px solid var(--flag);outline-offset:2px;}
+
   footer{padding:2.5rem 0 3.5rem;color:var(--dim);font-size:0.85rem;}
   footer p{max-width:74ch;}
   @media(prefers-reduced-motion:reduce){*{transition:none!important;}}
@@ -437,7 +449,6 @@
 <p style="color:var(--dim);margin:0.7rem 0 0">Safe rule: clean and neat — a collared or golf-appropriate top, tailored shorts, pants, skort or golf dress, and golf or clean athletic shoes. Skip denim, gym shorts, tank tops and flip-flops. Private clubs run more formal (shirt tucked, belt on, check their dress code first); public courses and simulator lounges are more relaxed. One bold piece is fine — the deeper etiquette is effort: look intentional and course-appropriate. You don&rsquo;t need expensive clothes.</p>
 <p style="color:var(--dim);margin:0.7rem 0 0"><b style="color:var(--card)">For women:</b> a collared or sleeveless-collared polo, mock-neck or quarter-zip &mdash; worn with a skort, golf skirt, tailored shorts, golf pants or leggings, or a golf dress for one-and-done. Finish with a visor or cap, sunglasses and spikeless golf shoes (or clean white sneakers). Skorts and dresses are the most popular for a reason; at private clubs keep shorts and skirts around mid-thigh and check whether leggings need a skort over them. Pastels, brights and patterns are all welcome.</p>
 <p style="color:var(--dim);margin:0.7rem 0 0"><b style="color:var(--card)">For men:</b> a collared polo with tailored shorts or golf pants and a belt; add a cap and golf shoes. That combination clears almost any dress code in the game.</p>
-<p style="margin:0.6rem 0 0"><a href="#wear-women" style="font-family:'Archivo Narrow',sans-serif;font-weight:700;text-transform:uppercase;letter-spacing:0.06em;font-size:0.8rem">New to golf? Build a course-ready look &rarr;</a></p>
       </details>
       <details style="border:1px solid var(--rule);background:var(--ink-2);padding:0.9rem 1.1rem">
         <summary style="font-family:'Archivo Narrow',sans-serif;font-weight:700;cursor:pointer">Do I need my own clubs?</summary>
@@ -459,6 +470,8 @@
   </div>
 </section>
 
+<dialog id="wear-dialog" class="sheet">
+  <div class="sheet__bar"><span class="sheet__tag">For players new to golf</span><button class="sheet__x" data-close aria-label="Close this panel">Close &times;</button></div>
 <section class="surfaces wear" id="wear-women">
   <div class="wrap">
     <span class="label">For players new to golf</span>
@@ -518,6 +531,7 @@
     <p class="wear__skip">Leave at home: denim, gym tees, and anything you can&rsquo;t swing freely in. General guidance &mdash; each club&rsquo;s dress code is the final word.</p>
   </div>
 </section>
+</dialog>
 <script>
 (function(){
   var TOPS={sleeveless:'a sleeveless collared polo',polo:'a short-sleeve polo',quarterzip:'a mock-neck quarter-zip',dress:'a golf dress'};
@@ -621,39 +635,68 @@
     </script>
   </div>
 </section>
+<dialog id="shop-dialog" class="sheet">
+  <div class="sheet__bar"><span class="sheet__tag">Pro shop &middot; in the works</span><button class="sheet__x" data-close aria-label="Close this panel">Close &times;</button></div>
 <section class="surfaces" id="shop" style="border-top:4px solid var(--flag)">
   <div class="wrap" style="max-width:48rem">
     <span class="label" style="color:var(--flag)">Pro shop &middot; coming soon</span>
     <h2 style="font-size:clamp(1.5rem,1.1rem + 1.7vw,2.3rem);margin-top:0.7rem">Tom&rsquo;s Pro Shop &mdash; stickers, hats &amp; more.</h2>
-    <p style="color:var(--dim);margin:0.8rem 0 0;font-size:0.95rem">Premium <b style="color:var(--card)">G/FORE hats</b> custom-embroidered with the Tom Harris mark, plus Tom&rsquo;s <b style="color:var(--card)">sticker series</b> &mdash; easy gifts for the golfer in your life, and a little brand to wear proudly. Drop your email and you&rsquo;ll be first in line when the shop opens, just in time for the holidays.</p>
+    <p style="color:var(--dim);margin:0.8rem 0 0;font-size:0.95rem">Tour-grade <b style="color:var(--card)">G/FORE performance caps</b> &mdash; the best-made hat in golf, nothing less &mdash; custom-embroidered with the Tom Harris mark, plus Tom&rsquo;s <b style="color:var(--card)">sticker series</b>. Easy gifts for the golfer in your life, and a little brand to wear proudly. Drop your email and you&rsquo;ll be first in line when the shop opens, just in time for the holidays.</p>
     <div style="display:grid;gap:1rem;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));margin-top:1.3rem">
       <div style="border:1px dashed var(--rule);background:var(--ink-2);padding:1.1rem 1.1rem 1.2rem;text-align:center">
-        <svg viewBox="0 0 260 190" style="width:190px;max-width:100%;height:auto;display:block;margin:0 auto" role="img" aria-label="The Club Sandwich cap">
-          <defs><clipPath id="cap-cs"><circle cx="130" cy="98" r="50"/></clipPath></defs>
-          <path d="M28,150 C60,178 200,178 232,150 C232,163 200,172 130,172 C60,172 28,163 28,150 Z" fill="#D6CDB0"/>
-          <path d="M32,148 C32,58 74,32 130,32 C186,32 228,58 228,148 C228,157 190,164 130,164 C70,164 32,157 32,148 Z" fill="#E7E0CA"/>
-          <circle cx="130" cy="34" r="6" fill="#E7E0CA" stroke="#B8AE90" stroke-width="1"/>
-          <image href="img/clubhouse-bites.jpg" x="80" y="48" width="100" height="100" clip-path="url(#cap-cs)" preserveAspectRatio="xMidYMid slice"/>
-          <circle cx="130" cy="98" r="50" fill="none" stroke="#8a8060" stroke-width="2.5" stroke-dasharray="4 3" opacity="0.5"/>
+        <svg viewBox="0 0 240 180" style="width:200px;max-width:100%;height:auto;display:block;margin:0 auto" role="img" aria-label="The Club Sandwich — premium black performance cap, design mockup">
+          <defs>
+            <linearGradient id="cr-cs" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#313236"/><stop offset="0.55" stop-color="#171719"/><stop offset="1" stop-color="#0b0b0c"/></linearGradient>
+            <linearGradient id="br-cs" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#212224"/><stop offset="1" stop-color="#070708"/></linearGradient>
+            <pattern id="pf-cs" width="7" height="7" patternUnits="userSpaceOnUse"><circle cx="1.7" cy="1.7" r="0.9" fill="#585a5f" opacity="0.5"/></pattern>
+            <clipPath id="cc-cs"><path d="M26,138 C26,62 66,36 120,36 C174,36 214,62 214,138 Z"/></clipPath>
+            <clipPath id="pc-cs"><circle cx="120" cy="95" r="42"/></clipPath>
+            <filter id="lf-cs" x="-30%" y="-30%" width="160%" height="160%"><feDropShadow dx="0" dy="2" stdDeviation="2" flood-color="#000" flood-opacity="0.5"/></filter>
+          </defs>
+          <path d="M22,138 C58,168 182,168 218,138 C216,154 182,164 120,164 C58,164 24,154 22,138 Z" fill="url(#br-cs)"/>
+          <path d="M22,139 C58,166 182,166 218,139" fill="none" stroke="#4a4b4e" stroke-width="1.1" opacity="0.6"/>
+          <path d="M120,36 C66,36 26,62 26,138 L214,138 C214,62 174,36 120,36 Z" fill="url(#cr-cs)"/>
+          <g clip-path="url(#cc-cs)">
+            <rect x="120" y="36" width="100" height="104" fill="url(#pf-cs)"/>
+            <path d="M120,36 L120,138 M86,40 C76,78 74,112 80,138 M154,40 C164,78 166,112 160,138" fill="none" stroke="#000" stroke-width="1" opacity="0.28"/>
+          </g>
+          <circle cx="120" cy="38" r="5" fill="url(#cr-cs)" stroke="#000" stroke-width="0.7"/>
+          <circle cx="120" cy="95" r="43" fill="#0b0b0c" filter="url(#lf-cs)"/>
+          <image href="img/clubhouse-bites.jpg" x="78" y="53" width="84" height="84" clip-path="url(#pc-cs)" preserveAspectRatio="xMidYMid slice"/>
+          <circle cx="120" cy="95" r="42" fill="none" stroke="#efe7c7" stroke-width="1.4" opacity="0.8"/>
         </svg>
         <b style="display:block;font-family:'Archivo Narrow',sans-serif;font-weight:700;color:var(--card);font-size:0.95rem;margin-top:0.6rem">The Club Sandwich</b>
-        <span style="color:var(--dim);font-size:0.8rem">Clubhouse Bites crest</span>
+        <span style="color:var(--dim);font-size:0.8rem">Clubhouse Bites crest &middot; black performance cap</span>
         <p style="margin:0.7rem 0 0"><button class="btn btn--y" data-buy="hat-club-sandwich" style="font-size:0.82rem">Reserve &mdash; $95 &rarr;</button></p>
       </div>
       <div style="border:1px dashed var(--rule);background:var(--ink-2);padding:1.1rem 1.1rem 1.2rem;text-align:center">
-        <svg viewBox="0 0 260 190" style="width:190px;max-width:100%;height:auto;display:block;margin:0 auto" role="img" aria-label="Tom Harris Golf Club cap">
-          <defs><clipPath id="cap-th"><circle cx="130" cy="98" r="50"/></clipPath></defs>
-          <path d="M28,150 C60,178 200,178 232,150 C232,163 200,172 130,172 C60,172 28,163 28,150 Z" fill="#264B36"/>
-          <path d="M32,148 C32,58 74,32 130,32 C186,32 228,58 228,148 C228,157 190,164 130,164 C70,164 32,157 32,148 Z" fill="#2F5D42"/>
-          <circle cx="130" cy="34" r="6" fill="#2F5D42" stroke="#1e3b2b" stroke-width="1"/>
-          <image href="img/th-golf-club.jpg" x="80" y="48" width="100" height="100" clip-path="url(#cap-th)" preserveAspectRatio="xMidYMid slice"/>
-          <circle cx="130" cy="98" r="50" fill="none" stroke="#cfc9b2" stroke-width="2.5" stroke-dasharray="4 3" opacity="0.5"/>
+        <svg viewBox="0 0 240 180" style="width:200px;max-width:100%;height:auto;display:block;margin:0 auto" role="img" aria-label="Tom Harris Golf Club — premium green performance cap, design mockup">
+          <defs>
+            <linearGradient id="cr-th" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#2c4536"/><stop offset="0.55" stop-color="#16271d"/><stop offset="1" stop-color="#0a140e"/></linearGradient>
+            <linearGradient id="br-th" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#1c2f24"/><stop offset="1" stop-color="#08110b"/></linearGradient>
+            <pattern id="pf-th" width="7" height="7" patternUnits="userSpaceOnUse"><circle cx="1.7" cy="1.7" r="0.9" fill="#5a7365" opacity="0.5"/></pattern>
+            <clipPath id="cc-th"><path d="M26,138 C26,62 66,36 120,36 C174,36 214,62 214,138 Z"/></clipPath>
+            <clipPath id="pc-th"><circle cx="120" cy="95" r="42"/></clipPath>
+            <filter id="lf-th" x="-30%" y="-30%" width="160%" height="160%"><feDropShadow dx="0" dy="2" stdDeviation="2" flood-color="#000" flood-opacity="0.5"/></filter>
+          </defs>
+          <path d="M22,138 C58,168 182,168 218,138 C216,154 182,164 120,164 C58,164 24,154 22,138 Z" fill="url(#br-th)"/>
+          <path d="M22,139 C58,166 182,166 218,139" fill="none" stroke="#3f5647" stroke-width="1.1" opacity="0.6"/>
+          <path d="M120,36 C66,36 26,62 26,138 L214,138 C214,62 174,36 120,36 Z" fill="url(#cr-th)"/>
+          <g clip-path="url(#cc-th)">
+            <rect x="120" y="36" width="100" height="104" fill="url(#pf-th)"/>
+            <path d="M120,36 L120,138 M86,40 C76,78 74,112 80,138 M154,40 C164,78 166,112 160,138" fill="none" stroke="#000" stroke-width="1" opacity="0.28"/>
+          </g>
+          <circle cx="120" cy="38" r="5" fill="url(#cr-th)" stroke="#000" stroke-width="0.7"/>
+          <circle cx="120" cy="95" r="43" fill="#0a140e" filter="url(#lf-th)"/>
+          <image href="img/th-golf-club.jpg" x="78" y="53" width="84" height="84" clip-path="url(#pc-th)" preserveAspectRatio="xMidYMid slice"/>
+          <circle cx="120" cy="95" r="42" fill="none" stroke="#d7e0c9" stroke-width="1.4" opacity="0.8"/>
         </svg>
         <b style="display:block;font-family:'Archivo Narrow',sans-serif;font-weight:700;color:var(--card);font-size:0.95rem;margin-top:0.6rem">Tom Harris Golf Club</b>
-        <span style="color:var(--dim);font-size:0.8rem">Evolution-of-golf patch</span>
+        <span style="color:var(--dim);font-size:0.8rem">Evolution-of-golf patch &middot; green performance cap</span>
         <p style="margin:0.7rem 0 0"><button class="btn btn--y" data-buy="hat-th-golf-club" style="font-size:0.82rem">Reserve &mdash; $95 &rarr;</button></p>
       </div>
     </div>
+    <p style="color:var(--dim);font-size:0.75rem;margin:0.8rem 0 0"><b style="color:var(--dim)">Design mockups</b> &mdash; the mark shown embroidered on a premium performance cap. Final product photos of the real G/FORE caps drop in here once a sample is made.</p>
     <style>
       .stick-grid{display:flex;flex-wrap:wrap;gap:0.6rem;margin-top:0.9rem}
       .stick{background:#2F5D42;color:#ECE6D6;font-family:'Archivo Black',sans-serif;font-weight:400;font-size:0.9rem;letter-spacing:-0.01em;line-height:1;padding:0.55rem 0.8rem;border-radius:5px;box-shadow:0 2px 8px rgba(0,0,0,0.35)}
@@ -681,6 +724,7 @@
     <p style="color:var(--dim);font-size:0.78rem;margin-top:0.9rem">A pilot &mdash; we&rsquo;re gauging interest before we open. No spam; just a heads-up when it launches.</p>
   </div>
 </section>
+</dialog>
 
 <section class="surfaces" id="newsletter">
   <div class="wrap" style="max-width:44rem">
@@ -727,8 +771,8 @@
       <a href="#videos">Courses</a>
       <a href="#recognition">Awards</a>
       <a href="#faq">FAQ</a>
-      <a href="#wear-women">Women&rsquo;s golf</a>
-      <a href="#shop">Pro shop</a>
+      <button type="button" class="foot-open" data-open="wear-dialog">Women&rsquo;s golf</button>
+      <button type="button" class="foot-open" data-open="shop-dialog">Pro shop</button>
       <a href="#golf-now">Leaderboard</a>
       <a href="#newsletter">Newsletter</a>
       <a href="#contact">Contact</a>
@@ -829,6 +873,26 @@ window.STRIPE_LINKS = {
   var nf=document.getElementById('news-form'); if(nf) nf.addEventListener('submit',function(){goal('Newsletter signup')});
   var cf=document.getElementById('contact-form'); if(cf) cf.addEventListener('submit',function(){goal('Contact submit')});
   var sf=document.getElementById('shop-form'); if(sf) sf.addEventListener('submit',function(){goal('Shop notify')});
+})();
+</script>
+<script>
+/* Pro shop and the players-new-to-golf panel are kept OUT of the main scroll —
+   they open only from their footer buttons (native <dialog>, Esc or backdrop to close). */
+(function(){
+  function goal(n,p){try{window.plausible&&window.plausible(n,p?{props:p}:undefined)}catch(e){}}
+  document.querySelectorAll('[data-open]').forEach(function(btn){
+    btn.addEventListener('click',function(){
+      var d=document.getElementById(btn.getAttribute('data-open'));
+      if(!d)return;
+      if(typeof d.showModal==='function'){try{d.showModal();}catch(e){d.setAttribute('open','');}}
+      else{d.setAttribute('open','');}
+      goal('Panel open',{panel:btn.getAttribute('data-open')});
+    });
+  });
+  document.querySelectorAll('dialog.sheet').forEach(function(d){
+    d.addEventListener('click',function(e){if(e.target===d)d.close();});
+    d.querySelectorAll('[data-close]').forEach(function(b){b.addEventListener('click',function(){d.close();});});
+  });
 })();
 </script>
 </body>
