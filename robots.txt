@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://clinical-trials.github.io/golf/sitemap.xml
