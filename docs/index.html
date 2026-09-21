@@ -206,9 +206,13 @@
   .videos{padding:clamp(2.5rem,6vw,4rem) 0;border-bottom:1px solid var(--rule);}
   .videos__hd{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:end;gap:1rem;}
   .needs{display:flex;flex-wrap:wrap;gap:0.5rem;margin-top:1.5rem;}
-  .need{appearance:none;background:transparent;border:1px solid var(--rule);color:var(--dim);font-family:'Archivo Narrow',sans-serif;font-weight:700;text-transform:uppercase;letter-spacing:0.08em;font-size:0.8rem;padding:0.55rem 0.95rem;min-height:42px;cursor:pointer;}
+  .need{display:inline-flex;align-items:center;gap:0.5rem;appearance:none;background:transparent;border:1px solid var(--rule);color:var(--dim);font-family:'Archivo Narrow',sans-serif;font-weight:700;text-transform:uppercase;letter-spacing:0.08em;font-size:0.8rem;padding:0.5rem 0.85rem;min-height:42px;cursor:pointer;}
+  .need:hover{border-color:var(--dim);color:var(--card);}
   .need[aria-selected="true"]{background:var(--flag);border-color:var(--flag);color:#231A06;}
   .need:focus-visible{outline:2px solid var(--flag);outline-offset:2px;}
+  .need__n{display:inline-flex;align-items:center;justify-content:center;width:1.35rem;height:1.35rem;border:1px solid currentColor;border-radius:50%;font-size:0.68rem;flex:0 0 auto;}
+  .need[aria-selected="true"] .need__n{background:#231A06;color:var(--flag);border-color:#231A06;}
+  .need__c{font-size:0.66rem;opacity:0.55;}
   .needs__say{color:var(--card);font-size:1.02rem;max-width:56ch;margin:1rem 0 0;padding-left:1rem;border-left:3px solid var(--flag);}
   .vgrid{display:grid;grid-template-columns:1fr;gap:0.9rem;margin-top:1.5rem;}
   @media(min-width:40rem){.vgrid{grid-template-columns:repeat(2,1fr);}}
@@ -432,7 +436,7 @@
       </div>
       <a class="btn btn--o" href="https://www.youtube.com/@Tomharrisgolf/videos" target="_blank" rel="noopener">All 100+ lessons on YouTube →</a>
     </div>
-    <p style="color:var(--dim);max-width:64ch;margin:1.1rem 0 0;font-size:0.95rem">A flipped classroom: pick what you&rsquo;re working on, watch the lesson, then take it to the range. Each video is a lesson &mdash; drawn from Tom&rsquo;s YouTube portfolio.</p>
+    <p style="color:var(--dim);max-width:64ch;margin:1.1rem 0 0;font-size:0.95rem">A flipped classroom &mdash; watch the lesson, then take it to the range. Work steps <b style="color:var(--card)">1&ndash;4</b> in order, or jump straight to what you&rsquo;re fixing. Every video is a real lesson from Tom&rsquo;s YouTube.</p>
     <div class="needs" id="needs" role="tablist" aria-label="Pick what you are working on"></div>
     <p class="needs__say" id="needs-say"></p>
     <div class="vgrid" id="vgrid"></div>
@@ -567,7 +571,7 @@
   <div class="wrap" style="max-width:48rem">
     <span class="label">Tour update &middot; Following the game</span>
     <h2 style="font-size:clamp(1.5rem,1.1rem + 1.7vw,2.3rem);margin-top:0.7rem">Keep up with the pros.</h2>
-    <p style="color:var(--dim);margin:0.8rem 0 0;font-size:0.95rem">Part of loving golf is following it. Straight links to who&rsquo;s playing where &mdash; watch a tournament, then bring one thing you saw to your next lesson.</p>
+    <p style="color:var(--dim);margin:0.8rem 0 0;font-size:0.95rem">Part of loving golf is following it. See who&rsquo;s playing where, watch a tournament, then bring one thing you saw to your next lesson.</p>
     <style>
       .lb__tabs{display:flex;border:1px solid var(--rule);width:max-content;margin-top:1.1rem}
       .lb__tab{appearance:none;background:transparent;color:var(--dim);border:0;font-family:'Archivo Narrow',sans-serif;font-weight:700;text-transform:uppercase;letter-spacing:0.06em;font-size:0.8rem;padding:0.55rem 1.15rem;min-height:42px;cursor:pointer}
@@ -585,16 +589,27 @@
       .lb__rank{color:var(--flag);font-weight:700}
       .lb__msg{padding:1.1rem 1rem;color:var(--dim);font-size:0.9rem;line-height:1.5}
       .lb__msg a{color:var(--flag)}
+      .lb__sk{padding:0.4rem 1rem 0.7rem}
+      .lb__sk span{display:block;height:0.85rem;margin:0.6rem 0;border-radius:3px;background:linear-gradient(90deg,var(--ink-3) 25%,#2a353d 37%,var(--ink-3) 63%);background-size:400% 100%;animation:lbsh 1.4s ease infinite}
+      @keyframes lbsh{0%{background-position:100% 0}100%{background-position:-100% 0}}
+      @media(prefers-reduced-motion:reduce){.lb__sk span{animation:none}}
+      .lb__score--under{color:var(--turf)}
+      .lb__score--over{color:var(--dim)}
+      .lb tr.lb__leader td{background:rgba(233,185,73,0.07)}
+      .lb__foot{padding:0.6rem 1rem;color:var(--dim);font-size:0.72rem;border-top:1px solid var(--rule)}
+      .lb__refresh{appearance:none;background:transparent;border:0;color:var(--dim);font-family:'Archivo Narrow',sans-serif;font-weight:700;text-transform:uppercase;letter-spacing:0.06em;font-size:0.72rem;cursor:pointer;padding:0;white-space:nowrap}
+      .lb__refresh:hover{color:var(--flag)}
+      .lb__refresh[aria-busy="true"]{opacity:0.5;cursor:progress}
     </style>
     <div class="lb__tabs" role="group" aria-label="Tour">
       <button class="lb__tab" id="lb-pga" aria-pressed="true">PGA Tour</button>
       <button class="lb__tab" id="lb-lpga" aria-pressed="false">LPGA</button>
     </div>
     <div class="lb">
-      <div class="lb__hd"><span class="lb__event" id="lb-event">Loading&hellip;</span><a class="lb__full" id="lb-full" href="https://www.pgatour.com/leaderboard" target="_blank" rel="noopener">Full leaderboard &rarr;</a></div>
+      <div class="lb__hd"><span class="lb__event" id="lb-event">Loading&hellip;</span><span style="display:inline-flex;gap:1rem;align-items:baseline"><button class="lb__refresh" id="lb-refresh" type="button">&#8635; Refresh</button><a class="lb__full" id="lb-full" href="https://www.pgatour.com/leaderboard" target="_blank" rel="noopener">Full leaderboard &rarr;</a></span></div>
       <div class="lb__msg" id="lb-body">Loading live leaderboard&hellip;</div>
     </div>
-    <p style="color:var(--dim);font-size:0.75rem;margin:0.9rem 0 0">Live scores from ESPN&rsquo;s public feed, refreshed when you reload &mdash; the two buttons go straight to each tour&rsquo;s official site for the full field, tee times and results.</p>
+    <p style="color:var(--dim);font-size:0.75rem;margin:0.9rem 0 0">Live scores from ESPN&rsquo;s public feed &mdash; hit Refresh for the latest. The tour buttons open the official site for the full field, tee times and results.</p>
     <script>
     (function(){
       var TOURS={pga:{api:'https://site.api.espn.com/apis/site/v2/sports/golf/pga/scoreboard',full:'https://www.pgatour.com/leaderboard'},lpga:{api:'https://site.api.espn.com/apis/site/v2/sports/golf/lpga/scoreboard',full:'https://www.lpga.com/leaderboard'}};
@@ -603,10 +618,15 @@
       if(!evEl)return;
       function esc(s){return String(s==null?'':s).replace(/[<>&]/g,function(c){return{'<':'&lt;','>':'&gt;','&':'&amp;'}[c];});}
       function fallback(msg){bodyEl.className='lb__msg';bodyEl.innerHTML=esc(msg)+' <a href="'+TOURS[cur].full+'" target="_blank" rel="noopener">See the official leaderboard &rarr;</a>';}
+      var refEl=document.getElementById('lb-refresh');
+      function skel(){return '<div class="lb__sk" aria-hidden="true"><span style="width:82%"></span><span style="width:68%"></span><span style="width:74%"></span><span style="width:60%"></span></div>';}
+      function scoreCls(s){s=String(s==null?'':s);return s.charAt(0)==='-'?' lb__score--under':(s.charAt(0)==='+'?' lb__score--over':'');}
       function load(){
         var t=TOURS[cur]; fullEl.href=t.full;
-        evEl.textContent='Loading…'; bodyEl.className='lb__msg'; bodyEl.textContent='Loading live leaderboard…';
+        if(refEl)refEl.setAttribute('aria-busy','true');
+        evEl.textContent='Loading…'; bodyEl.className=''; bodyEl.innerHTML=skel();
         fetch(t.api).then(function(r){if(!r.ok)throw 0;return r.json();}).then(function(d){
+          if(refEl)refEl.removeAttribute('aria-busy');
           var ev=(d.events||[])[0];
           if(!ev){evEl.textContent='—';fallback('No tournament scheduled right now.');return;}
           var comp=(ev.competitions||[])[0]||{}, cs=(comp.competitors||[]).slice();
@@ -617,15 +637,17 @@
           evEl.textContent=ev.name+(dates?(' · '+dates+', '+s.getUTCFullYear()):'')+(st?(' · '+st):'');
           if(!cs.length){fallback('Live scoring appears here once play begins.');return;}
           cs.sort(function(a,b){return (a.order==null?999:a.order)-(b.order==null?999:b.order);});
-          var rows=cs.slice(0,10).map(function(c){
+          var rows=cs.slice(0,10).map(function(c,i){
             var name=esc(c.athlete&&c.athlete.displayName||'—');
             var pos=esc(c.order==null?'':c.order);
             var score=esc(c.score==null?'':c.score);
-            return '<tr><td class="lb__rank">'+pos+'</td><td>'+name+'</td><td>'+score+'</td></tr>';
+            return '<tr'+(i===0?' class="lb__leader"':'')+'><td class="lb__rank">'+pos+'</td><td>'+name+'</td><td class="lb__score'+scoreCls(c.score)+'">'+score+'</td></tr>';
           }).join('');
-          bodyEl.className=''; bodyEl.innerHTML='<table><thead><tr><th>Pos</th><th>Player</th><th>Score</th></tr></thead><tbody>'+rows+'</tbody></table>';
-        }).catch(function(){fallback('Couldn’t reach the live feed just now.');});
+          bodyEl.className='';
+          bodyEl.innerHTML='<table><thead><tr><th>Pos</th><th>Player</th><th>Score</th></tr></thead><tbody>'+rows+'</tbody></table><p class="lb__foot">Top '+Math.min(10,cs.length)+' of '+cs.length+' &middot; scores to par</p>';
+        }).catch(function(){if(refEl)refEl.removeAttribute('aria-busy');evEl.textContent='—';fallback('Couldn’t reach the live feed just now.');});
       }
+      if(refEl)refEl.addEventListener('click',load);
       function setTour(t){cur=t;document.getElementById('lb-pga').setAttribute('aria-pressed',String(t==='pga'));document.getElementById('lb-lpga').setAttribute('aria-pressed',String(t==='lpga'));load();}
       document.getElementById('lb-pga').addEventListener('click',function(){setTour('pga');});
       document.getElementById('lb-lpga').addEventListener('click',function(){setTour('lpga');});
@@ -716,7 +738,7 @@
       <span class="stick">One shot at a time</span>
       <span class="stick stick--pick">Chunk happens</span>
     </div>
-    <form id="shop-form" style="display:flex;flex-wrap:wrap;gap:0.6rem;margin-top:1.3rem" onsubmit="event.preventDefault();var m=document.getElementById('shop-msg');m.textContent='Thanks — you&rsquo;re on the list. We&rsquo;ll email you the moment the pro shop opens.';this.reset();">
+    <form id="shop-form" data-msg="shop-msg" data-draft="You&rsquo;re on the interest list &mdash; it goes live once the shop&rsquo;s email is connected. (Nothing is sent yet.)" style="display:flex;flex-wrap:wrap;gap:0.6rem;margin-top:1.3rem">
       <input type="email" required placeholder="you@email.com" aria-label="Email address" style="flex:1 1 16rem;background:var(--ink-3);border:1px solid var(--rule);color:var(--card);padding:0.75rem;font-family:'Archivo Narrow',sans-serif;min-height:46px">
       <button class="btn btn--y" type="submit">Notify me &rarr;</button>
     </form>
@@ -733,7 +755,7 @@
     <h2 style="font-size:clamp(1.5rem,1.1rem + 1.7vw,2.3rem);margin-top:0.7rem">A bite of golf every Monday at noon &mdash; in time for your lunch break.</h2>
     <p style="color:var(--dim);margin:0.8rem 0 0;font-size:0.95rem">One short, useful read to start the week &mdash; a drill, a course worth playing, a gear tip, a rules-and-etiquette nibble. Sign up and we&rsquo;ll also send Tom&rsquo;s one-page pre-round warm-up and the ladder drill that kills three-putts. No fluff, leave any time.</p>
     <p style="color:var(--card);font-family:'Archivo Narrow',sans-serif;font-size:0.9rem;margin:0.9rem 0 0"><b style="color:var(--flag)">On the menu:</b> the cheapest Pete&nbsp;Dye you can play &middot; the only four clubs a beginner needs &middot; read any green in 10 seconds &middot; one 7-iron, nine shots.</p>
-    <form id="news-form" style="display:flex;flex-wrap:wrap;gap:0.6rem;margin-top:1.1rem" onsubmit="event.preventDefault();var m=document.getElementById('news-msg');m.textContent='Thanks — you&rsquo;re on Clubhouse Bites. (Connects to Mailchimp at launch; nothing is sent yet.)';this.reset();">
+    <form id="news-form" data-msg="news-msg" data-draft="You&rsquo;re set to join Clubhouse Bites &mdash; the signup goes live the moment Mailchimp is connected. (Nothing is sent yet.)" style="display:flex;flex-wrap:wrap;gap:0.6rem;margin-top:1.1rem">
       <input type="email" required placeholder="you@email.com" aria-label="Email address" style="flex:1 1 16rem;background:var(--ink-3);border:1px solid var(--rule);color:var(--card);padding:0.75rem;font-family:'Archivo Narrow',sans-serif;min-height:46px">
       <button class="btn btn--y" type="submit">Get Clubhouse Bites →</button>
     </form>
@@ -747,7 +769,7 @@
     <span class="label" style="color:var(--flag)">Contact</span>
     <h2 style="font-size:clamp(1.5rem,1.1rem + 1.7vw,2.3rem);margin-top:0.7rem">Ready to start? Get in touch.</h2>
     <p style="color:var(--dim);margin:0.8rem 0 0;font-size:0.95rem">Tell Tom where you are in your golf journey and what you want to work on. He&rsquo;ll help you pick the right lesson and set up payment &mdash; online by card, or in person by cash, Venmo or Zelle.</p>
-    <form id="contact-form" style="display:grid;gap:0.6rem;margin-top:1.1rem" onsubmit="event.preventDefault();var m=document.getElementById('contact-msg');m.textContent='Thanks — your note is ready. (Wire this to Tom&rsquo;s email or booking link at launch; nothing is sent yet.)';this.reset();">
+    <form id="contact-form" data-msg="contact-msg" data-draft="Your note is ready &mdash; this form goes live once Tom&rsquo;s email or booking link is connected. (Nothing is sent yet.)" style="display:grid;gap:0.6rem;margin-top:1.1rem">
       <input type="text" required placeholder="Your name" aria-label="Your name" style="background:var(--ink-3);border:1px solid var(--rule);color:var(--card);padding:0.75rem;font-family:'Archivo Narrow',sans-serif;min-height:46px">
       <input type="email" required placeholder="you@email.com" aria-label="Email address" style="background:var(--ink-3);border:1px solid var(--rule);color:var(--card);padding:0.75rem;font-family:'Archivo Narrow',sans-serif;min-height:46px">
       <textarea required placeholder="What would you like to work on?" aria-label="Message" rows="3" style="background:var(--ink-3);border:1px solid var(--rule);color:var(--card);padding:0.75rem;font-family:'Archivo Narrow',sans-serif"></textarea>
@@ -813,7 +835,7 @@ if(vgrid&&needsBar){
   let active=NEEDS[0]
   function renderVids(){
     document.getElementById('needs-say').textContent=active.say
-    needsBar.querySelectorAll('.need').forEach(b=>b.setAttribute('aria-selected',String(b.dataset.key===active.key)))
+    needsBar.querySelectorAll('.need').forEach(b=>{var on=b.dataset.key===active.key;b.setAttribute('aria-selected',String(on));b.tabIndex=on?0:-1;})
     vgrid.innerHTML=active.vids.map(v=>{
       const thumb=v.mp4?v.poster:`https://i.ytimg.com/vi/${v.id}/hqdefault.jpg`
       const data=v.mp4?`data-mp4="${v.mp4}"`:`data-id="${v.id}"`
@@ -836,10 +858,68 @@ if(vgrid&&needsBar){
       b.replaceChildren(el)
     },{once:true}))
   }
-  needsBar.innerHTML=NEEDS.map(n=>`<button class="need" role="tab" data-key="${n.key}" aria-selected="${n===active}">${n.label}</button>`).join('')
+  needsBar.innerHTML=NEEDS.map(n=>`<button class="need" role="tab" data-key="${n.key}" aria-selected="${n===active}" tabindex="${n===active?0:-1}"><span class="need__n" aria-hidden="true">${n.step}</span><span>${n.label}</span><span class="need__c" aria-hidden="true">${n.vids.length}</span></button>`).join('')
   needsBar.querySelectorAll('.need').forEach(b=>b.addEventListener('click',()=>{active=NEEDS.find(n=>n.key===b.dataset.key);renderVids()}))
+  needsBar.addEventListener('keydown',e=>{
+    if(['ArrowRight','ArrowLeft','Home','End'].indexOf(e.key)<0)return
+    e.preventDefault()
+    const i=NEEDS.indexOf(active)
+    const j=e.key==='Home'?0:e.key==='End'?NEEDS.length-1:e.key==='ArrowRight'?(i+1)%NEEDS.length:(i-1+NEEDS.length)%NEEDS.length
+    active=NEEDS[j];renderVids()
+    const el=needsBar.querySelector('.need[aria-selected="true"]');if(el)el.focus()
+  })
   renderVids()
 }
+</script>
+<script>
+/* FORMS — newsletter, pro-shop waitlist, and contact. Paste an endpoint to go live;
+   leave '' and the form shows an honest "connected at launch" note (nothing is sent).
+   • Mailchimp: Audience -> Signup forms -> Embedded form -> copy the <form action> URL
+     (…list-manage.com/subscribe/post?u=…&id=…). Submits inline via JSONP, no reload/backend.
+   • Contact: a Formspree endpoint (https://formspree.io/f/xxxx), POSTed as JSON — or
+     "mailto:tom@example.com" to open the visitor's email app with the note prefilled. */
+window.FORMS = {
+  newsletter: '',
+  shop:       '',
+  contact:    ''
+};
+(function(){
+  function goal(n){try{window.plausible&&window.plausible(n)}catch(e){}}
+  function say(form,text,ok){var m=document.getElementById(form.getAttribute('data-msg'));if(!m)return;m.style.color=(ok===false?'var(--penalty)':'var(--turf)');m.textContent=text;}
+  function fields(form){var o={};form.querySelectorAll('input,textarea').forEach(function(el){if(el.type!=='submit'&&el.value)o[el.getAttribute('aria-label')||el.name||el.type]=el.value;});return o;}
+  function emailOf(form){var el=form.querySelector('input[type=email]');return el?el.value:'';}
+  function mailchimp(action,addr,done){
+    try{
+      var u=new URL(action); u.pathname=u.pathname.replace('/post','/post-json'); u.searchParams.set('EMAIL',addr);
+      var cb='mc_'+Date.now(); u.searchParams.set('c',cb);
+      var s=document.createElement('script');
+      window[cb]=function(res){try{delete window[cb];}catch(e){}if(s.parentNode)s.parentNode.removeChild(s);done(!!res&&res.result==='success',res&&res.msg);};
+      s.src=u.toString(); s.onerror=function(){if(s.parentNode)s.parentNode.removeChild(s);done(false);};
+      document.body.appendChild(s);
+    }catch(e){done(false);}
+  }
+  function wire(id,key,successMsg){
+    var form=document.getElementById(id); if(!form)return;
+    form.addEventListener('submit',function(e){
+      e.preventDefault();
+      goal(key==='newsletter'?'Newsletter signup':key==='shop'?'Shop notify':'Contact submit');
+      var endpoint=(window.FORMS||{})[key]||'';
+      if(!endpoint){ say(form,form.getAttribute('data-draft')); form.reset(); return; }
+      var btn=form.querySelector('[type=submit]'); if(btn)btn.disabled=true;
+      function done(ok,serverMsg){ if(btn)btn.disabled=false;
+        if(ok){ say(form,successMsg); form.reset(); }
+        else { say(form,(serverMsg&&String(serverMsg).replace(/<[^>]*>/g,''))||'Hmm — that didn’t go through. Try again, or reach Tom on YouTube.',false); } }
+      if(/list-manage\.com/.test(endpoint)){ mailchimp(endpoint,emailOf(form),done); }
+      else if(/^mailto:/i.test(endpoint)){ var f=fields(form), body=Object.keys(f).map(function(k){return k+': '+f[k];}).join('\n');
+        window.location.href=endpoint+'?subject='+encodeURIComponent('Pocket Pro — new message')+'&body='+encodeURIComponent(body); done(true); }
+      else { fetch(endpoint,{method:'POST',headers:{'Accept':'application/json','Content-Type':'application/json'},body:JSON.stringify(fields(form))})
+        .then(function(r){done(r.ok);}).catch(function(){done(false);}); }
+    });
+  }
+  wire('news-form','newsletter','Thanks — you’re on Clubhouse Bites. Watch for your first bite Monday at noon.');
+  wire('shop-form','shop','Thanks — you’re on the list. We’ll email you the moment the pro shop opens.');
+  wire('contact-form','contact','Thanks — your note’s on its way to Tom. He’ll reply by email soon.');
+})();
 </script>
 <script>
 /* PAYMENTS — paste each product's Stripe Payment Link (https://buy.stripe.com/...) below to turn on
@@ -870,9 +950,7 @@ window.STRIPE_LINKS = {
   document.querySelectorAll('.nav__cta, .hero__cta a[href="#offerings"]').forEach(function(a){a.addEventListener('click',function(){goal('Get started')})});
   document.querySelectorAll('a[href*="coachnow"]').forEach(function(a){a.addEventListener('click',function(){goal('CoachNow click')})});
   document.addEventListener('click',function(e){ if(e.target.closest && e.target.closest('#vgrid .vid')) goal('Lesson play'); });
-  var nf=document.getElementById('news-form'); if(nf) nf.addEventListener('submit',function(){goal('Newsletter signup')});
-  var cf=document.getElementById('contact-form'); if(cf) cf.addEventListener('submit',function(){goal('Contact submit')});
-  var sf=document.getElementById('shop-form'); if(sf) sf.addEventListener('submit',function(){goal('Shop notify')});
+  // newsletter / shop / contact submit goals fire from the FORMS handler above
 })();
 </script>
 <script>
