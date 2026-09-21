@@ -150,8 +150,8 @@
   .wear__grid{display:grid;gap:0.9rem;grid-template-columns:1fr;margin-top:0.9rem;}
   @media(min-width:52rem){.wear__grid{grid-template-columns:0.9fr 1.1fr;align-items:start;}}
   .wear__controls{display:grid;gap:0.7rem;grid-template-columns:1fr 1fr;}
-  .wear__controls label{display:grid;gap:0.3rem;font-family:'Archivo Narrow',sans-serif;font-weight:700;text-transform:uppercase;letter-spacing:0.08em;font-size:0.7rem;color:#5C6259;}
-  .wear__controls select{background:#fff;border:1px solid #C9C1AC;color:#1C221C;font-family:'Archivo',sans-serif;font-weight:400;text-transform:none;letter-spacing:0;font-size:0.95rem;padding:0.55rem 0.5rem;min-height:44px;}
+  .wear__controls label{display:grid;gap:0.3rem;min-width:0;font-family:'Archivo Narrow',sans-serif;font-weight:700;text-transform:uppercase;letter-spacing:0.08em;font-size:0.7rem;color:#5C6259;}
+  .wear__controls select{width:100%;min-width:0;max-width:100%;background:#fff;border:1px solid #C9C1AC;color:#1C221C;font-family:'Archivo',sans-serif;font-weight:400;text-transform:none;letter-spacing:0;font-size:0.95rem;padding:0.55rem 0.5rem;min-height:44px;}
   .wear__controls select:focus{outline:2px solid var(--turf);outline-offset:1px;}
   .wear__controls select:disabled{opacity:0.5;}
   .wear__look{background:#fff;border:1px solid #D9D1BC;padding:1.1rem 1.2rem;}
