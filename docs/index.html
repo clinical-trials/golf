@@ -685,8 +685,12 @@
       function setTour(t){cur=t;document.getElementById('lb-pga').setAttribute('aria-pressed',String(t==='pga'));document.getElementById('lb-lpga').setAttribute('aria-pressed',String(t==='lpga'));load();}
       document.getElementById('lb-pga').addEventListener('click',function(){setTour('pga');});
       document.getElementById('lb-lpga').addEventListener('click',function(){setTour('lpga');});
-      // default to the PGA Tour (pro golf); LPGA stays one tap away
-      setTour('pga');
+      // Default to the tour with the most active event (live > upcoming > finished) — not always the men's PGA.
+      function lbRank(d){var ev=((d&&d.events)||[])[0];if(!ev)return 0;var st=ev.status&&ev.status.type&&ev.status.type.state;return st==='in'?3:st==='pre'?2:st==='post'?1:0;}
+      Promise.all([
+        fetch(TOURS.pga.api).then(function(r){return r.ok?r.json():null}).catch(function(){return null}),
+        fetch(TOURS.lpga.api).then(function(r){return r.ok?r.json():null}).catch(function(){return null})
+      ]).then(function(res){setTour(lbRank(res[1])>lbRank(res[0])?'lpga':'pga');}).catch(function(){setTour('pga');});
     })();
     </script>
   </div>
@@ -851,6 +855,7 @@
     </form>
     <p id="news-msg" style="color:var(--turf);font-size:0.85rem;margin:0.7rem 0 0" aria-live="polite"></p>
     <p style="color:var(--dim);font-size:0.75rem;margin-top:0.8rem">We only use your email to send Club Bites &mdash; no spam, and you can unsubscribe any time. Delivered with Mailchimp.</p>
+    <p style="margin:0.6rem 0 0"><a href="https://us4.campaign-archive.com/home/?u=1fcba8422abdc4d5f1429b82e&amp;id=f8e5038bdd" target="_blank" rel="noopener" style="font-family:'Archivo Narrow',sans-serif;font-weight:700;text-transform:uppercase;letter-spacing:0.06em;font-size:0.8rem;color:var(--flag)">Read past issues &rarr;</a></p>
   </div>
 </section>
 
