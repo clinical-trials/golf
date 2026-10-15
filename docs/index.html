@@ -446,8 +446,8 @@
       .quote figcaption{font-family:'Archivo Narrow',sans-serif;font-weight:700;text-transform:uppercase;letter-spacing:0.1em;font-size:0.75rem;color:var(--flag);margin-top:auto}
     </style>
     <span class="label">What golfers say</span>
-    <h2 style="font-size:clamp(1.6rem,1.1rem + 1.9vw,2.5rem);max-width:20ch;margin-top:0.5rem">In their words.</h2>
-    <p style="color:var(--dim);max-width:60ch;margin-top:0.8rem;font-size:0.95rem">Notes from the golfers Tom coaches.</p>
+    <h2 style="font-size:clamp(1.6rem,1.1rem + 1.9vw,2.5rem);max-width:20ch;margin-top:0.5rem">In their own words.</h2>
+    <p style="color:var(--dim);max-width:60ch;margin-top:0.8rem;font-size:0.95rem">Notes from golfers Tom coaches.</p>
     <div class="quotes">
       <figure class="quote">
         <blockquote>Course played long today. Drove it pretty well. One bad iron shot, several really good ones. Two bad chips but several good ones. Putted well. Had two lip-out birdie putts. Progress continues!!</blockquote>
@@ -918,6 +918,10 @@ const NEEDS=[
    say:'Instruction only sticks when it is individualized — assess, practice what the assessment found, then retest. That loop is Tom’s buttery sauce.',
    vids:[{id:'zVlgflvGHdA',t:'Film your swing right'},{id:'gxgx9Ec9HEs',t:'Feel impact, then check it'}]},
 ]
+// Auto-updating tab: shown first, populated at runtime from Tom's YouTube uploads.
+NEEDS.unshift({key:'latest',step:'↻',label:'Latest uploads',
+  say:'Fresh from Tom’s YouTube — this list refreshes on its own as he posts new videos.',
+  vids:[]})
 const PLAY='<span class="vid__play"><svg viewBox="0 0 68 48" aria-hidden="true"><path d="M66.5 7.7a8 8 0 0 0-5.6-5.7C56 .6 34 .6 34 .6s-22 0-26.9 1.4A8 8 0 0 0 1.5 7.7 83 83 0 0 0 0 24a83 83 0 0 0 1.5 16.3 8 8 0 0 0 5.6 5.7C12 47.4 34 47.4 34 47.4s22 0 26.9-1.4a8 8 0 0 0 5.6-5.7A83 83 0 0 0 68 24a83 83 0 0 0-1.5-16.3z" fill="#E9B949"/><path d="M27 34l18-10-18-10z" fill="#0B0F13"/></svg></span>'
 const vgrid=document.getElementById('vgrid')
 const needsBar=document.getElementById('needs')
@@ -926,6 +930,7 @@ if(vgrid&&needsBar){
   function renderVids(){
     document.getElementById('needs-say').textContent=active.say
     needsBar.querySelectorAll('.need').forEach(b=>{var on=b.dataset.key===active.key;b.setAttribute('aria-selected',String(on));b.tabIndex=on?0:-1;})
+    if(!active.vids.length){vgrid.innerHTML='<p style="grid-column:1/-1;color:var(--dim);margin:0">'+(active.key==='latest'?'Loading the latest from Tom’s YouTube…':'')+'</p>';return}
     vgrid.innerHTML=active.vids.map(v=>{
       const thumb=v.mp4?v.poster:`https://i.ytimg.com/vi/${v.id}/hqdefault.jpg`
       const data=v.mp4?`data-mp4="${v.mp4}"`:`data-id="${v.id}"`
@@ -959,6 +964,16 @@ if(vgrid&&needsBar){
     const el=needsBar.querySelector('.need[aria-selected="true"]');if(el)el.focus()
   })
   renderVids()
+  // Keep "Latest uploads" current: seed instantly from same-origin videos.json, then refresh live from Tom's YouTube RSS via a CORS proxy.
+  ;(function(){
+    var L=NEEDS.find(n=>n.key==='latest'); if(!L)return
+    var RSS='https://www.youtube.com/feeds/videos.xml?channel_id=UCK-_0YkiGuvISUZQKN8PeNw'
+    function set(vids){if(vids&&vids.length){L.vids=vids.slice(0,9);var c=needsBar.querySelector('.need[data-key="latest"] .need__c');if(c)c.textContent=L.vids.length;if(active&&active.key==='latest')renderVids()}}
+    function parseXML(txt){try{var doc=new DOMParser().parseFromString(txt,'text/xml');return [].slice.call(doc.getElementsByTagName('entry')).map(function(e){var idEl=e.getElementsByTagName('yt:videoId')[0]||e.getElementsByTagNameNS('*','videoId')[0],tEl=e.getElementsByTagName('title')[0];return (idEl&&tEl)?{id:idEl.textContent.trim(),t:tEl.textContent.trim()}:null}).filter(Boolean)}catch(e){return[]}}
+    fetch('videos.json').then(function(r){return r.ok?r.json():null}).then(function(d){if(d&&d.videos&&!L.vids.length)set(d.videos.map(function(v){return {id:v.id,t:v.title}}))}).catch(function(){})
+    var proxies=[function(u){return 'https://corsproxy.io/?url='+encodeURIComponent(u)},function(u){return 'https://api.allorigins.win/raw?url='+encodeURIComponent(u)}]
+    ;(async function(){for(var i=0;i<proxies.length;i++){try{var r=await fetch(proxies[i](RSS));if(r.ok){var v=parseXML(await r.text());if(v.length){set(v);return}}}catch(e){}}})()
+  })()
 }
 </script>
 <script>
