@@ -970,23 +970,31 @@ const NEEDS=[
 ]
 // Auto-updating tab: shown first, populated at runtime from Tom's YouTube uploads.
 NEEDS.unshift({key:'latest',step:'<svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 20V4"/><path d="M8 4.2l9 3.1-9 3.1z" fill="currentColor" stroke="none"/><path d="M5.5 20h6"/></svg>',label:'Latest uploads',
-  say:'Fresh from Tom’s YouTube — this list refreshes on its own as he posts new videos.',
-  vids:[]})
+  say:'Fresh from YouTube — this list refreshes as new videos are posted.',
+  vids:[{id:'BwYNrkzn4bs',t:'Using a line do’s and don’ts!'}]})
 const PLAY='<span class="vid__play"><svg viewBox="0 0 68 48" aria-hidden="true"><path d="M66.5 7.7a8 8 0 0 0-5.6-5.7C56 .6 34 .6 34 .6s-22 0-26.9 1.4A8 8 0 0 0 1.5 7.7 83 83 0 0 0 0 24a83 83 0 0 0 1.5 16.3 8 8 0 0 0 5.6 5.7C12 47.4 34 47.4 34 47.4s22 0 26.9-1.4a8 8 0 0 0 5.6-5.7A83 83 0 0 0 68 24a83 83 0 0 0-1.5-16.3z" fill="#E9B949"/><path d="M27 34l18-10-18-10z" fill="#0B0F13"/></svg></span>'
 const vgrid=document.getElementById('vgrid')
 const needsBar=document.getElementById('needs')
 if(vgrid&&needsBar){
   let active=NEEDS[0]
+  // "Latest uploads" keeps at least the newest video; a video this viewer has already played drops off (down to zero only once watched). Tracked per-browser.
+  var LVKEY='pp_latest_viewed'
+  var Ltab=NEEDS.find(n=>n.key==='latest')
+  function latestViewed(){try{return JSON.parse(localStorage.getItem(LVKEY)||'[]')||[]}catch(e){return[]}}
+  function markLatestViewed(id){try{var a=latestViewed();if(a.indexOf(id)<0){a.push(id);localStorage.setItem(LVKEY,JSON.stringify(a.slice(-80)))}}catch(e){}}
+  function syncLatest(){if(!Ltab)return;var raw=Ltab._raw||(Ltab._raw=(Ltab.vids||[]).slice());var seen=latestViewed();Ltab.vids=raw.filter(function(v){return seen.indexOf(v.id)<0});var c=needsBar.querySelector('.need[data-key="latest"] .need__c');if(c)c.textContent=Ltab.vids.length}
   function renderVids(){
+    if(active.key==='latest')syncLatest()
     document.getElementById('needs-say').textContent=active.say
     needsBar.querySelectorAll('.need').forEach(b=>{var on=b.dataset.key===active.key;b.setAttribute('aria-selected',String(on));b.tabIndex=on?0:-1;})
-    if(!active.vids.length){vgrid.innerHTML='<p style="grid-column:1/-1;color:var(--dim);margin:0">'+(active.key==='latest'?'Loading the latest from Tom’s YouTube…':'')+'</p>';return}
+    if(!active.vids.length){var emptyMsg=active.key==='latest'?((Ltab&&Ltab._raw&&Ltab._raw.length)?'You’re all caught up — new videos land here the moment Tom posts them.':'Loading the latest from Tom’s YouTube…'):'';vgrid.innerHTML='<p style="grid-column:1/-1;color:var(--dim);margin:0">'+emptyMsg+'</p>';return}
     vgrid.innerHTML=active.vids.map(v=>{
       const thumb=v.mp4?v.poster:`https://i.ytimg.com/vi/${v.id}/hqdefault.jpg`
       const data=v.mp4?`data-mp4="${v.mp4}"`:`data-id="${v.id}"`
       return `<button class="vid" ${data} aria-label="Play: ${v.t}"><img loading="lazy" decoding="async" alt="${v.t}" src="${thumb}">${PLAY}<span class="vid__t">${v.t}</span></button>`
     }).join('')
     vgrid.querySelectorAll('.vid').forEach(b=>b.addEventListener('click',()=>{
+      if(active.key==='latest'&&b.dataset.id)markLatestViewed(b.dataset.id)
       let el
       if(b.dataset.mp4){
         el=document.createElement('video')
@@ -1016,13 +1024,14 @@ if(vgrid&&needsBar){
   renderVids()
   // Keep "Latest uploads" current: seed instantly from same-origin videos.json, then refresh live from Tom's YouTube RSS via a CORS proxy.
   ;(function(){
-    var L=NEEDS.find(n=>n.key==='latest'); if(!L)return
+    var L=Ltab; if(!L)return
     var RSS='https://www.youtube.com/feeds/videos.xml?channel_id=UCK-_0YkiGuvISUZQKN8PeNw'
-    function set(vids){if(vids&&vids.length){L.vids=vids.slice(0,9);var c=needsBar.querySelector('.need[data-key="latest"] .need__c');if(c)c.textContent=L.vids.length;if(active&&active.key==='latest')renderVids()}}
+    var filledLive=false
+    function set(vids,live){if(!vids||!vids.length)return;if(filledLive&&!live)return;if(live)filledLive=true;L._raw=vids.slice(0,9);syncLatest();if(active&&active.key==='latest')renderVids()}
     function parseXML(txt){try{var doc=new DOMParser().parseFromString(txt,'text/xml');return [].slice.call(doc.getElementsByTagName('entry')).map(function(e){var idEl=e.getElementsByTagName('yt:videoId')[0]||e.getElementsByTagNameNS('*','videoId')[0],tEl=e.getElementsByTagName('title')[0];return (idEl&&tEl)?{id:idEl.textContent.trim(),t:tEl.textContent.trim()}:null}).filter(Boolean)}catch(e){return[]}}
-    fetch('videos.json').then(function(r){return r.ok?r.json():null}).then(function(d){if(d&&d.videos&&!L.vids.length)set(d.videos.map(function(v){return {id:v.id,t:v.title}}))}).catch(function(){})
+    fetch('videos.json').then(function(r){return r.ok?r.json():null}).then(function(d){if(d&&d.videos)set(d.videos.map(function(v){return {id:v.id,t:v.title}}),false)}).catch(function(){})
     var proxies=[function(u){return 'https://corsproxy.io/?url='+encodeURIComponent(u)},function(u){return 'https://api.allorigins.win/raw?url='+encodeURIComponent(u)}]
-    ;(async function(){for(var i=0;i<proxies.length;i++){try{var r=await fetch(proxies[i](RSS));if(r.ok){var v=parseXML(await r.text());if(v.length){set(v);return}}}catch(e){}}})()
+    ;(async function(){for(var i=0;i<proxies.length;i++){try{var r=await fetch(proxies[i](RSS));if(r.ok){var v=parseXML(await r.text());if(v.length){set(v,true);return}}}catch(e){}}})()
   })()
 }
 </script>
