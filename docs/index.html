@@ -879,6 +879,7 @@
         <div class="cam__links"><a href="https://golfatkapalua.com/live-views/" target="_blank" rel="noopener">Kapalua live views &rarr;</a></div>
       </div>
     </div>
+    <p id="atlas-cta-row" hidden style="margin:1.4rem 0 0.2rem"><a id="atlas-cta" class="btn btn--y" href="#" target="_blank" rel="noopener">Explore the full First Tee Atlas &rarr;</a><span style="display:block;color:var(--dim);font-size:0.8rem;margin-top:0.55rem">Public first-tee cams from golf courses across the U.S. &mdash; search by state, save your favorites.</span></p>
     <p style="color:var(--card);font-family:'Archivo Narrow',sans-serif;font-size:0.9rem;margin:1.3rem 0 0;padding-left:1rem;border-left:3px solid var(--flag)">Closer to home: Tom&rsquo;s local par-3 track has its own live feed &mdash; check if the <a href="https://butlerpitchandputt.com/view-the-cam/1st-tee-cam" target="_blank" rel="noopener" style="color:var(--flag)">Butler Pitch &amp; Putt 1st tee</a> is open before you head over, then go play the shots from the <b>Courses</b> lessons for real.</p>
     <p style="color:var(--dim);font-size:0.75rem;margin-top:1rem">Live cams are hosted by each course and depend on daylight, weather and the venue&rsquo;s own feed &mdash; sometimes a cam is offline. Pocket Pro isn&rsquo;t affiliated with Pebble Beach, Kapalua or Butler Pitch &amp; Putt; we just love watching the game.</p>
   </div>
@@ -1037,6 +1038,13 @@ window.FORMS = {
   shop:       '',
   contact:    'mailto:tom@tomharrisgolf.com'
 };
+/* FIRST TEE ATLAS — paste the hosted Atlas URL here to turn on the "Explore the full First Tee Atlas"
+   button inside the First tee cams panel. While it's blank, the button stays hidden (no dead link). */
+window.ATLAS_URL = '';
+(function(){
+  var url=(window.ATLAS_URL||'').trim(), row=document.getElementById('atlas-cta-row'), a=document.getElementById('atlas-cta');
+  if(url&&row&&a){ a.href=url; row.hidden=false; }
+})();
 (function(){
   function goal(n){try{window.plausible&&window.plausible(n)}catch(e){}}
   function say(form,text,ok){var m=document.getElementById(form.getAttribute('data-msg'));if(!m)return;m.style.color=(ok===false?'var(--penalty)':'var(--turf)');m.textContent=text;}
