@@ -969,7 +969,7 @@ const NEEDS=[
    vids:[{id:'zVlgflvGHdA',t:'Film your swing right'},{id:'gxgx9Ec9HEs',t:'Feel impact, then check it'}]},
 ]
 // Auto-updating tab: shown first, populated at runtime from Tom's YouTube uploads.
-NEEDS.unshift({key:'latest',step:'<svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 20V4"/><path d="M8 4.2l9 3.1-9 3.1z" fill="currentColor" stroke="none"/><path d="M5.5 20h6"/></svg>',label:'Latest uploads',
+NEEDS.unshift({key:'latest',step:'<svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 20V4"/><path d="M8 4.2l9 3.1-9 3.1z" fill="currentColor" stroke="none"/><path d="M5.5 20h6"/></svg>',label:'Latest video',
   say:'Fresh from YouTube — this list refreshes as new videos are posted.',
   vids:[{id:'BwYNrkzn4bs',t:'Using a line do’s and don’ts!'}]})
 const PLAY='<span class="vid__play"><svg viewBox="0 0 68 48" aria-hidden="true"><path d="M66.5 7.7a8 8 0 0 0-5.6-5.7C56 .6 34 .6 34 .6s-22 0-26.9 1.4A8 8 0 0 0 1.5 7.7 83 83 0 0 0 0 24a83 83 0 0 0 1.5 16.3 8 8 0 0 0 5.6 5.7C12 47.4 34 47.4 34 47.4s22 0 26.9-1.4a8 8 0 0 0 5.6-5.7A83 83 0 0 0 68 24a83 83 0 0 0-1.5-16.3z" fill="#E9B949"/><path d="M27 34l18-10-18-10z" fill="#0B0F13"/></svg></span>'
@@ -1027,7 +1027,7 @@ if(vgrid&&needsBar){
     var L=Ltab; if(!L)return
     var RSS='https://www.youtube.com/feeds/videos.xml?channel_id=UCK-_0YkiGuvISUZQKN8PeNw'
     var filledLive=false
-    function set(vids,live){if(!vids||!vids.length)return;if(filledLive&&!live)return;if(live)filledLive=true;L._raw=vids.slice(0,9);syncLatest();if(active&&active.key==='latest')renderVids()}
+    function set(vids,live){if(!vids||!vids.length)return;if(filledLive&&!live)return;if(live)filledLive=true;L._raw=vids.slice(0,1);syncLatest();if(active&&active.key==='latest')renderVids()}
     function parseXML(txt){try{var doc=new DOMParser().parseFromString(txt,'text/xml');return [].slice.call(doc.getElementsByTagName('entry')).map(function(e){var idEl=e.getElementsByTagName('yt:videoId')[0]||e.getElementsByTagNameNS('*','videoId')[0],tEl=e.getElementsByTagName('title')[0];return (idEl&&tEl)?{id:idEl.textContent.trim(),t:tEl.textContent.trim()}:null}).filter(Boolean)}catch(e){return[]}}
     fetch('videos.json').then(function(r){return r.ok?r.json():null}).then(function(d){if(d&&d.videos)set(d.videos.map(function(v){return {id:v.id,t:v.title}}),false)}).catch(function(){})
     var proxies=[function(u){return 'https://corsproxy.io/?url='+encodeURIComponent(u)},function(u){return 'https://api.allorigins.win/raw?url='+encodeURIComponent(u)}]
