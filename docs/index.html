@@ -220,6 +220,8 @@
   .vgrid{display:grid;grid-template-columns:1fr;gap:0.9rem;margin-top:1.5rem;}
   @media(min-width:40rem){.vgrid{grid-template-columns:repeat(2,1fr);}}
   @media(min-width:64rem){.vgrid{grid-template-columns:repeat(3,1fr);}}
+  /* A single highlighted video (Latest) gets a prominent, featured frame instead of a lonely 1/3 cell */
+  .vgrid--solo{grid-template-columns:1fr !important;max-width:620px;}
   .vid{position:relative;aspect-ratio:16/9;border:1px solid var(--rule);background:#0D1512;overflow:hidden;cursor:pointer;padding:0;display:block;width:100%;}
   .vid img{width:100%;height:100%;object-fit:cover;display:block;opacity:0.85;transition:opacity .2s;}
   .vid:hover img,.vid:focus-visible img{opacity:1;}
@@ -985,6 +987,7 @@ if(vgrid&&needsBar){
   function syncLatest(){if(!Ltab)return;var raw=Ltab._raw||(Ltab._raw=(Ltab.vids||[]).slice());var seen=latestViewed();Ltab.vids=raw.filter(function(v){return seen.indexOf(v.id)<0});var c=needsBar.querySelector('.need[data-key="latest"] .need__c');if(c)c.textContent=Ltab.vids.length}
   function renderVids(){
     if(active.key==='latest')syncLatest()
+    vgrid.classList.toggle('vgrid--solo',active.key==='latest'&&active.vids.length===1)
     document.getElementById('needs-say').textContent=active.say
     needsBar.querySelectorAll('.need').forEach(b=>{var on=b.dataset.key===active.key;b.setAttribute('aria-selected',String(on));b.tabIndex=on?0:-1;})
     if(!active.vids.length){var emptyMsg=active.key==='latest'?((Ltab&&Ltab._raw&&Ltab._raw.length)?'You’re all caught up — new videos land here the moment Tom posts them.':'Loading the latest from Tom’s YouTube…'):'';vgrid.innerHTML='<p style="grid-column:1/-1;color:var(--dim);margin:0">'+emptyMsg+'</p>';return}
