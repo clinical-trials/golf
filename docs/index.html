@@ -842,6 +842,49 @@
 </section>
 </dialog>
 
+<dialog id="cams-dialog" class="sheet">
+  <div class="sheet__bar"><span class="sheet__tag">First tee cams</span><button class="sheet__x" data-close aria-label="Close this panel">Close &times;</button></div>
+<section class="surfaces" id="cams" style="border-top:4px solid var(--flag)">
+  <div class="wrap" style="max-width:52rem">
+    <style>
+      .cam-grid{display:grid;gap:1rem;grid-template-columns:1fr;margin-top:1.3rem}
+      @media(min-width:46rem){.cam-grid{grid-template-columns:1fr 1fr}}
+      .cam{border:1px solid var(--rule);background:var(--ink-2);padding:1.2rem 1.25rem;display:flex;flex-direction:column;gap:0.65rem}
+      .cam__k{font-family:'Archivo Narrow',sans-serif;font-weight:700;text-transform:uppercase;letter-spacing:0.08em;font-size:0.66rem;color:var(--flag)}
+      .cam__name{font-family:'Archivo Black',sans-serif;font-weight:400;font-size:1.18rem;line-height:1.1;color:var(--card);margin:0}
+      .cam__desc{color:var(--dim);font-size:0.9rem;line-height:1.45;margin:0}
+      .cam__watch{border-left:3px solid var(--flag);padding:0.1rem 0 0.1rem 0.8rem;margin:0.1rem 0}
+      .cam__watch b{display:block;font-family:'Archivo Narrow',sans-serif;font-weight:700;text-transform:uppercase;letter-spacing:0.06em;font-size:0.72rem;color:var(--flag);margin-bottom:0.2rem}
+      .cam__watch span{color:var(--card);font-size:0.88rem;line-height:1.45}
+      .cam__links{display:flex;flex-wrap:wrap;gap:0.5rem 1rem;margin-top:auto;padding-top:0.35rem}
+      .cam__links a{font-family:'Archivo Narrow',sans-serif;font-weight:700;text-transform:uppercase;letter-spacing:0.05em;font-size:0.76rem;color:var(--flag);text-decoration:none}
+      .cam__links a:hover{text-decoration:underline}
+    </style>
+    <span class="label" style="color:var(--flag)">First tee cams &middot; live from the course</span>
+    <h2 style="font-size:clamp(1.5rem,1.1rem + 1.7vw,2.3rem);margin-top:0.7rem">Watch the game, live.</h2>
+    <p style="color:var(--dim);margin:0.8rem 0 0;font-size:0.95rem">Nothing settles first-tee nerves like watching how it&rsquo;s done. Drop in on a live cam any time and watch real golfers &mdash; and real weather &mdash; roll through the opening shot on some of the game&rsquo;s best first holes. Tom&rsquo;s take: study the tempo, the pre-shot routine and the way good players commit to a target. It&rsquo;s a free lesson in rhythm and nerve.</p>
+    <div class="cam-grid">
+      <div class="cam">
+        <span class="cam__k">Monterey Peninsula, CA</span>
+        <h3 class="cam__name">Pebble Beach &mdash; 1st tee</h3>
+        <p class="cam__desc">Arguably the most famous opening shot in American golf, live from the cliffs above Carmel Bay. Watch groups tee off with the Pacific right there.</p>
+        <div class="cam__watch"><b>Watch for</b><span>How players take dead aim and commit to a line with the ocean (and the nerves) in view &mdash; a masterclass in sticking to your routine on a big stage.</span></div>
+        <div class="cam__links"><a href="https://www.pebblebeach.com/golf/pebble-beach-golf-links/live-golf-cams/the-1st-tee-at-pebble-beach-golf-links/" target="_blank" rel="noopener">Pebble Beach live cam &rarr;</a></div>
+      </div>
+      <div class="cam">
+        <span class="cam__k">Maui, Hawaii</span>
+        <h3 class="cam__name">Kapalua &mdash; Plantation</h3>
+        <p class="cam__desc">Sweeping live views of the Plantation Course, home of the PGA Tour&rsquo;s season-opening Sentry &mdash; dramatic elevation changes and trade winds off the ocean.</p>
+        <div class="cam__watch"><b>Watch for</b><span>How much elevation and wind change a shot. It&rsquo;s a great reminder that club choice is about the conditions, not just the yardage on the card.</span></div>
+        <div class="cam__links"><a href="https://golfatkapalua.com/live-views/" target="_blank" rel="noopener">Kapalua live views &rarr;</a></div>
+      </div>
+    </div>
+    <p style="color:var(--card);font-family:'Archivo Narrow',sans-serif;font-size:0.9rem;margin:1.3rem 0 0;padding-left:1rem;border-left:3px solid var(--flag)">Closer to home: Tom&rsquo;s local par-3 track has its own live feed &mdash; check if the <a href="https://butlerpitchandputt.com/view-the-cam/1st-tee-cam" target="_blank" rel="noopener" style="color:var(--flag)">Butler Pitch &amp; Putt 1st tee</a> is open before you head over, then go play the shots from the <b>Courses</b> lessons for real.</p>
+    <p style="color:var(--dim);font-size:0.75rem;margin-top:1rem">Live cams are hosted by each course and depend on daylight, weather and the venue&rsquo;s own feed &mdash; sometimes a cam is offline. Pocket Pro isn&rsquo;t affiliated with Pebble Beach, Kapalua or Butler Pitch &amp; Putt; we just love watching the game.</p>
+  </div>
+</section>
+</dialog>
+
 <section class="surfaces" id="newsletter">
   <div class="wrap" style="max-width:44rem">
     <img src="img/clubhouse-bites.jpg" alt="Tom Harris Club Bites crest" width="512" height="512" style="width:132px;height:132px;border-radius:50%;display:block;box-shadow:0 3px 16px rgba(0,0,0,0.45);margin:0 0 0.9rem" loading="lazy" decoding="async">
@@ -892,6 +935,7 @@
       <button type="button" class="foot-open" data-open="wear-dialog">Women&rsquo;s golf</button>
       <button type="button" class="foot-open" data-open="shop-dialog">Pro shop</button>
       <button type="button" class="foot-open" data-open="family-dialog">Family fun</button>
+      <button type="button" class="foot-open" data-open="cams-dialog">First tee cams</button>
       <a href="#golf-now">Leaderboard</a>
       <a href="#newsletter">Newsletter</a>
       <a href="#contact">Contact</a>
