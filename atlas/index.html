@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#111914">
+<title>First Tee Atlas — Somewhere, it’s tee time.</title>
+<meta name="description" content="Your window onto the first tee. Explore golf webcams around the world, watch a favorite course, or create your own four-camera wall.">
+<link rel="icon" href="assets/flag.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;450;500;550;600;650;700&family=Libre+Caslon+Display&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+<script src="data.js" defer></script><script src="player.js" defer></script><script src="app.js" defer></script>
+</head>
+<body>
+<a class="skip" href="#directory">Skip to cameras</a>
+<header class="header"><div class="header-inner">
+<a class="brand" href="#" aria-label="First Tee Atlas home"><span class="brand-icon" aria-hidden="true"><svg viewBox="0 0 40 44"><path d="M12 32V6m0 0 19 5-19 7"/><ellipse cx="17" cy="35" rx="13" ry="4"/></svg></span><span>First Tee<span class="brand-atlas">ATLAS</span></span></a>
+<nav aria-label="Main navigation"><a href="#watch-section" class="nav-watch">Watch</a><a href="#directory">Explore</a><button id="saved-nav">Saved <span id="saved-count">0</span></button></nav>
+<div class="world-mark"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><ellipse cx="12" cy="12" rx="4" ry="9"/><path d="M3 12h18M5 6h14M5 18h14"/></svg><span>A WORLD OF GOLF</span></div>
+</div></header>
+<main class="shell">
+<section class="intro" aria-labelledby="hero-title"><div><p class="eyebrow"><span class="signal-dot"></span> YOUR WINDOW ONTO THE GAME</p><h1 id="hero-title">Somewhere, it’s <em>tee time.</em></h1><p class="intro-copy">From the coast of California to the links of Scotland.<br class="desktop-break"> Pick a first tee. Take a little escape.</p></div><div class="intro-aside"><div class="orbit-globe" aria-hidden="true"><span></span><i></i><b>01</b></div><div class="collection-stats"><span><strong id="course-count">20</strong>CAMERAS</span><span><strong id="country-count">6</strong>COUNTRIES</span></div></div></section>
+<section class="watch-section" id="watch-section" aria-label="Camera viewing room">
+<div class="watch-toolbar"><div class="watch-label"><span class="signal-dot"></span><span>THE VIEWING ROOM</span><span class="toolbar-divider"></span><span id="player-mode-note">One course. Front-row seat.</span></div><div class="watch-controls"><div class="segmented" role="group" aria-label="Camera layout"><button id="mode-focus" aria-pressed="true"><svg viewBox="0 0 20 20" aria-hidden="true"><rect x="2" y="4" width="16" height="12" rx="1"/></svg>Focus</button><button id="mode-wall" aria-pressed="false"><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M2 3h6v6H2zM12 3h6v6h-6zM2 12h6v6H2zM12 12h6v6h-6z"/></svg>Live wall</button></div><button id="cinema-toggle" class="icon-button" aria-label="Enter cinema mode" aria-pressed="false" title="Cinema mode"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 3H3v6m12-6h6v6M3 15v6h6m12-6v6h-6"/></svg></button></div></div>
+<div id="player-root"></div>
+<div class="room-bottom"><p>Feeds supplied by camera operators. Press play if needed; availability may vary.</p><div><button id="playback-toggle" class="quiet-button">Stop cameras</button><button id="next-camera" class="quiet-button">Next course <span aria-hidden="true">→</span></button></div></div>
+</section>
+<section class="destinations" aria-labelledby="destinations-title"><div class="strip-heading"><h2 id="destinations-title">A different kind of world tour.</h2><a href="#directory">Explore the collection <span aria-hidden="true">↘</span></a></div><div id="country-tour" class="country-tour"></div></section>
+<section class="directory" id="directory" aria-labelledby="directory-title">
+<div class="directory-heading"><div><p class="eyebrow">THE COLLECTION</p><h2 id="directory-title">Find your kind of <em>fairway.</em></h2></div><p>Twenty windows onto the game.<br>Your next favorite is out there.</p></div>
+<div class="search-row"><label class="search-box"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="10.5" cy="10.5" r="6.5"/><path d="m16 16 5 5"/></svg><span class="sr-only">Search courses, cities, or countries</span><input id="search" type="search" placeholder="Find a course, place, or country…" autocomplete="off"><kbd aria-hidden="true">/</kbd></label><label class="select-box"><span class="sr-only">Filter by country</span><select id="country"><option value="">All countries</option></select></label><label class="select-box"><span class="sr-only">Filter by state or region</span><select id="state"><option value="">All regions</option></select></label></div>
+<div class="filter-row"><div class="region-filters" role="group" aria-label="Filter by continent"><button class="chip active" data-region="all" aria-pressed="true">All cameras <span id="all-count">20</span></button><span id="continent-filters"></span><button id="saved-filter" class="chip" aria-pressed="false">♡ Saved</button></div><label class="embed-filter"><input type="checkbox" id="embedded-only"><span>Plays here</span></label></div>
+<div class="results-row"><p id="result-count" role="status" aria-live="polite"></p><button id="clear-filters" class="quiet-button" hidden>Clear filters ×</button><label class="sort-label">Sort <select id="sort"><option value="featured">Featured</option><option value="name">Course name</option><option value="country">Country</option></select></label></div>
+<div id="camera-grid" class="camera-grid"></div>
+<div id="empty" class="empty" hidden><span aria-hidden="true">⚑</span><h3>A little quiet here.</h3><p id="empty-message">Try another country or a broader search.</p><button id="reset" class="primary-button">Explore all cameras</button></div>
+<div class="collection-note"><span class="note-icon" aria-hidden="true">i</span><p>A growing collection of public first-tee cameras. Card images are labeled previews; streams may be offline or seasonal.</p><button id="coverage-button" class="quiet-button">Sources & coverage ↗</button></div>
+</section>
+<div class="closing"><span class="closing-flag" aria-hidden="true">⚑</span><p>A little closer to the course.<br><em>Wherever you are.</em></p><a href="#watch-section" class="round-link" aria-label="Back to viewing room">↑</a></div>
+</main>
+<footer class="footer shell"><a href="#" class="footer-brand">First Tee <em>Atlas</em></a><p>An independent collection. Feeds belong to their operators.<br>Not affiliated with First Tee, the youth development organization.</p><button id="footer-coverage" class="quiet-button">About this atlas ↗</button></footer>
+<dialog id="camera-dialog" class="camera-dialog"><button class="close-dialog" aria-label="Close camera details">×</button><div id="camera-detail"></div></dialog>
+<dialog id="coverage-dialog" class="coverage-dialog" aria-labelledby="coverage-title"><button class="close-dialog" aria-label="Close coverage information">×</button><p class="eyebrow">SOURCES & COVERAGE</p><h2 id="coverage-title">An ever-growing atlas.</h2><p>Public first-tee cameras, brought into one viewing room. Each location is supported by the course, camera operator, or a linked source.</p><p><strong>This is not an exhaustive inventory of every golf camera.</strong> The collection currently includes 20 listings across six countries. Private cameras, tournament broadcasts, retired feeds, and views of other holes are excluded.</p><p>Source pages were reviewed on <strong>October 15, 2026</strong>. A published player does not guarantee that a stream is online. Cameras are operated independently; their availability is not continuously monitored.</p><p>Focus loads one camera; Live wall loads up to four. Use the operator’s link if a feed is unavailable. Still-image webcams are labeled and open on their operator’s page. Card photos and saved previews are not live video.</p><p>Your saved courses stay in this browser. This private site uses ChatGPT sign-in for access.</p><div id="source-list"></div></dialog>
+<div id="toast" class="toast" role="status" aria-live="polite"></div>
+</body>
+</html>
