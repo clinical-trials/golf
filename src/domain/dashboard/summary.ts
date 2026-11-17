@@ -47,6 +47,7 @@ export interface PuttingTrend {
 export interface DashboardUpcoming {
   bookingId: string
   startsAt: string
+  endsAt: string
   productName: string
   status: BookingStatus
 }
@@ -131,6 +132,7 @@ export async function buildDashboardSummary(userId: string): Promise<DashboardSu
   const upcoming: DashboardUpcoming[] = bookings.map((b) => ({
     bookingId: b.id,
     startsAt: b.startsAt.toISOString(),
+    endsAt: b.endsAt.toISOString(),
     productName: b.product.name,
     status: b.status,
   }))
@@ -160,8 +162,9 @@ function puttingTrend(
     .sort((a, b) => a.playedOn.getTime() - b.playedOn.getTime())
 
   if (withPutts.length < 2) return null
-  const first = withPutts[0]
-  const latest = withPutts[withPutts.length - 1]
+  // The length check guarantees both ends exist (satisfies noUncheckedIndexedAccess).
+  const first = withPutts[0]!
+  const latest = withPutts[withPutts.length - 1]!
   return {
     rounds: withPutts.length,
     firstPlayedOn: first.playedOn.toISOString(),

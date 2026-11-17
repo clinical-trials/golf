@@ -179,5 +179,9 @@ describe('dashboard summary', () => {
     expect(summary.upcoming).toHaveLength(1)
     expect(summary.upcoming[0].productName).toBe('Private lesson with Tom')
     expect(summary.upcoming[0].status).toBe('CONFIRMED')
+    // endsAt is surfaced so the dashboard can build an "add to calendar" event.
+    expect(new Date(summary.upcoming[0].endsAt).getTime()).toBeGreaterThan(
+      new Date(summary.upcoming[0].startsAt).getTime(),
+    )
   })
 })

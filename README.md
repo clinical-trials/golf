@@ -17,11 +17,27 @@ Neither half is novel alone. The join is the product.
 
 ## Status
 
-Design phase. No implementation yet.
+Active build — two surfaces exist.
 
-- **Concept demo:** [docs/index.html](docs/index.html) — designed pages only, sample data, no working software behind them.
+- **Marketing + preview site** — static, in [docs/](docs/), served on GitHub Pages
+  (currently from `version-3`; active work is on `version-4-final-draft`). Near launch:
+  go-live is pasting real Stripe Payment Links, form endpoints, and Tom's business details
+  into the config objects at the end of [docs/index.html](docs/index.html).
+- **Application backend** — Next.js 15 + Prisma 7 + PostgreSQL under [src/](src/) and
+  [prisma/](prisma/). Real and tested (**116 tests**, `pnpm exec vitest run`); not yet
+  deployed. Built so far: consent/waivers, player model, video combine, scheduling,
+  payments (Stub + Stripe ports), class programs (flipped classroom), rounds, weather,
+  concierge, and the student dashboard read-model + hashed sessions, with "add to
+  calendar" (.ics + Google) for bookings. Pending: comms/reminders + magic-link login,
+  events & leagues, handicap/TrackMan + the biomechanics layer.
+
+**New to this repo? Start with [HANDOFF.md](HANDOFF.md)** — setup, the branch model, the
+TypeScript/Next build note, what's built vs. pending, the go-live checklist, and the
+non-negotiable constraints (nothing fabricated; curricula draft pending Tom's review;
+private student media; paid digital products).
+
 - **Design spec:** [docs/superpowers/specs/2026-08-22-golf-coaching-platform-design.md](docs/superpowers/specs/2026-08-22-golf-coaching-platform-design.md)
-- **Plans:** [foundation and extraction kit](docs/superpowers/plans/2026-08-22-foundation-and-extraction-kit.md) · [Video Combine capture](docs/superpowers/plans/2026-08-22-video-combine-capture.md) · [course directory and rounds](docs/superpowers/plans/2026-08-22-course-directory-and-rounds.md)
+- **Plans & roadmaps:** [docs/superpowers/plans/](docs/superpowers/plans/)
 
 ## Shape
 

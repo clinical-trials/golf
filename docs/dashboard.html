@@ -48,6 +48,9 @@
   .msg__who{font-family:'Archivo Narrow',sans-serif;font-weight:700;color:var(--flag);font-size:0.8rem;}
   .msg__body{color:var(--card);font-size:0.9rem;}
   .lock{color:var(--dim);font-size:0.8rem;margin-top:0.8rem;}
+  .cal{display:flex;gap:0.4rem;justify-content:flex-end;margin-top:0.3rem;}
+  .cal a{font-family:'Archivo Narrow',sans-serif;font-weight:700;text-transform:uppercase;letter-spacing:0.04em;font-size:0.66rem;color:var(--flag);text-decoration:none;border:1px solid var(--rule);padding:0.1rem 0.4rem;white-space:nowrap;}
+  .cal a:hover{border-color:var(--flag);}
   .verdict{font-family:'Archivo Black',sans-serif;font-size:1.05rem;line-height:1.2;color:var(--card);margin-top:0.85rem;}
   .verdict b{color:var(--flag);}
   footer{border-top:1px solid var(--rule);padding:1.5rem 0 3rem;color:var(--dim);font-size:0.82rem;}
@@ -183,9 +186,9 @@
       <h2>Upcoming</h2>
       <table>
         <tbody id="upcoming">
-          <tr><td>Tue, Sep 8 · 5:30 pm</td><td style="text-align:right;color:var(--dim)">Putting Intensive — wk 3</td></tr>
-          <tr><td>Sat, Sep 12 · 9:00 am</td><td style="text-align:right;color:var(--dim)">Private lesson with Tom</td></tr>
-          <tr><td>Wed, Nov 5 · 9:00 am</td><td style="text-align:right;color:var(--dim)">Butler beginner mornings</td></tr>
+          <tr data-title="Putting Intensive — week 3" data-start="2026-09-08T22:30:00Z" data-end="2026-09-08T23:30:00Z"><td>Tue, Sep 8 · 5:30 pm</td><td style="text-align:right;color:var(--dim)">Putting Intensive — wk 3<div class="cal-slot"></div></td></tr>
+          <tr data-title="Private lesson with Tom" data-start="2026-09-12T14:00:00Z" data-end="2026-09-12T15:00:00Z"><td>Sat, Sep 12 · 9:00 am</td><td style="text-align:right;color:var(--dim)">Private lesson with Tom<div class="cal-slot"></div></td></tr>
+          <tr data-title="Butler beginner mornings" data-start="2026-11-05T15:00:00Z" data-end="2026-11-05T16:00:00Z"><td>Wed, Nov 5 · 9:00 am</td><td style="text-align:right;color:var(--dim)">Butler beginner mornings<div class="cal-slot"></div></td></tr>
         </tbody>
       </table>
     </section>
@@ -210,6 +213,7 @@
    config, or any error, and the sample stays exactly as shown. Nothing here
    invents data: empty lists render as honest empty states. */
 (function () {
+  decorateSampleCalendar();
   var api, tok;
   try { api = localStorage.getItem('pp_api'); tok = localStorage.getItem('pp_session'); } catch (e) { return; }
   if (!api || !tok) return;
@@ -225,6 +229,40 @@
   // never slips a day in a behind-UTC timezone.
   function fmtDate(iso) { try { return new Date(iso).toLocaleDateString(undefined, { month: 'short', day: 'numeric', timeZone: 'UTC' }); } catch (e) { return iso; } }
   function fmtDateTime(iso) { try { return new Date(iso).toLocaleString(undefined, { weekday: 'short', month: 'short', day: 'numeric', hour: 'numeric', minute: '2-digit' }); } catch (e) { return iso; } }
+
+  // --- Add to calendar: a Google template link + a downloadable .ics, both plain
+  // anchors (no account, no backend). Mirrors src/domain/calendar/invite.ts. ---
+  function pad(n) { return (n < 10 ? '0' : '') + n; }
+  function calStamp(iso) { var d = new Date(iso); return d.getUTCFullYear() + pad(d.getUTCMonth() + 1) + pad(d.getUTCDate()) + 'T' + pad(d.getUTCHours()) + pad(d.getUTCMinutes()) + pad(d.getUTCSeconds()) + 'Z'; }
+  function googleCalUrl(title, startIso, endIso) {
+    var p = new URLSearchParams({ action: 'TEMPLATE', text: title, dates: calStamp(startIso) + '/' + calStamp(endIso) });
+    return 'https://calendar.google.com/calendar/render?' + p.toString();
+  }
+  function icsEscape(s) { return String(s).replace(/\\/g, '\\\\').replace(/;/g, '\\;').replace(/,/g, '\\,').replace(/\r?\n/g, '\\n'); }
+  function hashStr(s) { var h = 0; for (var i = 0; i < s.length; i++) { h = (h * 31 + s.charCodeAt(i)) | 0; } return Math.abs(h).toString(36); }
+  function slug(s) { return String(s).toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '').slice(0, 40) || 'event'; }
+  function buildIcs(title, startIso, endIso) {
+    return ['BEGIN:VCALENDAR', 'VERSION:2.0', 'PRODID:-//Pocket Pro//Lessons//EN', 'BEGIN:VEVENT',
+      'UID:' + calStamp(startIso) + '-' + hashStr(title) + '@pocketpro', 'DTSTAMP:' + calStamp(new Date().toISOString()),
+      'DTSTART:' + calStamp(startIso), 'DTEND:' + calStamp(endIso), 'SUMMARY:' + icsEscape(title),
+      'END:VEVENT', 'END:VCALENDAR'].join('\r\n') + '\r\n';
+  }
+  function calLinksHtml(title, startIso, endIso) {
+    try {
+      var g = googleCalUrl(title, startIso, endIso);
+      var ics = 'data:text/calendar;charset=utf-8,' + encodeURIComponent(buildIcs(title, startIso, endIso));
+      return '<div class="cal"><a href="' + g + '" target="_blank" rel="noopener">+ Google</a>' +
+        '<a href="' + ics + '" download="' + slug(title) + '.ics">+ iCal</a></div>';
+    } catch (e) { return ''; }
+  }
+  // Fill the "add to calendar" slot on any sample rows carrying data-start/end/title.
+  function decorateSampleCalendar() {
+    var rows = document.querySelectorAll('#upcoming tr[data-start]');
+    for (var i = 0; i < rows.length; i++) {
+      var tr = rows[i], slot = tr.querySelector('.cal-slot');
+      if (slot) slot.innerHTML = calLinksHtml(tr.getAttribute('data-title'), tr.getAttribute('data-start'), tr.getAttribute('data-end'));
+    }
+  }
 
   function bars(first, latest) {
     var max = Math.max(first, latest, 1);
@@ -287,7 +325,7 @@
     var ub = document.getElementById('upcoming');
     if (ub) {
       ub.innerHTML = d.upcoming.length ? d.upcoming.map(function (u) {
-        return '<tr><td>' + esc(fmtDateTime(u.startsAt)) + '</td><td style="text-align:right;color:var(--dim)">' + esc(u.productName) + '</td></tr>';
+        return '<tr><td>' + esc(fmtDateTime(u.startsAt)) + '</td><td style="text-align:right;color:var(--dim)">' + esc(u.productName) + calLinksHtml(u.productName, u.startsAt, u.endsAt) + '</td></tr>';
       }).join('') : '<tr><td colspan="2" style="color:var(--dim)">Nothing booked yet. <a href="index.html#book">Book a lesson →</a></td></tr>';
     }
 
