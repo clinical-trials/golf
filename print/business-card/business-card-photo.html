@@ -1,0 +1,126 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Tom Harris — Business Card</title>
+<style>
+  /* Print spec: trim 3.5in x 2in, bleed 0.125in all sides -> page 3.75in x 2.25in.
+     Text stays inside the safe zone: 0.25in from page edge.
+     PGA logo guidelines: white reverse on color field; min print width 0.625in;
+     clear space = width of the "P" (~0.2in) free of text/imagery. Logo artwork
+     extracted at 600dpi from the official PGA Logo Guidelines PDF. */
+  @page { size: 3.75in 2.25in; margin: 0; }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: "Avenir Next", "Helvetica Neue", Helvetica, Arial, sans-serif; }
+  .card { width: 3.75in; height: 2.25in; position: relative; overflow: hidden;
+          page-break-after: always;
+          background: linear-gradient(155deg, #317350 0%, #2D6A4F 45%, #23563E 100%); }
+  .card:last-child { page-break-after: auto; }
+  .dots { position: absolute; inset: 0; width: 100%; height: 100%; }
+  .safe { position: absolute; left: 0.25in; right: 0.25in; top: 0.25in; bottom: 0.25in; }
+
+  /* ---------- FRONT ---------- */
+  .seal { position: absolute; right: 0; top: 0; width: 0.66in; height: auto;
+          filter: drop-shadow(0 0.008in 0.02in rgba(0,0,0,0.18)); }
+  h1 { font-size: 19.5pt; font-weight: 800; letter-spacing: -0.015em; line-height: 0.98;
+       color: #FFFFFF; }
+  .rule { width: 0.32in; height: 2.6pt; background: #E9B949; margin: 0.075in 0 0.08in;
+          border-radius: 2pt; }
+  .cred1 { font-size: 6.7pt; font-weight: 700; letter-spacing: 0.17em;
+           text-transform: uppercase; color: #E9B949; }
+  .cred2 { margin-top: 0.035in; font-size: 6.1pt; font-weight: 500; letter-spacing: 0.11em;
+           text-transform: uppercase; color: rgba(255,255,255,0.80); }
+  h1, .cred1, .cred2 { max-width: 2.34in; } /* keeps PGA clear space */
+  .contact { position: absolute; left: 0; bottom: 0; font-size: 6.4pt; line-height: 1.62;
+             color: rgba(255,255,255,0.86); }
+  .contact b { color: #FFFFFF; font-weight: 600; }
+
+  /* ---------- BACK ---------- */
+  .back h2 { font-size: 15.5pt; font-weight: 800; letter-spacing: -0.015em; color: #FFFFFF;
+             line-height: 1.04; max-width: 1.8in; }
+  .back .sub { margin-top: 0.065in; font-size: 6.9pt; line-height: 1.52;
+               color: rgba(255,255,255,0.86); max-width: 1.7in; }
+  .brand { position: absolute; left: 0; bottom: 0; }
+  .brand .rule { margin: 0 0 0.06in; }
+  .brand .pp { font-size: 7pt; font-weight: 800; letter-spacing: 0.26em; color: #FFFFFF; }
+  .brand .by { margin-top: 0.03in; font-size: 5.8pt; font-weight: 600; letter-spacing: 0.14em;
+               text-transform: uppercase; color: rgba(255,255,255,0.65); }
+  .qr { position: absolute; right: 0; top: 50%; transform: translateY(-50%); text-align: center; }
+  .qr .tile { width: 1.12in; height: 1.12in; background: #FFFFFF; border-radius: 0.085in;
+              display: flex; align-items: center; justify-content: center;
+              box-shadow: 0 0.015in 0.05in rgba(0,0,0,0.28); }
+  .qr .tile img { width: 1.03in; height: 1.03in; }
+  .qr .lab { margin-top: 0.055in; font-size: 5.8pt; font-weight: 700; letter-spacing: 0.2em;
+             text-transform: uppercase; color: #E9B949; }
+  /* photo variant */
+  .who { width: 0.54in; height: 0.54in; margin-bottom: 0.055in; display: block;
+         filter: drop-shadow(0 0.01in 0.03in rgba(0,0,0,0.25)); }
+  .back h2 { font-size: 14.5pt; max-width: 2in; }
+  .back .sub { max-width: 1.95in; margin-top: 0.05in; }
+</style>
+</head>
+<body>
+
+  <!-- FRONT -->
+  <div class="card">
+    <svg class="dots" xmlns="http://www.w3.org/2000/svg"><defs>
+      <pattern id="dg1" width="10.08" height="10.08" patternUnits="userSpaceOnUse">
+        <circle cx="5.04" cy="5.04" r="0.82" fill="#FFFFFF" fill-opacity="0.42"/>
+      </pattern>
+      <linearGradient id="fg1" x1="100%" y1="0%" x2="10%" y2="100%">
+        <stop offset="0" stop-color="#FFFFFF"/>
+        <stop offset="0.45" stop-color="#9A9A9A"/>
+        <stop offset="0.8" stop-color="#1A1A1A"/>
+        <stop offset="1" stop-color="#000000"/>
+      </linearGradient>
+      <mask id="fm1"><rect width="100%" height="100%" fill="url(#fg1)"/></mask></defs>
+      <rect width="100%" height="100%" fill="url(#dg1)" mask="url(#fm1)"/>
+    </svg>
+    <div class="safe">
+      <h1>Tom Harris</h1>
+      <div class="rule"></div>
+      <div class="cred1">Class A PGA Professional</div>
+      <div class="cred2">Player Development &middot; TPI Level 3</div>
+      <div class="cred2">Operation 36 Master Coach</div>
+      <img class="seal" src="pga-white-hires.png" alt="PGA of America member">
+      <div class="contact">
+        <b>tom@tomharrisgolf.com</b><br>
+        YouTube &middot; @Tomharrisgolf<br>
+        Austin, Texas
+      </div>
+    </div>
+  </div>
+
+  <!-- BACK -->
+  <div class="card back">
+    <svg class="dots" xmlns="http://www.w3.org/2000/svg"><defs>
+      <pattern id="dg2" width="10.08" height="10.08" patternUnits="userSpaceOnUse">
+        <circle cx="5.04" cy="5.04" r="0.82" fill="#FFFFFF" fill-opacity="0.42"/>
+      </pattern>
+      <linearGradient id="fg2" x1="100%" y1="0%" x2="10%" y2="100%">
+        <stop offset="0" stop-color="#FFFFFF"/>
+        <stop offset="0.45" stop-color="#9A9A9A"/>
+        <stop offset="0.8" stop-color="#1A1A1A"/>
+        <stop offset="1" stop-color="#000000"/>
+      </linearGradient>
+      <mask id="fm2"><rect width="100%" height="100%" fill="url(#fg2)"/></mask></defs>
+      <rect width="100%" height="100%" fill="url(#dg2)" mask="url(#fm2)"/>
+    </svg>
+    <div class="safe">
+      <img class="who" src="tom-portrait.png" alt="Tom Harris">
+      <h2>Book a free lesson.</h2>
+      <p class="sub">Scan to start with Tom &mdash; lessons, programs, and the Pocket&nbsp;Pro platform.</p>
+      <div class="brand">
+        <div class="rule"></div>
+        <div class="pp">POCKET&nbsp;PRO</div>
+        <div class="by">Tom Harris Golf</div>
+      </div>
+      <div class="qr">
+        <div class="tile"><img src="qr-coach-cute.svg" alt="QR: book a free lesson on CoachNow"></div>
+        <div class="lab">CoachNow</div>
+      </div>
+    </div>
+  </div>
+
+</body>
+</html>

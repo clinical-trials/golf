@@ -5,8 +5,13 @@ offer, and PGA mark usage are his to sign off before printing).
 
 ## Files
 
-- `tom-harris-business-card.pdf` — the print file. Page 1 front, page 2 back.
-- `business-card.html` — the source. Edit, then re-render (below).
+- `tom-harris-business-card.pdf` — the print file, no photo. Page 1 front, page 2 back.
+- `tom-harris-business-card-photo.pdf` — same card with Tom's portrait on the
+  back beside the free-lesson CTA. Pick one; both share the same front.
+- `business-card.html` / `business-card-photo.html` — the sources. Edit, then
+  re-render (below; swap the filenames for the photo variant).
+- `tom-portrait.png` — circular portrait cropped from `docs/img/cred-pga-award.jpg`
+  (Tom's GRAA award photo, used with the pro's involvement — see docs/img/README.md).
 - `qr-coach-cute.svg` — styled QR → Tom's CoachNow facility (error correction
   level H; machine-decode-verified at print resolution, flag badge included).
 - `pga-white-hires.png` — official PGA of America mark, white reverse, extracted
