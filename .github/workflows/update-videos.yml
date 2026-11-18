@@ -1,0 +1,58 @@
+name: Update latest videos
+
+# Keeps docs/videos.json in step with Tom Harris's YouTube channel, so the site's
+# "Latest video" tab shows new uploads without anyone editing the site.
+#
+# WHERE THIS FILE HAS TO LIVE: GitHub runs `schedule` (and shows the "Run
+# workflow" button) only from the repository's DEFAULT branch. Keep an identical
+# copy of this file on the default branch (`main` today) and on TARGET_BRANCH.
+# Whichever copy runs, the job checks out TARGET_BRANCH, runs that branch's
+# scripts/update-videos.mjs, and commits docs/videos.json back to it.
+#
+# TARGET_BRANCH must be the branch GitHub Pages serves. If Pages is ever pointed
+# at a different branch, change it here (in both copies).
+
+on:
+  schedule:
+    - cron: '17 * * * *' # hourly; off the top of the hour, when GitHub's scheduler is most delayed
+  workflow_dispatch:
+  # Run once whenever the updater itself changes, so a broken edit shows up at once.
+  push:
+    branches: [version-4-final-draft]
+    paths:
+      - scripts/update-videos.mjs
+      - .github/workflows/update-videos.yml
+
+permissions:
+  contents: write
+
+concurrency:
+  group: update-videos
+  cancel-in-progress: false
+
+env:
+  TARGET_BRANCH: version-4-final-draft
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          ref: ${{ env.TARGET_BRANCH }}
+
+      - name: Fetch the channel feed and rewrite docs/videos.json
+        run: node scripts/update-videos.mjs
+
+      - name: Commit if the list changed
+        run: |
+          if git diff --quiet -- docs/videos.json; then
+            echo "No change — docs/videos.json already matches the channel."
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add docs/videos.json
+          git commit -m "Latest video: refresh docs/videos.json from YouTube"
+          git push origin "HEAD:${TARGET_BRANCH}"
