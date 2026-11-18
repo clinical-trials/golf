@@ -1005,6 +1005,30 @@
     </div>
   </div>
 </footer>
+<style>
+  /* Mobile comfort — finger-sized (44px) tap targets and no sub-12px labels on small or touch screens.
+     Kept last in the document so it wins over the per-section style blocks; desktop with a mouse is unaffected. */
+  @media (max-width:59.99rem){
+    .nav__toggle{min-height:44px;}
+    .nav__links.open{gap:0;padding:0.5rem 1.2rem 0.9rem;}
+    .nav__links.open a{display:flex;align-items:center;min-height:44px;width:100%;}
+  }
+  @media (max-width:60rem),(pointer:coarse){
+    .foot-nav{gap:0 1.3rem;}
+    .foot-nav a,.foot-nav .foot-open,#foot-joke{display:inline-flex;align-items:center;min-height:44px;}
+    #faq details>summary{margin:-0.9rem -1.1rem;padding:0.9rem 1.1rem;}
+    .offer summary{padding:0.75rem 0;margin:-0.4rem 0;}
+    .lb__refresh,.lb__full{display:inline-flex;align-items:center;min-height:44px;}
+    .fam__links,.cam__links{gap:0 1rem;padding-top:0;}
+    .fam__links a,.cam__links a{display:inline-flex;align-items:center;min-height:44px;}
+    .h19-note a,.h19-bf a{display:inline-block;padding:0.6rem 0;}
+    #newsletter p>a[href*="campaign-archive"]{display:inline-flex;align-items:center;min-height:44px;}
+    .sheet__x{min-height:44px;}
+    .offer__k,.fam__k,.cam__k{font-size:0.75rem;}
+    .offer__lim{font-size:0.72rem;}
+    #golf-now th{font-size:0.75rem;}
+  }
+</style>
 
 <script>
 // Real videos from Tom Harris's channel (youtube.com/@Tomharrisgolf),
