@@ -118,6 +118,17 @@ launch" placeholder:
   into this panel by script — edit it there.
 - **Footer joke line** — one random joke setup per page load; it opens the panel
   on that joke.
+- **Red Black Friday bar** at the very top (`#bf-bar`), driven by the same
+  `window.BLACK_FRIDAY` dates; it links to `COACHNOW_PACKAGES`. The sale prices
+  themselves have to be set by Tom on CoachNow — the site publishes none.
+- **Mobile comfort stylesheet** — the last `<style>` block in the page gives
+  44px tap targets on small or touch screens. Keep it last so it wins.
+- **Images** — video thumbnails use YouTube's 640/1280px files through `srcset`
+  (with a fallback for videos that have no large thumbnail); the clinic photo
+  has a 2000px variant for large screens. EXIF/XMP metadata was stripped
+  losslessly from the site and Atlas JPEGs; strip it from any new photo before
+  committing (six rotation-dependent photos in `docs/img` still carry a
+  device/date tag and would need re-encoding to remove it).
 - **Black Friday sale, Wed Nov 25 – Tue Dec 1, 2026.** A chip under the hero
   buttons and a box in the panel read "starts Wed, Nov 25" before the sale, "on
   now through Dec 1" during it, and remove themselves on Dec 2. No discount
