@@ -90,13 +90,15 @@ Plans live in `docs/superpowers/plans/`.
 End of `docs/index.html` has config objects to fill — blank = honest "connected at
 launch" placeholder:
 
-- `window.STRIPE_LINKS` — per-product checkout URLs. **`student-cheat-sheet` is
-  connected (2026-11-18):** it opens Tom's CoachNow Packages page, where "Cheat
-  Sheet for Reminders" ($9.99, paid via Stripe) is live; CoachNow has no
-  per-package URL. The site card uses Tom's own listing text and price. The same
-  Packages page also lists Individual Session ($69), Monthly Coaching ($250/mo)
-  and Full-Time Coaching ($400/mo) — those three site buttons are still blank
-  and could point there too, once the owner confirms.
+- `window.STRIPE_LINKS` — per-product checkout URLs. **Four of seven are
+  connected (2026-11-18)** to Tom's CoachNow Packages page (`COACHNOW_PACKAGES`),
+  where the listings are live and paid via Stripe: "Cheat Sheet for Reminders"
+  $9.99, "Individual Session" $69, "Monthly Coaching" $250/mo and "Full-Time
+  Coaching" $400/mo (both subscriptions carry a 3-month minimum, now stated on
+  the site cards). CoachNow has no per-package URL, so each button opens the
+  Packages page and the card names the listing to pick. **Still blank:**
+  `six-session-series` ($89), `self-guided-course` ($250) and the two hats —
+  none of those exist on CoachNow yet.
 - `window.FORMS` — newsletter/shop (Mailchimp embedded-form action URL) + contact
   (Formspree endpoint or `mailto:`).
 - `window.ATLAS_URL` — First Tee Atlas (already live at `/golf/atlas/`).

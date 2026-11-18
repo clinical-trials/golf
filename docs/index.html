@@ -346,6 +346,7 @@
         <div class="offer__price">$69</div>
         <p class="offer__desc">A single swing- or shot-analysis with drills you can take straight to the range.</p>
         <p style="margin:0.4rem 0 0"><button class="btn btn--y" data-buy="individual-class" style="font-size:0.82rem">Enroll &mdash; $69 &rarr;</button></p>
+        <p style="color:var(--dim);font-size:0.75rem;margin:0.45rem 0 0">Opens Tom&rsquo;s CoachNow packages &mdash; listed there as &ldquo;Individual Session.&rdquo;</p>
       </div>
       <div class="offer offer--feature">
         <span class="offer__k">Self-paced series</span>
@@ -376,18 +377,20 @@
       <div class="offer">
         <span class="offer__k">Ongoing &middot; subscription</span>
         <h3 class="offer__name">Monthly Coaching</h3>
-        <div class="offer__price">$250<small> / month</small></div>
+        <div class="offer__price">$250<small> / month &middot; 3-month minimum</small></div>
         <span class="offer__lim">Limited availability</span>
         <p class="offer__desc">Two live Zoom or FaceTime sessions a month, weekly swing analysis, and unlimited messaging and questions.</p>
         <p style="margin:0.4rem 0 0"><button class="btn btn--y" data-buy="monthly-coaching" style="font-size:0.82rem">Start Monthly &mdash; $250/mo &rarr;</button></p>
+        <p style="color:var(--dim);font-size:0.75rem;margin:0.45rem 0 0">Opens Tom&rsquo;s CoachNow packages &mdash; listed there as &ldquo;Monthly Coaching.&rdquo;</p>
       </div>
       <div class="offer offer--feature">
         <span class="offer__k">Ongoing &middot; all-in</span>
         <h3 class="offer__name">Full-Time Coaching</h3>
-        <div class="offer__price">$400<small> / month</small></div>
+        <div class="offer__price">$400<small> / month &middot; 3-month minimum</small></div>
         <span class="offer__lim">Limited availability</span>
         <p class="offer__desc">A live Zoom or FaceTime session every week, unlimited swing/shot analysis, unlimited messaging, plus a weekly practice plan and progress report.</p>
         <p style="margin:0.4rem 0 0"><button class="btn btn--y" data-buy="full-time-coaching" style="font-size:0.82rem">Join Full-Time &mdash; $400/mo &rarr;</button></p>
+        <p style="color:var(--dim);font-size:0.75rem;margin:0.45rem 0 0">Opens Tom&rsquo;s CoachNow packages &mdash; listed there as &ldquo;Full-Time Coaching.&rdquo;</p>
       </div>
     </div>
     <div style="border:1px solid var(--rule);background:var(--ink-2);padding:1.1rem 1.2rem;margin-top:1.3rem">
@@ -1231,15 +1234,18 @@ window.BLACK_FRIDAY = {
 <script>
 /* PAYMENTS — paste each product's Stripe Payment Link (https://buy.stripe.com/...) below to turn on
    one-click checkout. While a link is blank, clicking a paid option shows a "checkout being connected" note. */
+/* Four offerings are live on Tom's CoachNow Packages page (card checkout via Stripe). CoachNow has no
+   per-package URL, so each of those buttons opens that page; the card's note names the listing to pick:
+   "Cheat Sheet for Reminders" $9.99 · "Individual Session" $69 · "Monthly Coaching" $250/mo ·
+   "Full-Time Coaching" $400/mo (both subscriptions: 3-month minimum). */
+var COACHNOW_PACKAGES = 'https://app.coachnow.io/facility/af587bf4a6cb14ae78c59d7c61/coach/tom-harris/bf3b5b0052c30138ec4f3ab6da89620b/packages';
 window.STRIPE_LINKS = {
-  // Live on Tom's CoachNow as the package "Cheat Sheet for Reminders" ($9.99, paid via Stripe).
-  // CoachNow has no per-package URL, so this opens his Packages page (the cheat sheet is listed there).
-  'student-cheat-sheet': 'https://app.coachnow.io/facility/af587bf4a6cb14ae78c59d7c61/coach/tom-harris/bf3b5b0052c30138ec4f3ab6da89620b/packages',
-  'individual-class':    '',
+  'student-cheat-sheet': COACHNOW_PACKAGES,
+  'individual-class':    COACHNOW_PACKAGES,
   'six-session-series':  '',
   'self-guided-course':  '',
-  'monthly-coaching':    '',
-  'full-time-coaching':  '',
+  'monthly-coaching':    COACHNOW_PACKAGES,
+  'full-time-coaching':  COACHNOW_PACKAGES,
   'hat-club-sandwich':   '',
   'hat-th-golf-club':    ''
 };
