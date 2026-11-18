@@ -1,0 +1,104 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Tom Harris — Business Card (Portrait)</title>
+<style>
+  /* Print spec: trim 2in x 3.5in (vertical), bleed 0.125in -> page 2.25in x 3.75in.
+     Safe zone: 0.25in from page edge. PGA logo: min 0.625in, P-width clear space. */
+  @page { size: 2.25in 3.75in; margin: 0; }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: "Avenir Next", "Helvetica Neue", Helvetica, Arial, sans-serif; }
+  .card { width: 2.25in; height: 3.75in; position: relative; overflow: hidden;
+          page-break-after: always; text-align: center;
+          background: linear-gradient(170deg, #317350 0%, #2D6A4F 45%, #23563E 100%); }
+  .card:last-child { page-break-after: auto; }
+  .dots { position: absolute; inset: 0; width: 100%; height: 100%; }
+  .safe { position: absolute; left: 0.25in; right: 0.25in; top: 0.28in; bottom: 0.28in; }
+  .rule { width: 0.3in; height: 2.6pt; background: #E9B949; border-radius: 2pt;
+          margin: 0.07in auto; }
+  /* front */
+  .seal { width: 0.68in; height: auto; margin-bottom: 0.17in;
+          filter: drop-shadow(0 0.008in 0.02in rgba(0,0,0,0.18)); }
+  h1 { font-size: 16.5pt; font-weight: 800; letter-spacing: -0.01em; color: #FFFFFF; }
+  .cred1 { font-size: 6.4pt; font-weight: 700; letter-spacing: 0.15em;
+           text-transform: uppercase; color: #E9B949; }
+  .cred2 { margin-top: 0.035in; font-size: 5.9pt; font-weight: 500; letter-spacing: 0.1em;
+           text-transform: uppercase; color: rgba(255,255,255,0.80); }
+  .contact { position: absolute; left: 0; right: 0; bottom: 0; font-size: 6.3pt;
+             line-height: 1.65; color: rgba(255,255,255,0.86); }
+  .contact b { color: #FFFFFF; font-weight: 600; }
+  /* back */
+  .who { width: 0.52in; height: 0.52in; margin: 0 auto 0.06in; display: block;
+         filter: drop-shadow(0 0.01in 0.03in rgba(0,0,0,0.25)); }
+  h2 { font-size: 13pt; font-weight: 800; letter-spacing: -0.015em; color: #FFFFFF;
+       line-height: 1.05; }
+  .sub { margin: 0.04in auto 0.09in; font-size: 6.6pt; line-height: 1.5;
+         color: rgba(255,255,255,0.86); max-width: 1.7in; }
+  .tile { width: 1.08in; height: 1.08in; background: #FFFFFF; border-radius: 0.085in;
+          margin: 0 auto; display: flex; align-items: center; justify-content: center;
+          box-shadow: 0 0.015in 0.05in rgba(0,0,0,0.28); }
+  .tile img { width: 0.99in; height: 0.99in; }
+  .lab { margin-top: 0.055in; font-size: 5.7pt; font-weight: 700; letter-spacing: 0.2em;
+         text-transform: uppercase; color: #E9B949; }
+  .brand { position: absolute; left: 0; right: 0; bottom: 0; }
+  .brand .pp { font-size: 6.8pt; font-weight: 800; letter-spacing: 0.26em; color: #FFFFFF; }
+  .brand .by { margin-top: 0.03in; font-size: 5.6pt; font-weight: 600; letter-spacing: 0.14em;
+               text-transform: uppercase; color: rgba(255,255,255,0.65); }
+</style>
+</head>
+<body>
+  <!-- FRONT -->
+  <div class="card">
+    <svg class="dots" xmlns="http://www.w3.org/2000/svg"><defs>
+      <pattern id="dg1" width="10.08" height="10.08" patternUnits="userSpaceOnUse">
+        <circle cx="5.04" cy="5.04" r="0.82" fill="#FFFFFF" fill-opacity="0.42"/>
+      </pattern>
+      <linearGradient id="fg1" x1="100%" y1="0%" x2="10%" y2="100%">
+        <stop offset="0" stop-color="#FFFFFF"/><stop offset="0.45" stop-color="#9A9A9A"/>
+        <stop offset="0.8" stop-color="#1A1A1A"/><stop offset="1" stop-color="#000000"/>
+      </linearGradient>
+      <mask id="fm1"><rect width="100%" height="100%" fill="url(#fg1)"/></mask></defs>
+      <rect width="100%" height="100%" fill="url(#dg1)" mask="url(#fm1)"/>
+    </svg>
+    <div class="safe">
+      <img class="seal" src="pga-white-hires.png" alt="PGA of America member">
+      <h1>Tom Harris</h1>
+      <div class="rule"></div>
+      <div class="cred1">Class A PGA Professional</div>
+      <div class="cred2">Player Development &middot; TPI Level 3</div>
+      <div class="cred2">Operation 36 Master Coach</div>
+      <div class="contact">
+        <b>tom@tomharrisgolf.com</b><br>
+        YouTube &middot; @Tomharrisgolf<br>
+        Austin, Texas
+      </div>
+    </div>
+  </div>
+  <!-- BACK -->
+  <div class="card">
+    <svg class="dots" xmlns="http://www.w3.org/2000/svg"><defs>
+      <pattern id="dg2" width="10.08" height="10.08" patternUnits="userSpaceOnUse">
+        <circle cx="5.04" cy="5.04" r="0.82" fill="#FFFFFF" fill-opacity="0.42"/>
+      </pattern>
+      <linearGradient id="fg2" x1="100%" y1="0%" x2="10%" y2="100%">
+        <stop offset="0" stop-color="#FFFFFF"/><stop offset="0.45" stop-color="#9A9A9A"/>
+        <stop offset="0.8" stop-color="#1A1A1A"/><stop offset="1" stop-color="#000000"/>
+      </linearGradient>
+      <mask id="fm2"><rect width="100%" height="100%" fill="url(#fg2)"/></mask></defs>
+      <rect width="100%" height="100%" fill="url(#dg2)" mask="url(#fm2)"/>
+    </svg>
+    <div class="safe">
+      <img class="who" src="tom-portrait.png" alt="Tom Harris">
+      <h2>Book a free lesson.</h2>
+      <p class="sub">Scan to start with Tom &mdash; lessons, programs, and the Pocket&nbsp;Pro platform.</p>
+      <div class="tile"><img src="qr-coach-cute.svg" alt="QR: book a free lesson on CoachNow"></div>
+      <div class="lab">CoachNow</div>
+      <div class="brand">
+        <div class="pp">POCKET&nbsp;PRO</div>
+        <div class="by">Tom Harris Golf</div>
+      </div>
+    </div>
+  </div>
+</body>
+</html>
