@@ -914,17 +914,11 @@
       .h19-bf{border:1px solid var(--flag);background:var(--ink-2);padding:0.9rem 1rem;margin-top:1.2rem;color:var(--card);font-size:0.9rem;line-height:1.45}
       .h19-bf b{display:block;font-family:'Archivo Narrow',sans-serif;text-transform:uppercase;letter-spacing:0.08em;font-size:0.7rem;color:var(--flag);margin-bottom:0.25rem}
       .h19-bf a{color:var(--flag)}
-      .h19-stickers{display:grid;grid-template-columns:repeat(auto-fit,minmax(10.5rem,1fr));gap:0.7rem;margin-top:0.8rem}
-      .stk{border-radius:8px;padding:1rem 0.8rem;text-align:center;font-family:'Archivo Black',sans-serif;font-weight:400;text-transform:uppercase;line-height:1.05;font-size:1rem;border:2px solid var(--flag);min-width:0}
-      .stk small{display:block;font-family:'Archivo Narrow',sans-serif;font-weight:700;letter-spacing:0.12em;font-size:0.6rem;margin-top:0.45rem;opacity:0.75}
-      .stk--gold{background:var(--flag);color:var(--ink);border-color:var(--ink)}
-      .stk--cream{background:var(--card);color:#2C7A3D;border-color:#2C7A3D}
-      .stk--ink{background:var(--ink-3);color:var(--flag)}
     </style>
     <span class="label" style="color:var(--flag)">The 19th Hole &middot; certified groaners</span>
     <h2 style="font-size:clamp(1.5rem,1.1rem + 1.7vw,2.3rem);margin-top:0.7rem">Golf jokes. Par for the course.</h2>
     <p style="color:var(--dim);margin:0.8rem 0 0;font-size:0.95rem">Golf is supposed to be fun. Here&rsquo;s the clubhouse corner of the site &mdash; a few groaners to take to your next foursome.</p>
-    <div class="h19-bf" id="h19-bf" hidden><b id="h19-bf-k">Black Friday sale</b><span id="h19-bf-text"></span> <a href="#contact" data-close>Message Tom for the sale price &rarr;</a> &middot; <a href="#newsletter" data-close>Join Club Bites &rarr;</a></div>
+    <div class="h19-bf" id="h19-bf" hidden><b id="h19-bf-k">Black Friday sale</b><span id="h19-bf-text"></span> <a href="mailto:tom@tomharrisgolf.com?subject=Black%20Friday%20pricing&amp;body=Hi%20Tom%20%E2%80%94%20I%E2%80%99d%20like%20your%20Black%20Friday%20pricing%20for%3A%20">Message Tom for the absolute lowest pricing &rarr;</a> &middot; <a href="#newsletter" data-close>Join Club Bites &rarr;</a></div>
     <div class="h19-card" aria-live="polite">
       <p class="h19-q" id="h19-q">What is a Chihuahua&rsquo;s favorite sport?</p>
       <p class="h19-a" id="h19-a">Miniature golf!</p>
@@ -935,14 +929,15 @@
       <span class="h19-msg" id="h19-msg" aria-live="polite"></span>
     </div>
     <p class="h19-note">Want a fresh groaner every Monday? <a href="#newsletter" data-close>Join Club Bites &rarr;</a></p>
-    <p style="margin:1.6rem 0 0"><span class="label">Bumper-sticker ideas &middot; concept sketches</span></p>
-    <div class="h19-stickers">
-      <div class="stk stk--gold">I play the fairway<small>Tom Harris Golf</small></div>
-      <div class="stk stk--cream">Backseat driver on board<small>Tom Harris Golf</small></div>
-      <div class="stk stk--ink">My music? Swing.<small>Tom Harris Golf</small></div>
+    <div id="h19-stick-wrap" hidden>
+      <p style="margin:1.6rem 0 0"><span class="label">The sticker series &middot; borrowed from Tom&rsquo;s lessons</span></p>
+      <div class="stick-grid" id="h19-stickers"></div>
+      <p style="margin:1rem 0 0;display:flex;flex-wrap:wrap;gap:0.6rem">
+        <button type="button" class="btn btn--o" data-open="shop-dialog" data-close style="background:transparent;cursor:pointer">See the Pro shop &rarr;</button>
+        <a id="sticker-shop-link" class="btn btn--y" href="#" target="_blank" rel="noopener" style="display:none">See the sticker designs &rarr;</a>
+      </p>
+      <p style="color:var(--dim);font-size:0.75rem;margin-top:0.9rem">The Pro shop is a pilot &mdash; stickers aren&rsquo;t for sale yet.</p>
     </div>
-    <p id="sticker-shop-row" hidden style="margin:0.9rem 0 0"><a id="sticker-shop-link" class="btn btn--y" href="#" target="_blank" rel="noopener">See the sticker designs &rarr;</a></p>
-    <p style="color:var(--dim);font-size:0.75rem;margin-top:0.9rem">Sticker designs are concepts for now &mdash; not for sale yet.</p>
   </div>
 </section>
 </dialog>
@@ -1119,6 +1114,7 @@ window.ATLAS_URL = 'https://clinical-trials.github.io/golf/atlas/';
   if(url&&row&&a){ a.href=url; row.hidden=false; }
 })();
 /* THE 19TH HOLE — golf jokes (footer teaser line + panel).
+   • The sticker series shown in the panel is copied from the Pro shop panel's list (edit it there).
    • STICKER_SHOP_URL: paste a Shopify/design link to show the "See the sticker designs" button (blank = hidden).
    • BLACK_FRIDAY: sale window (inclusive dates). Before `from` the hero chip + panel show a "starts" teaser,
      during the window they show "on now", and from the day after `through` they disappear on their own.
@@ -1151,8 +1147,11 @@ window.BLACK_FRIDAY = {
     function done(ok){ if(msg)msg.textContent=ok?'Copied — go groan at someone.':'Couldn’t copy — select the joke and copy it by hand.'; }
     try{ navigator.clipboard.writeText(text).then(function(){done(true)},function(){done(false)}); }catch(e){ done(false); }
   });
-  var shop=(window.STICKER_SHOP_URL||'').trim(), srow=document.getElementById('sticker-shop-row'), slink=document.getElementById('sticker-shop-link');
-  if(shop&&srow&&slink){ slink.href=shop; srow.hidden=false; }
+  // Tom's sticker series is authored once, in the Pro shop panel; mirror it here so the two never drift.
+  var src=document.querySelector('#shop-dialog .stick-grid'), dst=document.getElementById('h19-stickers'), wrap=document.getElementById('h19-stick-wrap');
+  if(src&&dst&&wrap&&src.children.length){ dst.innerHTML=src.innerHTML; wrap.hidden=false; }
+  var shop=(window.STICKER_SHOP_URL||'').trim(), slink=document.getElementById('sticker-shop-link');
+  if(shop&&slink){ slink.href=shop; slink.style.display=''; }
   var bf=window.BLACK_FRIDAY||{}, box=document.getElementById('h19-bf'), bt=document.getElementById('h19-bf-text'), bk=document.getElementById('h19-bf-k');
   var chip=document.getElementById('hero19'), chipText=document.getElementById('hero19-text');
   if(bf.on&&bf.from&&bf.through){
