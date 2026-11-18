@@ -95,8 +95,39 @@ launch" placeholder:
 - `window.FORMS` — newsletter/shop (Mailchimp embedded-form action URL) + contact
   (Formspree endpoint or `mailto:`).
 - `window.ATLAS_URL` — First Tee Atlas (already live at `/golf/atlas/`).
+- `window.STICKER_SHOP_URL` — Shopify/design link for the sticker series; blank
+  keeps the "See the sticker designs" button hidden.
+- `window.BLACK_FRIDAY` — sale window (`from`/`through`, inclusive) + `offer` text.
+  Drives the hero chip and the box in The 19th Hole panel; see below.
 - LocalBusiness JSON-LD in `<head>` — Tom's real business address, phone, hours.
 - Analytics — a Plausible or GA account.
+
+### Added 2026-11-18 (static site, on `version-4-final-draft` only)
+
+- **The 19th Hole** — a footer-opened `<dialog>` like the other side panels: a
+  rotating golf-joke card (`JOKES` array next to the config objects), a copy
+  button, a Club Bites nudge, and Tom's sticker series. The sticker list is
+  authored once in the Pro shop panel (`#shop-dialog .stick-grid`) and mirrored
+  into this panel by script — edit it there.
+- **Footer joke line** — one random joke setup per page load; it opens the panel
+  on that joke.
+- **Black Friday sale, Wed Nov 25 – Tue Dec 1, 2026.** A chip under the hero
+  buttons and a box in the panel read "starts Wed, Nov 25" before the sale, "on
+  now through Dec 1" during it, and remove themselves on Dec 2. No discount
+  amounts are published: the link opens an email to Tom with the subject "Black
+  Friday pricing", which is deliberate — it shows who responds to a sale.
+  **Time-sensitive:** Pages still serves `version-3`, so none of this is public
+  until Pages is repointed (or v3 is fast-forwarded) — and Tom reviews the copy.
+
+### Known issue (found 2026-11-18)
+
+- **"Latest video" no longer refreshes from YouTube.** The page reads Tom's
+  channel RSS through two public CORS proxies; both now fail (corsproxy.io
+  returns 401, allorigins.win returns 522). The tab still shows a video because
+  it falls back to `docs/videos.json`, but that file was seeded 2026-10-15 and
+  nothing regenerates it, so new uploads don't appear. Fix: regenerate
+  `videos.json` on a schedule (a GitHub Actions cron only runs from the default
+  branch, `main`) or put the RSS behind a small serverless endpoint.
 
 ## Constraints the delegate MUST honor (non-negotiable)
 
