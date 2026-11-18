@@ -90,8 +90,13 @@ Plans live in `docs/superpowers/plans/`.
 End of `docs/index.html` has config objects to fill — blank = honest "connected at
 launch" placeholder:
 
-- `window.STRIPE_LINKS` — per-product Stripe Payment Link URLs (incl.
-  `student-cheat-sheet`).
+- `window.STRIPE_LINKS` — per-product checkout URLs. **`student-cheat-sheet` is
+  connected (2026-11-18):** it opens Tom's CoachNow Packages page, where "Cheat
+  Sheet for Reminders" ($9.99, paid via Stripe) is live; CoachNow has no
+  per-package URL. The site card uses Tom's own listing text and price. The same
+  Packages page also lists Individual Session ($69), Monthly Coaching ($250/mo)
+  and Full-Time Coaching ($400/mo) — those three site buttons are still blank
+  and could point there too, once the owner confirms.
 - `window.FORMS` — newsletter/shop (Mailchimp embedded-form action URL) + contact
   (Formspree endpoint or `mailto:`).
 - `window.ATLAS_URL` — First Tee Atlas (already live at `/golf/atlas/`).
@@ -118,6 +123,21 @@ launch" placeholder:
   Friday pricing", which is deliberate — it shows who responds to a sale.
   **Time-sensitive:** Pages still serves `version-3`, so none of this is public
   until Pages is repointed (or v3 is fast-forwarded) — and Tom reviews the copy.
+
+### Delegate to-do — added 2026-11-18
+
+- [ ] **Remove the street address from Tom's CoachNow coach page.** The public
+  coach page (`app.coachnow.io/facility/…/coach/tom-harris/…`, "Contact
+  Information") shows a full street address under "Tom Harris Golf". The owner
+  wants it gone. It is a CoachNow profile/location setting, so it needs Tom's
+  CoachNow sign-in — it cannot be changed from this repo. After the change,
+  reload the public page signed out and confirm the address no longer appears
+  (check the facility page too, which shows a separate location line).
+  The address is intentionally not written out here: this repo is public.
+- [ ] **Before Wed Nov 25:** get Tom's review of the Black Friday copy, then
+  repoint GitHub Pages to `version-4-final-draft` (or fast-forward `version-3`)
+  so the sale notice is actually public.
+- [ ] **Fix the "Latest video" feed** — see the known issue below.
 
 ### Known issue (found 2026-11-18)
 
