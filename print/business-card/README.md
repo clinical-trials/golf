@@ -1,0 +1,39 @@
+# Tom Harris — business card (print package)
+
+**Status: DRAFT pending Tom Harris's review** (contact details, the free-lesson
+offer, and PGA mark usage are his to sign off before printing).
+
+## Files
+
+- `tom-harris-business-card.pdf` — the print file. Page 1 front, page 2 back.
+- `business-card.html` — the source. Edit, then re-render (below).
+- `qr-coach-cute.svg` — styled QR → Tom's CoachNow facility (error correction
+  level H; machine-decode-verified at print resolution, flag badge included).
+- `pga-white-hires.png` — official PGA of America mark, white reverse, extracted
+  at 600 dpi from the official PGA Logo Guidelines PDF (790×716). Trademark of
+  the PGA of America; used per Tom's active Class A membership.
+
+## Print spec (FedEx Office / Kinkos or any shop)
+
+- Standard 3.5" × 2" business card, **bleed included** — the file is
+  3.75" × 2.25" (trim 1/8" per side). No crop marks; the shop imposes.
+- All vector except the PGA mark (1260 dpi effective) — any stock works.
+  Suggested: 14–16 pt cardstock, matte or soft-touch.
+
+## Re-render after edits
+
+```bash
+"/Applications/Google Chrome.app/Contents/MacOS/Google Chrome" --headless \
+  --disable-gpu --no-pdf-header-footer \
+  --print-to-pdf=tom-harris-business-card.pdf business-card.html
+```
+
+## Guardrails honored (see repo CLAUDE.md + docs/img/README.md)
+
+- PGA Brand Guide: white-reverse treatment, 0.625" minimum logo width,
+  "P"-width clear space, artwork unaltered.
+- Every fact on the card comes from the live site's own configured data
+  (email, YouTube, Austin, CoachNow link, credentials). "Book a free lesson"
+  matches the site's Start-free tier.
+- If the QR destination ever changes, regenerate the SVG and re-verify it
+  decodes — never swap the URL without re-testing the artwork.
