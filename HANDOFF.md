@@ -126,17 +126,9 @@ launch" placeholder:
 
 ### Delegate to-do — added 2026-11-18
 
-- [ ] **TOP PRIORITY — do this first: remove the street address from Tom's
-  CoachNow coach page.** The public coach page
-  (`app.coachnow.io/facility/…/coach/tom-harris/…`, "Contact Information")
-  shows a full street address under "Tom Harris Golf", and CoachNow turns
-  location lines into map links — so anyone can open it in a mapping app. That
-  is more location detail than the business should publish, and it gets worse
-  as the audience grows. It is a CoachNow profile/location setting, so it needs Tom's
-  CoachNow sign-in — it cannot be changed from this repo. After the change,
-  reload the public page signed out and confirm the address no longer appears
-  (check the facility page too, which shows a separate location line).
-  The address is intentionally not written out here: this repo is public.
+- [ ] **TOP PRIORITY — do this first:** a privacy item for Tom's third-party
+  profiles. The details are in `START-HERE.txt` in the private handoff package
+  (kept out of this public repo on purpose). Ask the owner if you don't have it.
 - [ ] **Before Wed Nov 25:** get Tom's review of the Black Friday copy, then
   repoint GitHub Pages to `version-4-final-draft` (or fast-forward `version-3`)
   so the sale notice is actually public.
