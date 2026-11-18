@@ -145,17 +145,47 @@ launch" placeholder:
 - [ ] **Before Wed Nov 25:** get Tom's review of the Black Friday copy, then
   repoint GitHub Pages to `version-4-final-draft` (or fast-forward `version-3`)
   so the sale notice is actually public.
-- [ ] **Fix the "Latest video" feed** — see the known issue below.
+- [x] **Fix the "Latest video" feed** — fixed 2026-11-18, see below. One step
+  is still open: the hourly schedule needs the workflow file on `main`.
 
-### Known issue (found 2026-11-18)
+### "Latest video" feed — fixed 2026-11-18
 
-- **"Latest video" no longer refreshes from YouTube.** The page reads Tom's
-  channel RSS through two public CORS proxies; both now fail (corsproxy.io
-  returns 401, allorigins.win returns 522). The tab still shows a video because
-  it falls back to `docs/videos.json`, but that file was seeded 2026-10-15 and
-  nothing regenerates it, so new uploads don't appear. Fix: regenerate
-  `videos.json` on a schedule (a GitHub Actions cron only runs from the default
-  branch, `main`) or put the RSS behind a small serverless endpoint.
+The Courses section's "Latest video" tab shows Tom's newest YouTube upload and
+now keeps itself current. No API key, no paid service, no third-party proxy.
+
+- **How it works.** `scripts/update-videos.mjs` fetches the channel's public
+  feed and rewrites `docs/videos.json` (same `{"videos":[{"id","title"}]}`
+  shape, newest first). `.github/workflows/update-videos.yml` runs it and
+  commits to `version-4-final-draft` as `github-actions[bot]`, only when the
+  list changed. The page reads `videos.json` from its own origin, shows the
+  first entry (`vids.slice(0,1)`), and hides it once this browser has played it
+  (`pp_latest_viewed` in localStorage). There is no hardcoded video any more;
+  if `videos.json` can't be read the tab links to Tom's channel instead.
+- **What had broken.** The page fetched the feed in the browser through two
+  free CORS proxies, and both died (corsproxy.io 401, allorigins.win 522);
+  `videos.json` was only a fallback, seeded once on 2026-10-15. Don't go back
+  to public proxies: of four others tried on 2026-11-18, three were down too.
+- **Verified 2026-11-18:** pushing the workflow ran it (it also runs on any
+  push that changes the script or the workflow), and the bot's commit
+  `60349ff` brought `videos.json` from six uploads behind to current.
+- **STILL OPEN — the hourly schedule is not running yet.** GitHub runs
+  `schedule`, and shows the "Run workflow" button, only for workflow files on
+  the default branch (`main`). Copy `.github/workflows/update-videos.yml` to
+  `main` unchanged (it always checks out `TARGET_BRANCH`, so nothing else on
+  `main` matters). Until then, refresh by hand: `node scripts/update-videos.mjs`,
+  then commit `docs/videos.json`. If the default branch ever changes, the copy
+  already on `version-4-final-draft` takes over.
+- **`TARGET_BRANCH` in the workflow must be the branch GitHub Pages builds
+  from** — `version-4-final-draft` (as of 2026-11-18 the Actions tab shows
+  "pages build and deployment" running on it). Change it in both copies if
+  Pages is ever pointed elsewhere.
+- **Pull before you push.** The bot commits whenever Tom uploads (roughly
+  weekly). If your push is rejected, `git pull --rebase` and push again.
+- **If the tab goes stale:** Actions tab → "Update latest videos". A failed run
+  leaves the last good `videos.json` in place. GitHub also switches scheduled
+  workflows off after 60 days without repository activity; re-enable it there.
+- Tests: `pnpm exec vitest run tests/scripts/update-videos.test.ts` (no
+  database needed).
 
 ## Constraints the delegate MUST honor (non-negotiable)
 
