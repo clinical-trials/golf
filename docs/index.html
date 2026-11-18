@@ -250,6 +250,8 @@
 </head>
 <body>
 
+<a id="bf-bar" href="#" target="_blank" rel="noopener" style="display:none;align-items:center;justify-content:center;min-height:44px;padding:0.55rem 1rem;background:#B42318;color:#fff;font-family:'Archivo Narrow',sans-serif;font-weight:700;font-size:0.92rem;line-height:1.3;text-align:center;text-decoration:none"></a>
+
 <nav class="nav">
   <div class="wrap nav__in">
     <a class="nav__brand" href="#top">Pocket Pro</a>
@@ -430,7 +432,7 @@
   <div class="wrap">
     <div class="gallery">
       <figure class="ph gcell gcell--big" data-need="img/tom-harris-clinic.jpg" style="margin:0">
-        <img src="img/tom-harris-clinic.jpg" alt="Tom Harris running a putting clinic with a grid drill on the practice green" onerror="this.parentElement.classList.add('empty');this.remove()">
+        <img src="img/tom-harris-clinic.jpg" srcset="img/tom-harris-clinic.jpg 1280w, img/tom-harris-clinic-2000.jpg 2000w" sizes="(min-width:48rem) 60vw, 100vw" alt="Tom Harris running a putting clinic with a grid drill on the practice green" onerror="this.parentElement.classList.add('empty');this.remove()">
         <figcaption><small>On the green</small>Drills that make practice count — not just hitting balls.</figcaption>
       </figure>
       <figure class="ph gcell" data-need="img/tom-harris-group.jpg" style="margin:0">
@@ -1076,9 +1078,14 @@ if(vgrid&&needsBar){
     needsBar.querySelectorAll('.need').forEach(b=>{var on=b.dataset.key===active.key;b.setAttribute('aria-selected',String(on));b.tabIndex=on?0:-1;})
     if(!active.vids.length){var emptyMsg=active.key==='latest'?((Ltab&&Ltab._raw&&Ltab._raw.length)?'You’re all caught up — new videos land here the moment Tom posts them.':'Loading the latest from Tom’s YouTube…'):'';vgrid.innerHTML='<p style="grid-column:1/-1;color:var(--dim);margin:0">'+emptyMsg+'</p>';return}
     vgrid.innerHTML=active.vids.map(v=>{
-      const thumb=v.mp4?v.poster:`https://i.ytimg.com/vi/${v.id}/hqdefault.jpg`
+      const yt=`https://i.ytimg.com/vi/${v.id}/`
+      const thumb=v.mp4?v.poster:yt+'hqdefault.jpg'
       const data=v.mp4?`data-mp4="${v.mp4}"`:`data-id="${v.id}"`
-      return `<button class="vid" ${data} aria-label="Play: ${v.t}"><img loading="lazy" decoding="async" alt="${v.t}" src="${thumb}">${PLAY}<span class="vid__t">${v.t}</span></button>`
+      // Sharper thumbnails: let the browser pick YouTube's 640px or 1280px file for the slot it is filling.
+      // If a video has no larger file YouTube serves a 120px placeholder — then fall back to the 480px one.
+      const sizes=(active.key==='latest'&&active.vids.length===1)?'(min-width:40rem) 620px, 100vw':'(min-width:64rem) 33vw, (min-width:40rem) 50vw, 100vw'
+      const hi=v.mp4?'':` srcset="${yt}sddefault.jpg 640w, ${yt}maxresdefault.jpg 1280w" sizes="${sizes}" onload="if(this.naturalWidth<=120&&this.hasAttribute('srcset')){this.removeAttribute('srcset');this.src='${yt}hqdefault.jpg'}"`
+      return `<button class="vid" ${data} aria-label="Play: ${v.t}"><img loading="lazy" decoding="async" alt="${v.t}" src="${thumb}"${hi}>${PLAY}<span class="vid__t">${v.t}</span></button>`
     }).join('')
     vgrid.querySelectorAll('.vid').forEach(b=>b.addEventListener('click',()=>{
       if(active.key==='latest'&&b.dataset.id)markLatestViewed(b.dataset.id)
@@ -1146,7 +1153,9 @@ window.ATLAS_URL = 'https://clinical-trials.github.io/golf/atlas/';
    • STICKER_SHOP_URL: paste a Shopify/design link to show the "See the sticker designs" button (blank = hidden).
    • BLACK_FRIDAY: sale window (inclusive dates). Before `from` the hero chip + panel show a "starts" teaser,
      during the window they show "on now", and from the day after `through` they disappear on their own.
-     Put the actual discounts in `offer` once Tom confirms them; set on:false to hide everything. */
+     Put the actual discounts in `offer` once Tom confirms them; set on:false to hide everything.
+     The red bar at the very top of the page links to COACHNOW_PACKAGES (where lessons are bought). */
+var COACHNOW_PACKAGES = 'https://app.coachnow.io/facility/af587bf4a6cb14ae78c59d7c61/coach/tom-harris/bf3b5b0052c30138ec4f3ab6da89620b/packages';
 window.STICKER_SHOP_URL = '';
 window.BLACK_FRIDAY = {
   on: true,
@@ -1189,6 +1198,8 @@ window.BLACK_FRIDAY = {
       var label=live?'Black Friday sale · on now through '+last.toLocaleDateString('en-US',{month:'short',day:'numeric'})
                     :'Black Friday sale · starts '+start.toLocaleDateString('en-US',{weekday:'short',month:'short',day:'numeric'});
       if(box&&bt){ if(bk)bk.textContent=label; bt.textContent=bf.offer||''; box.hidden=false; }
+      var bar=document.getElementById('bf-bar');
+      if(bar){ bar.href=COACHNOW_PACKAGES; bar.textContent=label+' — book lessons & packages on Tom’s CoachNow →'; bar.style.display='flex'; }
       if(chip&&chipText){ chipText.innerHTML='<b style="color:var(--flag)">'+label+'</b> — discounted lessons &amp; packages →'; chip.style.borderColor='var(--flag)'; }
     }
   }
@@ -1237,8 +1248,8 @@ window.BLACK_FRIDAY = {
 /* Four offerings are live on Tom's CoachNow Packages page (card checkout via Stripe). CoachNow has no
    per-package URL, so each of those buttons opens that page; the card's note names the listing to pick:
    "Cheat Sheet for Reminders" $9.99 · "Individual Session" $69 · "Monthly Coaching" $250/mo ·
-   "Full-Time Coaching" $400/mo (both subscriptions: 3-month minimum). */
-var COACHNOW_PACKAGES = 'https://app.coachnow.io/facility/af587bf4a6cb14ae78c59d7c61/coach/tom-harris/bf3b5b0052c30138ec4f3ab6da89620b/packages';
+   "Full-Time Coaching" $400/mo (both subscriptions: 3-month minimum).
+   (COACHNOW_PACKAGES itself is defined in the script block above, next to BLACK_FRIDAY, which also uses it.) */
 window.STRIPE_LINKS = {
   'student-cheat-sheet': COACHNOW_PACKAGES,
   'individual-class':    COACHNOW_PACKAGES,
