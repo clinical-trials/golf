@@ -126,10 +126,13 @@ launch" placeholder:
 
 ### Delegate to-do — added 2026-11-18
 
-- [ ] **Remove the street address from Tom's CoachNow coach page.** The public
-  coach page (`app.coachnow.io/facility/…/coach/tom-harris/…`, "Contact
-  Information") shows a full street address under "Tom Harris Golf". The owner
-  wants it gone. It is a CoachNow profile/location setting, so it needs Tom's
+- [ ] **TOP PRIORITY — do this first: remove the street address from Tom's
+  CoachNow coach page.** The public coach page
+  (`app.coachnow.io/facility/…/coach/tom-harris/…`, "Contact Information")
+  shows a full street address under "Tom Harris Golf", and CoachNow turns
+  location lines into map links — so anyone can open it in a mapping app. That
+  is more location detail than the business should publish, and it gets worse
+  as the audience grows. It is a CoachNow profile/location setting, so it needs Tom's
   CoachNow sign-in — it cannot be changed from this repo. After the change,
   reload the public page signed out and confirm the address no longer appears
   (check the facility page too, which shows a separate location line).
