@@ -145,8 +145,7 @@ launch" placeholder:
 - [ ] **Before Wed Nov 25:** get Tom's review of the Black Friday copy, then
   repoint GitHub Pages to `version-4-final-draft` (or fast-forward `version-3`)
   so the sale notice is actually public.
-- [x] **Fix the "Latest video" feed** — fixed 2026-11-18, see below. One step
-  is still open: the hourly schedule needs the workflow file on `main`.
+- [x] **Fix the "Latest video" feed** — fixed 2026-11-18, see below.
 
 ### "Latest video" feed — fixed 2026-11-18
 
@@ -168,13 +167,15 @@ now keeps itself current. No API key, no paid service, no third-party proxy.
 - **Verified 2026-11-18:** pushing the workflow ran it (it also runs on any
   push that changes the script or the workflow), and the bot's commit
   `60349ff` brought `videos.json` from six uploads behind to current.
-- **STILL OPEN — the hourly schedule is not running yet.** GitHub runs
+- **The workflow file lives on two branches, on purpose.** GitHub runs
   `schedule`, and shows the "Run workflow" button, only for workflow files on
-  the default branch (`main`). Copy `.github/workflows/update-videos.yml` to
-  `main` unchanged (it always checks out `TARGET_BRANCH`, so nothing else on
-  `main` matters). Until then, refresh by hand: `node scripts/update-videos.mjs`,
-  then commit `docs/videos.json`. If the default branch ever changes, the copy
-  already on `version-4-final-draft` takes over.
+  the default branch (`main`), so an unchanged copy was added there on
+  2026-11-18 (commit `113a494`). It always checks out `TARGET_BRANCH`, so
+  nothing else on `main` matters. When you change the workflow, change it on
+  `version-4-final-draft` and copy it to `main` again. If the default branch
+  ever changes, the copy already on `version-4-final-draft` takes over. To
+  refresh by hand at any time: `node scripts/update-videos.mjs`, then commit
+  `docs/videos.json`.
 - **`TARGET_BRANCH` in the workflow must be the branch GitHub Pages builds
   from** — `version-4-final-draft` (as of 2026-11-18 the Actions tab shows
   "pages build and deployment" running on it). Change it in both copies if
