@@ -11,14 +11,22 @@ A golf coaching platform for PGA Professional **Tom Harris**. Two surfaces in on
 > working from this zip — you get history, branches, and PRs. This zip is a clean
 > source snapshot (no `node_modules`, no secrets, no private media).
 
-## Branch model (important)
+## Branch model — the toggle map (important)
 
-- **`version-4-final-draft`** — the ACTIVE branch. Push here.
-- **`version-3`** — frozen minimal site, kept as a roll-back fallback. Don't touch.
-- **GitHub Pages currently serves `version-3`.** Until Pages is repointed in repo
-  Settings, the live `clinical-trials.github.io/golf` URL reflects v3; preview v4 via
-  githack.
-- `version-2` — the earlier FULL-featured site, kept as an add-back demo.
+Every branch carries the same static site in `docs/`, so toggling between eras is
+just `git switch <branch>` and open `docs/index.html` (or use GitHub's branch
+picker on the web).
+
+- **`v5-nov-18-2026`** — the WORKING branch: ideas and improvements from
+  Nov 18, 2026 forward (branched from `version-4-final-draft` that day).
+  New work goes here.
+- **`version-4-final-draft`** — the LIVE site: **GitHub Pages serves this branch**
+  at clinical-trials.github.io/golf/. Merge v5 work here only when it's ready to
+  go live. A bot commits `docs/videos.json` here — always pull before pushing.
+- **`version-3`** — the original minimal page, frozen as a roll-back fallback.
+  Don't touch.
+- **`version-2`** — the legacy FULL-featured site, the richest feature demo and
+  add-back reference (plus snapshots `version-2-legacy`, `version-2-sept-8`).
 - `main` — fallback.
 
 ## Prerequisites

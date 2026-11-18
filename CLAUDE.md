@@ -22,12 +22,15 @@ and the go-live checklist. Roadmap sheet: "The Next 20" PDF in the handoff packa
 - `POST /api/auth/session` issuance is dev-gated behind `DEV_AUTH=1` — never set
   that in production. It is the seam magic-link login replaces.
 
-## Branches
+## Branches (the toggle map)
 
-- `version-4-final-draft` — ACTIVE. Push here and only here.
-- `version-3` — frozen fallback; GitHub Pages currently serves it. Don't touch.
-- `version-2` — legacy full-featured site, kept as add-back reference.
+- `v5-nov-18-2026` — WORKING branch (Nov 18, 2026 forward). New work goes here.
+- `version-4-final-draft` — LIVE: GitHub Pages serves this branch. Merge from v5
+  only when ready. A bot commits `docs/videos.json` here — pull before pushing.
+- `version-3` — original minimal page, frozen fallback. Don't touch.
+- `version-2` — legacy full-featured site, add-back reference.
 - `main` — fallback.
+- Toggle eras: `git switch <branch>`, then open `docs/index.html`.
 
 ## Daily commands
 

@@ -20,7 +20,7 @@ Neither half is novel alone. The join is the product.
 Active build — two surfaces exist.
 
 - **Marketing + preview site** — static, in [docs/](docs/), served on GitHub Pages
-  (currently from `version-3`; active work is on `version-4-final-draft`). Near launch:
+  from `version-4-final-draft` (live); new work happens on `v5-nov-18-2026`. Near launch:
   go-live is pasting real Stripe Payment Links, form endpoints, and Tom's business details
   into the config objects at the end of [docs/index.html](docs/index.html).
 - **Application backend** — Next.js 15 + Prisma 7 + PostgreSQL under [src/](src/) and
