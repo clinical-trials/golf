@@ -295,6 +295,10 @@
       <a class="btn btn--y" href="#offerings">See Tom&rsquo;s offerings →</a>
       <a class="btn btn--o" href="#videos">Watch Tom teach →</a>
     </div>
+    <button type="button" id="hero19" data-open="hole19-dialog" style="appearance:none;display:inline-flex;align-items:center;gap:0.65rem;align-self:flex-start;max-width:100%;margin-top:1.1rem;padding:0.5rem 0.85rem 0.5rem 0.6rem;background:var(--ink-2);border:1px solid var(--rule);color:var(--card);font-family:'Archivo Narrow',sans-serif;font-size:0.9rem;line-height:1.3;text-align:left;cursor:pointer">
+      <svg viewBox="0 0 40 40" width="34" height="34" aria-hidden="true" style="flex:0 0 auto"><line x1="9" y1="5" x2="9" y2="35" stroke="#ECE6D6" stroke-width="2.5" stroke-linecap="round"/><path d="M10.5 6 L37 13.5 L10.5 21 Z" fill="#E9B949"/><text x="13" y="17" font-family="Arial,sans-serif" font-weight="700" font-size="9.5" fill="#0B0F13">19</text><ellipse cx="13" cy="35.5" rx="9" ry="2.2" fill="#7B9153"/></svg>
+      <span id="hero19-text"><b style="color:var(--flag)">The 19th Hole</b> &mdash; golf jokes &rarr;</span>
+    </button>
   </div>
 </header>
 
@@ -895,6 +899,54 @@
 </section>
 </dialog>
 
+<dialog id="hole19-dialog" class="sheet">
+  <div class="sheet__bar"><span class="sheet__tag">The 19th Hole</span><button class="sheet__x" data-close aria-label="Close this panel">Close &times;</button></div>
+<section class="surfaces" id="hole19" style="border-top:4px solid var(--flag)">
+  <div class="wrap" style="max-width:44rem">
+    <style>
+      .h19-card{background:var(--card);color:var(--ink);border-radius:10px;padding:1.4rem 1.3rem 1.5rem;margin-top:1.2rem;border:3px solid var(--flag);min-height:9.5rem;display:flex;flex-direction:column;justify-content:center}
+      .h19-q{font-family:'Archivo Narrow',sans-serif;font-weight:700;font-size:1.05rem;line-height:1.3;margin:0;color:#2a3530}
+      .h19-a{font-family:'Archivo Black',sans-serif;font-weight:400;font-size:clamp(1.35rem,1rem + 1.8vw,2rem);line-height:1.08;margin:0.6rem 0 0;color:var(--ink)}
+      .h19-actions{display:flex;flex-wrap:wrap;align-items:center;gap:0.6rem;margin-top:0.9rem}
+      .h19-msg{color:var(--turf);font-size:0.85rem}
+      .h19-note{border-left:3px solid var(--flag);padding-left:1rem;margin:1.3rem 0 0;color:var(--card);font-family:'Archivo Narrow',sans-serif;font-size:0.92rem;line-height:1.45}
+      .h19-note a{color:var(--flag)}
+      .h19-bf{border:1px solid var(--flag);background:var(--ink-2);padding:0.9rem 1rem;margin-top:1.2rem;color:var(--card);font-size:0.9rem;line-height:1.45}
+      .h19-bf b{display:block;font-family:'Archivo Narrow',sans-serif;text-transform:uppercase;letter-spacing:0.08em;font-size:0.7rem;color:var(--flag);margin-bottom:0.25rem}
+      .h19-bf a{color:var(--flag)}
+      .h19-stickers{display:grid;grid-template-columns:repeat(auto-fit,minmax(10.5rem,1fr));gap:0.7rem;margin-top:0.8rem}
+      .stk{border-radius:8px;padding:1rem 0.8rem;text-align:center;font-family:'Archivo Black',sans-serif;font-weight:400;text-transform:uppercase;line-height:1.05;font-size:1rem;border:2px solid var(--flag);min-width:0}
+      .stk small{display:block;font-family:'Archivo Narrow',sans-serif;font-weight:700;letter-spacing:0.12em;font-size:0.6rem;margin-top:0.45rem;opacity:0.75}
+      .stk--gold{background:var(--flag);color:var(--ink);border-color:var(--ink)}
+      .stk--cream{background:var(--card);color:#2C7A3D;border-color:#2C7A3D}
+      .stk--ink{background:var(--ink-3);color:var(--flag)}
+    </style>
+    <span class="label" style="color:var(--flag)">The 19th Hole &middot; certified groaners</span>
+    <h2 style="font-size:clamp(1.5rem,1.1rem + 1.7vw,2.3rem);margin-top:0.7rem">Golf jokes. Par for the course.</h2>
+    <p style="color:var(--dim);margin:0.8rem 0 0;font-size:0.95rem">Golf is supposed to be fun. Here&rsquo;s the clubhouse corner of the site &mdash; a few groaners to take to your next foursome.</p>
+    <div class="h19-bf" id="h19-bf" hidden><b id="h19-bf-k">Black Friday sale</b><span id="h19-bf-text"></span> <a href="#contact" data-close>Message Tom for the sale price &rarr;</a> &middot; <a href="#newsletter" data-close>Join Club Bites &rarr;</a></div>
+    <div class="h19-card" aria-live="polite">
+      <p class="h19-q" id="h19-q">What is a Chihuahua&rsquo;s favorite sport?</p>
+      <p class="h19-a" id="h19-a">Miniature golf!</p>
+    </div>
+    <div class="h19-actions">
+      <button type="button" class="btn btn--y" id="h19-next">Another one &rarr;</button>
+      <button type="button" class="btn btn--o" id="h19-copy" style="background:transparent;cursor:pointer">Copy joke</button>
+      <span class="h19-msg" id="h19-msg" aria-live="polite"></span>
+    </div>
+    <p class="h19-note">Want a fresh groaner every Monday? <a href="#newsletter" data-close>Join Club Bites &rarr;</a></p>
+    <p style="margin:1.6rem 0 0"><span class="label">Bumper-sticker ideas &middot; concept sketches</span></p>
+    <div class="h19-stickers">
+      <div class="stk stk--gold">I play the fairway<small>Tom Harris Golf</small></div>
+      <div class="stk stk--cream">Backseat driver on board<small>Tom Harris Golf</small></div>
+      <div class="stk stk--ink">My music? Swing.<small>Tom Harris Golf</small></div>
+    </div>
+    <p id="sticker-shop-row" hidden style="margin:0.9rem 0 0"><a id="sticker-shop-link" class="btn btn--y" href="#" target="_blank" rel="noopener">See the sticker designs &rarr;</a></p>
+    <p style="color:var(--dim);font-size:0.75rem;margin-top:0.9rem">Sticker designs are concepts for now &mdash; not for sale yet.</p>
+  </div>
+</section>
+</dialog>
+
 <section class="surfaces" id="newsletter">
   <div class="wrap" style="max-width:44rem">
     <img src="img/clubhouse-bites.jpg" alt="Tom Harris Club Bites crest" width="512" height="512" style="width:132px;height:132px;border-radius:50%;display:block;box-shadow:0 3px 16px rgba(0,0,0,0.45);margin:0 0 0.9rem" loading="lazy" decoding="async">
@@ -946,10 +998,12 @@
       <button type="button" class="foot-open" data-open="shop-dialog">Pro shop</button>
       <button type="button" class="foot-open" data-open="family-dialog">Family fun</button>
       <button type="button" class="foot-open" data-open="cams-dialog">First tee cams</button>
+      <button type="button" class="foot-open" data-open="hole19-dialog">The 19th Hole</button>
       <a href="#golf-now">Leaderboard</a>
       <a href="#newsletter">Newsletter</a>
       <a href="#contact">Contact</a>
     </nav>
+    <p style="margin:-0.7rem 0 1.5rem"><button type="button" class="foot-open" id="foot-joke" data-open="hole19-dialog" style="text-transform:none;letter-spacing:0;font-weight:400;font-style:italic;font-size:0.88rem;text-align:left;line-height:1.4">The 19th Hole &mdash; golf jokes &rarr;</button></p>
     <p style="margin-top:0.9rem"><span class="label">Follow</span></p>
     <div style="display:flex;flex-wrap:wrap;gap:0.6rem;margin-top:0.5rem">
       <a class="btn btn--o" href="https://www.youtube.com/@Tomharrisgolf" target="_blank" rel="noopener">YouTube</a>
@@ -1063,6 +1117,54 @@ window.ATLAS_URL = 'https://clinical-trials.github.io/golf/atlas/';
 (function(){
   var url=(window.ATLAS_URL||'').trim(), row=document.getElementById('atlas-cta-row'), a=document.getElementById('atlas-cta');
   if(url&&row&&a){ a.href=url; row.hidden=false; }
+})();
+/* THE 19TH HOLE — golf jokes (footer teaser line + panel).
+   • STICKER_SHOP_URL: paste a Shopify/design link to show the "See the sticker designs" button (blank = hidden).
+   • BLACK_FRIDAY: sale window (inclusive dates). Before `from` the hero chip + panel show a "starts" teaser,
+     during the window they show "on now", and from the day after `through` they disappear on their own.
+     Put the actual discounts in `offer` once Tom confirms them; set on:false to hide everything. */
+window.STICKER_SHOP_URL = '';
+window.BLACK_FRIDAY = {
+  on: true,
+  from: '2026-11-25',
+  through: '2026-12-01',
+  offer: 'Discounted lessons and discounted packages, Wed Nov 25 – Tue Dec 1, 2026.'
+};
+(function(){
+  var JOKES=[
+    ['What is a Chihuahua’s favorite sport?','Miniature golf!'],
+    ['Why don’t good golfers cheat?','Because they play the fairway.'],
+    ['Why couldn’t the computer play golf?','It had the wrong driver.'],
+    ['What do you call a golf club in the back of your car?','A backseat driver.'],
+    ['What’s a golf club’s favorite type of music?','Swing!'],
+    ['Why do the best golfers keep buying socks?','They keep getting a hole in one!']
+  ];
+  var i=Math.floor(Math.random()*JOKES.length);
+  var q=document.getElementById('h19-q'), a=document.getElementById('h19-a'), msg=document.getElementById('h19-msg');
+  var next=document.getElementById('h19-next'), copy=document.getElementById('h19-copy'), foot=document.getElementById('foot-joke');
+  function show(){ if(q)q.textContent=JOKES[i][0]; if(a)a.textContent=JOKES[i][1]; if(msg)msg.textContent=''; }
+  show();
+  if(foot)foot.textContent='⛳ '+JOKES[i][0]+' — tap for the answer →';
+  if(next)next.addEventListener('click',function(){ i=(i+1)%JOKES.length; show(); });
+  if(copy)copy.addEventListener('click',function(){
+    var text=JOKES[i][0]+' '+JOKES[i][1];
+    function done(ok){ if(msg)msg.textContent=ok?'Copied — go groan at someone.':'Couldn’t copy — select the joke and copy it by hand.'; }
+    try{ navigator.clipboard.writeText(text).then(function(){done(true)},function(){done(false)}); }catch(e){ done(false); }
+  });
+  var shop=(window.STICKER_SHOP_URL||'').trim(), srow=document.getElementById('sticker-shop-row'), slink=document.getElementById('sticker-shop-link');
+  if(shop&&srow&&slink){ slink.href=shop; srow.hidden=false; }
+  var bf=window.BLACK_FRIDAY||{}, box=document.getElementById('h19-bf'), bt=document.getElementById('h19-bf-text'), bk=document.getElementById('h19-bf-k');
+  var chip=document.getElementById('hero19'), chipText=document.getElementById('hero19-text');
+  if(bf.on&&bf.from&&bf.through){
+    var now=new Date(), start=new Date(bf.from+'T00:00:00'), end=new Date(bf.through+'T00:00:00'); end.setDate(end.getDate()+1);
+    if(now<end){
+      var last=new Date(bf.through+'T00:00:00'), live=now>=start;
+      var label=live?'Black Friday sale · on now through '+last.toLocaleDateString('en-US',{month:'short',day:'numeric'})
+                    :'Black Friday sale · starts '+start.toLocaleDateString('en-US',{weekday:'short',month:'short',day:'numeric'});
+      if(box&&bt){ if(bk)bk.textContent=label; bt.textContent=bf.offer||''; box.hidden=false; }
+      if(chip&&chipText){ chipText.innerHTML='<b style="color:var(--flag)">'+label+'</b> — discounted lessons &amp; packages →'; chip.style.borderColor='var(--flag)'; }
+    }
+  }
 })();
 (function(){
   function goal(n){try{window.plausible&&window.plausible(n)}catch(e){}}
