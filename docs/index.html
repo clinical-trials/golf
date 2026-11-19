@@ -367,6 +367,7 @@
           </ol>
         </details>
         <p style="margin:0.4rem 0 0"><button class="btn btn--y" data-buy="six-session-series" style="font-size:0.82rem">Get the series &mdash; $89 &rarr;</button></p>
+        <p style="color:var(--dim);font-size:0.75rem;margin:0.45rem 0 0">Opens Tom&rsquo;s CoachNow packages &mdash; listed there as &ldquo;From &lsquo;I&rsquo;m Interested to I&rsquo;m a Golfer&rsquo; Series.&rdquo;</p>
       </div>
       <div class="offer offer--feature">
         <span class="offer__k">Self-paced &middot; on your schedule</span>
@@ -1249,15 +1250,16 @@ window.BLACK_FRIDAY = {
 <script>
 /* PAYMENTS — paste each product's Stripe Payment Link (https://buy.stripe.com/...) below to turn on
    one-click checkout. While a link is blank, clicking a paid option shows a "checkout being connected" note. */
-/* Four offerings are live on Tom's CoachNow Packages page (card checkout via Stripe). CoachNow has no
+/* Five offerings are live on Tom's CoachNow Packages page (card checkout via Stripe). CoachNow has no
    per-package URL, so each of those buttons opens that page; the card's note names the listing to pick:
-   "Cheat Sheet for Reminders" $9.99 · "Individual Session" $69 · "Monthly Coaching" $250/mo ·
-   "Full-Time Coaching" $400/mo (both subscriptions: 3-month minimum).
+   "Cheat Sheet for Reminders" $9.99 · "Individual Session" $69 · "From 'I'm Interested to I'm a Golfer'
+   Series" $89 · "Monthly Coaching" $250/mo · "Full-Time Coaching" $400/mo (subscriptions: 3-month minimum).
+   Not on CoachNow yet, so still blank: the $250 Self-Guided Course and the two hats.
    (COACHNOW_PACKAGES itself is defined in the script block above, next to BLACK_FRIDAY, which also uses it.) */
 window.STRIPE_LINKS = {
   'student-cheat-sheet': COACHNOW_PACKAGES,
   'individual-class':    COACHNOW_PACKAGES,
-  'six-session-series':  '',
+  'six-session-series':  COACHNOW_PACKAGES,
   'self-guided-course':  '',
   'monthly-coaching':    COACHNOW_PACKAGES,
   'full-time-coaching':  COACHNOW_PACKAGES,
