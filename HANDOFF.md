@@ -169,7 +169,11 @@ launch" placeholder:
 - [ ] **Connect the last buy buttons** when their checkout exists: the $250
   Self-Guided Course and the two hats (see `window.STRIPE_LINKS`). The $89
   series was connected 2026-11-18; the $149 TPI assessment card was added and
-  connected 2026-11-19.
+  connected 2026-11-19. **Hat sourcing (owner-provided 2026-11-19):** the hats
+  are G/FORE Quick Turn hats, custom-ordered at ~$50/unit from
+  <https://www.corporategear.com/product/g-fore-quick-turn-hat-gmh000001-baja.html>
+  — that is the supplier page for placing orders, not a customer checkout, so
+  don't wire the Reserve buttons to it.
 - [x] **Fix the "Latest video" feed** — fixed 2026-11-18, see below.
 - [x] **Repoint GitHub Pages to `version-4-final-draft`** — done 2026-11-18.
 
