@@ -142,18 +142,29 @@ launch" placeholder:
   now through Dec 1" during it, and remove themselves on Dec 2. No discount
   amounts are published: the link opens an email to Tom with the subject "Black
   Friday pricing", which is deliberate — it shows who responds to a sale.
-  **Time-sensitive:** Pages still serves `version-3`, so none of this is public
-  until Pages is repointed (or v3 is fast-forwarded) — and Tom reviews the copy.
+  **This is public as of 2026-11-18** (Pages serves `version-4-final-draft`) and
+  still needs Tom's review — see the delegate to-do list.
 
 ### Delegate to-do — added 2026-11-18
 
 - [ ] **TOP PRIORITY — do this first:** a privacy item for Tom's third-party
   profiles. The details are in `START-HERE.txt` in the private handoff package
   (kept out of this public repo on purpose). Ask the owner if you don't have it.
-- [ ] **Before Wed Nov 25:** get Tom's review of the Black Friday copy, then
-  repoint GitHub Pages to `version-4-final-draft` (or fast-forward `version-3`)
-  so the sale notice is actually public.
+- [ ] **Before Wed Nov 25 — Black Friday is already public.** Pages now serves
+  `version-4-final-draft`, so the red bar, the hero chip and the sale notice are
+  live and currently read "starts Wed, Nov 25". Two things are still owed:
+  (1) Tom reviews the sale copy and the 19th Hole jokes, which went live
+  unreviewed; (2) Tom sets the sale prices on CoachNow — the red bar sends
+  buyers to his Packages page, where prices are still the regular ones.
+- [ ] **Ask Tom for larger originals of three photos** — the hero
+  (`tom-harris-lesson.jpg`), the pink-shirt photo (`lesson-tee.jpg`) and the
+  range photo (`tom-harris-range.jpg`). They are slightly soft on large retina
+  screens; 2000px or more on the long side fixes it. Strip metadata before
+  committing, and add a `srcset` the way the clinic photo does.
+- [ ] **Connect the last three buy buttons** when their checkout exists: the $89
+  series, the $250 course and the two hats (see `window.STRIPE_LINKS`).
 - [x] **Fix the "Latest video" feed** — fixed 2026-11-18, see below.
+- [x] **Repoint GitHub Pages to `version-4-final-draft`** — done 2026-11-18.
 
 ### "Latest video" feed — fixed 2026-11-18
 
