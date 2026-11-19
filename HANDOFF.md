@@ -171,9 +171,12 @@ launch" placeholder:
   series was connected 2026-11-18; the $149 TPI assessment card was added and
   connected 2026-11-19. **Hat sourcing (owner-provided 2026-11-19):** the hats
   are G/FORE Quick Turn hats, custom-ordered at ~$50/unit from
+  corporategear.com — the cap:
   <https://www.corporategear.com/product/g-fore-quick-turn-hat-gmh000001-baja.html>
-  — that is the supplier page for placing orders, not a customer checkout, so
-  don't wire the Reserve buttons to it.
+  and the trucker hat:
+  <https://www.corporategear.com/product/snow-g-fore-gmh000075-quick-turn-trucker-hat.html>
+  — those are supplier pages for placing orders, not customer checkouts, so
+  don't wire the Reserve buttons to them.
 - [x] **Fix the "Latest video" feed** — fixed 2026-11-18, see below.
 - [x] **Repoint GitHub Pages to `version-4-final-draft`** — done 2026-11-18.
 
