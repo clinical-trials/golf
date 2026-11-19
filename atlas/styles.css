@@ -16,3 +16,12 @@
 @media(min-width:768px){.player-message h3{font-size:33px}.player-message{gap:14px}.player-message p{font-size:12px}.tile-remove{min-width:36px;min-height:36px}.course-picker{padding-inline:23px}}
 @media(min-width:1024px){.watch-rail{padding-top:25px}.queue-country{font-size:7px}.queue-time{font-size:8px}.rail-note{font-size:10px}.cinema-mode .focus-main{width:min(100%,calc((100dvh - 300px)*1.7778))}}
 @media(pointer:coarse){.tile-remove{min-width:44px;min-height:44px}.course-picker select{min-height:44px}}
+
+/* ---- Golden hour & vacation autopilot ---- */
+.card-bottom{flex-wrap:wrap;gap:.3rem .5rem}
+.sun-badge{font-size:.64rem;letter-spacing:.03em;color:var(--muted);white-space:nowrap}
+.golden-button{margin-top:1.15rem;display:inline-flex;align-items:center;gap:.55rem;border:1px solid #e9b949;background:linear-gradient(135deg,rgba(233,185,73,.18),rgba(233,185,73,.05));color:#e9b949;font:600 .95rem/1 var(--font);padding:.7rem 1.2rem;border-radius:999px;cursor:pointer;transition:transform .15s ease,box-shadow .15s ease,background .15s ease}
+.golden-button:hover{transform:translateY(-1px);box-shadow:0 8px 22px rgba(233,185,73,.22);background:linear-gradient(135deg,rgba(233,185,73,.3),rgba(233,185,73,.1))}
+#tour-toggle[aria-pressed="true"]{color:#e9b949;border-color:#e9b949}
+body.tour-on #tour-toggle svg{animation:tour-spin 16s linear infinite}
+@keyframes tour-spin{to{transform:rotate(360deg)}}
