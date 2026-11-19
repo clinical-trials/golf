@@ -27,6 +27,7 @@
   },
   "makesOffer": [
     {"@type": "Offer", "name": "Individual Class", "price": "69", "priceCurrency": "USD"},
+    {"@type": "Offer", "name": "TPI Physical and Swing Assessment", "price": "149", "priceCurrency": "USD"},
     {"@type": "Offer", "name": "Self-Guided Course", "price": "250", "priceCurrency": "USD"},
     {"@type": "Offer", "name": "Monthly Coaching", "price": "250", "priceCurrency": "USD"},
     {"@type": "Offer", "name": "Full-Time Coaching", "price": "400", "priceCurrency": "USD"}
@@ -349,6 +350,26 @@
         <p class="offer__desc">A single swing- or shot-analysis with drills you can take straight to the range.</p>
         <p style="margin:0.4rem 0 0"><button class="btn btn--y" data-buy="individual-class" style="font-size:0.82rem">Enroll &mdash; $69 &rarr;</button></p>
         <p style="color:var(--dim);font-size:0.75rem;margin:0.45rem 0 0">Opens Tom&rsquo;s CoachNow packages &mdash; listed there as &ldquo;Individual Session.&rdquo;</p>
+      </div>
+      <div class="offer">
+        <span class="offer__k">One-off &middot; live assessment</span>
+        <h3 class="offer__name">TPI Physical and Swing Assessment</h3>
+        <div class="offer__price">$149<small> one-time</small></div>
+        <p class="offer__desc">Identifies any physical limitations that affect your swing mechanics and performance, combined with a swing analysis. Tom then prescribes a short exercise routine to help you gain mobility and stability &mdash; working around your limitations to build a swing that is effective and safe for you.</p>
+        <details>
+          <summary>How it works &rarr;</summary>
+          <ol>
+            <li>Sign up and you&rsquo;ll receive an invitation to CoachNow and a questionnaire.</li>
+            <li>Schedule your appointment, then fill out the questionnaire and post it before the session.</li>
+            <li>Video 2 swings from &ldquo;down the line&rdquo; and &ldquo;face on&rdquo; and post them to CoachNow.</li>
+            <li>Plan on around 40 minutes online, through FaceTime or Zoom.</li>
+            <li>Tom goes over his findings with you &mdash; both physical and swing traits.</li>
+            <li>You&rsquo;ll get an invitation from TPI Pro &mdash; an app, free of charge to you, with the details of your assessment and the exercises prescribed.</li>
+            <li>Questions and messages are encouraged afterward, to be sure you&rsquo;re on the right track.</li>
+          </ol>
+        </details>
+        <p style="margin:0.4rem 0 0"><button class="btn btn--y" data-buy="tpi-assessment" style="font-size:0.82rem">Book the assessment &mdash; $149 &rarr;</button></p>
+        <p style="color:var(--dim);font-size:0.75rem;margin:0.45rem 0 0">Opens Tom&rsquo;s CoachNow packages &mdash; listed there as &ldquo;TPI Physical and Swing Assessment.&rdquo;</p>
       </div>
       <div class="offer offer--feature">
         <span class="offer__k">Self-paced series</span>
@@ -1250,15 +1271,17 @@ window.BLACK_FRIDAY = {
 <script>
 /* PAYMENTS — paste each product's Stripe Payment Link (https://buy.stripe.com/...) below to turn on
    one-click checkout. While a link is blank, clicking a paid option shows a "checkout being connected" note. */
-/* Five offerings are live on Tom's CoachNow Packages page (card checkout via Stripe). CoachNow has no
+/* Six offerings are live on Tom's CoachNow Packages page (card checkout via Stripe). CoachNow has no
    per-package URL, so each of those buttons opens that page; the card's note names the listing to pick:
-   "Cheat Sheet for Reminders" $9.99 · "Individual Session" $69 · "From 'I'm Interested to I'm a Golfer'
-   Series" $89 · "Monthly Coaching" $250/mo · "Full-Time Coaching" $400/mo (subscriptions: 3-month minimum).
+   "Cheat Sheet for Reminders" $9.99 · "Individual Session" $69 · "TPI Physical and Swing Assessment" $149 ·
+   "From 'I'm Interested to I'm a Golfer' Series" $89 · "Monthly Coaching" $250/mo · "Full-Time Coaching"
+   $400/mo (subscriptions: 3-month minimum).
    Not on CoachNow yet, so still blank: the $250 Self-Guided Course and the two hats.
    (COACHNOW_PACKAGES itself is defined in the script block above, next to BLACK_FRIDAY, which also uses it.) */
 window.STRIPE_LINKS = {
   'student-cheat-sheet': COACHNOW_PACKAGES,
   'individual-class':    COACHNOW_PACKAGES,
+  'tpi-assessment':      COACHNOW_PACKAGES,
   'six-session-series':  COACHNOW_PACKAGES,
   'self-guided-course':  '',
   'monthly-coaching':    COACHNOW_PACKAGES,
