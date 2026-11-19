@@ -98,19 +98,20 @@ Plans live in `docs/superpowers/plans/`.
 End of `docs/index.html` has config objects to fill — blank = honest "connected at
 launch" placeholder:
 
-- `window.STRIPE_LINKS` — per-product checkout URLs. **Five of the six paid
-  teaching offerings are connected (2026-11-18)** to Tom's CoachNow Packages
+- `window.STRIPE_LINKS` — per-product checkout URLs. **Six of the seven paid
+  teaching offerings are connected (2026-11-19)** to Tom's CoachNow Packages
   page (`COACHNOW_PACKAGES`), where the listings are live and paid via Stripe:
-  "Cheat Sheet for Reminders" $9.99, "Individual Session" $69, "From 'I'm
-  Interested to I'm a Golfer' Series" $89, "Monthly Coaching" $250/mo and
-  "Full-Time Coaching" $400/mo (both subscriptions carry a 3-month minimum, now
-  stated on the site cards). CoachNow has no per-package URL, so each button
-  opens the Packages page and the card names the listing to pick. **Still
-  blank:** `self-guided-course` ($250) and the two hats — neither exists on
-  CoachNow. Also on CoachNow but not on the site (checked 2026-11-18): a "TPI
-  Physical and Swing Assessment" package ($149) and, under Private Sessions, a
-  free 30-minute "Introductory session". Tom edits these listings himself, so
-  re-check names and prices before relying on this list.
+  "Cheat Sheet for Reminders" $9.99, "Individual Session" $69, "TPI Physical
+  and Swing Assessment" $149 (card added 2026-11-19), "From 'I'm Interested to
+  I'm a Golfer' Series" $89, "Monthly Coaching" $250/mo and "Full-Time
+  Coaching" $400/mo (both subscriptions carry a 3-month minimum, now stated on
+  the site cards). CoachNow has no per-package URL, so each button opens the
+  Packages page and the card names the listing to pick. **Still blank:**
+  `self-guided-course` ($250) and the two hats — neither exists on CoachNow.
+  Also on CoachNow but not on the site (checked 2026-11-19): under Private
+  Sessions, a free 30-minute "Introductory session" (owner hasn't decided
+  whether to add a card). Tom edits these listings himself, so re-check names
+  and prices before relying on this list.
 - `window.FORMS` — newsletter/shop (Mailchimp embedded-form action URL) + contact
   (Formspree endpoint or `mailto:`).
 - `window.ATLAS_URL` — First Tee Atlas (already live at `/golf/atlas/`).
@@ -167,7 +168,8 @@ launch" placeholder:
   committing, and add a `srcset` the way the clinic photo does.
 - [ ] **Connect the last buy buttons** when their checkout exists: the $250
   Self-Guided Course and the two hats (see `window.STRIPE_LINKS`). The $89
-  series was connected 2026-11-18.
+  series was connected 2026-11-18; the $149 TPI assessment card was added and
+  connected 2026-11-19.
 - [x] **Fix the "Latest video" feed** — fixed 2026-11-18, see below.
 - [x] **Repoint GitHub Pages to `version-4-final-draft`** — done 2026-11-18.
 
